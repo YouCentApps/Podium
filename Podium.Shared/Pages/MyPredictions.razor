@@ -1,0 +1,641 @@
+@page "/my-predictions"
+@inject IPodiumApiClient ApiClient
+@inject AuthStateService AuthState
+@inject NavigationManager Navigation
+
+<PageTitle>My Predictions - Podium</PageTitle>
+
+<div class="page-container">
+    <h1>My Predictions</h1>
+
+    @if (!AuthState.IsAuthenticated)
+    {
+        <div class="alert alert-warning">
+            Please <a href="/signin">sign in</a> to view your predictions.
+        </div>
+        return;
+    }
+
+    @if (isLoading)
+    {
+        <div class="loading-spinner">
+            <p>Loading your predictions...</p>
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    else if (predictions.Count == 0)
+    {
+        <div class="alert alert-info">
+            <p>You haven't made any predictions yet.</p>
+            <a href="/disciplines" class="btn btn-primary">Make Your First Prediction</a>
+        </div>
+    }
+    else
+    {
+        <div class="filters-container">
+
+            <div class="filter-row">
+                <label>
+                    Discipline:
+                    <select @bind="selectedDisciplineId" @bind:after="OnDisciplineChanged">
+                        <option value="">All Disciplines</option>
+                        @foreach (var discipline in availableDisciplines)
+                        {
+                            <option value="@discipline.DisciplineId">@discipline.DisciplineDisplayName</option>
+                        }
+                    </select>
+                </label>
+                
+                @if (!string.IsNullOrEmpty(selectedDisciplineId))
+                {
+                    <label>
+                        Series:
+                        <select @bind="selectedSeriesId" @bind:after="OnSeriesChanged">
+                            <option value="">All Series</option>
+                            @foreach (var series in availableSeries)
+                            {
+                                <option value="@series.SeriesId">@series.SeriesDisplayName</option>
+                            }
+                        </select>
+                    </label>
+                }
+
+                @if (!string.IsNullOrEmpty(selectedSeriesId))
+                {
+                    <label>
+                        Season:
+                        <select @bind="selectedSeasonId" @bind:after="ApplyFilters">
+                            <option value="">All Seasons</option>
+                            @foreach (var season in availableSeasons)
+                            {
+                                <option value="@season.SeasonId">@season.SeasonName</option>
+                            }
+                        </select>
+                    </label>
+                }
+            </div>
+            <div class="filter-row">
+                <label>
+                    <input type="checkbox" @bind="showInactiveSeasons" @bind:after="ApplyFilters" />
+                    Include inactive seasons (need to update filter above after changing!)
+                </label>
+            </div>
+        </div>
+
+        <div class="predictions-list">
+            @{
+                var groupedPredictions = filteredPredictions
+                    .GroupBy(p => new { p.SeasonId, p.SeasonName, p.SeasonYear, p.SeriesDisplayName })
+                    .OrderByDescending(g => g.Key.SeasonYear)
+                    .ThenBy(g => g.Key.SeriesDisplayName);
+            }
+
+            @foreach (var seasonGroup in groupedPredictions)
+            {
+                <div class="season-group">
+                    <h2 class="season-header">@seasonGroup.Key.SeriesDisplayName - @seasonGroup.Key.SeasonName</h2>
+                    
+                    
+                    
+                    @{
+                        var seasonPredictions = seasonGroup.OrderByDescending(p => p.EventDate).ToList();
+                        var seasonCount = seasonPredictions.Count;
+                    }
+
+                    @foreach (var (pred, index) in seasonPredictions.Select((p, i) => (p, i)))
+                    {
+                        <div class="prediction-card">
+                            <div class="prediction-header">
+                                <div class="prediction-info">
+                                    <span class="prediction-number">#@(seasonCount - index)</span>
+                                    <div class="event-info">
+                                        <h3>@pred.EventDisplayName</h3>
+                                        <div class="event-details">
+                                            <span class="discipline-badge">@pred.DisciplineDisplayName</span>
+                                            <span class="series-badge">@pred.SeriesDisplayName</span>
+                                            <span class="season-badge">@pred.SeasonName</span>
+                                            @if (!pred.SeasonIsActive)
+                                            {
+                                                <span class="inactive-badge">Inactive</span>
+                                            }
+                                        </div>
+                                        <div class="event-meta">
+                                            <span>Location: @pred.EventLocation</span>
+                                            <span>Date: @pred.EventDate.ToString("MMM dd, yyyy")</span>
+                                            <span class="event-status @pred.EventStatus.ToLower()">@pred.EventStatus</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (pred.PointsEarned.HasValue)
+                                {
+                                    <span class="points-badge">@pred.PointsEarned pts</span>
+                                }
+                                else
+                                {
+                                    <span class="pending-badge">Pending</span>
+                                }
+                            </div>
+
+                            <div class="prediction-content">
+                                <div class="prediction-section">
+                                    <h4>Your Prediction</h4>
+                                    <div class="prediction-podium">
+                                        <div class="prediction-position">
+                                            <span class="medal gold">1st</span>
+                                            <span>@pred.FirstPlaceName</span>
+                                        </div>
+                                        <div class="prediction-position">
+                                            <span class="medal silver">2nd</span>
+                                            <span>@pred.SecondPlaceName</span>
+                                        </div>
+                                        <div class="prediction-position">
+                                            <span class="medal bronze">3rd</span>
+                                            <span>@pred.ThirdPlaceName</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (pred.EventStatus == "Completed" && !string.IsNullOrEmpty(pred.ActualFirstPlaceName))
+                                {
+                                    <div class="prediction-section actual-results">
+                                        <h4>Actual Results</h4>
+                                        <div class="actual-podium">
+                                            <div class="actual-position">
+                                                <span class="medal gold small">1st</span>
+                                                <span class="@(pred.FirstPlaceId == pred.ActualFirstPlaceId ? "correct" : "")">
+                                                    @pred.ActualFirstPlaceName
+                                                </span>
+                                            </div>
+                                            <div class="actual-position">
+                                                <span class="medal silver small">2nd</span>
+                                                <span class="@(pred.SecondPlaceId == pred.ActualSecondPlaceId ? "correct" : "")">
+                                                    @pred.ActualSecondPlaceName
+                                                </span>
+                                            </div>
+                                            <div class="actual-position">
+                                                <span class="medal bronze small">3rd</span>
+                                                <span class="@(pred.ThirdPlaceId == pred.ActualThirdPlaceId ? "correct" : "")">
+                                                    @pred.ActualThirdPlaceName
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="prediction-footer">
+                                <small>Submitted: @pred.SubmittedDate.ToString("MMM dd, yyyy HH:mm")</small>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .filters-container {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border: 2px solid var(--border-color);
+    }
+
+    .filter-row {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+    }
+
+    .filter-row:last-child {
+        margin-bottom: 0;
+    }
+
+    .filter-row label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .filter-row select {
+        padding: 0.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-size: 1rem;
+    }
+
+    .predictions-list {
+        display: grid;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .season-group {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .season-header {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin: 0 0 1rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid var(--primary-color);
+    }
+
+    .prediction-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 2px solid var(--border-color);
+    }
+
+    .prediction-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+        gap: 1rem;
+    }
+
+    .prediction-info {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        flex: 1;
+    }
+
+    .prediction-number {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--text-light);
+        min-width: 3rem;
+    }
+
+    .event-info {
+        flex: 1;
+    }
+
+    .event-info h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.25rem;
+    }
+
+    .event-details {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.5rem;
+    }
+
+    .discipline-badge,
+    .series-badge,
+    .season-badge,
+    .inactive-badge {
+        font-size: 0.85rem;
+        padding: 0.25rem 0.6rem;
+        border-radius: 12px;
+        font-weight: 500;
+    }
+
+    .discipline-badge {
+        background: #e3f2fd;
+        color: #1976d2;
+    }
+
+    .series-badge {
+        background: #f3e5f5;
+        color: #7b1fa2;
+    }
+
+    .season-badge {
+        background: #fff3e0;
+        color: #e65100;
+    }
+
+    .inactive-badge {
+        background: #ffebee;
+        color: #c62828;
+    }
+
+    .event-meta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-top: 0.5rem;
+    }
+
+    .event-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    /* Medal styles */
+    .medal {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .medal.gold {
+        background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #d4af37 100%);
+        border: 3px solid #b8960f;
+    }
+
+    .medal.silver {
+        background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 50%, #a8a8a8 100%);
+        border: 3px solid #8c8c8c;
+    }
+
+    .medal.bronze {
+        background: linear-gradient(135deg, #cd7f32 0%, #e5a060 50%, #a0522d 100%);
+        border: 3px solid #8b4513;
+    }
+
+    .medal.small {
+        min-width: 40px;
+        height: 40px;
+        font-size: 0.75rem;
+    }
+
+    .event-status {
+        padding: 0.25rem 0.6rem;
+        border-radius: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+    }
+
+    .event-status.upcoming {
+        background: #fff9c4;
+        color: #f57f17;
+    }
+
+    .event-status.inprogress {
+        background: #b3e5fc;
+        color: #0277bd;
+    }
+
+    .event-status.completed {
+        background: #c8e6c9;
+        color: #388e3c;
+    }
+
+    .points-badge {
+        background: var(--success-color);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        white-space: nowrap;
+    }
+
+    .pending-badge {
+        background: var(--warning-color);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        white-space: nowrap;
+    }
+
+    .prediction-content {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .prediction-section h4 {
+        margin: 0 0 1rem 0;
+        font-size: 1rem;
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .prediction-podium {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-around;
+    }
+
+    .prediction-position {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        flex: 1;
+        padding: 1rem;
+        background: var(--bg-light);
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .actual-results {
+        padding-top: 1rem;
+        border-top: 2px dashed var(--border-color);
+    }
+
+    .actual-podium {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-around;
+    }
+
+    .actual-position {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        flex: 1;
+        font-size: 0.9rem;
+        color: var(--text-light);
+        text-align: center;
+    }
+
+    .actual-position span.correct {
+        color: var(--success-color);
+        font-weight: bold;
+    }
+
+    .prediction-footer {
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-light);
+    }
+
+    @@media (max-width: 768px) {
+        .prediction-info {
+            flex-direction: column;
+        }
+
+        .prediction-header {
+            flex-direction: column;
+        }
+
+        .prediction-podium,
+        .actual-podium {
+            flex-direction: column;
+        }
+
+        .filter-row {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .filter-row label {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+</style>
+
+@code {
+    private List<PredictionWithDetails> predictions = new();
+    private List<PredictionWithDetails> filteredPredictions = new();
+    private bool isLoading = true;
+    private string? errorMessage;
+    private int totalPredictions = 0;
+
+    // Filter state
+    private bool showInactiveSeasons = false;
+    private string selectedDisciplineId = "";
+    private string selectedSeriesId = "";
+    private string selectedSeasonId = "";
+
+    // Available filter options based on actual data
+    private List<(string DisciplineId, string DisciplineDisplayName)> availableDisciplines = new();
+    private List<(string SeriesId, string SeriesDisplayName)> availableSeries = new();
+    private List<(string SeasonId, string SeasonName)> availableSeasons = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!AuthState.IsAuthenticated || string.IsNullOrEmpty(AuthState.UserId))
+        {
+            return;
+        }
+
+        await LoadPredictions();
+    }
+
+    private async Task LoadPredictions()
+    {
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            // Use the new detailed endpoint with all filters
+            var predsResponse = await ApiClient.GetUserPredictionsWithDetailsAsync(
+                AuthState.UserId!,
+                selectedSeasonId,
+                selectedSeriesId,
+                selectedDisciplineId,
+                showInactiveSeasons
+            );
+            
+            if (predsResponse.Success && predsResponse.Data != null)
+            {
+                predictions = predsResponse.Data.OrderByDescending(p => p.SubmittedDate).ToList();
+                totalPredictions = predictions.Count;
+                UpdateAvailableFilters();
+                ApplyFilters();
+            }
+            else if (!predsResponse.Success)
+            {
+                errorMessage = $"Error loading predictions: {predsResponse.Error}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void UpdateAvailableFilters()
+    {
+        // Get unique disciplines
+        availableDisciplines = predictions
+            .Select(p => (p.DisciplineId, p.DisciplineDisplayName))
+            .Distinct()
+            .OrderBy(d => d.DisciplineDisplayName)
+            .ToList();
+
+        // Get unique series for selected discipline (or all if none selected)
+        availableSeries = predictions
+            .Where(p => string.IsNullOrEmpty(selectedDisciplineId) || p.DisciplineId == selectedDisciplineId)
+            .Select(p => (p.SeriesId, p.SeriesDisplayName))
+            .Distinct()
+            .OrderBy(s => s.SeriesDisplayName)
+            .ToList();
+
+        // Get unique seasons for selected series (or all if none selected)
+        availableSeasons = predictions
+            .Where(p => string.IsNullOrEmpty(selectedSeriesId) || p.SeriesId == selectedSeriesId)
+            .Select(p => (p.SeasonId, p.SeasonName))
+            .Distinct()
+            .OrderBy(s => s.SeasonName)
+            .ToList();
+    }
+
+    private void ApplyFilters()
+    {
+        filteredPredictions = predictions;
+
+        if (!string.IsNullOrEmpty(selectedDisciplineId))
+        {
+            filteredPredictions = filteredPredictions.Where(p => p.DisciplineId == selectedDisciplineId).ToList();
+        }
+
+        if (!string.IsNullOrEmpty(selectedSeriesId))
+        {
+            filteredPredictions = filteredPredictions.Where(p => p.SeriesId == selectedSeriesId).ToList();
+        }
+
+        if (!string.IsNullOrEmpty(selectedSeasonId))
+        {
+            filteredPredictions = filteredPredictions.Where(p => p.SeasonId == selectedSeasonId).ToList();
+        }
+    }
+
+    private async Task OnDisciplineChanged()
+    {
+        // Reset dependent filters
+        selectedSeriesId = "";
+        selectedSeasonId = "";
+        UpdateAvailableFilters();
+        await LoadPredictions();
+    }
+
+    private async Task OnSeriesChanged()
+    {
+        // Reset dependent filters
+        selectedSeasonId = "";
+        UpdateAvailableFilters();
+        await LoadPredictions();
+    }
+}

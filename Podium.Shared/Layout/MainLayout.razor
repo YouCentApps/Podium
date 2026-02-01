@@ -1,0 +1,116 @@
+﻿@inherits LayoutComponentBase
+@inject AuthStateService AuthState
+@inject AdminStateService AdminState
+@inject NavigationManager Navigation
+
+<div class="app-container">
+    <header class="app-header">
+        <div class="header-content">
+            <a href="/" class="logo"><span class="logo-icon">🏆</span> Podium</a>
+            
+            <nav class="main-nav">
+                @if (AuthState.IsAuthenticated)
+                {
+                    <a href="/disciplines">Make Predictions</a>
+                    <a href="/my-predictions">My Predictions</a>
+                    <a href="/leaderboard">Leaderboard</a>
+                    @if (AdminState.IsAdmin)
+                    {
+                        <a href="/admin" class="admin-link">Admin</a>
+                    }
+                    <div class="profile-dropdown" @onfocusout="CloseDropdownDelayed">
+                        <button class="profile-btn" @onclick="ToggleDropdown" @onclick:stopPropagation="true">
+                            <span class="profile-name">@AuthState.Username</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        @if (showProfileDropdown)
+                        {
+                            <div class="dropdown-menu">
+                                <a href="/settings" class="dropdown-item" @onclick="CloseDropdown">
+                                    <span class="dropdown-icon">⚙️</span> Settings
+                                </a>
+                                <a href="/settings/favorites" class="dropdown-item" @onclick="CloseDropdown">
+                                    <span class="dropdown-icon">⭐</span> Favorites
+                                </a>
+                                <a class="dropdown-item" @onclick="SignOut">
+                                    <span class="dropdown-icon">🚪</span> Sign Out
+                                </a>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <a href="/signin">Sign In</a>
+                    <a href="/signup">Sign Up</a>
+                }
+            </nav>
+        </div>
+    </header>
+
+    <main class="app-main">
+        @Body
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; @DateTime.Now.Year Podium. Predict & Win.</p>
+    </footer>
+</div>
+
+@code {
+    private bool showProfileDropdown = false;
+    private System.Timers.Timer? closeTimer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthState.OnAuthStateChanged += StateHasChanged;
+        AdminState.OnAdminStateChanged += StateHasChanged;
+        
+        if (!AdminState.IsInitialized && AuthState.IsAuthenticated)
+        {
+            await AdminState.InitializeAsync();
+        }
+    }
+
+    private void ToggleDropdown()
+    {
+        showProfileDropdown = !showProfileDropdown;
+    }
+
+    private void CloseDropdown()
+    {
+        showProfileDropdown = false;
+    }
+
+    private void CloseDropdownDelayed()
+    {
+        closeTimer?.Dispose();
+        closeTimer = new System.Timers.Timer(150);
+        closeTimer.Elapsed += (s, e) =>
+        {
+            closeTimer?.Dispose();
+            InvokeAsync(() =>
+            {
+                showProfileDropdown = false;
+                StateHasChanged();
+            });
+        };
+        closeTimer.AutoReset = false;
+        closeTimer.Start();
+    }
+
+    private async Task SignOut()
+    {
+        showProfileDropdown = false;
+        await AuthState.ClearAuthStateAsync();
+        Navigation.NavigateTo("/");
+    }
+
+    public void Dispose()
+    {
+        AuthState.OnAuthStateChanged -= StateHasChanged;
+        AdminState.OnAdminStateChanged -= StateHasChanged;
+        closeTimer?.Dispose();
+    }
+}
+

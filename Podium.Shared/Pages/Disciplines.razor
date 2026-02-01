@@ -1,0 +1,138 @@
+﻿@page "/disciplines"
+@using Podium.Shared.Services.Api
+@using Podium.Shared.Services.State
+@using Podium.Shared.Models
+@inject IPodiumApiClient ApiClient
+@inject AuthStateService AuthState
+@inject NavigationManager Navigation
+
+<PageTitle>Select Discipline - Podium</PageTitle>
+
+<div class="page-container">
+    <h1>Choose a Discipline</h1>
+
+    @if (!AuthState.IsAuthenticated)
+    {
+        <div class="alert alert-warning">
+            Please <a href="/signin">sign in</a> to make predictions.
+        </div>
+    }
+
+    @if (AuthState.IsAuthenticated && favoriteSeasons.Count > 0)
+    {
+        <div class="favorites-section">
+            <h2>
+                <span><span class="card-icon">⭐</span> Quick Access - Your Favorite Seasons</span>
+                <a href="/settings/favorites" class="manage-link">Manage</a>
+            </h2>
+            <div class="favorites-quick-links">
+                @foreach (var favorite in favoriteSeasons)
+                {
+                    <div class="favorite-link" @onclick="() => NavigateToSeason(favorite.SeasonId)">
+                        <h4>@favorite.SeriesName</h4>
+                        <p>@favorite.SeasonName (@favorite.Year)</p>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @if (isLoading)
+    {
+        <div class="loading-spinner">
+            <p>Loading disciplines...</p>
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    else if (disciplines.Count == 0)
+    {
+        <div class="alert alert-info">
+            No disciplines available at the moment. Check back later!
+        </div>
+    }
+    else
+    {
+        <div class="sport-grid">
+            @foreach (var discipline in disciplines)
+            {
+                <div class="sport-card" @onclick="() => SelectDiscipline(discipline.Id)">
+                    <h3>@discipline.DisplayName</h3>
+                    <p>View series &rarr;</p>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<Discipline> disciplines = new();
+    private List<FavoriteSeason> favoriteSeasons = new();
+    private bool isLoading = true;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDisciplines();
+        
+        if (AuthState.IsAuthenticated)
+        {
+            await LoadFavoriteSeasons();
+        }
+    }
+
+    private async Task LoadDisciplines()
+    {
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            var response = await ApiClient.GetDisciplinesAsync();
+            if (response.Success && response.Data != null)
+            {
+                disciplines = response.Data;
+            }
+            else
+            {
+                errorMessage = response.Error ?? "Failed to load disciplines.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task LoadFavoriteSeasons()
+    {
+        try
+        {
+            var response = await ApiClient.GetFavoriteSeasonsAsync();
+            if (response.Success && response.Data != null)
+            {
+                favoriteSeasons = response.Data;
+            }
+        }
+        catch
+        {
+            // Silently fail - favorites are optional
+        }
+    }
+
+    private void SelectDiscipline(string disciplineId)
+    {
+        Navigation.NavigateTo($"/disciplines/{disciplineId}/series");
+    }
+
+    private void NavigateToSeason(string seasonId)
+    {
+        Navigation.NavigateTo($"/season/{seasonId}/events");
+    }
+}
