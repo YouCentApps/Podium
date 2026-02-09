@@ -1,7 +1,9 @@
 ﻿@inherits LayoutComponentBase
+@implements IDisposable
 @inject AuthStateService AuthState
 @inject AdminStateService AdminState
 @inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
 
 <div class="app-container">
     <header class="app-header">

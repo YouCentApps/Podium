@@ -745,6 +745,17 @@ public class PodiumApiClient : IPodiumApiClient
     {
         try
         {
+            // Handle specific status codes with user-friendly messages
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                return "Your session has expired. Please sign in again.";
+            }
+
+            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+                return "You don't have permission to access this resource.";
+            }
+
             var errorContent = await response.Content.ReadAsStringAsync();
             
             // Try to parse as JSON and extract the error message

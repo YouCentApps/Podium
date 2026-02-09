@@ -1,4 +1,7 @@
+@implements IDisposable
 @inject AuthStateService AuthState
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
 
 <link href="_content/Podium.Shared/app.css" rel="stylesheet" />
 <Routes />
@@ -8,5 +11,30 @@
     {
         // Restore session from storage on app startup
         await AuthState.InitializeAsync();
+
+        // Subscribe to session expiration events
+        AuthState.OnSessionExpired += HandleSessionExpired;
+    }
+
+    private async Task HandleSessionExpired()
+    {
+        try
+        {
+            // Show user-friendly alert
+            await JSRuntime.InvokeVoidAsync("alert", "Your session has expired. Please sign in again to continue.");
+            
+            // Navigate to sign-in page
+            Navigation.NavigateTo("/signin", true);
+        }
+        catch
+        {
+            // If JS interop fails, just navigate
+            Navigation.NavigateTo("/signin", true);
+        }
+    }
+
+    public void Dispose()
+    {
+        AuthState.OnSessionExpired -= HandleSessionExpired;
     }
 }

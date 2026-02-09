@@ -1,3 +1,4 @@
+using System.Net;
 using Podium.Shared.Services.State;
 
 namespace Podium.Shared.Services.Api;
@@ -5,6 +6,7 @@ namespace Podium.Shared.Services.Api;
 /// <summary>
 /// HTTP message handler that automatically injects the X-Session-Id header
 /// from the AuthStateService into all API requests (except auth endpoints)
+/// and handles session expiration (401 Unauthorized)
 /// </summary>
 public class AuthenticationMessageHandler : DelegatingHandler
 {
@@ -27,6 +29,15 @@ public class AuthenticationMessageHandler : DelegatingHandler
             request.Headers.Add("X-Session-Id", _authStateService.SessionId);
         }
 
-        return await base.SendAsync(request, cancellationToken);
+        var response = await base.SendAsync(request, cancellationToken);
+
+        // Handle authentication failures - session expired or invalid
+        if (response.StatusCode == HttpStatusCode.Unauthorized && !isAuthEndpoint)
+        {
+            // Trigger session expiration handling
+            await _authStateService.HandleSessionExpiredAsync();
+        }
+
+        return response;
     }
 }

@@ -4,12 +4,14 @@ public class AuthStateService
 {
     private const string StorageKey = "podium_session";
     private readonly IStorageService? _storageService;
+    private bool _isHandlingExpiration = false;
     
     private string? _userId;
     private string? _username;
     private string? _sessionId;
 
     public event Action? OnAuthStateChanged;
+    public event Func<Task>? OnSessionExpired;
 
     public bool IsAuthenticated => !string.IsNullOrEmpty(_userId);
     public string? UserId => _userId;
@@ -72,6 +74,31 @@ public class AuthStateService
         }
 
         NotifyStateChanged();
+    }
+
+    public async Task HandleSessionExpiredAsync()
+    {
+        // Prevent multiple simultaneous expiration handlers
+        if (_isHandlingExpiration)
+            return;
+
+        _isHandlingExpiration = true;
+
+        try
+        {
+            // Clear the auth state first
+            await ClearAuthStateAsync();
+
+            // Notify subscribers (e.g., UI components) that session expired
+            if (OnSessionExpired != null)
+            {
+                await OnSessionExpired.Invoke();
+            }
+        }
+        finally
+        {
+            _isHandlingExpiration = false;
+        }
     }
 
     // Legacy synchronous methods for backward compatibility
