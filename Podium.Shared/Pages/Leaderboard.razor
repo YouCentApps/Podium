@@ -1,4 +1,4 @@
-@page "/leaderboard"
+﻿@page "/leaderboard"
 @using Podium.Shared.Services.State
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
@@ -20,6 +20,25 @@
     }
     else
     {
+        @if (AuthState.IsAuthenticated && favoriteSeasons.Count > 0)
+        {
+            <div class="favorites-section">
+                <h2>
+                    <span><span class="card-icon">⭐</span> Quick Access - Your Favorite Seasons</span>
+                    <a href="/settings/favorites" class="manage-link">Manage</a>
+                </h2>
+                <div class="favorites-quick-links">
+                    @foreach (var favorite in favoriteSeasons)
+                    {
+                        <div class="favorite-link" @onclick="() => SelectFavoriteSeason(favorite.SeasonId)">
+                            <h4>@favorite.SeriesName</h4>
+                            <p>@favorite.SeasonName (@favorite.Year)</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
         <div class="leaderboard-filters">
             <div class="filter-group">
                 <label for="discipline-select">Discipline:</label>
@@ -195,7 +214,7 @@
                                     {
                                         <span class="selected-user-tag">
                                             @user.Username
-                                            <button class="clear-user-btn" @onclick="() => RemoveSearchUser(user)">�</button>
+                                            <button class="clear-user-btn" @onclick="() => RemoveSearchUser(user)">×</button>
                                         </span>
                                     }
                                     <button class="btn-link" @onclick="ClearAllSearchUsers">Clear All</button>
@@ -272,7 +291,8 @@ private List<UserStatistics> leaderboard = new();
 private List<Discipline> disciplines = new();
 private List<Series> series = new();
 private List<Season> seasons = new();
-    
+private List<FavoriteSeason> favoriteSeasons = new();
+
 private string? selectedDisciplineId;
 private string? selectedSeriesId;
 private string? selectedSeasonId;
@@ -293,6 +313,7 @@ private System.Threading.Timer? searchDebounceTimer;
     protected override async Task OnInitializedAsync()
     {
         await LoadDisciplines();
+        await LoadFavoriteSeasons();
         await AutoPopulateWithLatestSeason();
     }
 
@@ -321,6 +342,38 @@ private System.Threading.Timer? searchDebounceTimer;
         {
             isLoadingInitial = false;
         }
+    }
+
+    private async Task LoadFavoriteSeasons()
+    {
+        if (!AuthState.IsAuthenticated)
+            return;
+
+        try
+        {
+            var response = await ApiClient.GetFavoriteSeasonsAsync();
+            if (response.Success && response.Data != null)
+            {
+                favoriteSeasons = response.Data;
+            }
+        }
+        catch
+        {
+            // Silently fail - favorites are optional
+        }
+    }
+
+    private async Task SelectFavoriteSeason(string seasonId)
+    {
+        selectedSeasonId = seasonId;
+        leaderboard.Clear();
+        lastEventResult = null;
+        selectedSearchUsers.Clear();
+        userSearchResults.Clear();
+        searchUserQuery = "";
+
+        await LoadLeaderboard();
+        await LoadLastEventResult();
     }
 
     private async Task AutoPopulateWithLatestSeason()
