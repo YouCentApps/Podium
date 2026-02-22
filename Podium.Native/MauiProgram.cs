@@ -51,7 +51,8 @@ namespace Podium.Native
             CultureInfo.DefaultThreadCurrentUICulture = culture;
 
             // Add state management with storage first (needed by message handler)
-            builder.Services.AddScoped<IStorageService, BrowserStorageService>();
+            // Use MAUI Preferences so startup bootstrap and runtime share the same store
+            builder.Services.AddScoped<IStorageService, PreferencesStorageService>();
             builder.Services.AddScoped<AuthStateService>(sp =>
             {
                 var storageService = sp.GetRequiredService<IStorageService>();

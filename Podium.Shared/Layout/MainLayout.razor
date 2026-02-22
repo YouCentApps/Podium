@@ -124,8 +124,11 @@
         if (LangState.CurrentLanguageCode == code)
             return;
         await LangState.SetLanguageAsync(code);
-        await JSRuntime.InvokeVoidAsync("podiumCulture.set", code);
-        Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+        try { await JSRuntime.InvokeVoidAsync("podiumCulture.set", code); } catch { }
+
+        // In MAUI Blazor Hybrid forceLoad destroys the WebView; use soft navigation instead
+        var isWasm = OperatingSystem.IsBrowser();
+        Navigation.NavigateTo(Navigation.Uri, forceLoad: isWasm);
     }
 
     private async Task SignOut()

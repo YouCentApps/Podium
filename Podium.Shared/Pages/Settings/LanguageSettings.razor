@@ -140,6 +140,6 @@
             // JS interop may not be available (MAUI)
         }
 
-        Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+        Navigation.NavigateTo(Navigation.Uri, forceLoad: OperatingSystem.IsBrowser());
     }
 }

@@ -136,7 +136,7 @@ private async Task SignInWithPassword()
                 try { await JSRuntime.InvokeVoidAsync("podiumCulture.set", dbLang); } catch { }
             }
 
-            Navigation.NavigateTo("/", forceLoad: needsReload);
+            Navigation.NavigateTo("/", forceLoad: needsReload && OperatingSystem.IsBrowser());
         }
         else
         {
@@ -220,7 +220,7 @@ private async Task SendOtp()
                     try { await JSRuntime.InvokeVoidAsync("podiumCulture.set", dbLang); } catch { }
                 }
 
-                Navigation.NavigateTo("/", forceLoad: needsReload);
+                Navigation.NavigateTo("/", forceLoad: needsReload && OperatingSystem.IsBrowser());
             }
             else
             {
