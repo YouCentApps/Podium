@@ -651,7 +651,7 @@ public class PodiumApiClient : IPodiumApiClient
 
     public async Task<ApiResponse<MessageResponse>> UpdateMyLanguageAsync(string languageCode)
     {
-        return await PutAsync<MessageResponse>("/api/profile/language", new { languageCode });
+        return await PostAsync<MessageResponse>("/api/profile/language", new { languageCode });
     }
 
     public async Task<ApiResponse<UserLanguageResponse>> GetMyLanguageAsync()
