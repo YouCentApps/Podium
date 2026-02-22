@@ -1,5 +1,6 @@
 using Azure;
 using Azure.Data.Tables;
+using Microsoft.Extensions.Localization;
 using Podium.Shared.Models;
 using Podium.Shared.Services.Data;
 using Podium.Shared.Utilities;
@@ -26,15 +27,17 @@ public class AuthenticationService : IAuthenticationService
     private readonly ITableClientFactory _tableClientFactory;
     private readonly IUserRepository _userRepository;
     private readonly Action<string, string>? _sendEmailCallback;
+    private readonly IStringLocalizer<ApiMessages> _localizer;
     private const string UsersTable = "PodiumUsers";
     private const string SessionsTable = "PodiumAuthSessions";
     private const string OTPTable = "PodiumOTPCodes";
 
-    public AuthenticationService(ITableClientFactory tableClientFactory, IUserRepository userRepository, Action<string, string>? sendEmailCallback = null)
+    public AuthenticationService(ITableClientFactory tableClientFactory, IUserRepository userRepository, Action<string, string>? sendEmailCallback = null, IStringLocalizer<ApiMessages>? localizer = null)
     {
         _tableClientFactory = tableClientFactory;
         _userRepository = userRepository;
         _sendEmailCallback = sendEmailCallback;
+        _localizer = localizer ?? new NullStringLocalizer<ApiMessages>();
     }
 
     public async Task<(bool Success, string ActualEmail, string ErrorMessage)> SendOTPAsync(string emailOrUsername)
@@ -58,24 +61,24 @@ public class AuthenticationService : IAuthenticationService
         }
         catch (RequestFailedException ex)
         {
-            return (false, string.Empty, $"Database error: {ex.Message}");
+            return (false, string.Empty, _localizer["Auth_DbError"]);
         }
 
         if (user == null)
         {
-            return (false, string.Empty, "User not found. Please sign up first.");
+            return (false, string.Empty, _localizer["Auth_UserNotFound"]);
         }
 
         // Check if user allows email OTP authentication
         if (user.PreferredAuthMethod == "Password")
         {
-            return (false, string.Empty, "Email code authentication is not enabled for this account. Please use password to sign in.");
+            return (false, string.Empty, _localizer["Auth_EmailCodeDisabled"]);
         }
 
         // Check if user has an email (for password-only users who didn't provide email)
         if (string.IsNullOrWhiteSpace(user.Email))
         {
-            return (false, string.Empty, "No email address associated with this account. Please use password to sign in.");
+            return (false, string.Empty, _localizer["Auth_NoEmail"]);
         }
 
         // Generate 6-digit OTP
@@ -97,9 +100,9 @@ public class AuthenticationService : IAuthenticationService
         {
             await otpClient.AddEntityAsync(otpEntity);
         }
-        catch (RequestFailedException ex)
+        catch (RequestFailedException)
         {
-            return (false, string.Empty, $"Failed to generate code: {ex.Message}");
+            return (false, string.Empty, _localizer["Auth_FailedToGenerateCode"]);
         }
 
         // Send email via callback (API will provide this)
@@ -148,9 +151,9 @@ public class AuthenticationService : IAuthenticationService
         {
             await otpClient.AddEntityAsync(otpEntity);
         }
-        catch (RequestFailedException ex)
+        catch (RequestFailedException)
         {
-            return (false, $"Failed to generate code: {ex.Message}");
+            return (false, _localizer["Auth_FailedToGenerateCode"]);
         }
 
         // Send email via callback (API will provide this)
@@ -200,7 +203,7 @@ public class AuthenticationService : IAuthenticationService
 
             if (validOtp == null)
             {
-                return (false, string.Empty, string.Empty, string.Empty, "Invalid or expired code.");
+                return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidOtp"]);
             }
 
             // Mark OTP as used
@@ -219,7 +222,7 @@ public class AuthenticationService : IAuthenticationService
             // Check if user allows email OTP authentication
             if (user.PreferredAuthMethod == "Password")
             {
-                return (false, string.Empty, string.Empty, string.Empty, "Email code authentication is not enabled for this account. Please use password to sign in.");
+                return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_EmailCodeDisabled"]);
             }
 
             // Create session with normalized email
@@ -227,9 +230,9 @@ public class AuthenticationService : IAuthenticationService
 
             return (true, user.UserId, user.Username, sessionId, string.Empty);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            return (false, string.Empty, string.Empty, string.Empty, $"Verification failed: {ex.Message}");
+            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidOtp"]);
         }
     }
 
@@ -251,26 +254,26 @@ public class AuthenticationService : IAuthenticationService
                 user = await _userRepository.GetUserByUsernameAsync(emailOrUsername);
             }
         }
-        catch (RequestFailedException ex)
+        catch (RequestFailedException)
         {
-            return (false, string.Empty, string.Empty, string.Empty, $"Database error: {ex.Message}");
+            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_DbError"]);
         }
 
         if (user == null)
         {
-            return (false, string.Empty, string.Empty, string.Empty, "Invalid credentials.");
+            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidCredentials"]);
         }
 
         // Check if user allows password authentication
         if (user.PreferredAuthMethod == "Email")
         {
-            return (false, string.Empty, string.Empty, string.Empty, "Password authentication is not enabled for this account. Please use email code to sign in.");
+            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_PasswordNotEnabled"]);
         }
 
         // Verify password
         if (!VerifyPassword(password, user.PasswordHash, user.PasswordSalt))
         {
-            return (false, string.Empty, string.Empty, string.Empty, "Invalid credentials.");
+            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidCredentials"]);
         }
 
         // Create session
@@ -300,11 +303,11 @@ public class AuthenticationService : IAuthenticationService
                     string.Empty);
             }
 
-            return (false, string.Empty, string.Empty, string.Empty, "Session expired.");
+            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_SessionExpired"]);
         }
         catch (RequestFailedException)
         {
-            return (false, string.Empty, string.Empty, string.Empty, "Invalid session.");
+            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_SessionExpired"]);
         }
     }
 
@@ -404,26 +407,26 @@ public class AuthenticationService : IAuthenticationService
             // Get user by email
             user = await _userRepository.GetUserByEmailAsync(email);
         }
-        catch (RequestFailedException ex)
+        catch (RequestFailedException)
         {
-            return (false, $"Database error: {ex.Message}");
+            return (false, _localizer["Auth_DbError"]);
         }
 
         if (user == null)
         {
-            return (false, "Invalid credentials.");
+            return (false, _localizer["Auth_InvalidCredentials"]);
         }
 
         // Check if user allows password authentication
         if (user.PreferredAuthMethod == "Email")
         {
-            return (false, "Password authentication is not enabled for this account. Please use email code to sign in.");
+            return (false, _localizer["Auth_PasswordNotEnabled"]);
         }
 
         // Verify password
         if (!VerifyPassword(password, user.PasswordHash, user.PasswordSalt))
         {
-            return (false, "Invalid credentials.");
+            return (false, _localizer["Auth_InvalidCredentials"]);
         }
 
         // Password is valid - no session created
@@ -453,7 +456,7 @@ public class AuthenticationService : IAuthenticationService
 
             if (validOtp == null)
             {
-                return (false, "Invalid or expired code.");
+                return (false, _localizer["Auth_InvalidOtp"]);
             }
 
             // Mark OTP as used
@@ -472,15 +475,15 @@ public class AuthenticationService : IAuthenticationService
             // Check if user allows email OTP authentication
             if (user.PreferredAuthMethod == "Password")
             {
-                return (false, "Email code authentication is not enabled for this account. Please use password to sign in.");
+                return (false, _localizer["Auth_EmailCodeDisabled"]);
             }
 
             // OTP is valid - no session created
             return (true, string.Empty);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            return (false, $"Verification failed: {ex.Message}");
+            return (false, _localizer["Auth_InvalidOtp"]);
         }
     }
 }

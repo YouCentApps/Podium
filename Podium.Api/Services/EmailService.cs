@@ -1,5 +1,7 @@
 using System.Net;
 using System.Net.Mail;
+using Microsoft.Extensions.Localization;
+using Podium.Shared;
 
 namespace Podium.Api.Services;
 
@@ -16,9 +18,10 @@ public class EmailService : IEmailService
     private readonly string _smtpPassword;
     private readonly string _senderEmail;
     private readonly string _senderName;
+    private readonly IStringLocalizer<ApiMessages> _localizer;
 
-    public EmailService(string smtpServer, int smtpPort, string smtpUsername, string smtpPassword, 
-        string senderEmail, string senderName)
+    public EmailService(string smtpServer, int smtpPort, string smtpUsername, string smtpPassword,
+        string senderEmail, string senderName, IStringLocalizer<ApiMessages> localizer)
     {
         _smtpServer = smtpServer;
         _smtpPort = smtpPort;
@@ -26,10 +29,20 @@ public class EmailService : IEmailService
         _smtpPassword = smtpPassword;
         _senderEmail = senderEmail;
         _senderName = senderName;
+        _localizer = localizer;
     }
 
     public async Task SendVerificationEmailAsync(string toEmail, string verificationCode)
     {
+        var subject = _localizer["Email_Subject"].Value;
+        var header = _localizer["Email_Header"].Value;
+        var title = _localizer["Email_Title"].Value;
+        var body = _localizer["Email_Body"].Value;
+        var expiry = _localizer["Email_Expiry"].Value;
+        var ignore = _localizer["Email_Ignore"].Value;
+        var automated = _localizer["Email_Automated"].Value;
+        var copyright = _localizer["Email_Copyright"].Value;
+
         try
         {
             using var client = new SmtpClient(_smtpServer, _smtpPort)
@@ -42,7 +55,7 @@ public class EmailService : IEmailService
             var message = new MailMessage
             {
                 From = new MailAddress(_senderEmail, _senderName),
-                Subject = "Your Verification Code for YouCent Podium",
+                Subject = subject,
                 IsBodyHtml = true,
                 Body = $@"
                     <!DOCTYPE html>
@@ -60,34 +73,33 @@ public class EmailService : IEmailService
                     <body>
                         <div class='container'>
                             <div class='header'>
-                                <h1>YouCent Podium</h1>
+                                <h1>{header}</h1>
                             </div>
                             <div class='content'>
-                                <h2>Your Verification Code</h2>
-                                <p>Use this code to sign in to your Podium account:</p>
+                                <h2>{title}</h2>
+                                <p>{body}</p>
                                 <div class='code'>{verificationCode}</div>
-                                <p><strong>This code expires in 10 minutes.</strong></p>
-                                <p>If you didn't request this code, you can safely ignore this email.</p>
+                                <p><strong>{expiry}</strong></p>
+                                <p>{ignore}</p>
                             </div>
                             <div class='footer'>
-                                <p>This is an automated message, please do not reply.</p>
-                                <p>&copy; {DateTime.Now.Year} Podium. All rights reserved.</p>
+                                <p>{automated}</p>
+                                <p>&copy; {DateTime.Now.Year} Podium. {copyright}</p>
                             </div>
                         </div>
                     </body>
                     </html>
                 "
             };
-            
+
             message.To.Add(toEmail);
-            
+
             await client.SendMailAsync(message);
         }
         catch (Exception ex)
         {
-            // Log the error but don't throw - we don't want to break the flow
             Console.WriteLine($"Failed to send email to {toEmail}: {ex.Message}");
-            throw; // Re-throw so caller knows it failed
+            throw;
         }
     }
 }

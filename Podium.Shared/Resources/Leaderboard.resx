@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Leaderboard_SelectInfo" xml:space="preserve"><value>Please select a discipline, series, and season to view the leaderboard.</value></data>
+  <data name="Leaderboard_NoPredictions" xml:space="preserve"><value>No predictions have been made yet for this season.</value></data>
+  <data name="Leaderboard_Loading" xml:space="preserve"><value>Loading leaderboard...</value></data>
+  <data name="Leaderboard_LoadingLastEvent" xml:space="preserve"><value>Loading last event results...</value></data>
+  <data name="Leaderboard_SelectDiscipline" xml:space="preserve"><value>-- Select Discipline --</value></data>
+  <data name="Leaderboard_SelectSeries" xml:space="preserve"><value>-- Select Series --</value></data>
+  <data name="Leaderboard_SelectSeason" xml:space="preserve"><value>-- Select Season --</value></data>
+  <data name="Leaderboard_Label_Discipline" xml:space="preserve"><value>Discipline:</value></data>
+  <data name="Leaderboard_Label_Series" xml:space="preserve"><value>Series:</value></data>
+  <data name="Leaderboard_Label_Season" xml:space="preserve"><value>Season:</value></data>
+  <data name="Leaderboard_Col_Rank" xml:space="preserve"><value>Rank</value></data>
+  <data name="Leaderboard_Col_Player" xml:space="preserve"><value>Player</value></data>
+  <data name="Leaderboard_Col_BestResults" xml:space="preserve"><value>Best {0} Results</value></data>
+  <data name="Leaderboard_Col_Total" xml:space="preserve"><value>Total</value></data>
+  <data name="Leaderboard_Col_Predictions" xml:space="preserve"><value>Predictions</value></data>
+  <data name="Leaderboard_Col_Exact" xml:space="preserve"><value>Exact</value></data>
+  <data name="Leaderboard_Col_1Off" xml:space="preserve"><value>1 Off</value></data>
+  <data name="Leaderboard_Col_2Off" xml:space="preserve"><value>2 Off</value></data>
+  <data name="Leaderboard_LastEvent" xml:space="preserve"><value>Last Completed Event:</value></data>
+  <data name="Leaderboard_ActualPodium" xml:space="preserve"><value>Actual Podium Result</value></data>
+  <data name="Leaderboard_Top10" xml:space="preserve"><value>Top 10 Predictors</value></data>
+  <data name="Leaderboard_SearchUser" xml:space="preserve"><value>Search for a specific user:</value></data>
+  <data name="Leaderboard_SearchPlaceholder" xml:space="preserve"><value>Type username or email...</value></data>
+  <data name="Leaderboard_ShowingFor" xml:space="preserve"><value>Showing results for:</value></data>
+  <data name="Leaderboard_ClearAll" xml:space="preserve"><value>Clear All</value></data>
+  <data name="Leaderboard_NoPredictionsFound" xml:space="preserve"><value>No predictions found for the selected users.</value></data>
+  <data name="Leaderboard_Col_Prediction" xml:space="preserve"><value>Prediction</value></data>
+  <data name="Leaderboard_Col_Points" xml:space="preserve"><value>Points</value></data>
+  <data name="Leaderboard_Col_Submitted" xml:space="preserve"><value>Submitted</value></data>
+  <data name="Leaderboard_Pos1st" xml:space="preserve"><value>1st:</value></data>
+  <data name="Leaderboard_Pos2nd" xml:space="preserve"><value>2nd:</value></data>
+  <data name="Leaderboard_Pos3rd" xml:space="preserve"><value>3rd:</value></data>
+  <data name="Leaderboard_Col_BestResults_Short" xml:space="preserve"><value>Best Results</value></data>
+</root>

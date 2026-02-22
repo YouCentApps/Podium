@@ -7,14 +7,16 @@
 @inject AuthStateService AuthState
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<SettingsRes> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>Manage Favorite Seasons - Podium</PageTitle>
 
 <div class="settings-container">
     <div class="settings-header">
-        <a href="/settings" class="back-link">&larr; Back to Settings</a>
-        <h1>Manage Favorite Seasons</h1>
-        <p>Select up to 5 favorite seasons for quick access on the predictions page</p>
+        <a href="/settings" class="back-link">&larr; @LC["Btn_BackToSettings"]</a>
+        <h1>@L["ManageFavorites_Title"]</h1>
+        <p>@L["ManageFavorites_Subtitle"]</p>
     </div>
 
     @if (!AuthState.IsAuthenticated)
@@ -26,7 +28,7 @@
     else if (isLoading)
     {
         <div class="loading-spinner">
-            <p>Loading...</p>
+            <p>@LC["Loading"]</p>
         </div>
     }
     else
@@ -44,7 +46,7 @@
         @if (favoriteSeasons.Count > 0)
         {
             <div class="favorites-section">
-                <h3>Your Favorite Seasons (@favoriteSeasons.Count/5)</h3>
+                <h3>@string.Format(L["ManageFavorites_Current"], favoriteSeasons.Count)</h3>
                 <div class="favorites-list">
                     @foreach (var favorite in favoriteSeasons)
                     {
@@ -54,7 +56,7 @@
                                 <p>@favorite.SeasonName (@favorite.Year)</p>
                             </div>
                             <button class="btn btn-danger btn-sm" @onclick="() => RemoveFavorite(favorite.SeasonId)" disabled="@isRemoving">
-                                Remove
+                                @L["ManageFavorites_Btn_Remove"]
                             </button>
                         </div>
                     }
@@ -64,18 +66,18 @@
         else
         {
             <div class="alert alert-info">
-                You haven't added any favorite seasons yet. Browse seasons and add your favorites!
+                @L["ManageFavorites_None"]
             </div>
         }
 
         @if (favoriteSeasons.Count < 5)
         {
             <div class="add-favorite-section">
-                <h3>Add Favorite Season</h3>
-                <p>Browse through disciplines and series to find seasons to add to your favorites.</p>
-                
+                <h3>@L["ManageFavorites_Add_Title"]</h3>
+                <p>@L["ManageFavorites_Add_Desc"]</p>
+
                 <div class="form-group">
-                    <label>Select Discipline</label>
+                    <label>@L["ManageFavorites_SelectDiscipline"]</label>
                     <select class="form-control" @onchange="OnDisciplineSelected" value="@selectedDisciplineId">
                         <option value="">-- Select Discipline --</option>
                         @foreach (var discipline in disciplines)

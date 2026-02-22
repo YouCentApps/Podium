@@ -4,12 +4,13 @@
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
 @inject NavigationManager Navigation
+@inject IStringLocalizer<Auth> L
 
 <PageTitle>Sign In - Podium</PageTitle>
 
 <div class="auth-container">
     <div class="auth-card">
-        <h2>Sign In to Podium</h2>
+        <h2>@L["SignIn_Title"]</h2>
 
         @if (!string.IsNullOrEmpty(errorMessage))
         {
@@ -23,10 +24,10 @@
 
         <div class="auth-tabs">
             <button class="@(authMethod == "password" ? "active" : "")" @onclick="@(() => authMethod = "password")">
-                Password
+                @L["SignIn_Tab_Password"]
             </button>
             <button class="@(authMethod == "email" ? "active" : "")" @onclick="@(() => authMethod = "email")">
-                Email Code
+                @L["SignIn_Tab_EmailCode"]
             </button>
         </div>
 
@@ -34,24 +35,18 @@
         {
             <div class="auth-form">
                 <div class="form-group">
-                    <label>Email or Username</label>
-                    <input type="text" class="form-control" @bind="emailOrUsername" placeholder="your@email.com or username" />
+                    <label>@L["SignIn_Label_EmailOrUsername"]</label>
+                    <input type="text" class="form-control" @bind="emailOrUsername" placeholder="@L["SignIn_Placeholder_EmailOrUsername"]" />
                 </div>
 
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control" @bind="password" placeholder="••••••••" />
+                    <label>@L["SignIn_Label_Password"]</label>
+                    <input type="password" class="form-control" @bind="password" placeholder="@L["SignIn_Placeholder_Password"]" />
                 </div>
 
                 <button class="btn btn-primary w-100" @onclick="SignInWithPassword" disabled="@isLoading">
-                    @if (isLoading)
-                    {
-                        <span>Signing in...</span>
-                    }
-                    else
-                    {
-                        <span>Sign In</span>
-                    }
+                    @if (isLoading) { <span>@L["SignIn_Btn_SigningIn"]</span> }
+                    else { <span>@L["SignIn_Btn_SignIn"]</span> }
                 </button>
             </div>
         }
@@ -61,50 +56,38 @@
             {
                 <div class="auth-form">
                     <div class="form-group">
-                        <label>Email or Username</label>
-                        <input type="text" class="form-control" @bind="emailOrUsernameForOtp" placeholder="your@email.com or username" />
+                        <label>@L["SignIn_Label_EmailOrUsername"]</label>
+                        <input type="text" class="form-control" @bind="emailOrUsernameForOtp" placeholder="@L["SignIn_Placeholder_EmailOrUsername"]" />
                     </div>
 
                     <button class="btn btn-primary w-100" @onclick="SendOtp" disabled="@isLoading">
-                        @if (isLoading)
-                        {
-                            <span>Sending code...</span>
-                        }
-                        else
-                        {
-                            <span>Send Verification Code</span>
-                        }
+                        @if (isLoading) { <span>@L["SignIn_Btn_Sending"]</span> }
+                        else { <span>@L["SignIn_Btn_SendCode"]</span> }
                     </button>
                 </div>
             }
             else
             {
                 <div class="auth-form">
-                    <p class="text-center">We've sent a verification code to <strong>@displayEmail</strong></p>
+                    <p class="text-center">@L["SignIn_SentTo"] <strong>@displayEmail</strong></p>
 
                     <div class="form-group">
-                        <label>Verification Code</label>
-                        <input type="text" class="form-control" @bind="otpCode" placeholder="000000" maxlength="6" />
+                        <label>@L["SignIn_Label_Code"]</label>
+                        <input type="text" class="form-control" @bind="otpCode" placeholder="@L["SignIn_Placeholder_Code"]" maxlength="6" />
                     </div>
 
                     <button class="btn btn-primary w-100" @onclick="VerifyOtp" disabled="@isLoading">
-                        @if (isLoading)
-                        {
-                            <span>Verifying...</span>
-                        }
-                        else
-                        {
-                            <span>Verify & Sign In</span>
-                        }
+                        @if (isLoading) { <span>@L["SignIn_Btn_Verifying"]</span> }
+                        else { <span>@L["SignIn_Btn_Verify"]</span> }
                     </button>
 
-                    <button class="btn btn-link w-100" @onclick="ResetOtp">Send a new code</button>
+                    <button class="btn btn-link w-100" @onclick="ResetOtp">@L["SignIn_Btn_SendCode"]</button>
                 </div>
             }
         }
 
         <div class="auth-footer">
-            <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+            <p>@L["SignIn_NoAccount"] <a href="/signup">@L["SignIn_SignUpLink"]</a></p>
         </div>
     </div>
 </div>
@@ -129,7 +112,7 @@ private async Task SignInWithPassword()
 
     if (string.IsNullOrWhiteSpace(emailOrUsername) || string.IsNullOrWhiteSpace(password))
     {
-        errorMessage = "Please enter both email/username and password.";
+        errorMessage = L["SignIn_Required"];
         return;
     }
 
@@ -145,12 +128,12 @@ private async Task SignInWithPassword()
         }
         else
         {
-            errorMessage = response.Error ?? "Sign in failed. Please try again.";
+            errorMessage = response.Error ?? L["SignIn_Failed"];
         }
     }
     catch (Exception ex)
     {
-        errorMessage = $"Error: {ex.Message}";
+        errorMessage = ex.Message;
     }
     finally
     {
@@ -165,7 +148,7 @@ private async Task SendOtp()
 
     if (string.IsNullOrWhiteSpace(emailOrUsernameForOtp))
     {
-        errorMessage = "Please enter your email or username.";
+        errorMessage = L["SignIn_EnterEmailOrUsername"];
         return;
     }
 
@@ -203,7 +186,7 @@ private async Task SendOtp()
 
         if (string.IsNullOrWhiteSpace(otpCode))
         {
-            errorMessage = "Please enter the verification code.";
+            errorMessage = L["SignIn_EnterCode"];
             return;
         }
 

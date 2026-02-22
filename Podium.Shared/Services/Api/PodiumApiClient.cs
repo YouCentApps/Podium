@@ -132,6 +132,10 @@ public interface IPodiumApiClient
     Task<ApiResponse<MessageResponse>> ConfirmEmailUpdateAsync(ConfirmEmailUpdateRequest request);
     Task<ApiResponse<MessageResponse>> SendPasswordSetupOtpAsync();
 
+    // Language
+    Task<ApiResponse<List<Language>>> GetLanguagesAsync();
+    Task<ApiResponse<MessageResponse>> UpdateMyLanguageAsync(string languageCode);
+
     // Favorite Seasons
     Task<ApiResponse<List<FavoriteSeason>>> GetFavoriteSeasonsAsync();
     Task<ApiResponse<MessageResponse>> AddFavoriteSeasonAsync(string seasonId, string seasonName, string seriesName, int year);
@@ -636,6 +640,17 @@ public class PodiumApiClient : IPodiumApiClient
     public async Task<ApiResponse<MessageResponse>> SendPasswordSetupOtpAsync()
     {
         return await PostAsync<MessageResponse>("/api/profile/password/send-otp", new { });
+    }
+
+    // Language
+    public async Task<ApiResponse<List<Language>>> GetLanguagesAsync()
+    {
+        return await GetAsync<List<Language>>("/api/profile/languages");
+    }
+
+    public async Task<ApiResponse<MessageResponse>> UpdateMyLanguageAsync(string languageCode)
+    {
+        return await PutAsync<MessageResponse>("/api/profile/language", new { languageCode });
     }
 
     // Favorite Seasons

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Leaderboard_SelectInfo" xml:space="preserve"><value>Пожалуйста, выберите дисциплину, серию и сезон.</value></data>
+  <data name="Leaderboard_NoPredictions" xml:space="preserve"><value>Для этого сезона ещё нет прогнозов.</value></data>
+  <data name="Leaderboard_Loading" xml:space="preserve"><value>Загрузка таблицы лидеров...</value></data>
+  <data name="Leaderboard_LoadingLastEvent" xml:space="preserve"><value>Загрузка результатов последнего события...</value></data>
+  <data name="Leaderboard_SelectDiscipline" xml:space="preserve"><value>-- Выберите дисциплину --</value></data>
+  <data name="Leaderboard_SelectSeries" xml:space="preserve"><value>-- Выберите серию --</value></data>
+  <data name="Leaderboard_SelectSeason" xml:space="preserve"><value>-- Выберите сезон --</value></data>
+  <data name="Leaderboard_Label_Discipline" xml:space="preserve"><value>Дисциплина:</value></data>
+  <data name="Leaderboard_Label_Series" xml:space="preserve"><value>Серия:</value></data>
+  <data name="Leaderboard_Label_Season" xml:space="preserve"><value>Сезон:</value></data>
+  <data name="Leaderboard_Col_Rank" xml:space="preserve"><value>Место</value></data>
+  <data name="Leaderboard_Col_Player" xml:space="preserve"><value>Игрок</value></data>
+  <data name="Leaderboard_Col_BestResults" xml:space="preserve"><value>Лучшие {0} результатов</value></data>
+  <data name="Leaderboard_Col_Total" xml:space="preserve"><value>Итого</value></data>
+  <data name="Leaderboard_Col_Predictions" xml:space="preserve"><value>Прогнозы</value></data>
+  <data name="Leaderboard_Col_Exact" xml:space="preserve"><value>Точно</value></data>
+  <data name="Leaderboard_Col_1Off" xml:space="preserve"><value>±1</value></data>
+  <data name="Leaderboard_Col_2Off" xml:space="preserve"><value>±2</value></data>
+  <data name="Leaderboard_LastEvent" xml:space="preserve"><value>Последнее событие:</value></data>
+  <data name="Leaderboard_ActualPodium" xml:space="preserve"><value>Фактический результат подиума</value></data>
+  <data name="Leaderboard_Top10" xml:space="preserve"><value>Топ-10 предсказателей</value></data>
+  <data name="Leaderboard_SearchUser" xml:space="preserve"><value>Поиск конкретного пользователя:</value></data>
+  <data name="Leaderboard_SearchPlaceholder" xml:space="preserve"><value>Введите имя или email...</value></data>
+  <data name="Leaderboard_ShowingFor" xml:space="preserve"><value>Показаны результаты для:</value></data>
+  <data name="Leaderboard_ClearAll" xml:space="preserve"><value>Очистить всё</value></data>
+  <data name="Leaderboard_NoPredictionsFound" xml:space="preserve"><value>Прогнозы для выбранных пользователей не найдены.</value></data>
+  <data name="Leaderboard_Col_Prediction" xml:space="preserve"><value>Прогноз</value></data>
+  <data name="Leaderboard_Col_Points" xml:space="preserve"><value>Очки</value></data>
+  <data name="Leaderboard_Col_Submitted" xml:space="preserve"><value>Отправлено</value></data>
+  <data name="Leaderboard_Pos1st" xml:space="preserve"><value>1-е:</value></data>
+  <data name="Leaderboard_Pos2nd" xml:space="preserve"><value>2-е:</value></data>
+  <data name="Leaderboard_Pos3rd" xml:space="preserve"><value>3-е:</value></data>
+  <data name="Leaderboard_Col_BestResults_Short" xml:space="preserve"><value>Лучшие результаты</value></data>
+</root>

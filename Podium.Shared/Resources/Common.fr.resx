@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Nav_MakePredictions" xml:space="preserve"><value>Faire des prédictions</value></data>
+  <data name="Nav_MyPredictions" xml:space="preserve"><value>Mes prédictions</value></data>
+  <data name="Nav_Leaderboard" xml:space="preserve"><value>Classement</value></data>
+  <data name="Nav_SignIn" xml:space="preserve"><value>Se connecter</value></data>
+  <data name="Nav_SignUp" xml:space="preserve"><value>S'inscrire</value></data>
+  <data name="Nav_Settings" xml:space="preserve"><value>Paramètres</value></data>
+  <data name="Nav_Favorites" xml:space="preserve"><value>Favoris</value></data>
+  <data name="Nav_SignOut" xml:space="preserve"><value>Se déconnecter</value></data>
+  <data name="Nav_Admin" xml:space="preserve"><value>Admin</value></data>
+  <data name="Nav_Language" xml:space="preserve"><value>Langue</value></data>
+  <data name="Footer_Copyright" xml:space="preserve"><value>Prédit &amp; Gagne.</value></data>
+  <data name="Loading" xml:space="preserve"><value>Chargement...</value></data>
+  <data name="Btn_Save" xml:space="preserve"><value>Enregistrer</value></data>
+  <data name="Btn_Cancel" xml:space="preserve"><value>Annuler</value></data>
+  <data name="Btn_BackToSettings" xml:space="preserve"><value>Retour aux paramètres</value></data>
+  <data name="Btn_Remove" xml:space="preserve"><value>Supprimer</value></data>
+  <data name="Favorites_QuickAccess" xml:space="preserve"><value>Accès rapide - Saisons favorites</value></data>
+  <data name="Favorites_Manage" xml:space="preserve"><value>Gérer</value></data>
+  <data name="NotFound_Title" xml:space="preserve"><value>Introuvable</value></data>
+  <data name="NotFound_Message" xml:space="preserve"><value>Désolé, ce contenu n'existe pas.</value></data>
+  <data name="Alert_SignInRequired" xml:space="preserve"><value>Veuillez vous connecter pour voir cette page.</value></data>
+  <data name="Alert_SignInLink" xml:space="preserve"><value>connectez-vous</value></data>
+  <data name="Home_Welcome" xml:space="preserve"><value>Bienvenue, {0} !</value></data>
+  <data name="Home_Subtitle" xml:space="preserve"><value>Prêt à faire vos prédictions ?</value></data>
+  <data name="Home_MakePredictions_Desc" xml:space="preserve"><value>Choisissez une discipline et prédisez le podium</value></data>
+  <data name="Home_MyPredictions_Desc" xml:space="preserve"><value>Voir vos prédictions et résultats</value></data>
+  <data name="Home_Leaderboard_Desc" xml:space="preserve"><value>Voyez votre classement parmi les autres</value></data>
+  <data name="Home_Hero_Title" xml:space="preserve"><value>Prédisez le podium</value></data>
+  <data name="Home_Hero_Lead" xml:space="preserve"><value>Affrontez vos amis. Prédisez les gagnants. Grimpez le classement.</value></data>
+  <data name="Home_GetStarted" xml:space="preserve"><value>Commencer</value></data>
+  <data name="Home_Feature1_Title" xml:space="preserve"><value>Plusieurs disciplines</value></data>
+  <data name="Home_Feature1_Desc" xml:space="preserve"><value>De la Formule 1 aux autres sports mécaniques</value></data>
+  <data name="Home_Feature2_Title" xml:space="preserve"><value>Prédictions simples</value></data>
+  <data name="Home_Feature2_Desc" xml:space="preserve"><value>Choisissez simplement votre top 3 pour chaque événement</value></data>
+  <data name="Home_Feature3_Title" xml:space="preserve"><value>Concourir &amp; Gagner</value></data>
+  <data name="Home_Feature3_Desc" xml:space="preserve"><value>Gagnez des points et montez dans le classement</value></data>
+</root>

@@ -2,6 +2,8 @@
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
 @inject NavigationManager Navigation
+@inject IStringLocalizer<Predictions> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>Make Prediction - Podium</PageTitle>
 
@@ -9,7 +11,7 @@
     @if (!AuthState.IsAuthenticated)
     {
         <div class="alert alert-warning">
-            Please <a href="/signin">sign in</a> to make predictions.
+            @L["Predict_SignIn"]
         </div>
         return;
     }
@@ -17,7 +19,7 @@
     @if (isLoading)
     {
         <div class="loading-spinner">
-            <p>Loading...</p>
+            <p>@LC["Loading"]</p>
         </div>
     }
     else if (!string.IsNullOrEmpty(errorMessage))
@@ -26,7 +28,7 @@
     }
     else
     {
-        <h1>Predict the Podium</h1>
+        <h1>@L["Predict_Title"]</h1>
         <h2>@eventDetails?.DisplayName</h2>
 
         @if (!string.IsNullOrEmpty(successMessage))
@@ -36,7 +38,7 @@
 
         <div class="prediction-form">
             <div class="form-section">
-                <h3><span class="medal-icon gold">&#129351;</span> First Place</h3>
+                <h3><span class="medal-icon gold">&#129351;</span> @L["Predict_FirstPlace"]</h3>
                 <div class="competitor-grid">
                     @foreach (var competitor in competitors)
                     {
@@ -49,7 +51,7 @@
             </div>
 
             <div class="form-section">
-                <h3><span class="medal-icon silver">&#129352;</span> Second Place</h3>
+                <h3><span class="medal-icon silver">&#129352;</span> @L["Predict_SecondPlace"]</h3>
                 <div class="competitor-grid">
                     @foreach (var competitor in competitors)
                     {
@@ -62,7 +64,7 @@
             </div>
 
             <div class="form-section">
-                <h3><span class="medal-icon bronze">&#129353;</span> Third Place</h3>
+                <h3><span class="medal-icon bronze">&#129353;</span> @L["Predict_ThirdPlace"]</h3>
                 <div class="competitor-grid">
                     @foreach (var competitor in competitors)
                     {
@@ -77,31 +79,26 @@
             @if (!string.IsNullOrEmpty(selectedFirst) && !string.IsNullOrEmpty(selectedSecond) && !string.IsNullOrEmpty(selectedThird))
             {
                 <div class="prediction-summary">
-                    <h3>Your Prediction</h3>
+                    <h3>@L["Predict_YourPrediction"]</h3>
                     <div class="podium-display">
                         <div class="podium-position position-1">
-                            <div class="position-label"><span class="medal-icon gold">&#129351;</span> First</div>
+                            <div class="position-label"><span class="medal-icon gold">&#129351;</span> @L["Predict_FirstPlace"]</div>
                             <div class="position-competitor">@selectedFirstName</div>
                         </div>
                         <div class="podium-position position-2">
-                            <div class="position-label"><span class="medal-icon silver">&#129352;</span> Second</div>
+                            <div class="position-label"><span class="medal-icon silver">&#129352;</span> @L["Predict_SecondPlace"]</div>
                             <div class="position-competitor">@selectedSecondName</div>
                         </div>
                         <div class="podium-position position-3">
-                            <div class="position-label"><span class="medal-icon bronze">&#129353;</span> Third</div>
+                            <div class="position-label"><span class="medal-icon bronze">&#129353;</span> @L["Predict_ThirdPlace"]</div>
                             <div class="position-competitor">@selectedThirdName</div>
                         </div>
                     </div>
 
                     <button class="btn btn-primary w-100" @onclick="SubmitPrediction" disabled="@isSubmitting">
-                        @if (isSubmitting)
-                        {
-                            <span>Submitting...</span>
-                        }
-                        else
-                        {
-                            <span>Submit Prediction</span>
-                        }
+                        @if (isSubmitting) { <span>@L["Predict_Btn_Submitting"]</span> }
+                        else if (hasExistingPrediction) { <span>@L["Predict_Btn_Update"]</span> }
+                        else { <span>@L["Predict_Btn_Submit"]</span> }
                     </button>
                 </div>
             }
@@ -126,6 +123,7 @@
     private string selectedThirdName = "";
     private bool isLoading = true;
     private bool isSubmitting = false;
+    private bool hasExistingPrediction = false;
     private string? errorMessage;
     private string? successMessage;
 
@@ -176,6 +174,7 @@
                 var existingPrediction = await ApiClient.GetPredictionAsync(EventId, AuthState.UserId);
                 if (existingPrediction.Success && existingPrediction.Data != null)
                 {
+                    hasExistingPrediction = true;
                     var pred = existingPrediction.Data;
                     selectedFirst = pred.FirstPlaceId;
                     selectedFirstName = pred.FirstPlaceName;
@@ -257,13 +256,13 @@
             var response = await ApiClient.SubmitPredictionAsync(request);
             if (response.Success)
             {
-                successMessage = "Prediction submitted successfully!";
+                successMessage = L["Predict_Submitted"];
                 await Task.Delay(2000);
                 Navigation.NavigateTo("/my-predictions");
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to submit prediction.";
+                errorMessage = response.Error ?? L["Predict_SubmitFailed"];
             }
         }
         catch (Exception ex)

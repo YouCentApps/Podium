@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="SignIn_Title" xml:space="preserve"><value>Войти в Podium</value></data>
+  <data name="SignIn_Tab_Password" xml:space="preserve"><value>Пароль</value></data>
+  <data name="SignIn_Tab_EmailCode" xml:space="preserve"><value>Код на почту</value></data>
+  <data name="SignIn_Label_EmailOrUsername" xml:space="preserve"><value>Email или имя пользователя</value></data>
+  <data name="SignIn_Placeholder_EmailOrUsername" xml:space="preserve"><value>ваш@email.com или имя пользователя</value></data>
+  <data name="SignIn_Label_Password" xml:space="preserve"><value>Пароль</value></data>
+  <data name="SignIn_Placeholder_Password" xml:space="preserve"><value>••••••••</value></data>
+  <data name="SignIn_Btn_SignIn" xml:space="preserve"><value>Войти</value></data>
+  <data name="SignIn_Btn_SigningIn" xml:space="preserve"><value>Вход...</value></data>
+  <data name="SignIn_Btn_SendCode" xml:space="preserve"><value>Отправить код подтверждения</value></data>
+  <data name="SignIn_Btn_Sending" xml:space="preserve"><value>Отправка кода...</value></data>
+  <data name="SignIn_Btn_Verify" xml:space="preserve"><value>Подтвердить и войти</value></data>
+  <data name="SignIn_Btn_Verifying" xml:space="preserve"><value>Проверка...</value></data>
+  <data name="SignIn_Label_Code" xml:space="preserve"><value>Код подтверждения</value></data>
+  <data name="SignIn_Placeholder_Code" xml:space="preserve"><value>000000</value></data>
+  <data name="SignIn_SentTo" xml:space="preserve"><value>Мы отправили код подтверждения на</value></data>
+  <data name="SignIn_NoAccount" xml:space="preserve"><value>Нет аккаунта?</value></data>
+  <data name="SignIn_SignUpLink" xml:space="preserve"><value>Зарегистрируйтесь</value></data>
+  <data name="SignUp_Title" xml:space="preserve"><value>Создать аккаунт</value></data>
+  <data name="SignUp_Label_Username" xml:space="preserve"><value>Имя пользователя</value></data>
+  <data name="SignUp_Hint_Username" xml:space="preserve"><value>3-50 символов. Только латинские буквы, цифры и пробелы. Используется для входа.</value></data>
+  <data name="SignUp_Label_AuthMethod" xml:space="preserve"><value>Предпочтительный способ входа</value></data>
+  <data name="SignUp_Method_Both" xml:space="preserve"><value>Оба (Пароль и Код на почту)</value></data>
+  <data name="SignUp_Method_Password" xml:space="preserve"><value>Только пароль</value></data>
+  <data name="SignUp_Method_Email" xml:space="preserve"><value>Только код на почту</value></data>
+  <data name="SignUp_Label_Email" xml:space="preserve"><value>Email</value></data>
+  <data name="SignUp_Label_EmailOptional" xml:space="preserve"><value>Email (необязательно)</value></data>
+  <data name="SignUp_Hint_EmailRequired" xml:space="preserve"><value>Обязателен для входа по коду на почту</value></data>
+  <data name="SignUp_Label_Password" xml:space="preserve"><value>Пароль</value></data>
+  <data name="SignUp_Hint_Password" xml:space="preserve"><value>Латинские буквы, цифры и специальные символы. Без пробелов.</value></data>
+  <data name="SignUp_Label_ConfirmPassword" xml:space="preserve"><value>Подтвердите пароль</value></data>
+  <data name="SignUp_Placeholder_ConfirmPassword" xml:space="preserve"><value>Повторите пароль</value></data>
+  <data name="SignUp_Btn_Create" xml:space="preserve"><value>Создать аккаунт</value></data>
+  <data name="SignUp_Btn_Creating" xml:space="preserve"><value>Создание аккаунта...</value></data>
+  <data name="SignUp_AlreadyHave" xml:space="preserve"><value>Уже есть аккаунт?</value></data>
+  <data name="SignUp_SignInLink" xml:space="preserve"><value>Войдите</value></data>
+  <data name="SignUp_CodeSent" xml:space="preserve"><value>Код отправлен! Проверьте вашу почту.</value></data>
+  <data name="SignUp_Label_VerifCode" xml:space="preserve"><value>Код подтверждения</value></data>
+  <data name="SignUp_Btn_Verify" xml:space="preserve"><value>Подтвердить и создать аккаунт</value></data>
+  <data name="SignUp_Btn_Verifying" xml:space="preserve"><value>Проверка...</value></data>
+  <data name="SignUp_HaveCode" xml:space="preserve"><value>Уже есть код?</value></data>
+  <data name="SignUp_Required" xml:space="preserve"><value>Обязательно</value></data>
+  <data name="SignUp_Btn_Processing" xml:space="preserve"><value>Обработка...</value></data>
+  <data name="SignIn_Required" xml:space="preserve"><value>Введите email/имя пользователя и пароль.</value></data>
+  <data name="SignIn_Failed" xml:space="preserve"><value>Ошибка входа. Пожалуйста, повторите попытку.</value></data>
+  <data name="SignIn_EnterEmailOrUsername" xml:space="preserve"><value>Введите ваш email или имя пользователя.</value></data>
+  <data name="SignIn_EnterCode" xml:space="preserve"><value>Введите код подтверждения.</value></data>
+  <data name="SignIn_SendNewCode" xml:space="preserve"><value>Отправить новый код</value></data>
+  <data name="SignUp_EnterCode" xml:space="preserve"><value>Введите код подтверждения.</value></data>
+  <data name="SignUp_UsernameRequired" xml:space="preserve"><value>Имя пользователя обязательно.</value></data>
+  <data name="SignUp_EmailRequired" xml:space="preserve"><value>Email обязателен для входа по коду.</value></data>
+  <data name="SignUp_PasswordRequired2" xml:space="preserve"><value>Пароль обязателен для входа по паролю.</value></data>
+  <data name="SignUp_PasswordMismatch" xml:space="preserve"><value>Пароли не совпадают.</value></data>
+  <data name="SignUp_Failed" xml:space="preserve"><value>Ошибка регистрации. Пожалуйста, повторите попытку.</value></data>
+  <data name="SignUp_VerifyHint" xml:space="preserve"><value>Проверьте вашу почту и введите код ниже для завершения регистрации.</value></data>
+  <data name="SignUp_StartOver" xml:space="preserve"><value>Начать заново</value></data>
+  <data name="SignUp_SignIn" xml:space="preserve"><value>Войти</value></data>
+  <data name="Reg_VerificationFailed" xml:space="preserve"><value>Неверный или просроченный код.</value></data>
+</root>

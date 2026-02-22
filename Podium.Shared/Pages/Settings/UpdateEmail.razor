@@ -4,15 +4,17 @@
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
 @inject NavigationManager Navigation
+@inject IStringLocalizer<SettingsRes> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>Update Email - Podium</PageTitle>
 
 <div class="settings-form-container">
-<a href="/settings" class="back-link">&lsaquo; Back to Settings</a>
-    
+<a href="/settings" class="back-link">&lsaquo; @LC["Btn_BackToSettings"]</a>
+
     <div class="settings-form-card">
-        <h2>@(hasEmail ? "Update Email" : "Set Up Email")</h2>
-        <p class="subtitle">@(hasEmail ? "Change your email address for sign-in and notifications" : "Add an email address to your account")</p>
+        <h2>@(hasEmail ? L["UpdateEmail_Title"] : L["UpdateEmail_Setup_Title"])</h2>
+        <p class="subtitle">@(hasEmail ? L["Settings_UpdateEmail_Desc"] : L["UpdateEmail_Setup_Desc"])</p>
 
         @if (!string.IsNullOrEmpty(errorMessage))
         {
@@ -26,14 +28,14 @@
 
         @if (isLoading && profile == null)
         {
-            <div class="loading">Loading...</div>
+            <div class="loading">@LC["Loading"]</div>
         }
         else if (profile != null)
         {
             @if (hasEmail)
             {
                 <div class="current-value">
-                    <strong>Current email:</strong> @profile.Email
+                    <strong>@L["UpdateEmail_CurrentEmail"]</strong> @profile.Email
                 </div>
             }
 

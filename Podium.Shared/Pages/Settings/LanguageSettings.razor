@@ -1,0 +1,115 @@
+@page "/settings/language"
+@inject LanguageStateService LangState
+@inject AuthStateService AuthState
+@inject IPodiumApiClient ApiClient
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+@inject IStringLocalizer<SettingsRes> L
+@inject IStringLocalizer<Common> LC
+
+<PageTitle>Language Settings - Podium</PageTitle>
+
+<div class="settings-form-container">
+    <a href="/settings" class="back-link">&lsaquo; @LC["Btn_BackToSettings"]</a>
+
+    <div class="settings-form-card">
+        <h2>@L["LangSettings_Title"]</h2>
+        <p class="subtitle">@L["LangSettings_Subtitle"]</p>
+
+        @if (!string.IsNullOrEmpty(successMessage))
+        {
+            <div class="alert alert-success">@successMessage</div>
+        }
+
+        <div class="current-value">
+            <strong>@L["LangSettings_Current"]</strong> @GetLanguageName(LangState.CurrentLanguageCode)
+        </div>
+
+        <div class="lang-options">
+            @foreach (var lang in supportedLanguages)
+            {
+                var isSelected = LangState.CurrentLanguageCode == lang.Code;
+                <div class="lang-option-card @(isSelected ? "selected" : "")" @onclick="() => SelectLanguage(lang.Code)">
+                    <span class="lang-name">@lang.Name</span>
+                    <button class="btn @(isSelected ? "btn-success" : "btn-primary") btn-sm" disabled="@(isSelected || isSaving)">
+                        @if (isSaving && pendingCode == lang.Code)
+                        {
+                            <span>@L["LangSettings_Saving"]</span>
+                        }
+                        else if (isSelected)
+                        {
+                            <span>@L["LangSettings_Btn_Selected"]</span>
+                        }
+                        else
+                        {
+                            <span>@L["LangSettings_Btn_Select"]</span>
+                        }
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool isSaving = false;
+    private string pendingCode = "";
+    private string? successMessage;
+
+    private record LangOption(string Code, string Name);
+
+    private List<LangOption> supportedLanguages = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await ApiClient.GetLanguagesAsync();
+        if (response.Success && response.Data != null)
+        {
+            supportedLanguages = response.Data
+                .Select(l => new LangOption(l.Code, l.Name))
+                .ToList();
+        }
+        else
+        {
+            // Fallback if API unreachable
+            supportedLanguages = new()
+            {
+                new("en", "English"),
+                new("fr", "Français"),
+                new("ru", "Русский"),
+            };
+        }
+    }
+
+    private string GetLanguageName(string code) =>
+        supportedLanguages.FirstOrDefault(l => l.Code == code)?.Name ?? code;
+
+    private async Task SelectLanguage(string code)
+    {
+        if (LangState.CurrentLanguageCode == code || isSaving)
+            return;
+
+        isSaving = true;
+        pendingCode = code;
+
+        await LangState.SetLanguageAsync(code);
+
+        // Persist to server if authenticated
+        if (AuthState.IsAuthenticated)
+        {
+            try { await ApiClient.UpdateMyLanguageAsync(code); }
+            catch { /* non-critical – local preference already saved */ }
+        }
+
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("podiumCulture.set", code);
+        }
+        catch
+        {
+            // JS interop may not be available (MAUI)
+        }
+
+        Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+    }
+}

@@ -2,6 +2,7 @@ using Podium.Shared.Services.Data;
 using Podium.Shared.Models;
 using Podium.Shared.Utilities;
 using Azure.Data.Tables;
+using Microsoft.Extensions.Localization;
 using System.Security.Cryptography;
 
 namespace Podium.Shared.Services.Auth;
@@ -20,31 +21,33 @@ public class RegistrationService : IRegistrationService
     private readonly IUserRepository _userRepository;
     private readonly ITableClientFactory _tableClientFactory;
     private readonly Action<string, string>? _sendEmailCallback;
+    private readonly IStringLocalizer<ApiMessages> _localizer;
     private const string PendingRegistrationsTable = "PodiumPendingRegistrations";
     private const string OTPTable = "PodiumOTPCodes";
 
-    public RegistrationService(IUserRepository userRepository, ITableClientFactory tableClientFactory, Action<string, string>? sendEmailCallback = null)
+    public RegistrationService(IUserRepository userRepository, ITableClientFactory tableClientFactory, Action<string, string>? sendEmailCallback = null, IStringLocalizer<ApiMessages>? localizer = null)
     {
         _userRepository = userRepository;
         _tableClientFactory = tableClientFactory;
         _sendEmailCallback = sendEmailCallback;
+        _localizer = localizer ?? new NullStringLocalizer<ApiMessages>();
     }
 
     public async Task<(bool Success, string TempUserId, string ErrorMessage)> SendRegistrationVerificationAsync(
         string email, string username, string password, string preferredAuthMethod)
     {
         // Validate username - ALWAYS required
-        var (usernameValid, usernameError) = InputValidator.ValidateUsername(username);
+        var (usernameValid, _) = InputValidator.ValidateUsername(username);
         if (!usernameValid)
         {
-            return (false, string.Empty, usernameError!);
+            return (false, string.Empty, _localizer["Val_UsernameInvalid"]);
         }
 
         // Check if username already exists
         var existingUserByUsername = await _userRepository.GetUserByUsernameAsync(username);
         if (existingUserByUsername != null)
         {
-            return (false, string.Empty, "Username already taken. Please choose a different username.");
+            return (false, string.Empty, _localizer["Reg_UsernameTaken"]);
         }
 
         // Validate based on preferred auth method
@@ -52,26 +55,26 @@ public class RegistrationService : IRegistrationService
         
         if (emailRequired || !string.IsNullOrWhiteSpace(email))
         {
-            var (emailValid, emailError) = InputValidator.ValidateEmail(email);
+            var (emailValid, _) = InputValidator.ValidateEmail(email);
             if (!emailValid)
             {
-                return (false, string.Empty, emailError!);
+                return (false, string.Empty, _localizer["Val_EmailInvalid"]);
             }
 
             // Check if email already exists
             var existingUserByEmail = await _userRepository.GetUserByEmailAsync(email);
             if (existingUserByEmail != null)
             {
-                return (false, string.Empty, "Email already registered.");
+                return (false, string.Empty, _localizer["Reg_EmailTaken"]);
             }
         }
 
         if (preferredAuthMethod == "Password" || preferredAuthMethod == "Both")
         {
-            var (passwordValid, passwordError) = InputValidator.ValidatePassword(password);
+            var (passwordValid, _) = InputValidator.ValidatePassword(password);
             if (!passwordValid)
             {
-                return (false, string.Empty, passwordError!);
+                return (false, string.Empty, _localizer["Val_PasswordInvalid"]);
             }
         }
 
@@ -102,9 +105,9 @@ public class RegistrationService : IRegistrationService
             {
                 await pendingRegClient.AddEntityAsync(pendingEntity);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return (false, string.Empty, $"Failed to create pending registration: {ex.Message}");
+                return (false, string.Empty, _localizer["Reg_PendingFailed"]);
             }
 
             // Generate and send OTP
@@ -125,9 +128,9 @@ public class RegistrationService : IRegistrationService
             {
                 await otpClient.AddEntityAsync(otpEntity);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return (false, string.Empty, $"Failed to generate verification code: {ex.Message}");
+                return (false, string.Empty, _localizer["Reg_CodeFailed"]);
             }
 
             // Send email
@@ -181,7 +184,7 @@ public class RegistrationService : IRegistrationService
 
             if (validOtp == null)
             {
-                return (false, string.Empty, "Invalid or expired verification code.");
+                return (false, string.Empty, _localizer["Reg_VerificationFailed"]);
             }
 
             // Mark OTP as used
@@ -196,7 +199,7 @@ public class RegistrationService : IRegistrationService
             var expiryTime = pending.GetDateTimeOffset("ExpiryTime")?.DateTime ?? DateTime.MinValue;
             if (expiryTime < DateTime.UtcNow)
             {
-                return (false, string.Empty, "Registration session expired. Please start registration again.");
+                return (false, string.Empty, _localizer["Reg_Expired"]);
             }
 
             // Create the actual user
@@ -217,7 +220,7 @@ public class RegistrationService : IRegistrationService
             var success = await _userRepository.CreateUserAsync(user);
             if (!success)
             {
-                return (false, string.Empty, "Failed to create account. Please try again.");
+                return (false, string.Empty, _localizer["Reg_Failed"]);
             }
 
             // Delete pending registration
@@ -225,9 +228,9 @@ public class RegistrationService : IRegistrationService
 
             return (true, userId, string.Empty);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            return (false, string.Empty, $"Verification failed: {ex.Message}");
+            return (false, string.Empty, _localizer["Reg_Failed"]);
         }
     }
 
@@ -244,60 +247,60 @@ public class RegistrationService : IRegistrationService
         string email, string username, string password, string preferredAuthMethod)
     {
         // Validate username - ALWAYS required
-        var (usernameValid, usernameError) = InputValidator.ValidateUsername(username);
-        if (!usernameValid)
+        var (usernameValid2, _) = InputValidator.ValidateUsername(username);
+        if (!usernameValid2)
         {
-            return (false, string.Empty, usernameError!);
+            return (false, string.Empty, _localizer["Val_UsernameInvalid"]);
         }
 
         // Check if username already exists
         var existingUserByUsername = await _userRepository.GetUserByUsernameAsync(username);
         if (existingUserByUsername != null)
         {
-            return (false, string.Empty, "Username already taken. Please choose a different username.");
+            return (false, string.Empty, _localizer["Reg_UsernameTaken"]);
         }
 
         // Validate based on preferred auth method
         if (preferredAuthMethod == "Email" || preferredAuthMethod == "Both")
         {
             // Email is required for Email or Both methods
-            var (emailValid, emailError) = InputValidator.ValidateEmail(email);
+            var (emailValid, _) = InputValidator.ValidateEmail(email);
             if (!emailValid)
             {
-                return (false, string.Empty, emailError!);
+                return (false, string.Empty, _localizer["Val_EmailInvalid"]);
             }
 
             // Check if email already exists
             var existingUserByEmail = await _userRepository.GetUserByEmailAsync(email);
             if (existingUserByEmail != null)
             {
-                return (false, string.Empty, "Email already registered.");
+                return (false, string.Empty, _localizer["Reg_EmailTaken"]);
             }
         }
         else if (!string.IsNullOrWhiteSpace(email))
         {
             // Email is optional for Password-only method, but if provided, validate it
-            var (emailValid, emailError) = InputValidator.ValidateEmail(email);
+            var (emailValid, _) = InputValidator.ValidateEmail(email);
             if (!emailValid)
             {
-                return (false, string.Empty, emailError!);
+                return (false, string.Empty, _localizer["Val_EmailInvalid"]);
             }
 
             // Check if email already exists
             var existingUserByEmail = await _userRepository.GetUserByEmailAsync(email);
             if (existingUserByEmail != null)
             {
-                return (false, string.Empty, "Email already registered.");
+                return (false, string.Empty, _localizer["Reg_EmailTaken"]);
             }
         }
 
         if (preferredAuthMethod == "Password" || preferredAuthMethod == "Both")
         {
             // Password is required for Password or Both methods
-            var (passwordValid, passwordError) = InputValidator.ValidatePassword(password);
+            var (passwordValid, _) = InputValidator.ValidatePassword(password);
             if (!passwordValid)
             {
-                return (false, string.Empty, passwordError!);
+                return (false, string.Empty, _localizer["Val_PasswordInvalid"]);
             }
         }
 
@@ -323,7 +326,7 @@ public class RegistrationService : IRegistrationService
         var success = await _userRepository.CreateUserAsync(user);
         if (!success)
         {
-            return (false, string.Empty, "Failed to create account. Please try again.");
+            return (false, string.Empty, _localizer["Reg_Failed"]);
         }
 
         return (true, userId, string.Empty);

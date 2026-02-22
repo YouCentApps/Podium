@@ -8,6 +8,7 @@
 @inject AdminStateService AdminState
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
+@inject IStringLocalizer<AdminRes> L
 
 <PageTitle>Manage Users - Admin</PageTitle>
 
@@ -26,7 +27,7 @@
 
     @if (loading)
     {
-        <div class="loading">Loading users...</div>
+        <div class="loading">@L["Admin_Loading"]</div>
     }
     else if (!string.IsNullOrEmpty(errorMessage))
     {
@@ -52,14 +53,14 @@
                 <div class="form-group">
                     <label>
                         <input type="checkbox" @bind="formIsActive" />
-                        Active (can sign in and use the application)
+                        @L["Admin_Label_Active"] (can sign in and use the application)
                     </label>
                 </div>
                 
                 <div class="form-actions">
-                    <button class="btn btn-secondary" @onclick="CancelEdit">Cancel</button>
+                    <button class="btn btn-secondary" @onclick="CancelEdit">@L["Admin_Btn_Cancel"]</button>
                     <button class="btn btn-primary" @onclick="SaveUser" disabled="@saving">
-                        @(saving ? "Saving..." : "Save Changes")
+                        @(saving ? L["Admin_Btn_Saving"].Value : L["Admin_Btn_Save"].Value)
                     </button>
                 </div>
                 @if (!string.IsNullOrEmpty(formError))
@@ -93,14 +94,14 @@
                             <td>@user.Email</td>
                             <td>
                                 <span class="badge @(user.IsActive ? "badge-success" : "badge-inactive")">
-                                    @(user.IsActive ? "Active" : "Inactive")
+                                    @(user.IsActive ? L["Admin_Status_Active"].Value : L["Admin_Status_Inactive"].Value)
                                 </span>
                             </td>
                             <td>@user.CreatedDate.ToShortDateString()</td>
-                            <td>@(user.LastLoginDate?.ToShortDateString() ?? "Never")</td>
+                            <td>@(user.LastLoginDate?.ToShortDateString() ?? L["Admin_Never"].Value)</td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" @onclick="() => EditUser(user)">Edit</button>
-                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(user)">Delete</button>
+                                <button class="btn btn-sm btn-secondary" @onclick="() => EditUser(user)">@L["Admin_Btn_Edit"]</button>
+                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(user)">@L["Admin_Btn_Delete"]</button>
                             </td>
                         </tr>
                     }

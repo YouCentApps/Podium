@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Disciplines_Title" xml:space="preserve"><value>Choose a Discipline</value></data>
+  <data name="Disciplines_None" xml:space="preserve"><value>No disciplines available at the moment. Check back later!</value></data>
+  <data name="Disciplines_ViewSeries" xml:space="preserve"><value>View series →</value></data>
+  <data name="Disciplines_SignInToPredict" xml:space="preserve"><value>Please sign in to make predictions.</value></data>
+  <data name="SeriesSelection_Title" xml:space="preserve"><value>Choose a Series</value></data>
+  <data name="SeriesSelection_None" xml:space="preserve"><value>No series available for this discipline yet.</value></data>
+  <data name="SeriesSelection_Breadcrumb" xml:space="preserve"><value>Disciplines</value></data>
+  <data name="SeriesSelection_ViewEvents" xml:space="preserve"><value>View events →</value></data>
+  <data name="SeasonEvents_Title" xml:space="preserve"><value>Choose an Event</value></data>
+  <data name="SeasonEvents_Breadcrumb" xml:space="preserve"><value>Home</value></data>
+  <data name="SeasonEvents_None" xml:space="preserve"><value>No upcoming events available. Check back later!</value></data>
+  <data name="SeasonEvents_OpenPredictions" xml:space="preserve"><value>Open for predictions</value></data>
+  <data name="SeasonEvents_Closed" xml:space="preserve"><value>Closed</value></data>
+  <data name="Predict_Title" xml:space="preserve"><value>Predict the Podium</value></data>
+  <data name="Predict_FirstPlace" xml:space="preserve"><value>First Place</value></data>
+  <data name="Predict_SecondPlace" xml:space="preserve"><value>Second Place</value></data>
+  <data name="Predict_ThirdPlace" xml:space="preserve"><value>Third Place</value></data>
+  <data name="Predict_YourPrediction" xml:space="preserve"><value>Your Prediction</value></data>
+  <data name="Predict_Btn_Submit" xml:space="preserve"><value>Submit Prediction</value></data>
+  <data name="Predict_Btn_Update" xml:space="preserve"><value>Update Prediction</value></data>
+  <data name="Predict_Btn_Submitting" xml:space="preserve"><value>Submitting...</value></data>
+  <data name="Predict_SignIn" xml:space="preserve"><value>Please sign in to make predictions.</value></data>
+  <data name="Predict_SelectAll" xml:space="preserve"><value>Please select all three positions to submit.</value></data>
+  <data name="Predict_Closed" xml:space="preserve"><value>This event is closed for predictions.</value></data>
+  <data name="Predict_PreviousPrediction" xml:space="preserve"><value>Your previous prediction:</value></data>
+  <data name="Predict_1st" xml:space="preserve"><value>1st:</value></data>
+  <data name="Predict_2nd" xml:space="preserve"><value>2nd:</value></data>
+  <data name="Predict_3rd" xml:space="preserve"><value>3rd:</value></data>
+  <data name="MyPredictions_Title" xml:space="preserve"><value>My Predictions</value></data>
+  <data name="MyPredictions_SignIn" xml:space="preserve"><value>Please sign in to view your predictions.</value></data>
+  <data name="MyPredictions_None" xml:space="preserve"><value>You haven't made any predictions yet.</value></data>
+  <data name="MyPredictions_FirstPrediction" xml:space="preserve"><value>Make Your First Prediction</value></data>
+  <data name="MyPredictions_Loading" xml:space="preserve"><value>Loading your predictions...</value></data>
+  <data name="MyPredictions_FilterDiscipline" xml:space="preserve"><value>Discipline:</value></data>
+  <data name="MyPredictions_FilterSeries" xml:space="preserve"><value>Series:</value></data>
+  <data name="MyPredictions_FilterSeason" xml:space="preserve"><value>Season:</value></data>
+  <data name="MyPredictions_AllDisciplines" xml:space="preserve"><value>All Disciplines</value></data>
+  <data name="MyPredictions_AllSeries" xml:space="preserve"><value>All Series</value></data>
+  <data name="MyPredictions_AllSeasons" xml:space="preserve"><value>All Seasons</value></data>
+  <data name="MyPredictions_IncludeInactive" xml:space="preserve"><value>Include inactive seasons</value></data>
+  <data name="Predict_Submitted" xml:space="preserve"><value>Prediction submitted successfully!</value></data>
+  <data name="Predict_SubmitFailed" xml:space="preserve"><value>Failed to submit prediction. Please try again.</value></data>
+</root>

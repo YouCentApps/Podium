@@ -4,15 +4,17 @@
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
 @inject NavigationManager Navigation
+@inject IStringLocalizer<SettingsRes> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>Update Display Name - Podium</PageTitle>
 
 <div class="settings-form-container">
-<a href="/settings" class="back-link">&lsaquo; Back to Settings</a>
-    
+<a href="/settings" class="back-link">&lsaquo; @LC["Btn_BackToSettings"]</a>
+
     <div class="settings-form-card">
-        <h2>Update Display Name</h2>
-        <p class="subtitle">Change how your name appears on leaderboards and predictions (also can be used to sign in)</p>
+        <h2>@L["UpdateName_Title"]</h2>
+        <p class="subtitle">@L["UpdateName_Subtitle"]</p>
 
         @if (!string.IsNullOrEmpty(errorMessage))
         {
@@ -26,17 +28,17 @@
 
         @if (isLoading && profile == null)
         {
-            <div class="loading">Loading...</div>
+            <div class="loading">@LC["Loading"]</div>
         }
         else if (profile != null)
         {
             <div class="auth-form">
                 <div class="current-value">
-                    <strong>Current name:</strong> @profile.Username
+                    <strong>@L["UpdateName_CurrentName"]</strong> @profile.Username
                 </div>
 
                 <div class="form-group">
-                    <label>New Display Name</label>
+                    <label>@L["UpdateName_NewName"]</label>
                     <input type="text" class="form-control" @bind="newUsername" placeholder="Enter new display name" />
                 </div>
 
@@ -45,15 +47,15 @@
                     @if (profile.HasPassword && profile.HasEmail)
                     {
                         <div class="info-box info">
-                            <p>Choose how to verify your identity:</p>
+                            <p>@L["UpdateName_Verify_Choose"]</p>
                         </div>
-                        
+
                         <div class="auth-tabs">
                             <button class="@(verifyMethod == "password" ? "active" : "")" @onclick="@(() => verifyMethod = "password")">
-                                Password
+                                @L["UpdateName_Verify_Password"]
                             </button>
                             <button class="@(verifyMethod == "email" ? "active" : "")" @onclick="@(() => verifyMethod = "email")">
-                                Email Code
+                                @L["UpdateName_Verify_EmailCode"]
                             </button>
                         </div>
                     }
@@ -61,33 +63,33 @@
                     @if (verifyMethod == "password" && profile.HasPassword)
                     {
                         <div class="form-group">
-                            <label>Your Password</label>
+                            <label>@L["UpdateName_Verify_Password"]</label>
                             <input type="password" class="form-control" @bind="password" placeholder="Enter your password" />
                         </div>
 
                         <button class="btn btn-primary w-100" @onclick="UpdateWithPassword" disabled="@isLoading">
-                            @if (isLoading) { <span>Updating...</span> } else { <span>Update Name</span> }
+                            @if (isLoading) { <span>@L["UpdateName_Btn_Updating"]</span> } else { <span>@L["UpdateName_Btn_Update"]</span> }
                         </button>
                     }
                     else if (verifyMethod == "email" && profile.HasEmail)
                     {
                         <button class="btn btn-primary w-100" @onclick="SendOtp" disabled="@isLoading">
-                            @if (isLoading) { <span>Sending code...</span> } else { <span>Send Verification Code</span> }
+                            @if (isLoading) { <span>@LC["Loading"]</span> } else { <span>@L["UpdateName_Verify_EmailCode"]</span> }
                         </button>
                     }
                 }
                 else
                 {
                     <div class="form-group">
-                        <label>Verification Code</label>
+                        <label>@L["UpdateName_Verify_EmailCode"]</label>
                         <input type="text" class="form-control" @bind="otpCode" placeholder="Enter 6-digit code" maxlength="6" />
                     </div>
 
                     <button class="btn btn-primary w-100" @onclick="UpdateWithOtp" disabled="@isLoading">
-                        @if (isLoading) { <span>Updating...</span> } else { <span>Verify & Update Name</span> }
+                        @if (isLoading) { <span>@L["UpdateName_Btn_Updating"]</span> } else { <span>@L["UpdateName_Btn_Update"]</span> }
                     </button>
 
-                    <button class="btn btn-link w-100" @onclick="ResetOtp">Send a new code</button>
+                    <button class="btn btn-link w-100" @onclick="ResetOtp">@L["UpdateName_Verify_EmailCode"]</button>
                 }
             </div>
         }

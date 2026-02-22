@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Nav_MakePredictions" xml:space="preserve"><value>Сделать прогнозы</value></data>
+  <data name="Nav_MyPredictions" xml:space="preserve"><value>Мои прогнозы</value></data>
+  <data name="Nav_Leaderboard" xml:space="preserve"><value>Таблица лидеров</value></data>
+  <data name="Nav_SignIn" xml:space="preserve"><value>Войти</value></data>
+  <data name="Nav_SignUp" xml:space="preserve"><value>Зарегистрироваться</value></data>
+  <data name="Nav_Settings" xml:space="preserve"><value>Настройки</value></data>
+  <data name="Nav_Favorites" xml:space="preserve"><value>Избранное</value></data>
+  <data name="Nav_SignOut" xml:space="preserve"><value>Выйти</value></data>
+  <data name="Nav_Admin" xml:space="preserve"><value>Администратор</value></data>
+  <data name="Nav_Language" xml:space="preserve"><value>Язык</value></data>
+  <data name="Footer_Copyright" xml:space="preserve"><value>Предсказывай и побеждай.</value></data>
+  <data name="Loading" xml:space="preserve"><value>Загрузка...</value></data>
+  <data name="Btn_Save" xml:space="preserve"><value>Сохранить</value></data>
+  <data name="Btn_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Btn_BackToSettings" xml:space="preserve"><value>Назад в настройки</value></data>
+  <data name="Btn_Remove" xml:space="preserve"><value>Удалить</value></data>
+  <data name="Favorites_QuickAccess" xml:space="preserve"><value>Быстрый доступ — Любимые сезоны</value></data>
+  <data name="Favorites_Manage" xml:space="preserve"><value>Управление</value></data>
+  <data name="NotFound_Title" xml:space="preserve"><value>Не найдено</value></data>
+  <data name="NotFound_Message" xml:space="preserve"><value>Извините, запрошенный контент не существует.</value></data>
+  <data name="Alert_SignInRequired" xml:space="preserve"><value>Пожалуйста, войдите для просмотра страницы.</value></data>
+  <data name="Alert_SignInLink" xml:space="preserve"><value>войти</value></data>
+  <data name="Home_Welcome" xml:space="preserve"><value>Добро пожаловать, {0}!</value></data>
+  <data name="Home_Subtitle" xml:space="preserve"><value>Готовы делать прогнозы?</value></data>
+  <data name="Home_MakePredictions_Desc" xml:space="preserve"><value>Выберите дисциплину и предскажите подиум</value></data>
+  <data name="Home_MyPredictions_Desc" xml:space="preserve"><value>Смотрите свои прогнозы и результаты</value></data>
+  <data name="Home_Leaderboard_Desc" xml:space="preserve"><value>Посмотрите своё место в рейтинге</value></data>
+  <data name="Home_Hero_Title" xml:space="preserve"><value>Предскажи подиум</value></data>
+  <data name="Home_Hero_Lead" xml:space="preserve"><value>Соревнуйтесь с друзьями. Предсказывайте победителей. Поднимайтесь в рейтинге.</value></data>
+  <data name="Home_GetStarted" xml:space="preserve"><value>Начать</value></data>
+  <data name="Home_Feature1_Title" xml:space="preserve"><value>Несколько дисциплин</value></data>
+  <data name="Home_Feature1_Desc" xml:space="preserve"><value>От Формулы 1 до других видов автоспорта</value></data>
+  <data name="Home_Feature2_Title" xml:space="preserve"><value>Простые прогнозы</value></data>
+  <data name="Home_Feature2_Desc" xml:space="preserve"><value>Просто выберите топ-3 для каждого события</value></data>
+  <data name="Home_Feature3_Title" xml:space="preserve"><value>Соревнуйся и побеждай</value></data>
+  <data name="Home_Feature3_Desc" xml:space="preserve"><value>Набирайте очки и поднимайтесь в рейтинге</value></data>
+</root>
