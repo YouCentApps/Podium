@@ -60,7 +60,7 @@
         </div>
     </header>
 
-    <main class="app-main">
+    <main class="app-main" @key="renderKey">
         @Body
     </main>
 
@@ -72,12 +72,13 @@
 @code {
     private bool showProfileDropdown = false;
     private System.Timers.Timer? closeTimer;
+    private int renderKey;
 
     protected override async Task OnInitializedAsync()
     {
         AuthState.OnAuthStateChanged += StateHasChanged;
         AdminState.OnAdminStateChanged += StateHasChanged;
-        LangState.OnLanguageChanged += StateHasChanged;
+        LangState.OnLanguageChanged += OnLangChanged;
 
         if (!AdminState.IsInitialized && AuthState.IsAuthenticated)
         {
@@ -112,6 +113,12 @@
         closeTimer.Start();
     }
 
+    private void OnLangChanged()
+    {
+        renderKey++;
+        InvokeAsync(StateHasChanged);
+    }
+
     private async Task OnLanguageChanged(ChangeEventArgs e)
     {
         var code = e.Value?.ToString();
@@ -142,7 +149,7 @@
     {
         AuthState.OnAuthStateChanged -= StateHasChanged;
         AdminState.OnAdminStateChanged -= StateHasChanged;
-        LangState.OnLanguageChanged -= StateHasChanged;
+        LangState.OnLanguageChanged -= OnLangChanged;
         closeTimer?.Dispose();
     }
 }
