@@ -1,20 +1,22 @@
 @page "/series/{SeriesId}/events"
 @inject IPodiumApiClient ApiClient
 @inject NavigationManager Navigation
+@inject IStringLocalizer<Predictions> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>Select Event - Podium</PageTitle>
 
 <div class="page-container">
     <nav class="breadcrumb">
-        <a href="/disciplines">Disciplines</a> / <a href="javascript:history.back()">Series</a> / Events
+        <a href="/disciplines">@L["SeriesSelection_Breadcrumb"]</a> / <a href="javascript:history.back()">@L["Events_Breadcrumb_Series"]</a> / @L["Events_Breadcrumb_Events"]
     </nav>
 
-    <h1>Choose an Event</h1>
+    <h1>@L["SeasonEvents_Title"]</h1>
 
     @if (isLoading)
     {
         <div class="loading-spinner">
-            <p>Loading events...</p>
+            <p>@LC["Loading"]</p>
         </div>
     }
     else if (!string.IsNullOrEmpty(errorMessage))
@@ -24,7 +26,7 @@
     else if (events.Count == 0)
     {
         <div class="alert alert-info">
-            No upcoming events available. Check back later!
+            @L["SeasonEvents_None"]
         </div>
     }
     else
@@ -40,11 +42,11 @@
                     </p>
                     @if (evt.CanAcceptPredictions)
                     {
-                        <span style="color: var(--success-color); font-weight: 500;"><span class="status-icon">&#10003;</span> Open for predictions</span>
+                        <span style="color: var(--success-color); font-weight: 500;"><span class="status-icon">&#10003;</span> @L["SeasonEvents_OpenPredictions"]</span>
                     }
                     else
                     {
-                        <span style="color: var(--text-light);">Closed</span>
+                        <span style="color: var(--text-light);">@L["SeasonEvents_Closed"]</span>
                     }
                 </div>
             }
@@ -77,7 +79,7 @@
             var seasonResponse = await ApiClient.GetActiveSeasonAsync(SeriesId);
             if (!seasonResponse.Success || seasonResponse.Data == null)
             {
-                errorMessage = "No active season found for this series.";
+                errorMessage = L["Events_NoActiveSeason"];
                 isLoading = false;
                 return;
             }
@@ -92,7 +94,7 @@
             }
             else
             {
-                errorMessage = eventsResponse.Error ?? "Failed to load events.";
+                errorMessage = eventsResponse.Error ?? L["Events_LoadFailed"];
             }
         }
         catch (Exception ex)

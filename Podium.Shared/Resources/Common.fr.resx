@@ -40,4 +40,5 @@
   <data name="Home_Feature2_Desc" xml:space="preserve"><value>Choisissez simplement votre top 3 pour chaque événement</value></data>
   <data name="Home_Feature3_Title" xml:space="preserve"><value>Concourir &amp; Gagner</value></data>
   <data name="Home_Feature3_Desc" xml:space="preserve"><value>Gagnez des points et montez dans le classement</value></data>
+  <data name="Error_LoadFailed" xml:space="preserve"><value>Échec du chargement des données. Veuillez réessayer.</value></data>
 </root>

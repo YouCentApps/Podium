@@ -3,7 +3,9 @@
 @using Podium.Shared.Services.State
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
+@inject LanguageStateService LangState
 @inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
 @inject IStringLocalizer<Auth> L
 
 <PageTitle>Sign In - Podium</PageTitle>
@@ -124,7 +126,17 @@ private async Task SignInWithPassword()
         {
             // Use the sessionId returned from API
             await AuthState.SetAuthStateAsync(response.Data.UserId, response.Data.Username, response.Data.SessionId);
-            Navigation.NavigateTo("/");
+
+            // Apply user's DB language preference
+            var dbLang = response.Data.LanguageCode;
+            var needsReload = !string.IsNullOrEmpty(dbLang) && dbLang != LangState.CurrentLanguageCode;
+            if (needsReload)
+            {
+                await LangState.SetLanguageAsync(dbLang!);
+                try { await JSRuntime.InvokeVoidAsync("podiumCulture.set", dbLang); } catch { }
+            }
+
+            Navigation.NavigateTo("/", forceLoad: needsReload);
         }
         else
         {
@@ -162,11 +174,11 @@ private async Task SendOtp()
             // Use the ACTUAL email returned from the API for verification
             email = response.Data.Email;
             displayEmail = response.Data.Email;
-            successMessage = "Verification code sent! Check your email.";
+            successMessage = L["SignIn_OtpSent"];
         }
         else
         {
-            errorMessage = response.Error ?? "Failed to send code. Please try again.";
+            errorMessage = response.Error ?? L["SignIn_OtpFailed"];
         }
     }
     catch (Exception ex)
@@ -198,11 +210,21 @@ private async Task SendOtp()
             {
                 // Use the sessionId returned from API
                 await AuthState.SetAuthStateAsync(response.Data.UserId, response.Data.Username, response.Data.SessionId);
-                Navigation.NavigateTo("/");
+
+                // Apply user's DB language preference
+                var dbLang = response.Data.LanguageCode;
+                var needsReload = !string.IsNullOrEmpty(dbLang) && dbLang != LangState.CurrentLanguageCode;
+                if (needsReload)
+                {
+                    await LangState.SetLanguageAsync(dbLang!);
+                    try { await JSRuntime.InvokeVoidAsync("podiumCulture.set", dbLang); } catch { }
+                }
+
+                Navigation.NavigateTo("/", forceLoad: needsReload);
             }
             else
             {
-                errorMessage = response.Error ?? "Invalid or expired code.";
+                errorMessage = response.Error ?? L["SignIn_InvalidCode"];
             }
         }
         catch (Exception ex)

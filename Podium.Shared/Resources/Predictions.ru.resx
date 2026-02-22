@@ -46,4 +46,18 @@
   <data name="MyPredictions_IncludeInactive" xml:space="preserve"><value>Включить неактивные сезоны</value></data>
   <data name="Predict_Submitted" xml:space="preserve"><value>Прогноз успешно отправлен!</value></data>
   <data name="Predict_SubmitFailed" xml:space="preserve"><value>Ошибка отправки. Пожалуйста, повторите попытку.</value></data>
+  <data name="Events_Breadcrumb_Series" xml:space="preserve"><value>Серии</value></data>
+  <data name="Events_Breadcrumb_Events" xml:space="preserve"><value>События</value></data>
+  <data name="Events_NoActiveSeason" xml:space="preserve"><value>Активный сезон для этой серии не найден.</value></data>
+  <data name="Events_LoadFailed" xml:space="preserve"><value>Ошибка загрузки событий.</value></data>
+  <data name="Predict_EventNotFound" xml:space="preserve"><value>Событие не найдено.</value></data>
+  <data name="Predict_CompetitorsLoadFailed" xml:space="preserve"><value>Ошибка загрузки участников.</value></data>
+  <data name="MyPredictions_Inactive" xml:space="preserve"><value>Неактивный</value></data>
+  <data name="MyPredictions_Location" xml:space="preserve"><value>Место:</value></data>
+  <data name="MyPredictions_Date" xml:space="preserve"><value>Дата:</value></data>
+  <data name="MyPredictions_Pts" xml:space="preserve"><value>очк.</value></data>
+  <data name="MyPredictions_Pending" xml:space="preserve"><value>Ожидание</value></data>
+  <data name="MyPredictions_YourPrediction" xml:space="preserve"><value>Ваш прогноз</value></data>
+  <data name="MyPredictions_ActualResults" xml:space="preserve"><value>Фактические результаты</value></data>
+  <data name="MyPredictions_Submitted" xml:space="preserve"><value>Отправлено:</value></data>
 </root>

@@ -22,7 +22,7 @@
     @if (!AuthState.IsAuthenticated)
     {
         <div class="alert alert-danger">
-            Please sign in to manage your favorite seasons.
+            @L["ManageFavorites_SignInRequired"]
         </div>
     }
     else if (isLoading)
@@ -79,7 +79,7 @@
                 <div class="form-group">
                     <label>@L["ManageFavorites_SelectDiscipline"]</label>
                     <select class="form-control" @onchange="OnDisciplineSelected" value="@selectedDisciplineId">
-                        <option value="">-- Select Discipline --</option>
+                        <option value="">-- @L["ManageFavorites_SelectDiscipline"] --</option>
                         @foreach (var discipline in disciplines)
                         {
                             <option value="@discipline.Id">@discipline.DisplayName</option>
@@ -90,9 +90,9 @@
                 @if (!string.IsNullOrEmpty(selectedDisciplineId))
                 {
                     <div class="form-group">
-                        <label>Select Series</label>
+                        <label>@L["ManageFavorites_SelectSeries"]</label>
                         <select class="form-control" @onchange="OnSeriesSelected" value="@selectedSeriesId">
-                            <option value="">-- Select Series --</option>
+                            <option value="">-- @L["ManageFavorites_SelectSeries"] --</option>
                             @foreach (var series in seriesList)
                             {
                                 <option value="@series.Id">@series.DisplayName</option>
@@ -104,14 +104,14 @@
                 @if (!string.IsNullOrEmpty(selectedSeriesId))
                 {
                     <div class="form-group">
-                        <label>Select Season</label>
+                        <label>@L["ManageFavorites_SelectSeason"]</label>
                         @if (isLoadingSeasons)
                         {
-                            <p>Loading seasons...</p>
+                            <p>@LC["Loading"]</p>
                         }
                         else if (seasonsList.Count == 0)
                         {
-                            <p>No seasons available for this series.</p>
+                            <p>@L["ManageFavorites_NoSeasons"]</p>
                         }
                         else
                         {
@@ -126,11 +126,11 @@
                                         <p>@season.Year</p>
                                         @if (isFavorited)
                                         {
-                                            <span class="badge">Already Favorite</span>
+                                            <span class="badge">@L["ManageFavorites_AlreadyFavorite"]</span>
                                         }
                                         else
                                         {
-                                            <span class="add-icon">+ Add</span>
+                                            <span class="add-icon">+ @L["ManageFavorites_Btn_Add"]</span>
                                         }
                                     </div>
                                 }

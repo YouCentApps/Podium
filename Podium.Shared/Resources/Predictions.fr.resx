@@ -46,4 +46,18 @@
   <data name="MyPredictions_IncludeInactive" xml:space="preserve"><value>Inclure les saisons inactives</value></data>
   <data name="Predict_Submitted" xml:space="preserve"><value>Prédiction soumise avec succès !</value></data>
   <data name="Predict_SubmitFailed" xml:space="preserve"><value>Échec de la soumission. Veuillez réessayer.</value></data>
+  <data name="Events_Breadcrumb_Series" xml:space="preserve"><value>Séries</value></data>
+  <data name="Events_Breadcrumb_Events" xml:space="preserve"><value>Événements</value></data>
+  <data name="Events_NoActiveSeason" xml:space="preserve"><value>Aucune saison active trouvée pour cette série.</value></data>
+  <data name="Events_LoadFailed" xml:space="preserve"><value>Échec du chargement des événements.</value></data>
+  <data name="Predict_EventNotFound" xml:space="preserve"><value>Événement introuvable.</value></data>
+  <data name="Predict_CompetitorsLoadFailed" xml:space="preserve"><value>Échec du chargement des concurrents.</value></data>
+  <data name="MyPredictions_Inactive" xml:space="preserve"><value>Inactif</value></data>
+  <data name="MyPredictions_Location" xml:space="preserve"><value>Lieu :</value></data>
+  <data name="MyPredictions_Date" xml:space="preserve"><value>Date :</value></data>
+  <data name="MyPredictions_Pts" xml:space="preserve"><value>pts</value></data>
+  <data name="MyPredictions_Pending" xml:space="preserve"><value>En attente</value></data>
+  <data name="MyPredictions_YourPrediction" xml:space="preserve"><value>Votre prédiction</value></data>
+  <data name="MyPredictions_ActualResults" xml:space="preserve"><value>Résultats réels</value></data>
+  <data name="MyPredictions_Submitted" xml:space="preserve"><value>Soumis le :</value></data>
 </root>

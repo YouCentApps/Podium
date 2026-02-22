@@ -315,6 +315,25 @@ public static class ProfileEndpoints
         .RequireAuth()
         .WithName("UpdateLanguage");
 
+        // Get user's language preference from DB
+        group.MapGet("/language", async (
+            HttpContext context,
+            [FromServices] IUserRepository userRepository,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
+        {
+            var userId = context.GetUserId();
+            if (string.IsNullOrEmpty(userId))
+                return Results.Unauthorized();
+
+            var user = await userRepository.GetUserByIdAsync(userId);
+            if (user == null)
+                return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
+
+            return Results.Ok(new { languageCode = user.LanguageCode });
+        })
+        .RequireAuth()
+        .WithName("GetLanguage");
+
         // Get supported languages (static list, no auth required)
         group.MapGet("/languages", () =>
         {

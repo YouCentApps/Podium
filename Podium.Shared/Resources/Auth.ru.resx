@@ -62,4 +62,7 @@
   <data name="SignUp_StartOver" xml:space="preserve"><value>Начать заново</value></data>
   <data name="SignUp_SignIn" xml:space="preserve"><value>Войти</value></data>
   <data name="Reg_VerificationFailed" xml:space="preserve"><value>Неверный или просроченный код.</value></data>
+  <data name="SignIn_OtpSent" xml:space="preserve"><value>Код подтверждения отправлен! Проверьте почту.</value></data>
+  <data name="SignIn_OtpFailed" xml:space="preserve"><value>Не удалось отправить код. Попробуйте ещё раз.</value></data>
+  <data name="SignIn_InvalidCode" xml:space="preserve"><value>Неверный или просроченный код.</value></data>
 </root>

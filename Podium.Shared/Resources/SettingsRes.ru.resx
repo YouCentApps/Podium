@@ -56,4 +56,7 @@
   <data name="UpdateEmail_Setup_Title" xml:space="preserve"><value>Установить email</value></data>
   <data name="UpdateEmail_Setup_Desc" xml:space="preserve"><value>Добавить электронную почту к аккаунту</value></data>
   <data name="UpdateEmail_CurrentEmail" xml:space="preserve"><value>Текущий email:</value></data>
+  <data name="ManageFavorites_SignInRequired" xml:space="preserve"><value>Войдите для управления избранными сезонами.</value></data>
+  <data name="ManageFavorites_NoSeasons" xml:space="preserve"><value>Нет доступных сезонов для этой серии.</value></data>
+  <data name="ManageFavorites_AlreadyFavorite" xml:space="preserve"><value>Уже в избранном</value></data>
 </root>

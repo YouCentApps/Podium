@@ -12,11 +12,11 @@ public interface IAuthenticationService
 {
     Task<(bool Success, string ActualEmail, string ErrorMessage)> SendOTPAsync(string emailOrUsername);
     Task<(bool Success, string ErrorMessage)> SendOTPForNewEmailAsync(string email, string userId);
-    Task<(bool Success, string UserId, string Username, string SessionId, string ErrorMessage)> VerifyOTPAsync(string email, string otpCode);
-    Task<(bool Success, string UserId, string Username, string SessionId, string ErrorMessage)> SignInWithPasswordAsync(string emailOrUsername, string password);
-    Task<(bool Success, string UserId, string Username, string SessionId, string ErrorMessage)> ValidateSessionAsync(string sessionId);
+    Task<(bool Success, string UserId, string Username, string SessionId, string LanguageCode, string ErrorMessage)> VerifyOTPAsync(string email, string otpCode);
+    Task<(bool Success, string UserId, string Username, string SessionId, string LanguageCode, string ErrorMessage)> SignInWithPasswordAsync(string emailOrUsername, string password);
+    Task<(bool Success, string UserId, string Username, string SessionId, string LanguageCode, string ErrorMessage)> ValidateSessionAsync(string sessionId);
     Task SignOutAsync(string sessionId);
-    
+
     // Verification methods that don't create sessions (for profile updates, etc.)
     Task<(bool Success, string ErrorMessage)> VerifyPasswordAsync(string email, string password);
     Task<(bool Success, string ErrorMessage)> VerifyOTPCodeAsync(string email, string otpCode);
@@ -178,7 +178,7 @@ public class AuthenticationService : IAuthenticationService
         return (true, string.Empty);
     }
 
-    public async Task<(bool Success, string UserId, string Username, string SessionId, string ErrorMessage)> VerifyOTPAsync(string email, string otpCode)
+    public async Task<(bool Success, string UserId, string Username, string SessionId, string LanguageCode, string ErrorMessage)> VerifyOTPAsync(string email, string otpCode)
     {
         var otpClient = _tableClientFactory.GetTableClient(OTPTable);
         var cutoffTime = DateTime.UtcNow.AddMinutes(-10);
@@ -190,7 +190,7 @@ public class AuthenticationService : IAuthenticationService
             // Escape single quotes to prevent OData injection
             var safeEmail = normalizedEmail.Replace("'", "''");
             var filter = $"PartitionKey eq 'OTP' and Email eq '{safeEmail}' and IsUsed eq false and ExpiryTime gt datetime'{cutoffTime:yyyy-MM-ddTHH:mm:ss.fffffffZ}'";
-            
+
             TableEntity? validOtp = null;
             await foreach (var entity in otpClient.QueryAsync<TableEntity>(filter: filter))
             {
@@ -203,7 +203,7 @@ public class AuthenticationService : IAuthenticationService
 
             if (validOtp == null)
             {
-                return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidOtp"]);
+                return (false, string.Empty, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidOtp"]);
             }
 
             // Mark OTP as used
@@ -211,7 +211,7 @@ public class AuthenticationService : IAuthenticationService
             await otpClient.UpdateEntityAsync(validOtp, ETag.All, TableUpdateMode.Merge);
 
             var userId = validOtp.GetString("UserId") ?? string.Empty;
-            
+
             // Get user details
             var userClient = _tableClientFactory.GetTableClient(UsersTable);
             var partitionKey = userId.Substring(0, 6);
@@ -222,21 +222,21 @@ public class AuthenticationService : IAuthenticationService
             // Check if user allows email OTP authentication
             if (user.PreferredAuthMethod == "Password")
             {
-                return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_EmailCodeDisabled"]);
+                return (false, string.Empty, string.Empty, string.Empty, string.Empty, _localizer["Auth_EmailCodeDisabled"]);
             }
 
             // Create session with normalized email
             var sessionId = await CreateSessionAsync(user.UserId, normalizedEmail, user.Username);
 
-            return (true, user.UserId, user.Username, sessionId, string.Empty);
+            return (true, user.UserId, user.Username, sessionId, user.LanguageCode, string.Empty);
         }
         catch (Exception)
         {
-            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidOtp"]);
+            return (false, string.Empty, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidOtp"]);
         }
     }
 
-    public async Task<(bool Success, string UserId, string Username, string SessionId, string ErrorMessage)> SignInWithPasswordAsync(string emailOrUsername, string password)
+    public async Task<(bool Success, string UserId, string Username, string SessionId, string LanguageCode, string ErrorMessage)> SignInWithPasswordAsync(string emailOrUsername, string password)
     {
         User? user = null;
 
@@ -256,33 +256,33 @@ public class AuthenticationService : IAuthenticationService
         }
         catch (RequestFailedException)
         {
-            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_DbError"]);
+            return (false, string.Empty, string.Empty, string.Empty, string.Empty, _localizer["Auth_DbError"]);
         }
 
         if (user == null)
         {
-            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidCredentials"]);
+            return (false, string.Empty, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidCredentials"]);
         }
 
         // Check if user allows password authentication
         if (user.PreferredAuthMethod == "Email")
         {
-            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_PasswordNotEnabled"]);
+            return (false, string.Empty, string.Empty, string.Empty, string.Empty, _localizer["Auth_PasswordNotEnabled"]);
         }
 
         // Verify password
         if (!VerifyPassword(password, user.PasswordHash, user.PasswordSalt))
         {
-            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidCredentials"]);
+            return (false, string.Empty, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidCredentials"]);
         }
 
         // Create session
         var sessionId = await CreateSessionAsync(user.UserId, user.Email, user.Username);
 
-        return (true, user.UserId, user.Username, sessionId, string.Empty);
+        return (true, user.UserId, user.Username, sessionId, user.LanguageCode, string.Empty);
     }
 
-    public async Task<(bool Success, string UserId, string Username, string SessionId, string ErrorMessage)> ValidateSessionAsync(string sessionId)
+    public async Task<(bool Success, string UserId, string Username, string SessionId, string LanguageCode, string ErrorMessage)> ValidateSessionAsync(string sessionId)
     {
         var sessionClient = _tableClientFactory.GetTableClient(SessionsTable);
 
@@ -296,18 +296,29 @@ public class AuthenticationService : IAuthenticationService
 
             if (isActive && expiryDate > DateTime.UtcNow)
             {
+                // Look up user to get current language preference
+                var userId = session.GetString("UserId") ?? string.Empty;
+                var languageCode = "en";
+                if (!string.IsNullOrEmpty(userId))
+                {
+                    var user = await _userRepository.GetUserByIdAsync(userId);
+                    if (user != null)
+                        languageCode = user.LanguageCode;
+                }
+
                 return (true, 
-                    session.GetString("UserId") ?? string.Empty, 
+                    userId, 
                     session.GetString("Username") ?? string.Empty,
                     sessionId,
+                    languageCode,
                     string.Empty);
             }
 
-            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_SessionExpired"]);
+            return (false, string.Empty, string.Empty, string.Empty, string.Empty, _localizer["Auth_SessionExpired"]);
         }
         catch (RequestFailedException)
         {
-            return (false, string.Empty, string.Empty, string.Empty, _localizer["Auth_SessionExpired"]);
+            return (false, string.Empty, string.Empty, string.Empty, string.Empty, _localizer["Auth_SessionExpired"]);
         }
     }
 
@@ -394,7 +405,8 @@ public class AuthenticationService : IAuthenticationService
             PreferredAuthMethod = entity.GetString("PreferredAuthMethod") ?? "Both",
             IsActive = entity.GetBoolean("IsActive") ?? false,
             CreatedDate = entity.GetDateTimeOffset("CreatedDate")?.DateTime ?? DateTime.MinValue,
-            LastLoginDate = entity.GetDateTimeOffset("LastLoginDate")?.DateTime
+            LastLoginDate = entity.GetDateTimeOffset("LastLoginDate")?.DateTime,
+            LanguageCode = entity.GetString("LanguageCode") ?? "en"
         };
     }
 

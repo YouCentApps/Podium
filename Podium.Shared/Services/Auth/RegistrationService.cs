@@ -9,9 +9,9 @@ namespace Podium.Shared.Services.Auth;
 
 public interface IRegistrationService
 {
-    Task<(bool Success, string TempUserId, string ErrorMessage)> SendRegistrationVerificationAsync(string email, string username, string password, string preferredAuthMethod);
+    Task<(bool Success, string TempUserId, string ErrorMessage)> SendRegistrationVerificationAsync(string email, string username, string password, string preferredAuthMethod, string languageCode = "en");
     Task<(bool Success, string UserId, string ErrorMessage)> VerifyAndCompleteRegistrationAsync(string tempUserId, string otpCode);
-    Task<(bool Success, string UserId, string ErrorMessage)> RegisterUserAsync(string email, string username, string password, string preferredAuthMethod);
+    Task<(bool Success, string UserId, string ErrorMessage)> RegisterUserAsync(string email, string username, string password, string preferredAuthMethod, string languageCode = "en");
     Task<bool> IsEmailAvailableAsync(string email);
     Task<bool> IsUsernameAvailableAsync(string username);
 }
@@ -34,7 +34,7 @@ public class RegistrationService : IRegistrationService
     }
 
     public async Task<(bool Success, string TempUserId, string ErrorMessage)> SendRegistrationVerificationAsync(
-        string email, string username, string password, string preferredAuthMethod)
+        string email, string username, string password, string preferredAuthMethod, string languageCode = "en")
     {
         // Validate username - ALWAYS required
         var (usernameValid, _) = InputValidator.ValidateUsername(username);
@@ -97,6 +97,7 @@ public class RegistrationService : IRegistrationService
                 ["PasswordHash"] = hash,
                 ["PasswordSalt"] = salt,
                 ["PreferredAuthMethod"] = preferredAuthMethod,
+                ["LanguageCode"] = languageCode,
                 ["CreatedDate"] = DateTime.UtcNow,
                 ["ExpiryTime"] = DateTime.UtcNow.AddMinutes(30) // Pending reg expires in 30 min
             };
@@ -155,7 +156,7 @@ public class RegistrationService : IRegistrationService
         else
         {
             // No email provided (password-only without email) - register directly
-            return await RegisterUserAsync(email, username, password, preferredAuthMethod);
+            return await RegisterUserAsync(email, username, password, preferredAuthMethod, languageCode);
         }
     }
 
@@ -213,6 +214,7 @@ public class RegistrationService : IRegistrationService
                 PasswordHash = pending.GetString("PasswordHash") ?? string.Empty,
                 PasswordSalt = pending.GetString("PasswordSalt") ?? string.Empty,
                 PreferredAuthMethod = pending.GetString("PreferredAuthMethod") ?? "Both",
+                LanguageCode = pending.GetString("LanguageCode") ?? "en",
                 IsActive = true,
                 CreatedDate = DateTime.UtcNow
             };
@@ -244,7 +246,7 @@ public class RegistrationService : IRegistrationService
     }
 
     public async Task<(bool Success, string UserId, string ErrorMessage)> RegisterUserAsync(
-        string email, string username, string password, string preferredAuthMethod)
+        string email, string username, string password, string preferredAuthMethod, string languageCode = "en")
     {
         // Validate username - ALWAYS required
         var (usernameValid2, _) = InputValidator.ValidateUsername(username);
@@ -319,6 +321,7 @@ public class RegistrationService : IRegistrationService
             PasswordHash = hash,
             PasswordSalt = salt,
             PreferredAuthMethod = preferredAuthMethod,
+            LanguageCode = languageCode,
             IsActive = true,
             CreatedDate = DateTime.UtcNow
         };

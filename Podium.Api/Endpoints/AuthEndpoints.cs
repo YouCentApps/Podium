@@ -22,7 +22,8 @@ public static class AuthEndpoints
                 request.Email,
                 request.Username,
                 request.Password,
-                request.PreferredAuthMethod);
+                request.PreferredAuthMethod,
+                request.LanguageCode ?? "en");
 
             if (!success)
                 return Results.BadRequest(new { error = errorMessage });
@@ -58,7 +59,8 @@ public static class AuthEndpoints
                 request.Email,
                 request.Username,
                 request.Password,
-                request.PreferredAuthMethod);
+                request.PreferredAuthMethod,
+                request.LanguageCode ?? "en");
 
             if (!success)
                 return Results.BadRequest(new { error = errorMessage });
@@ -87,14 +89,14 @@ public static class AuthEndpoints
             [FromBody] VerifyOtpRequest request,
             [FromServices] IAuthenticationService authService) =>
         {
-            var (success, userId, username, sessionId, errorMessage) = await authService.VerifyOTPAsync(
+            var (success, userId, username, sessionId, languageCode, errorMessage) = await authService.VerifyOTPAsync(
                 request.Email,
                 request.OtpCode);
 
             if (!success)
                 return Results.BadRequest(new { error = errorMessage });
 
-            return Results.Ok(new { userId, username, sessionId });
+            return Results.Ok(new { userId, username, sessionId, languageCode });
         })
         .WithName("VerifyOTP");
 
@@ -103,14 +105,14 @@ public static class AuthEndpoints
             [FromBody] SignInRequest request,
             [FromServices] IAuthenticationService authService) =>
         {
-            var (success, userId, username, sessionId, errorMessage) = await authService.SignInWithPasswordAsync(
+            var (success, userId, username, sessionId, languageCode, errorMessage) = await authService.SignInWithPasswordAsync(
                 request.EmailOrUsername,
                 request.Password);
 
             if (!success)
                 return Results.BadRequest(new { error = errorMessage });
 
-            return Results.Ok(new { userId, username, sessionId });
+            return Results.Ok(new { userId, username, sessionId, languageCode });
         })
         .WithName("SignIn");
 
@@ -119,7 +121,7 @@ public static class AuthEndpoints
             [FromBody] ValidateSessionRequest request,
             [FromServices] IAuthenticationService authService) =>
         {
-            var (success, userId, username, sessionId, errorMessage) = 
+            var (success, userId, username, sessionId, languageCode, errorMessage) = 
                 await authService.ValidateSessionAsync(request.SessionId);
 
             if (!success)
@@ -127,7 +129,7 @@ public static class AuthEndpoints
                 return Results.Unauthorized();
             }
 
-            return Results.Ok(new { userId, username, sessionId });
+            return Results.Ok(new { userId, username, sessionId, languageCode });
         })
         .WithName("ValidateSession");
 
@@ -145,7 +147,7 @@ public static class AuthEndpoints
 }
 
 // Request DTOs
-public record RegisterRequest(string Email, string Username, string Password, string PreferredAuthMethod);
+public record RegisterRequest(string Email, string Username, string Password, string PreferredAuthMethod, string? LanguageCode);
 public record VerifyRegistrationRequest(string TempUserId, string OtpCode);
 public record SendOtpRequest(string EmailOrUsername);
 public record VerifyOtpRequest(string Email, string OtpCode);

@@ -3,6 +3,7 @@
 @using Podium.Shared.Services.State
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
+@inject LanguageStateService LangState
 @inject NavigationManager Navigation
 @inject IStringLocalizer<Auth> L
 
@@ -158,7 +159,7 @@
             // If email is provided, send verification
             if (!string.IsNullOrWhiteSpace(email))
             {
-                var response = await ApiClient.SendRegistrationVerificationAsync(email, username, password, preferredAuthMethod);
+                var response = await ApiClient.SendRegistrationVerificationAsync(email, username, password, preferredAuthMethod, LangState.CurrentLanguageCode);
                 if (response.Success && response.Data != null)
                 {
                     tempUserId = response.Data.TempUserId;
@@ -173,7 +174,7 @@
             else
             {
                 // No email - register directly (password-only without email)
-                var response = await ApiClient.RegisterAsync(email, username, password, preferredAuthMethod);
+                var response = await ApiClient.RegisterAsync(email, username, password, preferredAuthMethod, LangState.CurrentLanguageCode);
                 if (response.Success && response.Data != null)
                 {
                     Navigation.NavigateTo("/signin");

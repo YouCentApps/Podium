@@ -62,4 +62,7 @@
   <data name="SignUp_StartOver" xml:space="preserve"><value>Recommencer</value></data>
   <data name="SignUp_SignIn" xml:space="preserve"><value>Se connecter</value></data>
   <data name="Reg_VerificationFailed" xml:space="preserve"><value>Code invalide ou expiré.</value></data>
+  <data name="SignIn_OtpSent" xml:space="preserve"><value>Code de vérification envoyé ! Vérifiez votre email.</value></data>
+  <data name="SignIn_OtpFailed" xml:space="preserve"><value>Échec de l'envoi du code. Veuillez réessayer.</value></data>
+  <data name="SignIn_InvalidCode" xml:space="preserve"><value>Code invalide ou expiré.</value></data>
 </root>

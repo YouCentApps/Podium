@@ -21,40 +21,51 @@
             <div class="alert alert-success">@successMessage</div>
         }
 
-        <div class="current-value">
-            <strong>@L["LangSettings_Current"]</strong> @GetLanguageName(LangState.CurrentLanguageCode)
-        </div>
+        @if (isLoadingDbLang)
+        {
+            <div class="loading-spinner">
+                <p>@LC["Loading"]</p>
+            </div>
+        }
+        else
+        {
+            <div class="current-value">
+                <strong>@L["LangSettings_Current"]</strong> @GetLanguageName(dbLanguageCode)
+            </div>
 
-        <div class="lang-options">
-            @foreach (var lang in supportedLanguages)
-            {
-                var isSelected = LangState.CurrentLanguageCode == lang.Code;
-                <div class="lang-option-card @(isSelected ? "selected" : "")" @onclick="() => SelectLanguage(lang.Code)">
-                    <span class="lang-name">@lang.Name</span>
-                    <button class="btn @(isSelected ? "btn-success" : "btn-primary") btn-sm" disabled="@(isSelected || isSaving)">
-                        @if (isSaving && pendingCode == lang.Code)
-                        {
-                            <span>@L["LangSettings_Saving"]</span>
-                        }
-                        else if (isSelected)
-                        {
-                            <span>@L["LangSettings_Btn_Selected"]</span>
-                        }
-                        else
-                        {
-                            <span>@L["LangSettings_Btn_Select"]</span>
-                        }
-                    </button>
-                </div>
-            }
-        </div>
+            <div class="lang-options">
+                @foreach (var lang in supportedLanguages)
+                {
+                    var isSelected = dbLanguageCode == lang.Code;
+                    <div class="lang-option-card @(isSelected ? "selected" : "")" @onclick="() => SelectLanguage(lang.Code)">
+                        <span class="lang-name">@lang.Name</span>
+                        <button class="btn @(isSelected ? "btn-success" : "btn-primary") btn-sm" disabled="@(isSelected || isSaving)">
+                            @if (isSaving && pendingCode == lang.Code)
+                            {
+                                <span>@L["LangSettings_Saving"]</span>
+                            }
+                            else if (isSelected)
+                            {
+                                <span>@L["LangSettings_Btn_Selected"]</span>
+                            }
+                            else
+                            {
+                                <span>@L["LangSettings_Btn_Select"]</span>
+                            }
+                        </button>
+                    </div>
+                }
+            </div>
+        }
     </div>
 </div>
 
 @code {
     private bool isSaving = false;
+    private bool isLoadingDbLang = true;
     private string pendingCode = "";
     private string? successMessage;
+    private string dbLanguageCode = "en";
 
     private record LangOption(string Code, string Name);
 
@@ -79,6 +90,22 @@
                 new("ru", "Русский"),
             };
         }
+
+        // Load the user's saved language from DB
+        if (AuthState.IsAuthenticated)
+        {
+            try
+            {
+                var langResponse = await ApiClient.GetMyLanguageAsync();
+                if (langResponse.Success && langResponse.Data != null)
+                {
+                    dbLanguageCode = langResponse.Data.LanguageCode;
+                }
+            }
+            catch { /* fallback to default */ }
+        }
+
+        isLoadingDbLang = false;
     }
 
     private string GetLanguageName(string code) =>
@@ -86,20 +113,23 @@
 
     private async Task SelectLanguage(string code)
     {
-        if (LangState.CurrentLanguageCode == code || isSaving)
+        if (dbLanguageCode == code || isSaving)
             return;
 
         isSaving = true;
         pendingCode = code;
 
-        await LangState.SetLanguageAsync(code);
-
-        // Persist to server if authenticated
+        // Save to DB first
         if (AuthState.IsAuthenticated)
         {
             try { await ApiClient.UpdateMyLanguageAsync(code); }
-            catch { /* non-critical – local preference already saved */ }
+            catch { /* will still apply locally */ }
         }
+
+        dbLanguageCode = code;
+
+        // Also apply immediately to the current session
+        await LangState.SetLanguageAsync(code);
 
         try
         {

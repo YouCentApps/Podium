@@ -143,7 +143,7 @@
             var eventResponse = await ApiClient.GetEventDetailsAsync(EventId, SeasonId);
             if (!eventResponse.Success || eventResponse.Data == null)
             {
-                errorMessage = "Event not found.";
+                errorMessage = L["Predict_EventNotFound"];
                 isLoading = false;
                 return;
             }
@@ -152,7 +152,7 @@
 
             if (!eventDetails.CanAcceptPredictions)
             {
-                errorMessage = "This event no longer accepts predictions.";
+                errorMessage = L["Predict_Closed"];
                 isLoading = false;
                 return;
             }
@@ -165,7 +165,7 @@
             }
             else
             {
-                errorMessage = "Failed to load competitors.";
+                errorMessage = L["Predict_CompetitorsLoadFailed"];
             }
 
             // Check if user already has a prediction
@@ -231,7 +231,7 @@
     {
         if (string.IsNullOrEmpty(AuthState.UserId))
         {
-            errorMessage = "You must be signed in to submit predictions.";
+            errorMessage = L["Predict_SignIn"];
             return;
         }
 

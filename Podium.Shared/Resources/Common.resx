@@ -40,4 +40,5 @@
   <data name="Home_Feature2_Desc" xml:space="preserve"><value>Just pick your top 3 for each event</value></data>
   <data name="Home_Feature3_Title" xml:space="preserve"><value>Compete &amp; Win</value></data>
   <data name="Home_Feature3_Desc" xml:space="preserve"><value>Earn points and climb the leaderboard</value></data>
+  <data name="Error_LoadFailed" xml:space="preserve"><value>Failed to load data. Please try again.</value></data>
 </root>

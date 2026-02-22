@@ -8,7 +8,7 @@
 <PageTitle>Leaderboard - Podium</PageTitle>
 
 <div class="page-container">
-    <h1><span class="trophy-icon">&#127942;</span> Leaderboard</h1>
+    <h1><span class="trophy-icon">&#127942;</span> @L["Leaderboard_Title"]</h1>
 
     @if (isLoadingInitial)
     {
@@ -202,7 +202,7 @@
                                     {
                                         <div class="search-result-item" @onclick="() => SelectSearchUser(user)">
                                             <strong>@user.Username</strong> (@user.Email)
-                                            <span class="points-badge">@user.PointsEarned pts</span>
+                                            <span class="points-badge">@user.PointsEarned @L["Leaderboard_Pts"]</span>
                                         </div>
                                     }
                                 </div>
@@ -333,7 +333,7 @@ private System.Threading.Timer? searchDebounceTimer;
             }
             else
             {
-                errorMessage = disciplinesResponse.Error ?? "Failed to load disciplines.";
+                errorMessage = disciplinesResponse.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)
@@ -446,7 +446,7 @@ private System.Threading.Timer? searchDebounceTimer;
             }
             else
             {
-                errorMessage = seriesResponse.Error ?? "Failed to load series.";
+                errorMessage = seriesResponse.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)
@@ -473,7 +473,7 @@ private System.Threading.Timer? searchDebounceTimer;
             }
             else
             {
-                errorMessage = seasonsResponse.Error ?? "Failed to load seasons.";
+                errorMessage = seasonsResponse.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)
@@ -512,7 +512,7 @@ private System.Threading.Timer? searchDebounceTimer;
             }
             else
             {
-                errorMessage = leaderboardResponse.Error ?? "Failed to load leaderboard.";
+                errorMessage = leaderboardResponse.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)

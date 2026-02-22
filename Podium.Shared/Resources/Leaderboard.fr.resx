@@ -37,4 +37,6 @@
   <data name="Leaderboard_Pos2nd" xml:space="preserve"><value>2e :</value></data>
   <data name="Leaderboard_Pos3rd" xml:space="preserve"><value>3e :</value></data>
   <data name="Leaderboard_Col_BestResults_Short" xml:space="preserve"><value>Meilleurs résultats</value></data>
+  <data name="Leaderboard_Title" xml:space="preserve"><value>Classement</value></data>
+  <data name="Leaderboard_Pts" xml:space="preserve"><value>pts</value></data>
 </root>

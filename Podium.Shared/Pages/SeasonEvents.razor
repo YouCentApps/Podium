@@ -8,7 +8,7 @@
 
 <div class="page-container">
     <nav class="breadcrumb">
-        <a href="/">@L["SeasonEvents_Breadcrumb"]</a> / Events
+        <a href="/">@L["SeasonEvents_Breadcrumb"]</a> / @L["Events_Breadcrumb_Events"]
     </nav>
 
     <h1>@L["SeasonEvents_Title"]</h1>
@@ -82,7 +82,7 @@
             }
             else
             {
-                errorMessage = eventsResponse.Error ?? "Failed to load events.";
+                errorMessage = eventsResponse.Error ?? L["Events_LoadFailed"];
             }
         }
         catch (Exception ex)

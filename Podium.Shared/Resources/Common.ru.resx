@@ -40,4 +40,5 @@
   <data name="Home_Feature2_Desc" xml:space="preserve"><value>Просто выберите топ-3 для каждого события</value></data>
   <data name="Home_Feature3_Title" xml:space="preserve"><value>Соревнуйся и побеждай</value></data>
   <data name="Home_Feature3_Desc" xml:space="preserve"><value>Набирайте очки и поднимайтесь в рейтинге</value></data>
+  <data name="Error_LoadFailed" xml:space="preserve"><value>Ошибка загрузки данных. Попробуйте ещё раз.</value></data>
 </root>
