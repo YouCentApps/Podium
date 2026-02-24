@@ -114,3 +114,4 @@ __azurite_db_table__.json
 # MyPodium files (legacy)
 /MyPodium/google-pass.md
 /Podium/Podium.Api/appsettings.Development.json
+/Podium.Api/appsettings.Development.json
