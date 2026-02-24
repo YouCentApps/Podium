@@ -3,20 +3,22 @@
 @using Podium.Shared.Models
 @inject IPodiumApiClient ApiClient
 @inject NavigationManager Navigation
+@inject IStringLocalizer<Predictions> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>Select Series - Podium</PageTitle>
 
 <div class="page-container">
     <nav class="breadcrumb">
-        <a href="/disciplines">Disciplines</a> / Series
+        <a href="/disciplines">@L["SeriesSelection_Breadcrumb"]</a> / @L["Events_Breadcrumb_Series"]
     </nav>
 
-    <h1>Choose a Series</h1>
+    <h1>@L["SeriesSelection_Title"]</h1>
 
     @if (isLoading)
     {
         <div class="loading-spinner">
-            <p>Loading series...</p>
+            <p>@LC["Loading"]</p>
         </div>
     }
     else if (!string.IsNullOrEmpty(errorMessage))
@@ -26,7 +28,7 @@
     else if (seriesList.Count == 0)
     {
         <div class="alert alert-info">
-            No series available for this discipline yet.
+            @L["SeriesSelection_None"]
         </div>
     }
     else
@@ -37,7 +39,7 @@
                 <div class="tier-card" @onclick="() => SelectSeries(series.Id)">
                     <h3>@series.DisplayName</h3>
                     <p class="series-info">@series.GoverningBody &middot; @series.Region</p>
-                    <p>View events &rarr;</p>
+                    <p>@L["SeriesSelection_ViewEvents"]</p>
                 </div>
             }
         </div>

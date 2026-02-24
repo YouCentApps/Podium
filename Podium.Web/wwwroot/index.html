@@ -17,6 +17,13 @@
             <p style="font-size: 1.5em;">Loading...</p>
         </div>
     </div>
+    <script>
+        // Expose localStorage language so Blazor WASM can read it before first render
+        window.podiumCulture = {
+            get: () => window.localStorage.getItem('podium_language') || 'en',
+            set: (value) => window.localStorage.setItem('podium_language', value)
+        };
+    </script>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
 

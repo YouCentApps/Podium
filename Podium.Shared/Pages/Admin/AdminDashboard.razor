@@ -5,6 +5,8 @@
 @inject AdminStateService AdminState
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
+@inject IStringLocalizer<AdminRes> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>Admin Dashboard - Podium</PageTitle>
 
@@ -12,9 +14,9 @@
 {
     <div class="admin-container">
         <div class="admin-error">
-            <h2><span style="font-size: 1.3em;">&#128274;</span> Authentication Required</h2>
-            <p>Please sign in to access the admin dashboard.</p>
-            <button class="btn btn-primary" @onclick="@(() => Navigation.NavigateTo("/signin"))">Sign In</button>
+            <h2><span style="font-size: 1.3em;">&#128274;</span> @L["Admin_AuthRequired"]</h2>
+            <p>@L["Admin_AuthRequired_Desc"]</p>
+            <button class="btn btn-primary" @onclick="@(() => Navigation.NavigateTo("/signin"))">@LC["Nav_SignIn"]</button>
         </div>
     </div>
 }
@@ -22,9 +24,9 @@ else if (!AdminState.IsAdmin)
 {
     <div class="admin-container">
         <div class="admin-error">
-            <h2><span style="font-size: 1.3em;">&#128737;</span> Access Denied</h2>
-            <p>You don't have administrator privileges.</p>
-            <button class="btn btn-secondary" @onclick="@(() => Navigation.NavigateTo("/"))">Back to Home</button>
+            <h2><span style="font-size: 1.3em;">&#128737;</span> @L["Admin_AccessDenied"]</h2>
+            <p>@L["Admin_NotAuthorized"]</p>
+            <button class="btn btn-secondary" @onclick="@(() => Navigation.NavigateTo("/"))">@L["Admin_BackToHome"]</button>
         </div>
     </div>
 }
@@ -32,59 +34,59 @@ else
 {
     <div class="admin-container">
         <div class="admin-header">
-            <h1><span style="font-size: 1.2em;">&#9881;</span> Admin Dashboard</h1>
-            <p>Manage disciplines, series, seasons, competitors, and more</p>
+            <h1><span style="font-size: 1.2em;">&#9881;</span> @L["Admin_Dashboard_Title"]</h1>
+            <p>@L["Admin_Dashboard_Subtitle"]</p>
         </div>
 
         <div class="admin-cards">
             <a href="/admin/disciplines" class="admin-card">
                 <div class="card-icon"><span style="font-size: 1.2em;">&#127950;&#65039;</span></div>
-                <h3>Disciplines</h3>
-                <p>Manage racing categories and disciplines</p>
+                <h3>@L["Admin_Disciplines_Title"]</h3>
+                <p>@L["Admin_Disciplines_Desc"]</p>
             </a>
 
             <a href="/admin/series" class="admin-card">
                 <div class="card-icon">&#127942;</div>
-                <h3>Series</h3>
-                <p>Manage racing series within disciplines</p>
+                <h3>@L["Admin_Series_Title"]</h3>
+                <p>@L["Admin_Series_Desc"]</p>
             </a>
 
             <a href="/admin/seasons" class="admin-card">
                 <div class="card-icon">&#128197;</div>
-                <h3>Seasons</h3>
-                <p>Manage seasons for each series</p>
+                <h3>@L["Admin_Seasons_Title"]</h3>
+                <p>@L["Admin_Seasons_Desc"]</p>
             </a>
 
             <a href="/admin/competitors" class="admin-card">
                 <div class="card-icon"><span style="font-size: 1.2em;">&#127933;&#65039;</span></div>
-                <h3>Competitors</h3>
-                <p>Manage drivers, riders, and teams</p>
+                <h3>@L["Admin_Competitors_Title"]</h3>
+                <p>@L["Admin_Competitors_Desc"]</p>
             </a>
 
             <a href="/admin/events" class="admin-card">
                 <div class="card-icon">&#127937;</div>
-                <h3>Events</h3>
-                <p>Manage races and events</p>
+                <h3>@L["Admin_Events_Title"]</h3>
+                <p>@L["Admin_Events_Desc"]</p>
             </a>
 
             <a href="/admin/results" class="admin-card">
                 <div class="card-icon">&#128202;</div>
-                <h3>Results</h3>
-                <p>Enter and manage event results</p>
+                <h3>@L["Admin_Results_Title"]</h3>
+                <p>@L["Admin_Results_Desc"]</p>
             </a>
 
             <a href="/admin/users" class="admin-card">
                 <div class="card-icon">&#128101;</div>
-                <h3>Users</h3>
-                <p>Manage user accounts</p>
+                <h3>@L["Admin_Users_Title"]</h3>
+                <p>@L["Admin_Users_Desc"]</p>
             </a>
 
             @if (AdminState.CanManageAdmins)
             {
                 <a href="/admin/admins" class="admin-card">
                     <div class="card-icon"><span style="font-size: 1.2em;">&#128737;&#65039;</span></div>
-                    <h3>Administrators</h3>
-                    <p>Manage admin privileges</p>
+                    <h3>@L["Admin_Admins_Title"]</h3>
+                    <p>@L["Admin_Admins_Desc"]</p>
                 </a>
             }
         </div>

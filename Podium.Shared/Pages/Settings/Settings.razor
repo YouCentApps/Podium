@@ -4,19 +4,20 @@
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
 @inject NavigationManager Navigation
+@inject IStringLocalizer<SettingsRes> L
 
 <PageTitle>Settings - Podium</PageTitle>
 
 <div class="settings-container">
     <div class="settings-header">
-        <h1>Settings</h1>
-        <p>Manage your account preferences and security settings</p>
+        <h1>@L["Settings_Title"]</h1>
+        <p>@L["Settings_Subtitle"]</p>
     </div>
 
     @if (!AuthState.IsAuthenticated)
     {
         <div class="alert alert-danger">
-            Please sign in to access settings.
+            @L["Settings_SignInRequired"]
         </div>
     }
     else
@@ -25,8 +26,8 @@
             <a href="/settings/name" class="settings-card">
                 <div class="settings-card-icon"><strong>ID</strong></div>
                 <div class="settings-card-content">
-                    <h3>Update Display Name</h3>
-                    <p>Change how your name appears on leaderboards and predictions (also can be used to sign in)</p>
+                    <h3>@L["Settings_UpdateName_Title"]</h3>
+                    <p>@L["Settings_UpdateName_Desc"]</p>
                 </div>
                 <span class="settings-card-arrow">&rsaquo;</span>
             </a>
@@ -34,8 +35,8 @@
             <a href="/settings/signin-method" class="settings-card">
                 <div class="settings-card-icon"><strong>AUTH</strong></div>
                 <div class="settings-card-content">
-                    <h3>Sign-in Method</h3>
-                    <p>Choose how you want to sign in: password, email code, or both</p>
+                    <h3>@L["Settings_AuthMethod_Title"]</h3>
+                    <p>@L["Settings_AuthMethod_Desc"]</p>
                 </div>
                 <span class="settings-card-arrow">&rsaquo;</span>
             </a>
@@ -43,8 +44,8 @@
             <a href="/settings/password" class="settings-card">
                 <div class="settings-card-icon"><strong>PASS</strong></div>
                 <div class="settings-card-content">
-                    <h3>Update Password</h3>
-                    <p>Change your account password</p>
+                    <h3>@L["Settings_UpdatePassword_Title"]</h3>
+                    <p>@L["Settings_UpdatePassword_Desc"]</p>
                 </div>
                 <span class="settings-card-arrow">&rsaquo;</span>
             </a>
@@ -52,8 +53,26 @@
             <a href="/settings/email" class="settings-card">
                 <div class="settings-card-icon"><strong>&#64;</strong></div>
                 <div class="settings-card-content">
-                    <h3>Update Email</h3>
-                    <p>Change your email address for sign-in and notifications</p>
+                    <h3>@L["Settings_UpdateEmail_Title"]</h3>
+                    <p>@L["Settings_UpdateEmail_Desc"]</p>
+                </div>
+                <span class="settings-card-arrow">&rsaquo;</span>
+            </a>
+
+            <a href="/settings/favorites" class="settings-card">
+                <div class="settings-card-icon"><strong>⭐</strong></div>
+                <div class="settings-card-content">
+                    <h3>@L["Settings_Favorites_Title"]</h3>
+                    <p>@L["Settings_Favorites_Desc"]</p>
+                </div>
+                <span class="settings-card-arrow">&rsaquo;</span>
+            </a>
+
+            <a href="/settings/language" class="settings-card">
+                <div class="settings-card-icon"><strong>🌐</strong></div>
+                <div class="settings-card-content">
+                    <h3>@L["Settings_Language_Title"]</h3>
+                    <p>@L["Settings_Language_Desc"]</p>
                 </div>
                 <span class="settings-card-arrow">&rsaquo;</span>
             </a>

@@ -125,7 +125,8 @@ public class UserRepository : IUserRepository
                 ["CreatedDate"] = DateTime.SpecifyKind(user.CreatedDate, DateTimeKind.Utc),
                 ["LastLoginDate"] = user.LastLoginDate.HasValue 
                     ? DateTime.SpecifyKind(user.LastLoginDate.Value, DateTimeKind.Utc) 
-                    : (DateTime?)null
+                    : (DateTime?)null,
+                ["LanguageCode"] = user.LanguageCode
             };
 
             await tableClient.AddEntityAsync(entity);
@@ -238,7 +239,8 @@ public class UserRepository : IUserRepository
                 ["CreatedDate"] = DateTime.SpecifyKind(user.CreatedDate, DateTimeKind.Utc),
                 ["LastLoginDate"] = user.LastLoginDate.HasValue 
                     ? DateTime.SpecifyKind(user.LastLoginDate.Value, DateTimeKind.Utc) 
-                    : (DateTime?)null
+                    : (DateTime?)null,
+                ["LanguageCode"] = user.LanguageCode
             };
 
             await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
@@ -319,7 +321,8 @@ public class UserRepository : IUserRepository
             PreferredAuthMethod = entity.GetString("PreferredAuthMethod") ?? "Both",
             IsActive = entity.GetBoolean("IsActive") ?? false,
             CreatedDate = entity.GetDateTimeOffset("CreatedDate")?.UtcDateTime ?? DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc),
-            LastLoginDate = entity.GetDateTimeOffset("LastLoginDate")?.UtcDateTime
+            LastLoginDate = entity.GetDateTimeOffset("LastLoginDate")?.UtcDateTime,
+            LanguageCode = entity.GetString("LanguageCode") ?? "en"
         };
     }
 }

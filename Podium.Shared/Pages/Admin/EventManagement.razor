@@ -8,6 +8,7 @@
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
 @inject IJSRuntime JS
+@inject IStringLocalizer<AdminRes> L
 
 <PageTitle>Manage Events - Admin</PageTitle>
 
@@ -19,7 +20,7 @@
 
     @if (loading)
     {
-        <div class="loading">Loading events...</div>
+        <div class="loading">@L["Admin_Loading"]</div>
     }
     else
     {
@@ -42,7 +43,7 @@
         @if (showForm)
         {
             <div class="admin-form" id="eventForm">
-                <h3>@(editingEvent == null ? "Create" : "Edit") Event</h3>
+                <h3>@(editingEvent == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) Event</h3>
                 
                 @if (editingEvent == null)
                 {
@@ -142,14 +143,14 @@
                 <div class="form-group">
                     <label>
                         <input type="checkbox" @bind="formIsActive" />
-                        Active (accepts predictions)
+                        @L["Admin_Label_Active"] (accepts predictions)
                     </label>
                 </div>
 
                 <div class="form-actions">
-                    <button class="btn btn-secondary" @onclick="CancelForm">Cancel</button>
+                    <button class="btn btn-secondary" @onclick="CancelForm">@L["Admin_Btn_Cancel"]</button>
                     <button class="btn btn-primary" @onclick="SaveEvent" disabled="@saving">
-                        @(saving ? "Saving..." : "Save")
+                        @(saving ? L["Admin_Btn_Saving"].Value : L["Admin_Btn_Save"].Value)
                     </button>
                 </div>
                 @if (!string.IsNullOrEmpty(formError))
@@ -215,7 +216,7 @@
                                 @if (!evt.IsActive)
                                 {
                                     <br />
-                                    <span class="badge badge-inactive" style="margin-top: 0.25rem;">Inactive</span>
+                                    <span class="badge badge-inactive" style="margin-top: 0.25rem;">@L["Admin_Status_Inactive"]</span>
                                 }
                             </td>
                             <td>
@@ -249,8 +250,8 @@
                                 }
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" @onclick="() => EditEvent(evt)">Edit</button>
-                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(evt)">Delete</button>
+                                <button class="btn btn-sm btn-secondary" @onclick="() => EditEvent(evt)">@L["Admin_Btn_Edit"]</button>
+                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(evt)">@L["Admin_Btn_Delete"]</button>
                             </td>
                         </tr>
                     }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Settings_Title" xml:space="preserve"><value>Paramètres</value></data>
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Gérez vos préférences de compte et paramètres de sécurité</value></data>
+  <data name="Settings_SignInRequired" xml:space="preserve"><value>Veuillez vous connecter pour accéder aux paramètres.</value></data>
+  <data name="Settings_UpdateName_Title" xml:space="preserve"><value>Modifier le nom d'affichage</value></data>
+  <data name="Settings_UpdateName_Desc" xml:space="preserve"><value>Modifiez votre nom visible sur les classements et les prédictions</value></data>
+  <data name="Settings_AuthMethod_Title" xml:space="preserve"><value>Méthode de connexion</value></data>
+  <data name="Settings_AuthMethod_Desc" xml:space="preserve"><value>Choisissez votre méthode de connexion : mot de passe, code email ou les deux</value></data>
+  <data name="Settings_UpdatePassword_Title" xml:space="preserve"><value>Modifier le mot de passe</value></data>
+  <data name="Settings_UpdatePassword_Desc" xml:space="preserve"><value>Modifiez le mot de passe de votre compte</value></data>
+  <data name="Settings_UpdateEmail_Title" xml:space="preserve"><value>Modifier l'email</value></data>
+  <data name="Settings_UpdateEmail_Desc" xml:space="preserve"><value>Modifiez votre adresse email pour la connexion et les notifications</value></data>
+  <data name="Settings_Favorites_Title" xml:space="preserve"><value>Saisons favorites</value></data>
+  <data name="Settings_Favorites_Desc" xml:space="preserve"><value>Gérez vos saisons favorites pour un accès rapide</value></data>
+  <data name="Settings_Language_Title" xml:space="preserve"><value>Langue</value></data>
+  <data name="Settings_Language_Desc" xml:space="preserve"><value>Changer la langue d'affichage</value></data>
+  <data name="LangSettings_Title" xml:space="preserve"><value>Paramètres de langue</value></data>
+  <data name="LangSettings_Subtitle" xml:space="preserve"><value>Choisissez votre langue. La page sera rechargée pour appliquer le changement.</value></data>
+  <data name="LangSettings_Current" xml:space="preserve"><value>Langue actuelle :</value></data>
+  <data name="LangSettings_Btn_Select" xml:space="preserve"><value>Sélectionner</value></data>
+  <data name="LangSettings_Btn_Selected" xml:space="preserve"><value>✓ Sélectionné</value></data>
+  <data name="LangSettings_Saving" xml:space="preserve"><value>Application...</value></data>
+  <data name="UpdateName_Title" xml:space="preserve"><value>Modifier le nom d'affichage</value></data>
+  <data name="UpdateName_Subtitle" xml:space="preserve"><value>Modifiez votre nom visible sur les classements et les prédictions</value></data>
+  <data name="UpdateName_CurrentName" xml:space="preserve"><value>Nom actuel :</value></data>
+  <data name="UpdateName_NewName" xml:space="preserve"><value>Nouveau nom d'affichage</value></data>
+  <data name="UpdateName_Verify_Choose" xml:space="preserve"><value>Choisissez comment vérifier votre identité :</value></data>
+  <data name="UpdateName_Verify_Password" xml:space="preserve"><value>Mot de passe</value></data>
+  <data name="UpdateName_Verify_EmailCode" xml:space="preserve"><value>Code email</value></data>
+  <data name="UpdateName_Btn_Update" xml:space="preserve"><value>Mettre à jour le nom</value></data>
+  <data name="UpdateName_Btn_Updating" xml:space="preserve"><value>Mise à jour...</value></data>
+  <data name="ManageFavorites_Title" xml:space="preserve"><value>Gérer les saisons favorites</value></data>
+  <data name="ManageFavorites_Subtitle" xml:space="preserve"><value>Sélectionnez jusqu'à 5 saisons favorites pour un accès rapide</value></data>
+  <data name="ManageFavorites_Current" xml:space="preserve"><value>Vos saisons favorites ({0}/5)</value></data>
+  <data name="ManageFavorites_None" xml:space="preserve"><value>Vous n'avez pas encore ajouté de saisons favorites.</value></data>
+  <data name="ManageFavorites_Add_Title" xml:space="preserve"><value>Ajouter une saison favorite</value></data>
+  <data name="ManageFavorites_Add_Desc" xml:space="preserve"><value>Parcourez les disciplines et séries pour trouver des saisons à ajouter.</value></data>
+  <data name="ManageFavorites_Btn_Remove" xml:space="preserve"><value>Supprimer</value></data>
+  <data name="ManageFavorites_Btn_Add" xml:space="preserve"><value>Ajouter aux favoris</value></data>
+  <data name="ManageFavorites_Btn_Adding" xml:space="preserve"><value>Ajout...</value></data>
+  <data name="ManageFavorites_SelectDiscipline" xml:space="preserve"><value>Sélectionner une discipline</value></data>
+  <data name="ManageFavorites_SelectSeries" xml:space="preserve"><value>Sélectionner une série</value></data>
+  <data name="ManageFavorites_SelectSeason" xml:space="preserve"><value>Sélectionner une saison</value></data>
+  <data name="ManageFavorites_MaxReached" xml:space="preserve"><value>Vous avez atteint le maximum de 5 saisons favorites.</value></data>
+  <data name="UpdatePassword_Title" xml:space="preserve"><value>Modifier le mot de passe</value></data>
+  <data name="UpdateEmail_Title" xml:space="preserve"><value>Modifier l'email</value></data>
+  <data name="SignInSettings_Title" xml:space="preserve"><value>Méthode de connexion</value></data>
+  <data name="SignInSettings_Subtitle" xml:space="preserve"><value>Choisissez comment vous connecter à Podium</value></data>
+  <data name="UpdatePassword_Setup_Title" xml:space="preserve"><value>Configurer un mot de passe</value></data>
+  <data name="UpdatePassword_Setup_Desc" xml:space="preserve"><value>Créer un mot de passe pour votre compte</value></data>
+  <data name="UpdateEmail_Setup_Title" xml:space="preserve"><value>Configurer un email</value></data>
+  <data name="UpdateEmail_Setup_Desc" xml:space="preserve"><value>Ajouter une adresse email à votre compte</value></data>
+  <data name="UpdateEmail_CurrentEmail" xml:space="preserve"><value>Email actuel :</value></data>
+  <data name="ManageFavorites_SignInRequired" xml:space="preserve"><value>Connectez-vous pour gérer vos saisons favorites.</value></data>
+  <data name="ManageFavorites_NoSeasons" xml:space="preserve"><value>Aucune saison disponible pour cette série.</value></data>
+  <data name="ManageFavorites_AlreadyFavorite" xml:space="preserve"><value>Déjà en favori</value></data>
+</root>

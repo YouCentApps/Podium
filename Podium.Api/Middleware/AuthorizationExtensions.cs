@@ -18,7 +18,7 @@ public static class AuthorizationExtensions
             return Results.Unauthorized();
         }
 
-        var (success, userId, username, validSessionId, _) = 
+        var (success, userId, username, validSessionId, _, _) = 
             await authService.ValidateSessionAsync(sessionId!);
 
         if (!success || string.IsNullOrEmpty(userId))

@@ -9,6 +9,7 @@
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
 @inject IJSRuntime JS
+@inject IStringLocalizer<AdminRes> L
 
 <PageTitle>Manage Competitors - Admin</PageTitle>
 
@@ -20,7 +21,7 @@
 
     @if (loading)
     {
-        <div class="loading">Loading competitors...</div>
+        <div class="loading">@L["Admin_Loading"]</div>
     }
     else
     {
@@ -43,7 +44,7 @@
         @if (showForm)
         {
             <div class="admin-form" id="competitorForm">
-                <h3>@(editingCompetitor == null ? "Create" : "Edit") Competitor</h3>
+                <h3>@(editingCompetitor == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) Competitor</h3>
                 
                 <div class="form-group">
                     <label>Type:</label>
@@ -78,7 +79,7 @@
                 <div class="form-group">
                     <label>
                         <input type="checkbox" @bind="formIsActive" />
-                        Active
+                        @L["Admin_Label_Active"]
                     </label>
                 </div>
 
@@ -160,9 +161,9 @@
                 }
 
                 <div class="form-actions">
-                    <button class="btn btn-secondary" @onclick="CancelForm">Cancel</button>
+                    <button class="btn btn-secondary" @onclick="CancelForm">@L["Admin_Btn_Cancel"]</button>
                     <button class="btn btn-primary" @onclick="SaveCompetitor" disabled="@saving">
-                        @(saving ? "Saving..." : "Save")
+                        @(saving ? L["Admin_Btn_Saving"].Value : L["Admin_Btn_Save"].Value)
                     </button>
                 </div>
                 @if (!string.IsNullOrEmpty(formError))
@@ -224,7 +225,7 @@
                             </td>
                             <td>
                                 <span class="badge @(competitor.IsActive ? "badge-success" : "badge-inactive")">
-                                    @(competitor.IsActive ? "Active" : "Inactive")
+                                    @(competitor.IsActive ? L["Admin_Status_Active"].Value : L["Admin_Status_Inactive"].Value)
                                 </span>
                             </td>
                             <td>
@@ -259,8 +260,8 @@
                                 }
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" @onclick="() => EditCompetitor(competitor)">Edit</button>
-                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(competitor)">Delete</button>
+                                <button class="btn btn-sm btn-secondary" @onclick="() => EditCompetitor(competitor)">@L["Admin_Btn_Edit"]</button>
+                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(competitor)">@L["Admin_Btn_Delete"]</button>
                             </td>
                         </tr>
                     }

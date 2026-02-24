@@ -2,23 +2,25 @@
 @implements IDisposable
 @inject AuthStateService AuthState
 @inject AdminStateService AdminState
+@inject LanguageStateService LangState
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<Common> L
 
 <div class="app-container">
     <header class="app-header">
         <div class="header-content">
             <a href="/" class="logo"><span class="logo-icon">🏆</span> Podium</a>
-            
+
             <nav class="main-nav">
                 @if (AuthState.IsAuthenticated)
                 {
-                    <a href="/disciplines">Make Predictions</a>
-                    <a href="/my-predictions">My Predictions</a>
-                    <a href="/leaderboard">Leaderboard</a>
+                    <a href="/disciplines">@L["Nav_MakePredictions"]</a>
+                    <a href="/my-predictions">@L["Nav_MyPredictions"]</a>
+                    <a href="/leaderboard">@L["Nav_Leaderboard"]</a>
                     @if (AdminState.IsAdmin)
                     {
-                        <a href="/admin" class="admin-link">Admin</a>
+                        <a href="/admin" class="admin-link">@L["Nav_Admin"]</a>
                     }
                     <div class="profile-dropdown" @onfocusout="CloseDropdownDelayed">
                         <button class="profile-btn" @onclick="ToggleDropdown" @onclick:stopPropagation="true">
@@ -29,13 +31,13 @@
                         {
                             <div class="dropdown-menu">
                                 <a href="/settings" class="dropdown-item" @onclick="CloseDropdown">
-                                    <span class="dropdown-icon">⚙️</span> Settings
+                                    <span class="dropdown-icon">⚙️</span> @L["Nav_Settings"]
                                 </a>
                                 <a href="/settings/favorites" class="dropdown-item" @onclick="CloseDropdown">
-                                    <span class="dropdown-icon">⭐</span> Favorites
+                                    <span class="dropdown-icon">⭐</span> @L["Nav_Favorites"]
                                 </a>
                                 <a class="dropdown-item" @onclick="SignOut">
-                                    <span class="dropdown-icon">🚪</span> Sign Out
+                                    <span class="dropdown-icon">🚪</span> @L["Nav_SignOut"]
                                 </a>
                             </div>
                         }
@@ -43,31 +45,41 @@
                 }
                 else
                 {
-                    <a href="/signin">Sign In</a>
-                    <a href="/signup">Sign Up</a>
+                    <a href="/signin">@L["Nav_SignIn"]</a>
+                    <a href="/signup">@L["Nav_SignUp"]</a>
                 }
+
+                <div class="lang-picker">
+                    <select class="lang-select" @onchange="OnLanguageChanged">
+                        <option value="en" selected="@(LangState.CurrentLanguageCode == "en")">EN – English</option>
+                        <option value="fr" selected="@(LangState.CurrentLanguageCode == "fr")">FR – Français</option>
+                        <option value="ru" selected="@(LangState.CurrentLanguageCode == "ru")">RU – Русский</option>
+                    </select>
+                </div>
             </nav>
         </div>
     </header>
 
-    <main class="app-main">
+    <main class="app-main" @key="renderKey">
         @Body
     </main>
 
     <footer class="app-footer">
-        <p>&copy; @DateTime.Now.Year Podium. Predict & Win.</p>
+        <p>&copy; @DateTime.Now.Year Podium. @L["Footer_Copyright"]</p>
     </footer>
 </div>
 
 @code {
     private bool showProfileDropdown = false;
     private System.Timers.Timer? closeTimer;
+    private int renderKey;
 
     protected override async Task OnInitializedAsync()
     {
         AuthState.OnAuthStateChanged += StateHasChanged;
         AdminState.OnAdminStateChanged += StateHasChanged;
-        
+        LangState.OnLanguageChanged += OnLangChanged;
+
         if (!AdminState.IsInitialized && AuthState.IsAuthenticated)
         {
             await AdminState.InitializeAsync();
@@ -101,6 +113,31 @@
         closeTimer.Start();
     }
 
+    private void OnLangChanged()
+    {
+        renderKey++;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async Task OnLanguageChanged(ChangeEventArgs e)
+    {
+        var code = e.Value?.ToString();
+        if (!string.IsNullOrEmpty(code) && code != LangState.CurrentLanguageCode)
+            await ChangeLanguage(code);
+    }
+
+    private async Task ChangeLanguage(string code)
+    {
+        if (LangState.CurrentLanguageCode == code)
+            return;
+        await LangState.SetLanguageAsync(code);
+        try { await JSRuntime.InvokeVoidAsync("podiumCulture.set", code); } catch { }
+
+        // In MAUI Blazor Hybrid forceLoad destroys the WebView; use soft navigation instead
+        var isWasm = OperatingSystem.IsBrowser();
+        Navigation.NavigateTo(Navigation.Uri, forceLoad: isWasm);
+    }
+
     private async Task SignOut()
     {
         showProfileDropdown = false;
@@ -112,6 +149,7 @@
     {
         AuthState.OnAuthStateChanged -= StateHasChanged;
         AdminState.OnAdminStateChanged -= StateHasChanged;
+        LangState.OnLanguageChanged -= OnLangChanged;
         closeTimer?.Dispose();
     }
 }

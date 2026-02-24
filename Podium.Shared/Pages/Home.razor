@@ -5,6 +5,7 @@
 @inject AuthStateService AuthState
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
+@inject IStringLocalizer<Common> L
 
 <PageTitle>Podium - Predict & Win</PageTitle>
 
@@ -12,15 +13,15 @@
     @if (AuthState.IsAuthenticated)
     {
         <div class="welcome-section">
-            <h1>Welcome back, @AuthState.Username!</h1>
-            <p>Ready to make your predictions?</p>
+            <h1>@string.Format(L["Home_Welcome"], AuthState.Username)</h1>
+            <p>@L["Home_Subtitle"]</p>
         </div>
 
         @if (favoriteSeasons.Count > 0)
         {
             <div class="favorites-section">
                 <h2>
-                    <span><span class="card-icon">⭐</span> Your Favorite Seasons</span>
+                    <span><span class="card-icon">⭐</span> @L["Favorites_QuickAccess"]</span>
                 </h2>
                 <div class="favorites-quick-links">
                     @foreach (var favorite in favoriteSeasons)
@@ -36,47 +37,47 @@
 
         <div class="quick-actions">
             <a href="/disciplines" class="action-card">
-                <h3><span class="card-icon">🏆</span> Make Predictions</h3>
-                <p>Choose a discipline and predict the podium</p>
+                <h3><span class="card-icon">🏆</span> @L["Nav_MakePredictions"]</h3>
+                <p>@L["Home_MakePredictions_Desc"]</p>
             </a>
 
             <a href="/my-predictions" class="action-card">
-                <h3><span class="card-icon">📊</span> My Predictions</h3>
-                <p>View your predictions and results</p>
+                <h3><span class="card-icon">📊</span> @L["Nav_MyPredictions"]</h3>
+                <p>@L["Home_MyPredictions_Desc"]</p>
             </a>
 
             <a href="/leaderboard" class="action-card">
-                <h3><span class="card-icon">🏅</span> Leaderboard</h3>
-                <p>See how you rank against others</p>
+                <h3><span class="card-icon">🏅</span> @L["Nav_Leaderboard"]</h3>
+                <p>@L["Home_Leaderboard_Desc"]</p>
             </a>
         </div>
     }
     else
     {
         <div class="hero-section">
-            <h1>Predict the Podium</h1>
-            <p class="lead">Compete with friends. Predict race winners. Climb the leaderboard.</p>
-            
+            <h1>@L["Home_Hero_Title"]</h1>
+            <p class="lead">@L["Home_Hero_Lead"]</p>
+
             <div class="cta-buttons">
-                <a href="/signup" class="btn btn-primary btn-lg">Get Started</a>
-                <a href="/signin" class="btn btn-outline btn-lg">Sign In</a>
+                <a href="/signup" class="btn btn-primary btn-lg">@L["Home_GetStarted"]</a>
+                <a href="/signin" class="btn btn-outline btn-lg">@L["Nav_SignIn"]</a>
             </div>
         </div>
 
         <div class="features">
             <div class="feature-card">
-                <h3><span class="card-icon">🏁</span> Multiple Disciplines</h3>
-                <p>From Formula 1 to other motorsports and beyond</p>
+                <h3><span class="card-icon">🏁</span> @L["Home_Feature1_Title"]</h3>
+                <p>@L["Home_Feature1_Desc"]</p>
             </div>
 
             <div class="feature-card">
-                <h3><span class="card-icon">🎯</span> Simple Predictions</h3>
-                <p>Just pick your top 3 for each event</p>
+                <h3><span class="card-icon">🎯</span> @L["Home_Feature2_Title"]</h3>
+                <p>@L["Home_Feature2_Desc"]</p>
             </div>
 
             <div class="feature-card">
-                <h3><span class="card-icon">🏆</span> Compete & Win</h3>
-                <p>Earn points and climb the leaderboard</p>
+                <h3><span class="card-icon">🏆</span> @L["Home_Feature3_Title"]</h3>
+                <p>@L["Home_Feature3_Desc"]</p>
             </div>
         </div>
     }

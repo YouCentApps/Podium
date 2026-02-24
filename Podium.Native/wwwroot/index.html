@@ -16,6 +16,21 @@
 
     <div id="app">Loading...</div>
 
+    <script>
+        // Match the Web project's podiumCulture helper so shared Blazor code
+        // can call it without errors.  In MAUI the real persistence happens
+        // through Preferences/localStorage, but this keeps JS interop safe.
+        window.podiumCulture = {
+            get: function () {
+                try { return window.localStorage.getItem('podium_language') || 'en'; }
+                catch { return 'en'; }
+            },
+            set: function (value) {
+                try { window.localStorage.setItem('podium_language', value); }
+                catch { }
+            }
+        };
+    </script>
     <script src="_framework/blazor.webview.js" autostart="false"></script>
 
 </body>

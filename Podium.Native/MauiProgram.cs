@@ -2,6 +2,7 @@
 using Podium.Shared.Services.Api;
 using Podium.Shared.Services.State;
 using Podium.Shared.Services.Configuration;
+using System.Globalization;
 
 namespace Podium.Native
 {
@@ -22,7 +23,7 @@ namespace Podium.Native
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
             builder.Logging.AddDebug();
-            
+
             // Development configuration
             var appConfig = new AppConfiguration 
             { 
@@ -40,12 +41,28 @@ namespace Podium.Native
 
             builder.Services.AddSingleton<IAppConfiguration>(appConfig);
 
+            // Localization - resources are co-located with their marker classes, no ResourcesPath needed
+            builder.Services.AddLocalization();
+
+            // Bootstrap culture from stored preference before services are resolved
+            var storedLanguage = Microsoft.Maui.Storage.Preferences.Default.Get("podium_language", "en");
+            var culture = new CultureInfo(storedLanguage);
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
             // Add state management with storage first (needed by message handler)
-            builder.Services.AddScoped<IStorageService, BrowserStorageService>();
+            // Use MAUI Preferences so startup bootstrap and runtime share the same store
+            builder.Services.AddScoped<IStorageService, PreferencesStorageService>();
             builder.Services.AddScoped<AuthStateService>(sp =>
             {
                 var storageService = sp.GetRequiredService<IStorageService>();
                 return new AuthStateService(storageService);
+            });
+
+            builder.Services.AddScoped<LanguageStateService>(sp =>
+            {
+                var storageService = sp.GetRequiredService<IStorageService>();
+                return new LanguageStateService(storageService);
             });
 
             // Register the authentication message handler
@@ -57,7 +74,7 @@ namespace Podium.Native
                 var config = sp.GetRequiredService<IAppConfiguration>();
                 var authHandler = sp.GetRequiredService<AuthenticationMessageHandler>();
                 authHandler.InnerHandler = new HttpClientHandler();
-                
+
                 return new HttpClient(authHandler) { BaseAddress = new Uri(config.ApiBaseUrl) };
             });
 

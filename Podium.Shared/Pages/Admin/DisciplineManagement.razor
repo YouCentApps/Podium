@@ -7,6 +7,7 @@
 @inject AdminStateService AdminState
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
+@inject IStringLocalizer<AdminRes> L
 
 <PageTitle>Manage Disciplines - Admin</PageTitle>
 
@@ -18,7 +19,7 @@
 
     @if (loading)
     {
-        <div class="loading">Loading disciplines...</div>
+        <div class="loading">@L["Admin_Loading"]</div>
     }
     else
     {
@@ -32,25 +33,25 @@
         @if (showForm)
         {
             <div class="admin-form">
-                <h3>@(editingDiscipline == null ? "Create" : "Edit") Discipline</h3>
+                <h3>@(editingDiscipline == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) Discipline</h3>
                 <div class="form-group">
-                    <label>Name:</label>
+                    <label>@L["Admin_Label_Name"]</label>
                     <input type="text" class="form-control" @bind="formName" placeholder="e.g., Single-Seater Racing" />
                 </div>
                 <div class="form-group">
-                    <label>Display Name:</label>
+                    <label>@L["Admin_Label_DisplayName"]</label>
                     <input type="text" class="form-control" @bind="formDisplayName" placeholder="e.g., Formula Racing" />
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" @bind="formIsActive" />
-                        Active
+                        @L["Admin_Label_Active"]
                     </label>
                 </div>
                 <div class="form-actions">
-                    <button class="btn btn-secondary" @onclick="CancelForm">Cancel</button>
+                    <button class="btn btn-secondary" @onclick="CancelForm">@L["Admin_Btn_Cancel"]</button>
                     <button class="btn btn-primary" @onclick="SaveDiscipline" disabled="@saving">
-                        @(saving ? "Saving..." : "Save")
+                        @(saving ? L["Admin_Btn_Saving"].Value : L["Admin_Btn_Save"].Value)
                     </button>
                 </div>
                 @if (!string.IsNullOrEmpty(formError))
@@ -64,11 +65,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Display Name</th>
-                        <th>Status</th>
-                        <th>Created</th>
-                        <th>Actions</th>
+                        <th>@L["Admin_Col_Name"]</th>
+                        <th>@L["Admin_Col_DisplayName"]</th>
+                        <th>@L["Admin_Col_Status"]</th>
+                        <th>@L["Admin_Col_Created"]</th>
+                        <th>@L["Admin_Col_Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,13 +80,13 @@
                             <td>@discipline.DisplayName</td>
                             <td>
                                 <span class="badge @(discipline.IsActive ? "badge-success" : "badge-inactive")">
-                                    @(discipline.IsActive ? "Active" : "Inactive")
+                                    @(discipline.IsActive ? L["Admin_Status_Active"].Value : L["Admin_Status_Inactive"].Value)
                                 </span>
                             </td>
                             <td>@discipline.CreatedDate.ToShortDateString()</td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" @onclick="() => EditDiscipline(discipline)">Edit</button>
-                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(discipline)">Delete</button>
+                                <button class="btn btn-sm btn-secondary" @onclick="() => EditDiscipline(discipline)">@L["Admin_Btn_Edit"]</button>
+                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(discipline)">@L["Admin_Btn_Delete"]</button>
                             </td>
                         </tr>
                     }

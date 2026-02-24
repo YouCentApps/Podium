@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Settings_Title" xml:space="preserve"><value>Настройки</value></data>
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Управляйте настройками аккаунта и безопасностью</value></data>
+  <data name="Settings_SignInRequired" xml:space="preserve"><value>Войдите для доступа к настройкам.</value></data>
+  <data name="Settings_UpdateName_Title" xml:space="preserve"><value>Изменить отображаемое имя</value></data>
+  <data name="Settings_UpdateName_Desc" xml:space="preserve"><value>Измените имя, видимое в таблицах лидеров и прогнозах</value></data>
+  <data name="Settings_AuthMethod_Title" xml:space="preserve"><value>Способ входа</value></data>
+  <data name="Settings_AuthMethod_Desc" xml:space="preserve"><value>Выберите способ входа: пароль, код на почту или оба</value></data>
+  <data name="Settings_UpdatePassword_Title" xml:space="preserve"><value>Изменить пароль</value></data>
+  <data name="Settings_UpdatePassword_Desc" xml:space="preserve"><value>Измените пароль аккаунта</value></data>
+  <data name="Settings_UpdateEmail_Title" xml:space="preserve"><value>Изменить email</value></data>
+  <data name="Settings_UpdateEmail_Desc" xml:space="preserve"><value>Измените адрес электронной почты для входа и уведомлений</value></data>
+  <data name="Settings_Favorites_Title" xml:space="preserve"><value>Любимые сезоны</value></data>
+  <data name="Settings_Favorites_Desc" xml:space="preserve"><value>Управляйте любимыми сезонами для быстрого доступа</value></data>
+  <data name="Settings_Language_Title" xml:space="preserve"><value>Язык</value></data>
+  <data name="Settings_Language_Desc" xml:space="preserve"><value>Изменить язык интерфейса</value></data>
+  <data name="LangSettings_Title" xml:space="preserve"><value>Настройки языка</value></data>
+  <data name="LangSettings_Subtitle" xml:space="preserve"><value>Выберите предпочитаемый язык. Страница перезагрузится для применения.</value></data>
+  <data name="LangSettings_Current" xml:space="preserve"><value>Текущий язык:</value></data>
+  <data name="LangSettings_Btn_Select" xml:space="preserve"><value>Выбрать</value></data>
+  <data name="LangSettings_Btn_Selected" xml:space="preserve"><value>✓ Выбрано</value></data>
+  <data name="LangSettings_Saving" xml:space="preserve"><value>Применение...</value></data>
+  <data name="UpdateName_Title" xml:space="preserve"><value>Изменить отображаемое имя</value></data>
+  <data name="UpdateName_Subtitle" xml:space="preserve"><value>Измените имя, видимое в таблицах лидеров и прогнозах</value></data>
+  <data name="UpdateName_CurrentName" xml:space="preserve"><value>Текущее имя:</value></data>
+  <data name="UpdateName_NewName" xml:space="preserve"><value>Новое отображаемое имя</value></data>
+  <data name="UpdateName_Verify_Choose" xml:space="preserve"><value>Выберите способ подтверждения личности:</value></data>
+  <data name="UpdateName_Verify_Password" xml:space="preserve"><value>Пароль</value></data>
+  <data name="UpdateName_Verify_EmailCode" xml:space="preserve"><value>Код на почту</value></data>
+  <data name="UpdateName_Btn_Update" xml:space="preserve"><value>Обновить имя</value></data>
+  <data name="UpdateName_Btn_Updating" xml:space="preserve"><value>Обновление...</value></data>
+  <data name="ManageFavorites_Title" xml:space="preserve"><value>Управление любимыми сезонами</value></data>
+  <data name="ManageFavorites_Subtitle" xml:space="preserve"><value>Выберите до 5 любимых сезонов для быстрого доступа</value></data>
+  <data name="ManageFavorites_Current" xml:space="preserve"><value>Ваши любимые сезоны ({0}/5)</value></data>
+  <data name="ManageFavorites_None" xml:space="preserve"><value>У вас пока нет любимых сезонов. Просмотрите сезоны и добавьте любимые!</value></data>
+  <data name="ManageFavorites_Add_Title" xml:space="preserve"><value>Добавить любимый сезон</value></data>
+  <data name="ManageFavorites_Add_Desc" xml:space="preserve"><value>Просмотрите дисциплины и серии, чтобы найти сезоны для добавления.</value></data>
+  <data name="ManageFavorites_Btn_Remove" xml:space="preserve"><value>Удалить</value></data>
+  <data name="ManageFavorites_Btn_Add" xml:space="preserve"><value>Добавить в избранное</value></data>
+  <data name="ManageFavorites_Btn_Adding" xml:space="preserve"><value>Добавление...</value></data>
+  <data name="ManageFavorites_SelectDiscipline" xml:space="preserve"><value>Выберите дисциплину</value></data>
+  <data name="ManageFavorites_SelectSeries" xml:space="preserve"><value>Выберите серию</value></data>
+  <data name="ManageFavorites_SelectSeason" xml:space="preserve"><value>Выберите сезон</value></data>
+  <data name="ManageFavorites_MaxReached" xml:space="preserve"><value>Достигнут максимум — 5 любимых сезонов.</value></data>
+  <data name="UpdatePassword_Title" xml:space="preserve"><value>Изменить пароль</value></data>
+  <data name="UpdateEmail_Title" xml:space="preserve"><value>Изменить email</value></data>
+  <data name="SignInSettings_Title" xml:space="preserve"><value>Способ входа</value></data>
+  <data name="SignInSettings_Subtitle" xml:space="preserve"><value>Выберите способ входа в Podium</value></data>
+  <data name="UpdatePassword_Setup_Title" xml:space="preserve"><value>Установить пароль</value></data>
+  <data name="UpdatePassword_Setup_Desc" xml:space="preserve"><value>Создать пароль для вашего аккаунта</value></data>
+  <data name="UpdateEmail_Setup_Title" xml:space="preserve"><value>Установить email</value></data>
+  <data name="UpdateEmail_Setup_Desc" xml:space="preserve"><value>Добавить электронную почту к аккаунту</value></data>
+  <data name="UpdateEmail_CurrentEmail" xml:space="preserve"><value>Текущий email:</value></data>
+  <data name="ManageFavorites_SignInRequired" xml:space="preserve"><value>Войдите для управления избранными сезонами.</value></data>
+  <data name="ManageFavorites_NoSeasons" xml:space="preserve"><value>Нет доступных сезонов для этой серии.</value></data>
+  <data name="ManageFavorites_AlreadyFavorite" xml:space="preserve"><value>Уже в избранном</value></data>
+</root>

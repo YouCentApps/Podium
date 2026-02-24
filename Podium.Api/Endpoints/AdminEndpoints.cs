@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
+using Podium.Shared;
 using Podium.Shared.Services.Data;
 using Podium.Shared.Services.Business;
 using Podium.Shared.Models;
@@ -35,14 +37,15 @@ public static class AdminEndpoints
         group.MapPost("/series/{seriesId}/seasons/{seasonId}/set-active", async (
             string seriesId,
             string seasonId,
-            [FromServices] ISeasonRepository seasonRepo) =>
+            [FromServices] ISeasonRepository seasonRepo,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var success = await seasonRepo.SetActiveSeasonAsync(seriesId, seasonId);
-            
+
             if (!success)
-                return Results.BadRequest(new { error = "Failed to set active season. Season may not exist." });
-            
-            return Results.Ok(new { message = "Season activated successfully. Other seasons in this series have been deactivated." });
+                return Results.BadRequest(new { error = localizer["Admin_SetActiveFailed"].Value });
+
+            return Results.Ok(new { message = localizer["Admin_SetActiveSuccess"].Value });
         })
         .RequireAdmin()
         .WithName("SetActiveSeason");

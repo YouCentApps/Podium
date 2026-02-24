@@ -6,27 +6,28 @@
 @inject AdminStateService AdminState
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
+@inject IStringLocalizer<AdminRes> L
 
 <PageTitle>User Details - Admin</PageTitle>
 
 <div class="admin-container">
     @if (loading)
     {
-        <div class="loading">Loading user details...</div>
+        <div class="loading">@L["Admin_Loading"]</div>
     }
     else if (user == null)
     {
         <div class="admin-error">
-            <h2>User Not Found</h2>
-            <p>The requested user could not be found.</p>
-            <button class="btn btn-primary" @onclick="GoBack">Back to Users</button>
+            <h2>@L["Admin_User_NotFound"]</h2>
+            <p>@L["Admin_User_NotFound_Desc"]</p>
+            <button class="btn btn-primary" @onclick="GoBack">@L["Admin_Btn_BackToUsers"]</button>
         </div>
     }
     else
     {
         <div class="admin-header">
             <div>
-                <button class="btn btn-outline" @onclick="GoBack">&larr; Back to Users</button>
+                <button class="btn btn-outline" @onclick="GoBack">&larr; @L["Admin_Btn_BackToUsers"]</button>
                 <h1><span style="font-size: 1.2em;">&#128100;</span> @user.Username</h1>
                 <p class="user-email">@user.Email</p>
             </div>
@@ -50,7 +51,7 @@
                 <div class="detail-row">
                     <span class="detail-label">Status:</span>
                     <span class="badge @(user.IsActive ? "badge-success" : "badge-inactive")">
-                        @(user.IsActive ? "Active" : "Inactive")
+                        @(user.IsActive ? L["Admin_Status_Active"].Value : L["Admin_Status_Inactive"].Value)
                     </span>
                 </div>
                 <div class="detail-row">
@@ -63,7 +64,7 @@
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">Last Login:</span>
-                    <span class="detail-value">@(user.LastLoginDate?.ToString("MMMM dd, yyyy HH:mm") ?? "Never")</span>
+                    <span class="detail-value">@(user.LastLoginDate?.ToString("MMMM dd, yyyy HH:mm") ?? L["Admin_Never"].Value)</span>
                 </div>
             </div>
 
