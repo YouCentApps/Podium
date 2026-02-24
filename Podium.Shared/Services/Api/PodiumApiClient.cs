@@ -7,9 +7,9 @@ namespace Podium.Shared.Services.Api;
 public interface IPodiumApiClient
 {
     // Authentication
-    Task<ApiResponse<RegisterVerificationResponse>> SendRegistrationVerificationAsync(string email, string username, string password, string preferredAuthMethod);
+    Task<ApiResponse<RegisterVerificationResponse>> SendRegistrationVerificationAsync(string email, string username, string password, string preferredAuthMethod, string languageCode);
     Task<ApiResponse<RegisterResponse>> VerifyRegistrationAsync(string tempUserId, string otpCode);
-    Task<ApiResponse<RegisterResponse>> RegisterAsync(string email, string username, string password, string preferredAuthMethod);
+    Task<ApiResponse<RegisterResponse>> RegisterAsync(string email, string username, string password, string preferredAuthMethod, string languageCode);
     Task<ApiResponse<SendOtpResponse>> SendOtpAsync(string emailOrUsername);
     Task<ApiResponse<AuthResponse>> VerifyOtpAsync(string email, string otpCode);
     Task<ApiResponse<AuthResponse>> SignInAsync(string emailOrUsername, string password);
@@ -132,6 +132,11 @@ public interface IPodiumApiClient
     Task<ApiResponse<MessageResponse>> ConfirmEmailUpdateAsync(ConfirmEmailUpdateRequest request);
     Task<ApiResponse<MessageResponse>> SendPasswordSetupOtpAsync();
 
+    // Language
+    Task<ApiResponse<List<Language>>> GetLanguagesAsync();
+    Task<ApiResponse<MessageResponse>> UpdateMyLanguageAsync(string languageCode);
+    Task<ApiResponse<UserLanguageResponse>> GetMyLanguageAsync();
+
     // Favorite Seasons
     Task<ApiResponse<List<FavoriteSeason>>> GetFavoriteSeasonsAsync();
     Task<ApiResponse<MessageResponse>> AddFavoriteSeasonAsync(string seasonId, string seasonName, string seriesName, int year);
@@ -149,10 +154,10 @@ public class PodiumApiClient : IPodiumApiClient
     }
 
     // Authentication
-    public async Task<ApiResponse<RegisterVerificationResponse>> SendRegistrationVerificationAsync(string email, string username, string password, string preferredAuthMethod)
+    public async Task<ApiResponse<RegisterVerificationResponse>> SendRegistrationVerificationAsync(string email, string username, string password, string preferredAuthMethod, string languageCode)
     {
         return await PostAsync<RegisterVerificationResponse>("/api/auth/register/send-verification", 
-            new { email, username, password, preferredAuthMethod });
+            new { email, username, password, preferredAuthMethod, languageCode });
     }
 
     public async Task<ApiResponse<RegisterResponse>> VerifyRegistrationAsync(string tempUserId, string otpCode)
@@ -161,10 +166,10 @@ public class PodiumApiClient : IPodiumApiClient
             new { tempUserId, otpCode });
     }
 
-    public async Task<ApiResponse<RegisterResponse>> RegisterAsync(string email, string username, string password, string preferredAuthMethod)
+    public async Task<ApiResponse<RegisterResponse>> RegisterAsync(string email, string username, string password, string preferredAuthMethod, string languageCode)
     {
         return await PostAsync<RegisterResponse>("/api/auth/register", 
-            new { email, username, password, preferredAuthMethod });
+            new { email, username, password, preferredAuthMethod, languageCode });
     }
 
     public async Task<ApiResponse<SendOtpResponse>> SendOtpAsync(string emailOrUsername)
@@ -638,6 +643,22 @@ public class PodiumApiClient : IPodiumApiClient
         return await PostAsync<MessageResponse>("/api/profile/password/send-otp", new { });
     }
 
+    // Language
+    public async Task<ApiResponse<List<Language>>> GetLanguagesAsync()
+    {
+        return await GetAsync<List<Language>>("/api/profile/languages");
+    }
+
+    public async Task<ApiResponse<MessageResponse>> UpdateMyLanguageAsync(string languageCode)
+    {
+        return await PostAsync<MessageResponse>("/api/profile/language", new { languageCode });
+    }
+
+    public async Task<ApiResponse<UserLanguageResponse>> GetMyLanguageAsync()
+    {
+        return await GetAsync<UserLanguageResponse>("/api/profile/language");
+    }
+
     // Favorite Seasons
     public async Task<ApiResponse<List<FavoriteSeason>>> GetFavoriteSeasonsAsync()
     {
@@ -788,7 +809,7 @@ public record RegisterVerificationResponse(string TempUserId, string Message);
 public record RegisterResponse(string UserId, string Message);
 public record SendOtpResponse(string Message, string Email);
 public record MessageResponse(string Message);
-public record AuthResponse(string UserId, string Username, string SessionId, string Message);
+public record AuthResponse(string UserId, string Username, string SessionId, string? LanguageCode, string Message);
 public record PredictionResponse(string Message, Prediction Prediction);
 public record AdminStatusResponse(bool IsAdmin, bool CanManageAdmins);
 
@@ -850,3 +871,6 @@ public record ConfirmEmailUpdateRequest(string NewEmail, string OtpCode);
 
 // Favorite Season DTOs
 public record CheckFavoriteResponse(bool IsFavorite);
+
+// Language DTOs
+public record UserLanguageResponse(string LanguageCode);

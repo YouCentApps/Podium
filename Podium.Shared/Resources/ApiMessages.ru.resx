@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Auth_UserNotFound" xml:space="preserve"><value>Пользователь не найден. Пожалуйста, зарегистрируйтесь.</value></data>
+  <data name="Auth_EmailCodeDisabled" xml:space="preserve"><value>Вход по коду на почту не включён для этого аккаунта. Используйте пароль.</value></data>
+  <data name="Auth_NoEmail" xml:space="preserve"><value>К этому аккаунту не привязан email. Используйте пароль.</value></data>
+  <data name="Auth_FailedToGenerateCode" xml:space="preserve"><value>Не удалось сгенерировать код. Пожалуйста, попробуйте снова.</value></data>
+  <data name="Auth_InvalidOtp" xml:space="preserve"><value>Недействительный или просроченный код подтверждения.</value></data>
+  <data name="Auth_InvalidCredentials" xml:space="preserve"><value>Неверный email/имя пользователя или пароль.</value></data>
+  <data name="Auth_PasswordNotEnabled" xml:space="preserve"><value>Вход по паролю не включён для этого аккаунта.</value></data>
+  <data name="Auth_SessionExpired" xml:space="preserve"><value>Сессия истекла или недействительна. Пожалуйста, войдите снова.</value></data>
+  <data name="Auth_DbError" xml:space="preserve"><value>Произошла ошибка базы данных. Пожалуйста, попробуйте снова.</value></data>
+  <data name="Auth_OtpSent" xml:space="preserve"><value>Код отправлен на почту</value></data>
+  <data name="Auth_RegistrationSuccess" xml:space="preserve"><value>Регистрация прошла успешно</value></data>
+  <data name="Auth_VerificationSent" xml:space="preserve"><value>Код подтверждения отправлен на вашу почту</value></data>
+  <data name="Auth_SignOutSuccess" xml:space="preserve"><value>Выход выполнен успешно</value></data>
+  <data name="Reg_UsernameTaken" xml:space="preserve"><value>Имя пользователя уже занято. Пожалуйста, выберите другое.</value></data>
+  <data name="Reg_EmailTaken" xml:space="preserve"><value>Email уже зарегистрирован.</value></data>
+  <data name="Reg_VerificationFailed" xml:space="preserve"><value>Недействительный или просроченный код подтверждения.</value></data>
+  <data name="Reg_Expired" xml:space="preserve"><value>Сессия регистрации истекла. Пожалуйста, начните регистрацию заново.</value></data>
+  <data name="Reg_Failed" xml:space="preserve"><value>Регистрация не удалась. Пожалуйста, попробуйте снова.</value></data>
+  <data name="Reg_PendingFailed" xml:space="preserve"><value>Не удалось создать регистрацию. Пожалуйста, попробуйте снова.</value></data>
+  <data name="Reg_CodeFailed" xml:space="preserve"><value>Не удалось сгенерировать код. Пожалуйста, попробуйте снова.</value></data>
+  <data name="Val_UsernameInvalid" xml:space="preserve"><value>Недопустимое имя пользователя. Должно быть 3-50 символов: только латинские буквы, цифры и пробелы.</value></data>
+  <data name="Val_PasswordInvalid" xml:space="preserve"><value>Недопустимый пароль. Должен быть 6-100 символов, без пробелов, только латиница/цифры/спецсимволы.</value></data>
+  <data name="Val_EmailInvalid" xml:space="preserve"><value>Недопустимый адрес email. Введите действительный email.</value></data>
+  <data name="Profile_NotFound" xml:space="preserve"><value>Пользователь не найден</value></data>
+  <data name="Profile_UsernameUpdated" xml:space="preserve"><value>Имя пользователя успешно обновлено</value></data>
+  <data name="Profile_UsernameTaken" xml:space="preserve"><value>Имя пользователя уже занято</value></data>
+  <data name="Profile_UpdateFailed" xml:space="preserve"><value>Не удалось обновить. Пожалуйста, попробуйте снова.</value></data>
+  <data name="Profile_InvalidAuthMethod" xml:space="preserve"><value>Недопустимый метод аутентификации</value></data>
+  <data name="Profile_AuthMethodUpdated" xml:space="preserve"><value>Метод аутентификации успешно обновлён</value></data>
+  <data name="Profile_PasswordUpdated" xml:space="preserve"><value>Пароль успешно обновлён</value></data>
+  <data name="Profile_EmailUpdated" xml:space="preserve"><value>Email успешно обновлён</value></data>
+  <data name="Profile_VerificationSent" xml:space="preserve"><value>Код подтверждения отправлен на новый email</value></data>
+  <data name="Profile_VerificationFailed" xml:space="preserve"><value>Проверка не прошла. Пожалуйста, попробуйте снова.</value></data>
+  <data name="Profile_LanguageUpdated" xml:space="preserve"><value>Язык успешно обновлён</value></data>
+  <data name="Profile_IdentityVerificationFailed" xml:space="preserve"><value>Проверка личности не прошла. Проверьте свои учётные данные.</value></data>
+  <data name="Profile_PasswordSetupSent" xml:space="preserve"><value>Код настройки пароля отправлен на почту</value></data>
+  <data name="Profile_PasswordsDoNotMatch" xml:space="preserve"><value>Пароли не совпадают</value></data>
+  <data name="Profile_PasswordRequired" xml:space="preserve"><value>Новый пароль обязателен</value></data>
+  <data name="Profile_NeedPasswordFirst" xml:space="preserve"><value>Сначала необходимо задать пароль перед включением входа по паролю</value></data>
+  <data name="Profile_NeedEmailFirst" xml:space="preserve"><value>Сначала необходимо добавить email перед включением входа по email</value></data>
+  <data name="Profile_OldPasswordRequired" xml:space="preserve"><value>Необходим текущий пароль</value></data>
+  <data name="Profile_OldPasswordIncorrect" xml:space="preserve"><value>Текущий пароль неверен</value></data>
+  <data name="Profile_OtpRequired" xml:space="preserve"><value>Для настройки пароля необходим код подтверждения</value></data>
+  <data name="Profile_NoEmailForSetup" xml:space="preserve"><value>Email не задан. Пожалуйста, сначала добавьте email.</value></data>
+  <data name="Profile_PasswordAuthDisabled" xml:space="preserve"><value>Вход по паролю не включён для вашего аккаунта. Используйте код, отправленный на почту.</value></data>
+  <data name="Profile_NoPasswordSet" xml:space="preserve"><value>Пароль не задан для вашего аккаунта. Используйте код, отправленный на почту.</value></data>
+  <data name="Profile_EmailAuthDisabled" xml:space="preserve"><value>Вход по коду email не включён для вашего аккаунта. Используйте пароль.</value></data>
+  <data name="Profile_NoEmailSet" xml:space="preserve"><value>Email не задан для вашего аккаунта. Используйте пароль.</value></data>
+  <data name="Profile_ProvidePasswordOrCode" xml:space="preserve"><value>Пожалуйста, предоставьте пароль или код подтверждения</value></data>
+  <data name="Profile_ProvidePassword" xml:space="preserve"><value>Пожалуйста, предоставьте пароль</value></data>
+  <data name="Profile_ProvideCode" xml:space="preserve"><value>Пожалуйста, предоставьте код подтверждения</value></data>
+  <data name="Profile_InvalidLanguage" xml:space="preserve"><value>Недопустимый код языка. Поддерживается: en, fr, ru</value></data>
+  <data name="Favorites_LimitReached" xml:space="preserve"><value>Максимум 5 любимых сезонов</value></data>
+  <data name="Favorites_AlreadyFavorited" xml:space="preserve"><value>Сезон уже в избранном</value></data>
+  <data name="Favorites_NotFound" xml:space="preserve"><value>Сезон не найден</value></data>
+  <data name="Favorites_AddFailed" xml:space="preserve"><value>Не удалось добавить сезон в избранное</value></data>
+  <data name="Favorites_Added" xml:space="preserve"><value>Сезон добавлен в избранное</value></data>
+  <data name="Favorites_RemoveFailed" xml:space="preserve"><value>Не удалось удалить сезон из избранного</value></data>
+  <data name="Favorites_Removed" xml:space="preserve"><value>Сезон удалён из избранного</value></data>
+  <data name="Admin_SetActiveFailed" xml:space="preserve"><value>Не удалось активировать сезон. Возможно, он не существует.</value></data>
+  <data name="Admin_SetActiveSuccess" xml:space="preserve"><value>Сезон успешно активирован. Другие сезоны этой серии деактивированы.</value></data>
+  <data name="Admin_Unauthorized" xml:space="preserve"><value>Требуется доступ администратора</value></data>
+  <data name="General_NotFound" xml:space="preserve"><value>Не найдено</value></data>
+  <data name="General_Failed" xml:space="preserve"><value>Операция не выполнена. Пожалуйста, попробуйте снова.</value></data>
+  <data name="General_Success" xml:space="preserve"><value>Операция выполнена успешно</value></data>
+  <data name="Email_Subject" xml:space="preserve"><value>Ваш код подтверждения YouCent Podium</value></data>
+  <data name="Email_Header" xml:space="preserve"><value>YouCent Podium</value></data>
+  <data name="Email_Title" xml:space="preserve"><value>Ваш код подтверждения</value></data>
+  <data name="Email_Body" xml:space="preserve"><value>Используйте этот код для входа в ваш аккаунт Podium:</value></data>
+  <data name="Email_Expiry" xml:space="preserve"><value>Код действителен 10 минут.</value></data>
+  <data name="Email_Ignore" xml:space="preserve"><value>Если вы не запрашивали этот код, просто проигнорируйте это письмо.</value></data>
+  <data name="Email_Automated" xml:space="preserve"><value>Это автоматическое сообщение, пожалуйста, не отвечайте на него.</value></data>
+  <data name="Email_Copyright" xml:space="preserve"><value>Все права защищены.</value></data>
+</root>

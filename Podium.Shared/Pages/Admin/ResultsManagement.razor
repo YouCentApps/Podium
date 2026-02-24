@@ -8,6 +8,7 @@
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
 @inject IJSRuntime JS
+@inject IStringLocalizer<AdminRes> L
 
 <PageTitle>Manage Results - Admin</PageTitle>
 
@@ -18,7 +19,7 @@
 
     @if (loading)
     {
-        <div class="loading">Loading events...</div>
+        <div class="loading">@L["Admin_Loading"]</div>
     }
     else
     {
@@ -93,7 +94,7 @@
                                 }
                                 else
                                 {
-                                    <span class="badge badge-inactive">Not Entered</span>
+                                    <span class="badge badge-inactive">@L["Admin_Status_Inactive"]</span>
                                 }
                             </td>
                             <td>
@@ -115,11 +116,11 @@
                                 @if (evt.Status == "Completed")
                                 {
                                     <button class="btn btn-sm btn-primary" @onclick="() => EnterOrEditResult(evt)">
-                                        @(hasResult ? "Edit" : "Enter") Result
+                                        @(hasResult ? L["Admin_Btn_Edit"].Value : L["Admin_Btn_Create"].Value) Result
                                     </button>
                                     @if (hasResult)
                                     {
-                                        <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(evt)">Delete</button>
+                                        <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(evt)">@L["Admin_Btn_Delete"]</button>
                                     }
                                 }
                                 else
@@ -163,7 +164,7 @@
     <div class="modal-overlay">
         <div class="modal-content" style="max-width: 700px;">
             <div class="modal-header">
-                <h3>@(isEditingResult ? "Edit" : "Enter") Result - @selectedEvent?.DisplayName</h3>
+                <h3>@(isEditingResult ? L["Admin_Btn_Edit"].Value : L["Admin_Btn_Create"].Value) Result - @selectedEvent?.DisplayName</h3>
             </div>
             <div class="modal-body">
                 @if (!string.IsNullOrEmpty(formError))
@@ -238,9 +239,9 @@
                 }
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" @onclick="CancelResultForm">Cancel</button>
+                <button class="btn btn-secondary" @onclick="CancelResultForm">@L["Admin_Btn_Cancel"]</button>
                 <button class="btn btn-primary" @onclick="SaveResult" disabled="@saving">
-                    @(saving ? "Saving..." : "Save Result")
+                    @(saving ? L["Admin_Btn_Saving"].Value : L["Admin_Btn_Save"].Value) Result
                 </button>
             </div>
         </div>

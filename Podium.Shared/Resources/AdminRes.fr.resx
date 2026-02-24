@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <!-- Partial translation - English fallback used for untranslated keys -->
+  <data name="Admin_Dashboard_Title" xml:space="preserve"><value>Tableau de bord Admin</value></data>
+  <data name="Admin_Dashboard_Subtitle" xml:space="preserve"><value>Gérez votre plateforme Podium</value></data>
+  <data name="Admin_NotAuthorized" xml:space="preserve"><value>Vous n'avez pas la permission d'accéder à cette zone.</value></data>
+  <data name="Admin_Loading" xml:space="preserve"><value>Chargement...</value></data>
+  <data name="Admin_AuthRequired" xml:space="preserve"><value>Authentification requise</value></data>
+  <data name="Admin_AuthRequired_Desc" xml:space="preserve"><value>Veuillez vous connecter pour accéder au tableau de bord admin.</value></data>
+  <data name="Admin_AccessDenied" xml:space="preserve"><value>Accès refusé</value></data>
+  <data name="Admin_BackToHome" xml:space="preserve"><value>Retour à l'accueil</value></data>
+  <data name="Admin_Disciplines_Desc" xml:space="preserve"><value>Gérer les catégories et disciplines sportives</value></data>
+  <data name="Admin_Series_Desc" xml:space="preserve"><value>Gérer les séries dans les disciplines</value></data>
+  <data name="Admin_Seasons_Desc" xml:space="preserve"><value>Gérer les saisons pour chaque série</value></data>
+  <data name="Admin_Competitors_Desc" xml:space="preserve"><value>Gérer les pilotes, coureurs et équipes</value></data>
+  <data name="Admin_Events_Desc" xml:space="preserve"><value>Gérer les courses et événements</value></data>
+  <data name="Admin_Results_Desc" xml:space="preserve"><value>Saisir et gérer les résultats des événements</value></data>
+  <data name="Admin_Users_Desc" xml:space="preserve"><value>Gérer les comptes utilisateurs</value></data>
+  <data name="Admin_Admins_Desc" xml:space="preserve"><value>Gérer les privilèges administrateur</value></data>
+  <data name="Admin_Status_Active" xml:space="preserve"><value>Actif</value></data>
+  <data name="Admin_Status_Inactive" xml:space="preserve"><value>Inactif</value></data>
+  <data name="Admin_Btn_Saving" xml:space="preserve"><value>Enregistrement...</value></data>
+  <data name="Admin_Col_Name" xml:space="preserve"><value>Nom</value></data>
+  <data name="Admin_Col_DisplayName" xml:space="preserve"><value>Nom d'affichage</value></data>
+  <data name="Admin_Col_Status" xml:space="preserve"><value>Statut</value></data>
+  <data name="Admin_Col_Created" xml:space="preserve"><value>Créé</value></data>
+  <data name="Admin_Col_Actions" xml:space="preserve"><value>Actions</value></data>
+  <data name="Admin_Label_Active" xml:space="preserve"><value>Actif</value></data>
+  <data name="Admin_Label_Name" xml:space="preserve"><value>Nom :</value></data>
+  <data name="Admin_Label_DisplayName" xml:space="preserve"><value>Nom d'affichage :</value></data>
+  <data name="Admin_Filter_AllDisciplines" xml:space="preserve"><value>Toutes les disciplines</value></data>
+  <data name="Admin_Filter_Discipline" xml:space="preserve"><value>Filtrer par discipline :</value></data>
+  <data name="Admin_Filter_Series" xml:space="preserve"><value>Filtrer par série :</value></data>
+  <data name="Admin_Filter_AllSeries" xml:space="preserve"><value>Toutes les séries</value></data>
+  <data name="Admin_User_NotFound" xml:space="preserve"><value>Utilisateur introuvable</value></data>
+  <data name="Admin_User_NotFound_Desc" xml:space="preserve"><value>L'utilisateur demandé est introuvable.</value></data>
+  <data name="Admin_Btn_BackToUsers" xml:space="preserve"><value>Retour aux utilisateurs</value></data>
+  <data name="Admin_Never" xml:space="preserve"><value>Jamais</value></data>
+</root>

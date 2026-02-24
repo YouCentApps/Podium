@@ -4,15 +4,17 @@
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
 @inject NavigationManager Navigation
+@inject IStringLocalizer<SettingsRes> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>Sign-in Method - Podium</PageTitle>
 
 <div class="settings-form-container">
-<a href="/settings" class="back-link">&lsaquo; Back to Settings</a>
-    
+<a href="/settings" class="back-link">&lsaquo; @LC["Btn_BackToSettings"]</a>
+
     <div class="settings-form-card">
-        <h2>Sign-in Method</h2>
-        <p class="subtitle">Choose how you want to sign in to Podium</p>
+        <h2>@L["SignInSettings_Title"]</h2>
+        <p class="subtitle">@L["SignInSettings_Subtitle"]</p>
 
         @if (!string.IsNullOrEmpty(errorMessage))
         {
@@ -26,7 +28,7 @@
 
         @if (isLoading && profile == null)
         {
-            <div class="loading">Loading...</div>
+            <div class="loading">@LC["Loading"]</div>
         }
         else if (profile != null)
         {

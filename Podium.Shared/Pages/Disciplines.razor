@@ -5,16 +5,18 @@
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
 @inject NavigationManager Navigation
+@inject IStringLocalizer<Predictions> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>Select Discipline - Podium</PageTitle>
 
 <div class="page-container">
-    <h1>Choose a Discipline</h1>
+    <h1>@L["Disciplines_Title"]</h1>
 
     @if (!AuthState.IsAuthenticated)
     {
         <div class="alert alert-warning">
-            Please <a href="/signin">sign in</a> to make predictions.
+            @L["Disciplines_SignInToPredict"]
         </div>
     }
 
@@ -22,8 +24,8 @@
     {
         <div class="favorites-section">
             <h2>
-                <span><span class="card-icon">⭐</span> Quick Access - Your Favorite Seasons</span>
-                <a href="/settings/favorites" class="manage-link">Manage</a>
+                <span><span class="card-icon">⭐</span> @LC["Favorites_QuickAccess"]</span>
+                <a href="/settings/favorites" class="manage-link">@LC["Favorites_Manage"]</a>
             </h2>
             <div class="favorites-quick-links">
                 @foreach (var favorite in favoriteSeasons)
@@ -40,7 +42,7 @@
     @if (isLoading)
     {
         <div class="loading-spinner">
-            <p>Loading disciplines...</p>
+            <p>@LC["Loading"]</p>
         </div>
     }
     else if (!string.IsNullOrEmpty(errorMessage))
@@ -50,7 +52,7 @@
     else if (disciplines.Count == 0)
     {
         <div class="alert alert-info">
-            No disciplines available at the moment. Check back later!
+            @L["Disciplines_None"]
         </div>
     }
     else
@@ -60,7 +62,7 @@
             {
                 <div class="sport-card" @onclick="() => SelectDiscipline(discipline.Id)">
                     <h3>@discipline.DisplayName</h3>
-                    <p>View series &rarr;</p>
+                    <p>@L["Disciplines_ViewSeries"]</p>
                 </div>
             }
         </div>
@@ -97,7 +99,7 @@
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to load disciplines.";
+                errorMessage = response.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)

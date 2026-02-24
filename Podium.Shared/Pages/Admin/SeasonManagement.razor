@@ -8,6 +8,7 @@
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
 @implements IDisposable
+@inject IStringLocalizer<AdminRes> L
 
 <PageTitle>Manage Seasons - Admin</PageTitle>
 
@@ -19,7 +20,7 @@
 
     @if (loading)
     {
-        <div class="loading">Loading seasons...</div>
+        <div class="loading">@L["Admin_Loading"]</div>
     }
     else
     {
@@ -44,7 +45,7 @@
         @if (showForm)
         {
             <div class="admin-form">
-                <h3>@(editingSeason == null ? "Create" : "Edit") Season</h3>
+                <h3>@(editingSeason == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) Season</h3>
                 
                 <div class="form-group">
                     <label>Discipline:</label>
@@ -91,7 +92,7 @@
                 <div class="form-group">
                     <label>
                         <input type="checkbox" @bind="formIsActive" />
-                        Active
+                        @L["Admin_Label_Active"]
                     </label>
                 </div>
 
@@ -102,9 +103,9 @@
                 </div>
 
                 <div class="form-actions">
-                    <button class="btn btn-secondary" @onclick="CancelForm">Cancel</button>
+                    <button class="btn btn-secondary" @onclick="CancelForm">@L["Admin_Btn_Cancel"]</button>
                     <button class="btn btn-primary" @onclick="SaveSeason" disabled="@saving">
-                        @(saving ? "Saving..." : "Save")
+                        @(saving ? L["Admin_Btn_Saving"].Value : L["Admin_Btn_Save"].Value)
                     </button>
                 </div>
                 @if (!string.IsNullOrEmpty(formError))
@@ -115,9 +116,9 @@
         }
 
         <div class="filter-section">
-            <label>Filter by Discipline:</label>
+            <label>@L["Admin_Filter_Discipline"]</label>
             <select class="form-control" @bind="selectedDisciplineFilter" @bind:after="OnDisciplineFilterChanged">
-                <option value="">All Disciplines</option>
+                <option value="">@L["Admin_Filter_AllDisciplines"]</option>
                 @foreach (var discipline in disciplines)
                 {
                     <option value="@discipline.Id">@discipline.DisplayName</option>
@@ -126,9 +127,9 @@
 
             @if (!string.IsNullOrEmpty(selectedDisciplineFilter))
             {
-                <label style="margin-left: 15px;">Filter by Series:</label>
+                <label style="margin-left: 15px;">@L["Admin_Filter_Series"]</label>
                 <select class="form-control" @bind="selectedSeriesFilter" @bind:after="FilterSeasons">
-                    <option value="">All Series</option>
+                    <option value="">@L["Admin_Filter_AllSeries"]</option>
                     @foreach (var series in filteredSeriesForFilter)
                     {
                         <option value="@series.Id">@series.DisplayName</option>
@@ -173,11 +174,11 @@
                             <td>
                                 @if (season.IsActive)
                                 {
-                                    <span class="badge badge-success">Active</span>
+                                    <span class="badge badge-success">@L["Admin_Status_Active"]</span>
                                 }
                                 else
                                 {
-                                    <span class="badge badge-inactive">Inactive</span>
+                                    <span class="badge badge-inactive">@L["Admin_Status_Inactive"]</span>
                                     <button class="btn btn-sm btn-primary" @onclick="() => SetActiveSeason(season)" style="margin-left: 5px;">
                                         Set Active
                                     </button>
@@ -209,8 +210,8 @@
                                 }
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" @onclick="() => EditSeason(season)">Edit</button>
-                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(season)">Delete</button>
+                                <button class="btn btn-sm btn-secondary" @onclick="() => EditSeason(season)">@L["Admin_Btn_Edit"]</button>
+                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(season)">@L["Admin_Btn_Delete"]</button>
                                 <button class="btn btn-sm btn-primary" @onclick="() => RecalculateStatistics(season)" 
                                         disabled="@(recalculatingSeasonId == season.Id)">
                                     @if (recalculatingSeasonId == season.Id)

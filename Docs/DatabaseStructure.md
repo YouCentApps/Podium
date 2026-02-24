@@ -206,6 +206,7 @@ Stores user accounts.
 | IsActive | bool | Whether account is active |
 | CreatedDate | DateTime | Account creation date |
 | LastLoginDate | DateTime? | Last login date |
+| LanguageCode | string | Preferred UI language ("en", "fr", "ru"). Defaults to "en" |
 
 **Example:**
 - PartitionKey: "e5f6g7"

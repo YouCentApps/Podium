@@ -3,11 +3,17 @@ using Podium.Shared.Services.Auth;
 using Podium.Shared.Services.Business;
 using Podium.Api.Endpoints;
 using Podium.Api.Services;
+using Microsoft.Extensions.Localization;
+using Podium.Shared;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddEndpointsApiExplorer();
+
+// Localization - resources are co-located with their marker classes in Podium.Shared, no ResourcesPath needed
+builder.Services.AddLocalization();
 
 // Configure CORS for web and mobile apps
 builder.Services.AddCors(options =>
@@ -60,13 +66,16 @@ var senderName = builder.Configuration["EmailSettings:SenderName"] ?? "Podium";
 
 if (!string.IsNullOrEmpty(smtpServer) && !string.IsNullOrEmpty(smtpUsername) && !string.IsNullOrEmpty(smtpPassword))
 {
-    builder.Services.AddScoped<IEmailService>(sp => 
-        new EmailService(smtpServer, smtpPort, smtpUsername, smtpPassword, senderEmail ?? smtpUsername, senderName));
-    Console.WriteLine("? Email service configured");
+    builder.Services.AddScoped<IEmailService>(sp =>
+    {
+        var localizer = sp.GetRequiredService<IStringLocalizer<ApiMessages>>();
+        return new EmailService(smtpServer, smtpPort, smtpUsername, smtpPassword, senderEmail ?? smtpUsername, senderName, localizer);
+    });
+    Console.WriteLine("✅ Email service configured");
 }
 else
 {
-    Console.WriteLine("? Email service not configured - OTP codes will be logged to console only");
+    Console.WriteLine("⚠️ Email service not configured - OTP codes will be logged to console only");
 }
 
 // Register repositories
@@ -93,17 +102,18 @@ builder.Services.AddScoped<IAuthenticationService>(sp =>
     var tableClientFactory = sp.GetRequiredService<ITableClientFactory>();
     var userRepository = sp.GetRequiredService<IUserRepository>();
     var emailService = sp.GetService<IEmailService>();
-    
+    var localizer = sp.GetRequiredService<IStringLocalizer<ApiMessages>>();
+
     Action<string, string>? emailCallback = null;
     if (emailService != null)
     {
-        emailCallback = (email, code) => 
+        emailCallback = (email, code) =>
         {
             _ = emailService.SendVerificationEmailAsync(email, code);
         };
     }
-    
-    return new AuthenticationService(tableClientFactory, userRepository, emailCallback);
+
+    return new AuthenticationService(tableClientFactory, userRepository, emailCallback, localizer);
 });
 
 builder.Services.AddScoped<IRegistrationService>(sp =>
@@ -111,17 +121,18 @@ builder.Services.AddScoped<IRegistrationService>(sp =>
     var userRepository = sp.GetRequiredService<IUserRepository>();
     var tableClientFactory = sp.GetRequiredService<ITableClientFactory>();
     var emailService = sp.GetService<IEmailService>();
-    
+    var localizer = sp.GetRequiredService<IStringLocalizer<ApiMessages>>();
+
     Action<string, string>? emailCallback = null;
     if (emailService != null)
     {
-        emailCallback = (email, code) => 
+        emailCallback = (email, code) =>
         {
             _ = emailService.SendVerificationEmailAsync(email, code);
         };
     }
-    
-    return new RegistrationService(userRepository, tableClientFactory, emailCallback);
+
+    return new RegistrationService(userRepository, tableClientFactory, emailCallback, localizer);
 });
 
 var app = builder.Build();
@@ -129,6 +140,14 @@ var app = builder.Build();
 // Configure the HTTP request pipeline
 app.UseHttpsRedirection();
 app.UseCors("AllowPodiumClients");
+
+// Enable request localization - reads Accept-Language header and sets CultureInfo for the request
+// Keep this list in sync with ProfileEndpoints.SupportedLanguages when adding new languages.
+var supportedCultures = ProfileEndpoints.SupportedLanguages.Select(l => l.Code).ToArray();
+app.UseRequestLocalization(new RequestLocalizationOptions()
+    .SetDefaultCulture("en")
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures));
 
 // Add a simple health check endpoint
 app.MapGet("/api/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow, environment = app.Environment.EnvironmentName }))

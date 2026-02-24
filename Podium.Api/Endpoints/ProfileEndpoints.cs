@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Podium.Api.Middleware;
+using Podium.Shared;
 using Podium.Shared.Models;
 using Podium.Shared.Services.Auth;
 using Podium.Shared.Services.Data;
@@ -9,6 +11,15 @@ namespace Podium.Api.Endpoints;
 
 public static class ProfileEndpoints
 {
+    // Single source of truth for supported languages.
+    // Add new entries here — validation and the GET /languages endpoint both use this list.
+    internal static readonly (string Code, string Name)[] SupportedLanguages =
+    [
+        ("en", "English"),
+        ("fr", "Français"),
+        ("ru", "Русский"),
+    ];
+
     public static void MapProfileEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/api/profile")
@@ -17,7 +28,8 @@ public static class ProfileEndpoints
         // Get current user's profile
         group.MapGet("/", async (
             HttpContext context,
-            [FromServices] IUserRepository userRepository) =>
+            [FromServices] IUserRepository userRepository,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var userId = context.GetUserId();
             if (string.IsNullOrEmpty(userId))
@@ -25,7 +37,7 @@ public static class ProfileEndpoints
 
             var user = await userRepository.GetUserByIdAsync(userId);
             if (user == null)
-                return Results.NotFound(new { error = "User not found" });
+                return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
             return Results.Ok(new UserProfileResponse(
                 user.UserId,
@@ -44,7 +56,8 @@ public static class ProfileEndpoints
             HttpContext context,
             [FromBody] UpdateUsernameRequest request,
             [FromServices] IUserRepository userRepository,
-            [FromServices] IAuthenticationService authService) =>
+            [FromServices] IAuthenticationService authService,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var userId = context.GetUserId();
             if (string.IsNullOrEmpty(userId))
@@ -52,30 +65,27 @@ public static class ProfileEndpoints
 
             var user = await userRepository.GetUserByIdAsync(userId);
             if (user == null)
-                return Results.NotFound(new { error = "User not found" });
+                return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
-            // Verify identity with password or OTP
-            var verified = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService);
+            var verified = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService, localizer);
             if (!verified.Success)
                 return Results.BadRequest(new { error = verified.Error });
 
-            // Validate username
-            var (usernameValid, usernameError) = InputValidator.ValidateUsername(request.NewUsername);
+            var (usernameValid, _) = InputValidator.ValidateUsername(request.NewUsername);
             if (!usernameValid)
-                return Results.BadRequest(new { error = usernameError });
+                return Results.BadRequest(new { error = localizer["Val_UsernameInvalid"].Value });
 
-            // Check if username is already taken
             var existingUser = await userRepository.GetUserByUsernameAsync(request.NewUsername);
             if (existingUser != null && existingUser.UserId != userId)
-                return Results.BadRequest(new { error = "Username already taken" });
+                return Results.BadRequest(new { error = localizer["Profile_UsernameTaken"].Value });
 
             user.Username = request.NewUsername;
             user.NormalizedUsername = InputValidator.NormalizeUsername(request.NewUsername);
             var success = await userRepository.UpdateUserAsync(user);
             if (!success)
-                return Results.BadRequest(new { error = "Failed to update username" });
+                return Results.BadRequest(new { error = localizer["Profile_UpdateFailed"].Value });
 
-            return Results.Ok(new { message = "Username updated successfully" });
+            return Results.Ok(new { message = localizer["Profile_UsernameUpdated"].Value });
         })
         .RequireAuth()
         .WithName("UpdateUsername");
@@ -85,7 +95,8 @@ public static class ProfileEndpoints
             HttpContext context,
             [FromBody] UpdateAuthMethodRequest request,
             [FromServices] IUserRepository userRepository,
-            [FromServices] IAuthenticationService authService) =>
+            [FromServices] IAuthenticationService authService,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var userId = context.GetUserId();
             if (string.IsNullOrEmpty(userId))
@@ -93,44 +104,41 @@ public static class ProfileEndpoints
 
             var user = await userRepository.GetUserByIdAsync(userId);
             if (user == null)
-                return Results.NotFound(new { error = "User not found" });
+                return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
-            // Validate new auth method
             var validMethods = new[] { "Email", "Password", "Both" };
             if (!validMethods.Contains(request.NewAuthMethod))
-                return Results.BadRequest(new { error = "Invalid auth method. Must be 'Email', 'Password', or 'Both'" });
+                return Results.BadRequest(new { error = localizer["Profile_InvalidAuthMethod"].Value });
 
-            // Check if user can switch to the new method
             var hasPassword = !string.IsNullOrEmpty(user.PasswordHash);
             var hasEmail = !string.IsNullOrEmpty(user.Email);
 
             if ((request.NewAuthMethod == "Password" || request.NewAuthMethod == "Both") && !hasPassword)
             {
-                return Results.BadRequest(new { 
-                    error = "You must set a password first before enabling password sign-in",
+                return Results.BadRequest(new {
+                    error = localizer["Profile_NeedPasswordFirst"].Value,
                     requiresPasswordSetup = true
                 });
             }
 
             if ((request.NewAuthMethod == "Email" || request.NewAuthMethod == "Both") && !hasEmail)
             {
-                return Results.BadRequest(new { 
-                    error = "You must set an email first before enabling email sign-in",
+                return Results.BadRequest(new {
+                    error = localizer["Profile_NeedEmailFirst"].Value,
                     requiresEmailSetup = true
                 });
             }
 
-            // Verify identity before changing auth method
-            var verified = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService);
+            var verified = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService, localizer);
             if (!verified.Success)
                 return Results.BadRequest(new { error = verified.Error });
 
             user.PreferredAuthMethod = request.NewAuthMethod;
             var success = await userRepository.UpdateUserAsync(user);
             if (!success)
-                return Results.BadRequest(new { error = "Failed to update auth method" });
+                return Results.BadRequest(new { error = localizer["Profile_UpdateFailed"].Value });
 
-            return Results.Ok(new { message = "Sign-in method updated successfully" });
+            return Results.Ok(new { message = localizer["Profile_AuthMethodUpdated"].Value });
         })
         .RequireAuth()
         .WithName("UpdateAuthMethod");
@@ -140,7 +148,8 @@ public static class ProfileEndpoints
             HttpContext context,
             [FromBody] UpdatePasswordRequest request,
             [FromServices] IUserRepository userRepository,
-            [FromServices] IAuthenticationService authService) =>
+            [FromServices] IAuthenticationService authService,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var userId = context.GetUserId();
             if (string.IsNullOrEmpty(userId))
@@ -148,45 +157,41 @@ public static class ProfileEndpoints
 
             var user = await userRepository.GetUserByIdAsync(userId);
             if (user == null)
-                return Results.NotFound(new { error = "User not found" });
+                return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
-            // Validate new password
             if (string.IsNullOrWhiteSpace(request.NewPassword) || request.NewPassword.Length < 6)
-                return Results.BadRequest(new { error = "Password must be at least 6 characters" });
+                return Results.BadRequest(new { error = localizer["Val_PasswordInvalid"].Value });
 
             var hasExistingPassword = !string.IsNullOrEmpty(user.PasswordHash);
 
             if (hasExistingPassword)
             {
-                // User has password, verify with old password
                 if (string.IsNullOrEmpty(request.OldPassword))
-                    return Results.BadRequest(new { error = "Current password is required" });
+                    return Results.BadRequest(new { error = localizer["Profile_OldPasswordRequired"].Value });
 
-                var verified = await VerifyIdentityAsync(user, request.OldPassword, null, authService);
+                var verified = await VerifyIdentityAsync(user, request.OldPassword, null, authService, localizer);
                 if (!verified.Success)
-                    return Results.BadRequest(new { error = "Current password is incorrect" });
+                    return Results.BadRequest(new { error = localizer["Profile_OldPasswordIncorrect"].Value });
             }
             else
             {
-                // User doesn't have password, verify with OTP
                 if (string.IsNullOrEmpty(request.OtpCode))
-                    return Results.BadRequest(new { error = "Verification code is required to set up password" });
+                    return Results.BadRequest(new { error = localizer["Profile_OtpRequired"].Value });
 
-                var verified = await VerifyIdentityAsync(user, null, request.OtpCode, authService);
+                var verified = await VerifyIdentityAsync(user, null, request.OtpCode, authService, localizer);
                 if (!verified.Success)
                     return Results.BadRequest(new { error = verified.Error });
             }
 
-            // Hash and set new password
             var (hash, salt) = AuthenticationService.HashPassword(request.NewPassword);
             user.PasswordHash = hash;
             user.PasswordSalt = salt;
 
             var success = await userRepository.UpdateUserAsync(user);
             if (!success)
-                return Results.BadRequest(new { error = "Failed to update password" });
+                return Results.BadRequest(new { error = localizer["Profile_UpdateFailed"].Value });
 
-            return Results.Ok(new { message = "Password updated successfully" });
+            return Results.Ok(new { message = localizer["Profile_PasswordUpdated"].Value });
         })
         .RequireAuth()
         .WithName("UpdatePassword");
@@ -195,7 +200,8 @@ public static class ProfileEndpoints
         group.MapPost("/password/send-otp", async (
             HttpContext context,
             [FromServices] IUserRepository userRepository,
-            [FromServices] IAuthenticationService authService) =>
+            [FromServices] IAuthenticationService authService,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var userId = context.GetUserId();
             if (string.IsNullOrEmpty(userId))
@@ -203,16 +209,16 @@ public static class ProfileEndpoints
 
             var user = await userRepository.GetUserByIdAsync(userId);
             if (user == null)
-                return Results.NotFound(new { error = "User not found" });
+                return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
             if (string.IsNullOrEmpty(user.Email))
-                return Results.BadRequest(new { error = "No email address set. Please add an email first." });
+                return Results.BadRequest(new { error = localizer["Profile_NoEmailForSetup"].Value });
 
-            var (success, actualEmail, error) = await authService.SendOTPAsync(user.Email);
+            var (success, _, error) = await authService.SendOTPAsync(user.Email);
             if (!success)
                 return Results.BadRequest(new { error });
 
-            return Results.Ok(new { message = "Verification code sent to your email" });
+            return Results.Ok(new { message = localizer["Profile_PasswordSetupSent"].Value });
         })
         .RequireAuth()
         .WithName("SendPasswordSetupOtp");
@@ -222,26 +228,25 @@ public static class ProfileEndpoints
             HttpContext context,
             [FromBody] SendEmailUpdateOtpRequest request,
             [FromServices] IUserRepository userRepository,
-            [FromServices] IAuthenticationService authService) =>
+            [FromServices] IAuthenticationService authService,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var userId = context.GetUserId();
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
             if (string.IsNullOrWhiteSpace(request.NewEmail) || !request.NewEmail.Contains("@"))
-                return Results.BadRequest(new { error = "Please enter a valid email address" });
+                return Results.BadRequest(new { error = localizer["Val_EmailInvalid"].Value });
 
-            // Check if email is already in use by another user
             var existingUser = await userRepository.GetUserByEmailAsync(request.NewEmail);
             if (existingUser != null && existingUser.UserId != userId)
-                return Results.BadRequest(new { error = "This email is already in use" });
+                return Results.BadRequest(new { error = localizer["Reg_EmailTaken"].Value });
 
-            // Send OTP to the new email using special method that doesn't require user to exist
             var (success, error) = await authService.SendOTPForNewEmailAsync(request.NewEmail, userId);
             if (!success)
                 return Results.BadRequest(new { error });
 
-            return Results.Ok(new { message = "Verification code sent to new email address" });
+            return Results.Ok(new { message = localizer["Profile_VerificationSent"].Value });
         })
         .RequireAuth()
         .WithName("SendEmailUpdateOtp");
@@ -251,7 +256,8 @@ public static class ProfileEndpoints
             HttpContext context,
             [FromBody] ConfirmEmailUpdateRequest request,
             [FromServices] IUserRepository userRepository,
-            [FromServices] IAuthenticationService authService) =>
+            [FromServices] IAuthenticationService authService,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var userId = context.GetUserId();
             if (string.IsNullOrEmpty(userId))
@@ -259,100 +265,145 @@ public static class ProfileEndpoints
 
             var user = await userRepository.GetUserByIdAsync(userId);
             if (user == null)
-                return Results.NotFound(new { error = "User not found" });
+                return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
             if (string.IsNullOrWhiteSpace(request.NewEmail) || !request.NewEmail.Contains("@"))
-                return Results.BadRequest(new { error = "Please enter a valid email address" });
+                return Results.BadRequest(new { error = localizer["Val_EmailInvalid"].Value });
 
             if (string.IsNullOrEmpty(request.OtpCode))
-                return Results.BadRequest(new { error = "Verification code is required" });
+                return Results.BadRequest(new { error = localizer["Auth_InvalidOtp"].Value });
 
-            // Verify OTP for the new email
             var (success, error) = await authService.VerifyOTPCodeAsync(request.NewEmail, request.OtpCode);
             if (!success)
-                return Results.BadRequest(new { error = "Invalid or expired verification code" });
+                return Results.BadRequest(new { error = localizer["Auth_InvalidOtp"].Value });
 
-            // Update email
             user.Email = request.NewEmail.ToLowerInvariant();
             var updateSuccess = await userRepository.UpdateUserAsync(user);
             if (!updateSuccess)
-                return Results.BadRequest(new { error = "Failed to update email" });
+                return Results.BadRequest(new { error = localizer["Profile_UpdateFailed"].Value });
 
-            return Results.Ok(new { message = "Email updated successfully" });
+            return Results.Ok(new { message = localizer["Profile_EmailUpdated"].Value });
         })
         .RequireAuth()
         .WithName("ConfirmEmailUpdate");
+
+        // Update language preference
+        group.MapPost("/language", async (
+            HttpContext context,
+            [FromBody] UpdateLanguageRequest request,
+            [FromServices] IUserRepository userRepository,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
+        {
+            var userId = context.GetUserId();
+            if (string.IsNullOrEmpty(userId))
+                return Results.Unauthorized();
+
+            var user = await userRepository.GetUserByIdAsync(userId);
+            if (user == null)
+                return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
+
+            if (!SupportedLanguages.Any(l => l.Code == request.LanguageCode))
+                return Results.BadRequest(new { error = localizer["Profile_InvalidLanguage"].Value });
+
+            user.LanguageCode = request.LanguageCode;
+            var success = await userRepository.UpdateUserAsync(user);
+            if (!success)
+                return Results.BadRequest(new { error = localizer["Profile_UpdateFailed"].Value });
+
+            return Results.Ok(new { message = localizer["Profile_LanguageUpdated"].Value });
+        })
+        .RequireAuth()
+        .WithName("UpdateLanguage");
+
+        // Get user's language preference from DB
+        group.MapGet("/language", async (
+            HttpContext context,
+            [FromServices] IUserRepository userRepository,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
+        {
+            var userId = context.GetUserId();
+            if (string.IsNullOrEmpty(userId))
+                return Results.Unauthorized();
+
+            var user = await userRepository.GetUserByIdAsync(userId);
+            if (user == null)
+                return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
+
+            return Results.Ok(new { languageCode = user.LanguageCode });
+        })
+        .RequireAuth()
+        .WithName("GetLanguage");
+
+        // Get supported languages (static list, no auth required)
+        group.MapGet("/languages", () =>
+        {
+            var languages = SupportedLanguages
+                .Select(l => new { l.Code, l.Name });
+            return Results.Ok(languages);
+        })
+        .WithName("GetLanguages")
+        .AllowAnonymous();
     }
 
     private static async Task<(bool Success, string Error)> VerifyIdentityAsync(
-        User user, 
-        string? password, 
+        User user,
+        string? password,
         string? otpCode,
-        IAuthenticationService authService)
+        IAuthenticationService authService,
+        IStringLocalizer<ApiMessages> localizer)
     {
         var hasPassword = !string.IsNullOrEmpty(user.PasswordHash);
         var hasEmail = !string.IsNullOrEmpty(user.Email);
-        
-        // Check if password authentication is enabled in user's preferred auth method
+
         var passwordAuthEnabled = user.PreferredAuthMethod == "Password" || user.PreferredAuthMethod == "Both";
-        // Check if email authentication is enabled in user's preferred auth method
         var emailAuthEnabled = user.PreferredAuthMethod == "Email" || user.PreferredAuthMethod == "Both";
 
-        // If password provided
         if (!string.IsNullOrEmpty(password))
         {
-            // Check if user has password AND password auth is enabled
             if (hasPassword && passwordAuthEnabled)
             {
-                var (success, error) = await authService.VerifyPasswordAsync(user.Email, password);
+                var (success, _) = await authService.VerifyPasswordAsync(user.Email, password);
                 if (success)
                     return (true, string.Empty);
-                return (false, "Invalid password");
+                return (false, localizer["Auth_InvalidCredentials"].Value);
             }
-            // User provided password but password auth is not enabled
             else if (hasPassword && !passwordAuthEnabled)
             {
-                return (false, "Password authentication is not enabled for your account. Please use the verification code sent to your email.");
+                return (false, localizer["Profile_PasswordAuthDisabled"].Value);
             }
-            // User doesn't have a password set
             else
             {
-                return (false, "No password is set for your account. Please use the verification code sent to your email.");
+                return (false, localizer["Profile_NoPasswordSet"].Value);
             }
         }
 
-        // If OTP provided
         if (!string.IsNullOrEmpty(otpCode))
         {
-            // Check if user has email AND email auth is enabled
             if (hasEmail && emailAuthEnabled)
             {
-                var (success, error) = await authService.VerifyOTPCodeAsync(user.Email, otpCode);
+                var (success, _) = await authService.VerifyOTPCodeAsync(user.Email, otpCode);
                 if (success)
                     return (true, string.Empty);
-                return (false, "Invalid or expired verification code");
+                return (false, localizer["Auth_InvalidOtp"].Value);
             }
-            // User provided OTP but email auth is not enabled
             else if (hasEmail && !emailAuthEnabled)
             {
-                return (false, "Email code authentication is not enabled for your account. Please use your password.");
+                return (false, localizer["Profile_EmailAuthDisabled"].Value);
             }
-            // User doesn't have email set
             else
             {
-                return (false, "No email is set for your account. Please use your password.");
+                return (false, localizer["Profile_NoEmailSet"].Value);
             }
         }
 
-        // No verification provided - tell user what they can use
         if (passwordAuthEnabled && emailAuthEnabled)
-            return (false, "Please provide your password or verification code");
+            return (false, localizer["Profile_ProvidePasswordOrCode"].Value);
         else if (passwordAuthEnabled)
-            return (false, "Please provide your password");
+            return (false, localizer["Profile_ProvidePassword"].Value);
         else if (emailAuthEnabled)
-            return (false, "Please provide the verification code");
+            return (false, localizer["Profile_ProvideCode"].Value);
         else
-            return (false, "Unable to verify identity");
+            return (false, localizer["Profile_IdentityVerificationFailed"].Value);
     }
 }
 
@@ -362,10 +413,11 @@ public record UpdateAuthMethodRequest(string NewAuthMethod, string? Password, st
 public record UpdatePasswordRequest(string? OldPassword, string? OtpCode, string NewPassword);
 public record SendEmailUpdateOtpRequest(string NewEmail);
 public record ConfirmEmailUpdateRequest(string NewEmail, string OtpCode);
+public record UpdateLanguageRequest(string LanguageCode);
 public record UserProfileResponse(
-    string UserId, 
-    string Email, 
-    string Username, 
+    string UserId,
+    string Email,
+    string Username,
     string PreferredAuthMethod,
     bool HasPassword,
     bool HasEmail);

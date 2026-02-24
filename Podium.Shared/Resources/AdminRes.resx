@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Admin_Dashboard_Title" xml:space="preserve"><value>Admin Dashboard</value></data>
+  <data name="Admin_Dashboard_Subtitle" xml:space="preserve"><value>Manage your Podium platform</value></data>
+  <data name="Admin_Users_Title" xml:space="preserve"><value>User Management</value></data>
+  <data name="Admin_Disciplines_Title" xml:space="preserve"><value>Discipline Management</value></data>
+  <data name="Admin_Series_Title" xml:space="preserve"><value>Series Management</value></data>
+  <data name="Admin_Seasons_Title" xml:space="preserve"><value>Season Management</value></data>
+  <data name="Admin_Events_Title" xml:space="preserve"><value>Event Management</value></data>
+  <data name="Admin_Competitors_Title" xml:space="preserve"><value>Competitor Management</value></data>
+  <data name="Admin_Results_Title" xml:space="preserve"><value>Results Management</value></data>
+  <data name="Admin_Admins_Title" xml:space="preserve"><value>Admin Management</value></data>
+  <data name="Admin_Btn_Create" xml:space="preserve"><value>Create</value></data>
+  <data name="Admin_Btn_Edit" xml:space="preserve"><value>Edit</value></data>
+  <data name="Admin_Btn_Delete" xml:space="preserve"><value>Delete</value></data>
+  <data name="Admin_Btn_Save" xml:space="preserve"><value>Save</value></data>
+  <data name="Admin_Btn_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Admin_Btn_Confirm" xml:space="preserve"><value>Confirm</value></data>
+  <data name="Admin_NotAuthorized" xml:space="preserve"><value>You do not have permission to access this area.</value></data>
+  <data name="Admin_Loading" xml:space="preserve"><value>Loading...</value></data>
+  <data name="Admin_NoData" xml:space="preserve"><value>No data available.</value></data>
+  <data name="Admin_ConfirmDelete" xml:space="preserve"><value>Are you sure you want to delete this item?</value></data>
+  <data name="Admin_DeleteSuccess" xml:space="preserve"><value>Item deleted successfully.</value></data>
+  <data name="Admin_SaveSuccess" xml:space="preserve"><value>Saved successfully.</value></data>
+  <data name="Admin_Error" xml:space="preserve"><value>An error occurred. Please try again.</value></data>
+  <data name="Admin_AuthRequired" xml:space="preserve"><value>Authentication Required</value></data>
+  <data name="Admin_AuthRequired_Desc" xml:space="preserve"><value>Please sign in to access the admin dashboard.</value></data>
+  <data name="Admin_AccessDenied" xml:space="preserve"><value>Access Denied</value></data>
+  <data name="Admin_BackToHome" xml:space="preserve"><value>Back to Home</value></data>
+  <data name="Admin_Dashboard_Subtitle_Extended" xml:space="preserve"><value>Manage disciplines, series, seasons, competitors, and more</value></data>
+  <data name="Admin_Disciplines_Desc" xml:space="preserve"><value>Manage racing categories and disciplines</value></data>
+  <data name="Admin_Series_Desc" xml:space="preserve"><value>Manage racing series within disciplines</value></data>
+  <data name="Admin_Seasons_Desc" xml:space="preserve"><value>Manage seasons for each series</value></data>
+  <data name="Admin_Competitors_Desc" xml:space="preserve"><value>Manage drivers, riders, and teams</value></data>
+  <data name="Admin_Events_Desc" xml:space="preserve"><value>Manage races and events</value></data>
+  <data name="Admin_Results_Desc" xml:space="preserve"><value>Enter and manage event results</value></data>
+  <data name="Admin_Users_Desc" xml:space="preserve"><value>Manage user accounts</value></data>
+  <data name="Admin_Admins_Desc" xml:space="preserve"><value>Manage admin privileges</value></data>
+  <data name="Admin_Placeholders_Title" xml:space="preserve"><value>Placeholder Management</value></data>
+  <data name="Admin_Status_Active" xml:space="preserve"><value>Active</value></data>
+  <data name="Admin_Status_Inactive" xml:space="preserve"><value>Inactive</value></data>
+  <data name="Admin_Btn_Saving" xml:space="preserve"><value>Saving...</value></data>
+  <data name="Admin_Col_Name" xml:space="preserve"><value>Name</value></data>
+  <data name="Admin_Col_DisplayName" xml:space="preserve"><value>Display Name</value></data>
+  <data name="Admin_Col_Status" xml:space="preserve"><value>Status</value></data>
+  <data name="Admin_Col_Created" xml:space="preserve"><value>Created</value></data>
+  <data name="Admin_Col_Actions" xml:space="preserve"><value>Actions</value></data>
+  <data name="Admin_Label_Active" xml:space="preserve"><value>Active</value></data>
+  <data name="Admin_Label_Name" xml:space="preserve"><value>Name:</value></data>
+  <data name="Admin_Label_DisplayName" xml:space="preserve"><value>Display Name:</value></data>
+  <data name="Admin_Filter_AllDisciplines" xml:space="preserve"><value>All Disciplines</value></data>
+  <data name="Admin_Filter_Discipline" xml:space="preserve"><value>Filter by Discipline:</value></data>
+  <data name="Admin_Filter_Series" xml:space="preserve"><value>Filter by Series:</value></data>
+  <data name="Admin_Filter_AllSeries" xml:space="preserve"><value>All Series</value></data>
+  <data name="Admin_User_NotFound" xml:space="preserve"><value>User Not Found</value></data>
+  <data name="Admin_User_NotFound_Desc" xml:space="preserve"><value>The requested user could not be found.</value></data>
+  <data name="Admin_Btn_BackToUsers" xml:space="preserve"><value>Back to Users</value></data>
+  <data name="Admin_Never" xml:space="preserve"><value>Never</value></data>
+</root>

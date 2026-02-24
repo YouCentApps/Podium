@@ -1,17 +1,19 @@
-@page "/leaderboard"
+﻿@page "/leaderboard"
 @using Podium.Shared.Services.State
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
+@inject IStringLocalizer<Podium.Shared.Leaderboard> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>Leaderboard - Podium</PageTitle>
 
 <div class="page-container">
-    <h1><span class="trophy-icon">&#127942;</span> Leaderboard</h1>
+    <h1><span class="trophy-icon">&#127942;</span> @L["Leaderboard_Title"]</h1>
 
     @if (isLoadingInitial)
     {
         <div class="loading-spinner">
-            <p>Loading...</p>
+            <p>@LC["Loading"]</p>
         </div>
     }
     else if (!string.IsNullOrEmpty(errorMessage))
@@ -20,11 +22,30 @@
     }
     else
     {
+        @if (AuthState.IsAuthenticated && favoriteSeasons.Count > 0)
+        {
+            <div class="favorites-section">
+                <h2>
+                    <span><span class="card-icon">⭐</span> @LC["Favorites_QuickAccess"]</span>
+                    <a href="/settings/favorites" class="manage-link">@LC["Favorites_Manage"]</a>
+                </h2>
+                <div class="favorites-quick-links">
+                    @foreach (var favorite in favoriteSeasons)
+                    {
+                        <div class="favorite-link" @onclick="() => SelectFavoriteSeason(favorite.SeasonId)">
+                            <h4>@favorite.SeriesName</h4>
+                            <p>@favorite.SeasonName (@favorite.Year)</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
         <div class="leaderboard-filters">
             <div class="filter-group">
-                <label for="discipline-select">Discipline:</label>
+                <label for="discipline-select">@L["Leaderboard_Label_Discipline"]</label>
                 <select id="discipline-select" @bind="selectedDisciplineId" @bind:after="OnDisciplineChanged">
-                    <option value="">-- Select Discipline --</option>
+                    <option value="">@L["Leaderboard_SelectDiscipline"]</option>
                     @foreach (var discipline in disciplines)
                     {
                         <option value="@discipline.Id">@discipline.DisplayName</option>
@@ -35,9 +56,9 @@
             @if (!string.IsNullOrEmpty(selectedDisciplineId) && series.Count > 0)
             {
                 <div class="filter-group">
-                    <label for="series-select">Series:</label>
+                    <label for="series-select">@L["Leaderboard_Label_Series"]</label>
                     <select id="series-select" @bind="selectedSeriesId" @bind:after="OnSeriesChanged">
-                        <option value="">-- Select Series --</option>
+                        <option value="">@L["Leaderboard_SelectSeries"]</option>
                         @foreach (var s in series)
                         {
                             <option value="@s.Id">@s.DisplayName</option>
@@ -49,9 +70,9 @@
             @if (!string.IsNullOrEmpty(selectedSeriesId) && seasons.Count > 0)
             {
                 <div class="filter-group">
-                    <label for="season-select">Season:</label>
+                    <label for="season-select">@L["Leaderboard_Label_Season"]</label>
                     <select id="season-select" @bind="selectedSeasonId" @bind:after="OnSeasonChanged">
-                        <option value="">-- Select Season --</option>
+                        <option value="">@L["Leaderboard_SelectSeason"]</option>
                         @foreach (var season in seasons)
                         {
                             <option value="@season.Id">@season.Name (@season.Year)</option>
@@ -64,19 +85,19 @@
         @if (isLoadingLeaderboard)
         {
             <div class="loading-spinner">
-                <p>Loading leaderboard...</p>
+                <p>@L["Leaderboard_Loading"]</p>
             </div>
         }
         else if (string.IsNullOrEmpty(selectedSeasonId))
         {
             <div class="alert alert-info">
-                <p>Please select a discipline, series, and season to view the leaderboard.</p>
+                <p>@L["Leaderboard_SelectInfo"]</p>
             </div>
         }
         else if (leaderboard.Count == 0)
         {
             <div class="alert alert-info">
-                No predictions have been made yet for this season.
+                @L["Leaderboard_NoPredictions"]
             </div>
         }
         else
@@ -85,17 +106,17 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Rank</th>
-                            <th>Player</th>
+                            <th>@L["Leaderboard_Col_Rank"]</th>
+                            <th>@L["Leaderboard_Col_Player"]</th>
                             @if (ShouldShowBestResultsColumn())
                             {
                                 <th>@GetBestResultsColumnHeader()</th>
                             }
-                            <th>Total</th>
-                            <th>Predictions</th>
-                            <th>Exact</th>
-                            <th>1 Off</th>
-                            <th>2 Off</th>
+                            <th>@L["Leaderboard_Col_Total"]</th>
+                            <th>@L["Leaderboard_Col_Predictions"]</th>
+                            <th>@L["Leaderboard_Col_Exact"]</th>
+                            <th>@L["Leaderboard_Col_1Off"]</th>
+                            <th>@L["Leaderboard_Col_2Off"]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -128,46 +149,46 @@
             {
                 <div class="last-event-section">
                     <div class="loading-spinner">
-                        <p>Loading last event results...</p>
+                        <p>@L["Leaderboard_LoadingLastEvent"]</p>
                     </div>
                 </div>
             }
             else if (lastEventResult != null)
             {
                 <div class="last-event-section">
-                    <h2><span class="flag-icon">&#127937;</span> Last Completed Event: @lastEventResult.EventName</h2>
+                    <h2><span class="flag-icon">&#127937;</span> @L["Leaderboard_LastEvent"] @lastEventResult.EventName</h2>
                     <p class="event-date">@lastEventResult.EventDate.ToShortDateString()</p>
 
                     <div class="actual-result-box">
-                        <h3>Actual Podium Result</h3>
+                        <h3>@L["Leaderboard_ActualPodium"]</h3>
                         <div class="podium-display">
                             <div class="podium-position position-1">
-                                <div class="position-label"><span class="medal-icon">&#129351;</span> 1st</div>
+                                <div class="position-label"><span class="medal-icon">&#129351;</span> @L["Leaderboard_Pos1st"]</div>
                                 <div class="competitor-name">@lastEventResult.FirstPlaceName</div>
                             </div>
                             <div class="podium-position position-2">
-                                <div class="position-label"><span class="medal-icon">&#129352;</span> 2nd</div>
+                                <div class="position-label"><span class="medal-icon">&#129352;</span> @L["Leaderboard_Pos2nd"]</div>
                                 <div class="competitor-name">@lastEventResult.SecondPlaceName</div>
                             </div>
                             <div class="podium-position position-3">
-                                <div class="position-label"><span class="medal-icon">&#129353;</span> 3rd</div>
+                                <div class="position-label"><span class="medal-icon">&#129353;</span> @L["Leaderboard_Pos3rd"]</div>
                                 <div class="competitor-name">@lastEventResult.ThirdPlaceName</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="user-predictions-section">
-                        <h3>Top 10 Predictors</h3>
-                        
+                        <h3>@L["Leaderboard_Top10"]</h3>
+
                         <div class="search-section">
-                            <label>Search for a specific user:</label>
+                            <label>@L["Leaderboard_SearchUser"]</label>
                             <div class="search-input-container">
                                 <input type="text" 
                                        class="form-control" 
                                        @bind="searchUserQuery" 
                                        @bind:event="oninput"
                                        @onkeyup="SearchLastEventUsers"
-                                       placeholder="Type username or email..." />
+                                       placeholder="@L["Leaderboard_SearchPlaceholder"]" />
                                 @if (searchingUsers)
                                 {
                                     <span class="search-spinner">?</span>
@@ -181,7 +202,7 @@
                                     {
                                         <div class="search-result-item" @onclick="() => SelectSearchUser(user)">
                                             <strong>@user.Username</strong> (@user.Email)
-                                            <span class="points-badge">@user.PointsEarned pts</span>
+                                            <span class="points-badge">@user.PointsEarned @L["Leaderboard_Pts"]</span>
                                         </div>
                                     }
                                 </div>
@@ -190,15 +211,15 @@
                             @if (selectedSearchUsers.Any())
                             {
                                 <div class="selected-users-display">
-                                    <strong>Showing results for:</strong>
+                                    <strong>@L["Leaderboard_ShowingFor"]</strong>
                                     @foreach (var user in selectedSearchUsers)
                                     {
                                         <span class="selected-user-tag">
                                             @user.Username
-                                            <button class="clear-user-btn" @onclick="() => RemoveSearchUser(user)">�</button>
+                                            <button class="clear-user-btn" @onclick="() => RemoveSearchUser(user)">×</button>
                                         </span>
                                     }
-                                    <button class="btn-link" @onclick="ClearAllSearchUsers">Clear All</button>
+                                    <button class="btn-link" @onclick="ClearAllSearchUsers">@L["Leaderboard_ClearAll"]</button>
                                 </div>
                             }
                         </div>
@@ -215,11 +236,11 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Rank</th>
-                                            <th>User</th>
-                                            <th>Prediction</th>
-                                            <th>Points</th>
-                                            <th>Submitted</th>
+                                            <th>@L["Leaderboard_Col_Rank"]</th>
+                                            <th>@L["Leaderboard_Col_Player"]</th>
+                                            <th>@L["Leaderboard_Col_Prediction"]</th>
+                                            <th>@L["Leaderboard_Col_Points"]</th>
+                                            <th>@L["Leaderboard_Col_Submitted"]</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -237,9 +258,9 @@
                                                 </td>
                                                 <td>
                                                     <div class="prediction-display">
-                                                        <span class="pred-position">1st: @pred.FirstPlaceName</span>
-                                                        <span class="pred-position">2nd: @pred.SecondPlaceName</span>
-                                                        <span class="pred-position">3rd: @pred.ThirdPlaceName</span>
+                                                        <span class="pred-position">@L["Leaderboard_Pos1st"] @pred.FirstPlaceName</span>
+                                                        <span class="pred-position">@L["Leaderboard_Pos2nd"] @pred.SecondPlaceName</span>
+                                                        <span class="pred-position">@L["Leaderboard_Pos3rd"] @pred.ThirdPlaceName</span>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -257,7 +278,7 @@
                         else
                         {
                             <div class="no-results">
-                                <p>No predictions found for the selected users.</p>
+                                <p>@L["Leaderboard_NoPredictionsFound"]</p>
                             </div>
                         }
                     </div>
@@ -272,7 +293,8 @@ private List<UserStatistics> leaderboard = new();
 private List<Discipline> disciplines = new();
 private List<Series> series = new();
 private List<Season> seasons = new();
-    
+private List<FavoriteSeason> favoriteSeasons = new();
+
 private string? selectedDisciplineId;
 private string? selectedSeriesId;
 private string? selectedSeasonId;
@@ -293,6 +315,7 @@ private System.Threading.Timer? searchDebounceTimer;
     protected override async Task OnInitializedAsync()
     {
         await LoadDisciplines();
+        await LoadFavoriteSeasons();
         await AutoPopulateWithLatestSeason();
     }
 
@@ -310,7 +333,7 @@ private System.Threading.Timer? searchDebounceTimer;
             }
             else
             {
-                errorMessage = disciplinesResponse.Error ?? "Failed to load disciplines.";
+                errorMessage = disciplinesResponse.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)
@@ -321,6 +344,38 @@ private System.Threading.Timer? searchDebounceTimer;
         {
             isLoadingInitial = false;
         }
+    }
+
+    private async Task LoadFavoriteSeasons()
+    {
+        if (!AuthState.IsAuthenticated)
+            return;
+
+        try
+        {
+            var response = await ApiClient.GetFavoriteSeasonsAsync();
+            if (response.Success && response.Data != null)
+            {
+                favoriteSeasons = response.Data;
+            }
+        }
+        catch
+        {
+            // Silently fail - favorites are optional
+        }
+    }
+
+    private async Task SelectFavoriteSeason(string seasonId)
+    {
+        selectedSeasonId = seasonId;
+        leaderboard.Clear();
+        lastEventResult = null;
+        selectedSearchUsers.Clear();
+        userSearchResults.Clear();
+        searchUserQuery = "";
+
+        await LoadLeaderboard();
+        await LoadLastEventResult();
     }
 
     private async Task AutoPopulateWithLatestSeason()
@@ -391,7 +446,7 @@ private System.Threading.Timer? searchDebounceTimer;
             }
             else
             {
-                errorMessage = seriesResponse.Error ?? "Failed to load series.";
+                errorMessage = seriesResponse.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)
@@ -418,7 +473,7 @@ private System.Threading.Timer? searchDebounceTimer;
             }
             else
             {
-                errorMessage = seasonsResponse.Error ?? "Failed to load seasons.";
+                errorMessage = seasonsResponse.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)
@@ -457,7 +512,7 @@ private System.Threading.Timer? searchDebounceTimer;
             }
             else
             {
-                errorMessage = leaderboardResponse.Error ?? "Failed to load leaderboard.";
+                errorMessage = leaderboardResponse.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)
@@ -598,16 +653,16 @@ private System.Threading.Timer? searchDebounceTimer;
     private string GetBestResultsColumnHeader()
     {
         if (string.IsNullOrEmpty(selectedSeasonId))
-            return "Best Results";
+            return L["Leaderboard_Col_BestResults_Short"];
 
         var selectedSeason = seasons.FirstOrDefault(s => s.Id == selectedSeasonId);
-        if (selectedSeason?.BestResultsNumber.HasValue == true && 
+        if (selectedSeason?.BestResultsNumber.HasValue == true &&
             selectedSeason.BestResultsNumber.Value > 0)
         {
-            return $"Best {selectedSeason.BestResultsNumber} Results";
+            return string.Format(L["Leaderboard_Col_BestResults"], selectedSeason.BestResultsNumber);
         }
 
-        return "Best Results";
+        return L["Leaderboard_Col_BestResults_Short"];
     }
 }
 

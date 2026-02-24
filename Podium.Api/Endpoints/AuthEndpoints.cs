@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
+using Podium.Shared;
 using Podium.Shared.Services.Auth;
 using Podium.Shared.Services.Data;
 
@@ -13,74 +15,72 @@ public static class AuthEndpoints
         // Send registration verification email
         group.MapPost("/register/send-verification", async (
             [FromBody] RegisterRequest request,
-            [FromServices] IRegistrationService registrationService) =>
+            [FromServices] IRegistrationService registrationService,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var (success, tempUserId, errorMessage) = await registrationService.SendRegistrationVerificationAsync(
-                request.Email, 
-                request.Username, 
-                request.Password, 
-                request.PreferredAuthMethod);
+                request.Email,
+                request.Username,
+                request.Password,
+                request.PreferredAuthMethod,
+                request.LanguageCode ?? "en");
 
             if (!success)
-            {
                 return Results.BadRequest(new { error = errorMessage });
-            }
 
-            return Results.Ok(new { tempUserId, message = "Verification code sent to your email" });
+            return Results.Ok(new { tempUserId, message = localizer["Auth_VerificationSent"].Value });
         })
         .WithName("SendRegistrationVerification");
 
         // Verify email and complete registration
         group.MapPost("/register/verify", async (
             [FromBody] VerifyRegistrationRequest request,
-            [FromServices] IRegistrationService registrationService) =>
+            [FromServices] IRegistrationService registrationService,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var (success, userId, errorMessage) = await registrationService.VerifyAndCompleteRegistrationAsync(
-                request.TempUserId, 
+                request.TempUserId,
                 request.OtpCode);
 
             if (!success)
-            {
                 return Results.BadRequest(new { error = errorMessage });
-            }
 
-            return Results.Ok(new { userId, message = "Registration successful" });
+            return Results.Ok(new { userId, message = localizer["Auth_RegistrationSuccess"].Value });
         })
         .WithName("VerifyRegistration");
 
-        // Register new user (direct registration without email verification - for password-only without email)
+        // Register new user (direct - password-only without email)
         group.MapPost("/register", async (
             [FromBody] RegisterRequest request,
-            [FromServices] IRegistrationService registrationService) =>
+            [FromServices] IRegistrationService registrationService,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var (success, userId, errorMessage) = await registrationService.RegisterUserAsync(
-                request.Email, 
-                request.Username, 
-                request.Password, 
-                request.PreferredAuthMethod);
+                request.Email,
+                request.Username,
+                request.Password,
+                request.PreferredAuthMethod,
+                request.LanguageCode ?? "en");
 
             if (!success)
-            {
                 return Results.BadRequest(new { error = errorMessage });
-            }
 
-            return Results.Ok(new { userId, message = "Registration successful" });
+            return Results.Ok(new { userId, message = localizer["Auth_RegistrationSuccess"].Value });
         })
         .WithName("Register");
 
         // Send OTP to email
         group.MapPost("/send-otp", async (
             [FromBody] SendOtpRequest request,
-            [FromServices] IAuthenticationService authService) =>
+            [FromServices] IAuthenticationService authService,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var (success, actualEmail, errorMessage) = await authService.SendOTPAsync(request.EmailOrUsername);
 
             if (!success)
-            {
                 return Results.BadRequest(new { error = errorMessage });
-            }
 
-            return Results.Ok(new { message = "OTP sent to email", email = actualEmail });
+            return Results.Ok(new { message = localizer["Auth_OtpSent"].Value, email = actualEmail });
         })
         .WithName("SendOTP");
 
@@ -89,16 +89,14 @@ public static class AuthEndpoints
             [FromBody] VerifyOtpRequest request,
             [FromServices] IAuthenticationService authService) =>
         {
-            var (success, userId, username, sessionId, errorMessage) = await authService.VerifyOTPAsync(
-                request.Email, 
+            var (success, userId, username, sessionId, languageCode, errorMessage) = await authService.VerifyOTPAsync(
+                request.Email,
                 request.OtpCode);
 
             if (!success)
-            {
                 return Results.BadRequest(new { error = errorMessage });
-            }
 
-            return Results.Ok(new { userId, username, sessionId, message = "Authentication successful" });
+            return Results.Ok(new { userId, username, sessionId, languageCode });
         })
         .WithName("VerifyOTP");
 
@@ -107,16 +105,14 @@ public static class AuthEndpoints
             [FromBody] SignInRequest request,
             [FromServices] IAuthenticationService authService) =>
         {
-            var (success, userId, username, sessionId, errorMessage) = await authService.SignInWithPasswordAsync(
-                request.EmailOrUsername, 
+            var (success, userId, username, sessionId, languageCode, errorMessage) = await authService.SignInWithPasswordAsync(
+                request.EmailOrUsername,
                 request.Password);
 
             if (!success)
-            {
                 return Results.BadRequest(new { error = errorMessage });
-            }
 
-            return Results.Ok(new { userId, username, sessionId, message = "Sign in successful" });
+            return Results.Ok(new { userId, username, sessionId, languageCode });
         })
         .WithName("SignIn");
 
@@ -125,7 +121,7 @@ public static class AuthEndpoints
             [FromBody] ValidateSessionRequest request,
             [FromServices] IAuthenticationService authService) =>
         {
-            var (success, userId, username, sessionId, errorMessage) = 
+            var (success, userId, username, sessionId, languageCode, errorMessage) = 
                 await authService.ValidateSessionAsync(request.SessionId);
 
             if (!success)
@@ -133,24 +129,25 @@ public static class AuthEndpoints
                 return Results.Unauthorized();
             }
 
-            return Results.Ok(new { userId, username, sessionId });
+            return Results.Ok(new { userId, username, sessionId, languageCode });
         })
         .WithName("ValidateSession");
 
         // Sign out
         group.MapPost("/signout", async (
             [FromBody] SignOutRequest request,
-            [FromServices] IAuthenticationService authService) =>
+            [FromServices] IAuthenticationService authService,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             await authService.SignOutAsync(request.SessionId);
-            return Results.Ok(new { message = "Signed out successfully" });
+            return Results.Ok(new { message = localizer["Auth_SignOutSuccess"].Value });
         })
         .WithName("SignOut");
     }
 }
 
 // Request DTOs
-public record RegisterRequest(string Email, string Username, string Password, string PreferredAuthMethod);
+public record RegisterRequest(string Email, string Username, string Password, string PreferredAuthMethod, string? LanguageCode);
 public record VerifyRegistrationRequest(string TempUserId, string OtpCode);
 public record SendOtpRequest(string EmailOrUsername);
 public record VerifyOtpRequest(string Email, string OtpCode);

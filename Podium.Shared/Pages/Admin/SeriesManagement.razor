@@ -7,6 +7,7 @@
 @inject AdminStateService AdminState
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
+@inject IStringLocalizer<AdminRes> L
 
 <PageTitle>Manage Series - Admin</PageTitle>
 
@@ -18,7 +19,7 @@
 
     @if (loading)
     {
-        <div class="loading">Loading series...</div>
+        <div class="loading">@L["Admin_Loading"]</div>
     }
     else
     {
@@ -32,8 +33,8 @@
         @if (showForm)
         {
             <div class="admin-form">
-                <h3>@(editingSeries == null ? "Create" : "Edit") Series</h3>
-                
+                <h3>@(editingSeries == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) Series</h3>
+
                 <div class="form-group">
                     <label>Discipline:</label>
                     @if (editingSeries == null)
@@ -85,14 +86,14 @@
                 <div class="form-group">
                     <label>
                         <input type="checkbox" @bind="formIsActive" />
-                        Active
+                        @L["Admin_Label_Active"]
                     </label>
                 </div>
 
                 <div class="form-actions">
-                    <button class="btn btn-secondary" @onclick="CancelForm">Cancel</button>
+                    <button class="btn btn-secondary" @onclick="CancelForm">@L["Admin_Btn_Cancel"]</button>
                     <button class="btn btn-primary" @onclick="SaveSeries" disabled="@saving">
-                        @(saving ? "Saving..." : "Save")
+                        @(saving ? L["Admin_Btn_Saving"].Value : L["Admin_Btn_Save"].Value)
                     </button>
                 </div>
                 @if (!string.IsNullOrEmpty(formError))
@@ -103,9 +104,9 @@
         }
 
         <div class="filter-section">
-            <label>Filter by Discipline:</label>
+            <label>@L["Admin_Filter_Discipline"]</label>
             <select class="form-control" @bind="selectedDisciplineFilter" @bind:after="FilterSeries">
-                <option value="">All Disciplines</option>
+                <option value="">@L["Admin_Filter_AllDisciplines"]</option>
                 @foreach (var discipline in disciplines)
                 {
                     <option value="@discipline.Id">@discipline.DisplayName</option>
@@ -117,14 +118,14 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Display Name</th>
+                        <th>@L["Admin_Col_Name"]</th>
+                        <th>@L["Admin_Col_DisplayName"]</th>
                         <th>Discipline</th>
                         <th>Governing Body</th>
                         <th>Region</th>
-                        <th>Status</th>
-                        <th>Created</th>
-                        <th>Actions</th>
+                        <th>@L["Admin_Col_Status"]</th>
+                        <th>@L["Admin_Col_Created"]</th>
+                        <th>@L["Admin_Col_Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -142,13 +143,13 @@
                             <td>@series.Region</td>
                             <td>
                                 <span class="badge @(series.IsActive ? "badge-success" : "badge-inactive")">
-                                    @(series.IsActive ? "Active" : "Inactive")
+                                    @(series.IsActive ? L["Admin_Status_Active"].Value : L["Admin_Status_Inactive"].Value)
                                 </span>
                             </td>
                             <td>@series.CreatedDate.ToShortDateString()</td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" @onclick="() => EditSeries(series)">Edit</button>
-                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(series)">Delete</button>
+                                <button class="btn btn-sm btn-secondary" @onclick="() => EditSeries(series)">@L["Admin_Btn_Edit"]</button>
+                                <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(series)">@L["Admin_Btn_Delete"]</button>
                             </td>
                         </tr>
                     }

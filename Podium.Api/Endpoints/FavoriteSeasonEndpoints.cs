@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Podium.Api.Middleware;
+using Podium.Shared;
 using Podium.Shared.Models;
 using Podium.Shared.Services.Data;
 
@@ -33,38 +35,36 @@ public static class FavoriteSeasonEndpoints
             string seasonId,
             [FromBody] AddFavoriteSeasonRequest request,
             [FromServices] IFavoriteSeasonRepository favoriteRepo,
-            [FromServices] ISeasonRepository seasonRepo) =>
+            [FromServices] ISeasonRepository seasonRepo,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var userId = context.GetUserId();
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            // Check if user already has 5 favorites
             var count = await favoriteRepo.GetUserFavoriteCountAsync(userId);
             if (count >= 5)
-                return Results.BadRequest(new { error = "You can only have up to 5 favorite seasons" });
+                return Results.BadRequest(new { error = localizer["Favorites_LimitReached"].Value });
 
-            // Check if already a favorite
             var isFavorite = await favoriteRepo.IsFavoriteAsync(userId, seasonId);
             if (isFavorite)
-                return Results.BadRequest(new { error = "Season is already in your favorites" });
+                return Results.BadRequest(new { error = localizer["Favorites_AlreadyFavorited"].Value });
 
-            // Get season details to verify it exists
             var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId);
             if (season == null)
-                return Results.NotFound(new { error = "Season not found" });
+                return Results.NotFound(new { error = localizer["Favorites_NotFound"].Value });
 
             var success = await favoriteRepo.AddFavoriteSeasonAsync(
-                userId, 
-                seasonId, 
-                request.SeasonName, 
-                request.SeriesName, 
+                userId,
+                seasonId,
+                request.SeasonName,
+                request.SeriesName,
                 request.Year);
 
             if (!success)
-                return Results.BadRequest(new { error = "Failed to add favorite season" });
+                return Results.BadRequest(new { error = localizer["Favorites_AddFailed"].Value });
 
-            return Results.Ok(new { message = "Season added to favorites" });
+            return Results.Ok(new { message = localizer["Favorites_Added"].Value });
         })
         .RequireAuth()
         .WithName("AddFavoriteSeason");
@@ -73,7 +73,8 @@ public static class FavoriteSeasonEndpoints
         group.MapDelete("/seasons/{seasonId}", async (
             HttpContext context,
             string seasonId,
-            [FromServices] IFavoriteSeasonRepository favoriteRepo) =>
+            [FromServices] IFavoriteSeasonRepository favoriteRepo,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var userId = context.GetUserId();
             if (string.IsNullOrEmpty(userId))
@@ -81,9 +82,9 @@ public static class FavoriteSeasonEndpoints
 
             var success = await favoriteRepo.RemoveFavoriteSeasonAsync(userId, seasonId);
             if (!success)
-                return Results.BadRequest(new { error = "Failed to remove favorite season" });
+                return Results.BadRequest(new { error = localizer["Favorites_RemoveFailed"].Value });
 
-            return Results.Ok(new { message = "Season removed from favorites" });
+            return Results.Ok(new { message = localizer["Favorites_Removed"].Value });
         })
         .RequireAuth()
         .WithName("RemoveFavoriteSeason");

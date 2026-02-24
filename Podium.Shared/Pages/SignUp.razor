@@ -3,13 +3,15 @@
 @using Podium.Shared.Services.State
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
+@inject LanguageStateService LangState
 @inject NavigationManager Navigation
+@inject IStringLocalizer<Auth> L
 
 <PageTitle>Sign Up - Podium</PageTitle>
 
 <div class="auth-container">
     <div class="auth-card">
-        <h2>Create Your Account</h2>
+        <h2>@L["SignUp_Title"]</h2>
 
         @if (!string.IsNullOrEmpty(errorMessage))
         {
@@ -25,94 +27,78 @@
         {
             <div class="auth-form">
                 <div class="form-group">
-                    <label>Username <span class="text-danger">*</span></label>
+                    <label>@L["SignUp_Label_Username"] <span class="text-danger">@L["SignUp_Required"]</span></label>
                     <input type="text" class="form-control" @bind="username" placeholder="Your username (can be used to sign in)" maxlength="50" />
-                    <small class="form-text text-muted">3-50 characters. Latin letters, numbers, and spaces only. You can use this to sign in.</small>
+                    <small class="form-text text-muted">@L["SignUp_Hint_Username"]</small>
                 </div>
 
                 <div class="form-group">
-                    <label>Preferred Sign-In Method <span class="text-danger">*</span></label>
+                    <label>@L["SignUp_Label_AuthMethod"] <span class="text-danger">@L["SignUp_Required"]</span></label>
                     <select class="form-control" @bind="preferredAuthMethod">
-                        <option value="Both">Both (Password & Email Code)</option>
-                        <option value="Password">Password Only</option>
-                        <option value="Email">Email Code Only</option>
+                        <option value="Both">@L["SignUp_Method_Both"]</option>
+                        <option value="Password">@L["SignUp_Method_Password"]</option>
+                        <option value="Email">@L["SignUp_Method_Email"]</option>
                     </select>
                 </div>
 
                 @if (preferredAuthMethod == "Email" || preferredAuthMethod == "Both")
                 {
                     <div class="form-group">
-                        <label>Email @(preferredAuthMethod == "Password" ? "(Optional)" : "")<span class='text-danger'>@(preferredAuthMethod == "Password" ? "" : "*")</span></label>
+                        <label>@L["SignUp_Label_Email"] <span class="text-danger">@L["SignUp_Required"]</span></label>
                         <input type="email" class="form-control" @bind="email" placeholder="your@email.com" />
-                        @if (preferredAuthMethod != "Password")
-                        {
-                            <small class="form-text text-muted">Required for email code authentication</small>
-                        }
+                        <small class="form-text text-muted">@L["SignUp_Hint_EmailRequired"]</small>
                     </div>
                 }
                 else
                 {
                     <div class="form-group">
-                        <label>Email (Optional)</label>
+                        <label>@L["SignUp_Label_EmailOptional"]</label>
                         <input type="email" class="form-control" @bind="email" placeholder="your@email.com" />
-                        <small class="form-text text-muted">Optional for password-only sign-in</small>
                     </div>
                 }
 
                 @if (preferredAuthMethod == "Password" || preferredAuthMethod == "Both")
                 {
                     <div class="form-group">
-                        <label>Password <span class="text-danger">*</span></label>
+                        <label>@L["SignUp_Label_Password"] <span class="text-danger">@L["SignUp_Required"]</span></label>
                         <input type="password" class="form-control" @bind="password" placeholder="6-100 characters, no spaces" maxlength="100" />
-                        <small class="form-text text-muted">Latin letters, numbers, and special characters. No spaces.</small>
+                        <small class="form-text text-muted">@L["SignUp_Hint_Password"]</small>
                     </div>
 
                     <div class="form-group">
-                        <label>Confirm Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" @bind="confirmPassword" placeholder="Re-enter password" maxlength="100" />
+                        <label>@L["SignUp_Label_ConfirmPassword"] <span class="text-danger">@L["SignUp_Required"]</span></label>
+                        <input type="password" class="form-control" @bind="confirmPassword" placeholder="@L["SignUp_Placeholder_ConfirmPassword"]" maxlength="100" />
                     </div>
                 }
 
                 <button class="btn btn-primary w-100" @onclick="RegisterUser" disabled="@isLoading">
-                    @if (isLoading)
-                    {
-                        <span>Processing...</span>
-                    }
-                    else
-                    {
-                        <span>Sign Up</span>
-                    }
+                    @if (isLoading) { <span>@L["SignUp_Btn_Processing"]</span> }
+                    else { <span>@L["SignUp_Btn_Create"]</span> }
                 </button>
             </div>
         }
         else
         {
             <div class="auth-form">
-                <p class="text-center">We've sent a verification code to <strong>@email</strong></p>
-                <p class="text-center text-muted">Please check your email and enter the code below to complete your registration.</p>
+                <p class="text-center">@L["SignIn_SentTo"] <strong>@email</strong></p>
+                <p class="text-center text-muted">@L["SignUp_VerifyHint"]</p>
 
                 <div class="form-group">
-                    <label>Verification Code</label>
-                    <input type="text" class="form-control" @bind="verificationCode" placeholder="000000" maxlength="6" />
+                    <label>@L["SignUp_Label_VerifCode"]</label>
+                    <input type="text" class="form-control" @bind="verificationCode" placeholder="@L["SignIn_Placeholder_Code"]" maxlength="6" />
                 </div>
 
                 <button class="btn btn-primary w-100" @onclick="VerifyAndCompleteRegistration" disabled="@isLoading">
-                    @if (isLoading)
-                    {
-                        <span>Verifying...</span>
-                    }
-                    else
-                    {
-                        <span>Verify & Complete Registration</span>
-                    }
+                    @if (isLoading) { <span>@L["SignUp_Btn_Verifying"]</span> }
+                    else { <span>@L["SignUp_Btn_Verify"]</span> }
                 </button>
 
-                <button class="btn btn-link w-100" @onclick="ResetVerification">Start over</button>
+                <button class="btn btn-link w-100" @onclick="ResetVerification">@L["SignUp_StartOver"]</button>
             </div>
         }
 
         <div class="auth-footer">
-            <p>Already have an account? <a href="/signin">Sign In</a></p>
+            <p>@L["SignUp_AlreadyHave"] <a href="/signin">@L["SignUp_SignInLink"]</a></p>
         </div>
     </div>
 </div>
@@ -138,7 +124,7 @@
         // Validate username - always required
         if (string.IsNullOrWhiteSpace(username))
         {
-            errorMessage = "Username is required.";
+            errorMessage = L["SignUp_UsernameRequired"];
             return;
         }
 
@@ -147,7 +133,7 @@
         {
             if (string.IsNullOrWhiteSpace(email))
             {
-                errorMessage = "Email is required for email code authentication.";
+                errorMessage = L["SignUp_EmailRequired"];
                 return;
             }
         }
@@ -156,13 +142,13 @@
         {
             if (string.IsNullOrWhiteSpace(password))
             {
-                errorMessage = "Password is required for password authentication.";
+                errorMessage = L["SignUp_PasswordRequired2"];
                 return;
             }
 
             if (password != confirmPassword)
             {
-                errorMessage = "Passwords do not match.";
+                errorMessage = L["SignUp_PasswordMismatch"];
                 return;
             }
         }
@@ -173,35 +159,35 @@
             // If email is provided, send verification
             if (!string.IsNullOrWhiteSpace(email))
             {
-                var response = await ApiClient.SendRegistrationVerificationAsync(email, username, password, preferredAuthMethod);
+                var response = await ApiClient.SendRegistrationVerificationAsync(email, username, password, preferredAuthMethod, LangState.CurrentLanguageCode);
                 if (response.Success && response.Data != null)
                 {
                     tempUserId = response.Data.TempUserId;
                     verificationSent = true;
-                    successMessage = "Verification code sent! Check your email.";
+                    successMessage = L["SignUp_CodeSent"];
                 }
                 else
                 {
-                    errorMessage = response.Error ?? "Registration failed. Please try again.";
+                    errorMessage = response.Error ?? L["SignUp_Failed"];
                 }
             }
             else
             {
                 // No email - register directly (password-only without email)
-                var response = await ApiClient.RegisterAsync(email, username, password, preferredAuthMethod);
+                var response = await ApiClient.RegisterAsync(email, username, password, preferredAuthMethod, LangState.CurrentLanguageCode);
                 if (response.Success && response.Data != null)
                 {
                     Navigation.NavigateTo("/signin");
                 }
                 else
                 {
-                    errorMessage = response.Error ?? "Registration failed. Please try again.";
+                    errorMessage = response.Error ?? L["SignUp_Failed"];
                 }
             }
         }
         catch (Exception ex)
         {
-            errorMessage = $"Error: {ex.Message}";
+            errorMessage = ex.Message;
         }
         finally
         {
@@ -216,7 +202,7 @@
 
         if (string.IsNullOrWhiteSpace(verificationCode))
         {
-            errorMessage = "Please enter the verification code.";
+            errorMessage = L["SignUp_EnterCode"];
             return;
         }
 
@@ -231,12 +217,12 @@
             }
             else
             {
-                errorMessage = response.Error ?? "Invalid or expired verification code.";
+                errorMessage = response.Error ?? L["Reg_VerificationFailed"];
             }
         }
         catch (Exception ex)
         {
-            errorMessage = $"Error: {ex.Message}";
+            errorMessage = ex.Message;
         }
         finally
         {

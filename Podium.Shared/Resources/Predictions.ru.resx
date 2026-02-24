@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Disciplines_Title" xml:space="preserve"><value>Выберите дисциплину</value></data>
+  <data name="Disciplines_None" xml:space="preserve"><value>Дисциплины пока недоступны. Проверьте позже!</value></data>
+  <data name="Disciplines_ViewSeries" xml:space="preserve"><value>Смотреть серии →</value></data>
+  <data name="Disciplines_SignInToPredict" xml:space="preserve"><value>Пожалуйста, войдите для прогнозов.</value></data>
+  <data name="SeriesSelection_Title" xml:space="preserve"><value>Выберите серию</value></data>
+  <data name="SeriesSelection_None" xml:space="preserve"><value>Серии для этой дисциплины пока недоступны.</value></data>
+  <data name="SeriesSelection_Breadcrumb" xml:space="preserve"><value>Дисциплины</value></data>
+  <data name="SeriesSelection_ViewEvents" xml:space="preserve"><value>Смотреть события →</value></data>
+  <data name="SeasonEvents_Title" xml:space="preserve"><value>Выберите событие</value></data>
+  <data name="SeasonEvents_Breadcrumb" xml:space="preserve"><value>Главная</value></data>
+  <data name="SeasonEvents_None" xml:space="preserve"><value>Нет предстоящих событий. Проверьте позже!</value></data>
+  <data name="SeasonEvents_OpenPredictions" xml:space="preserve"><value>Открыто для прогнозов</value></data>
+  <data name="SeasonEvents_Closed" xml:space="preserve"><value>Закрыто</value></data>
+  <data name="Predict_Title" xml:space="preserve"><value>Предскажи подиум</value></data>
+  <data name="Predict_FirstPlace" xml:space="preserve"><value>Первое место</value></data>
+  <data name="Predict_SecondPlace" xml:space="preserve"><value>Второе место</value></data>
+  <data name="Predict_ThirdPlace" xml:space="preserve"><value>Третье место</value></data>
+  <data name="Predict_YourPrediction" xml:space="preserve"><value>Ваш прогноз</value></data>
+  <data name="Predict_Btn_Submit" xml:space="preserve"><value>Отправить прогноз</value></data>
+  <data name="Predict_Btn_Update" xml:space="preserve"><value>Обновить прогноз</value></data>
+  <data name="Predict_Btn_Submitting" xml:space="preserve"><value>Отправка...</value></data>
+  <data name="Predict_SignIn" xml:space="preserve"><value>Пожалуйста, войдите для прогнозов.</value></data>
+  <data name="Predict_SelectAll" xml:space="preserve"><value>Выберите все три позиции для отправки.</value></data>
+  <data name="Predict_Closed" xml:space="preserve"><value>Событие закрыто для прогнозов.</value></data>
+  <data name="Predict_PreviousPrediction" xml:space="preserve"><value>Ваш предыдущий прогноз:</value></data>
+  <data name="Predict_1st" xml:space="preserve"><value>1-е:</value></data>
+  <data name="Predict_2nd" xml:space="preserve"><value>2-е:</value></data>
+  <data name="Predict_3rd" xml:space="preserve"><value>3-е:</value></data>
+  <data name="MyPredictions_Title" xml:space="preserve"><value>Мои прогнозы</value></data>
+  <data name="MyPredictions_SignIn" xml:space="preserve"><value>Пожалуйста, войдите для просмотра прогнозов.</value></data>
+  <data name="MyPredictions_None" xml:space="preserve"><value>У вас пока нет прогнозов.</value></data>
+  <data name="MyPredictions_FirstPrediction" xml:space="preserve"><value>Сделать первый прогноз</value></data>
+  <data name="MyPredictions_Loading" xml:space="preserve"><value>Загрузка ваших прогнозов...</value></data>
+  <data name="MyPredictions_FilterDiscipline" xml:space="preserve"><value>Дисциплина:</value></data>
+  <data name="MyPredictions_FilterSeries" xml:space="preserve"><value>Серия:</value></data>
+  <data name="MyPredictions_FilterSeason" xml:space="preserve"><value>Сезон:</value></data>
+  <data name="MyPredictions_AllDisciplines" xml:space="preserve"><value>Все дисциплины</value></data>
+  <data name="MyPredictions_AllSeries" xml:space="preserve"><value>Все серии</value></data>
+  <data name="MyPredictions_AllSeasons" xml:space="preserve"><value>Все сезоны</value></data>
+  <data name="MyPredictions_IncludeInactive" xml:space="preserve"><value>Включить неактивные сезоны</value></data>
+  <data name="Predict_Submitted" xml:space="preserve"><value>Прогноз успешно отправлен!</value></data>
+  <data name="Predict_SubmitFailed" xml:space="preserve"><value>Ошибка отправки. Пожалуйста, повторите попытку.</value></data>
+  <data name="Events_Breadcrumb_Series" xml:space="preserve"><value>Серии</value></data>
+  <data name="Events_Breadcrumb_Events" xml:space="preserve"><value>События</value></data>
+  <data name="Events_NoActiveSeason" xml:space="preserve"><value>Активный сезон для этой серии не найден.</value></data>
+  <data name="Events_LoadFailed" xml:space="preserve"><value>Ошибка загрузки событий.</value></data>
+  <data name="Predict_EventNotFound" xml:space="preserve"><value>Событие не найдено.</value></data>
+  <data name="Predict_CompetitorsLoadFailed" xml:space="preserve"><value>Ошибка загрузки участников.</value></data>
+  <data name="MyPredictions_Inactive" xml:space="preserve"><value>Неактивный</value></data>
+  <data name="MyPredictions_Location" xml:space="preserve"><value>Место:</value></data>
+  <data name="MyPredictions_Date" xml:space="preserve"><value>Дата:</value></data>
+  <data name="MyPredictions_Pts" xml:space="preserve"><value>очк.</value></data>
+  <data name="MyPredictions_Pending" xml:space="preserve"><value>Ожидание</value></data>
+  <data name="MyPredictions_YourPrediction" xml:space="preserve"><value>Ваш прогноз</value></data>
+  <data name="MyPredictions_ActualResults" xml:space="preserve"><value>Фактические результаты</value></data>
+  <data name="MyPredictions_Submitted" xml:space="preserve"><value>Отправлено:</value></data>
+</root>

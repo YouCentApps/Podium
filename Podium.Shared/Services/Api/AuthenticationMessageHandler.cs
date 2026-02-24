@@ -4,37 +4,39 @@ using Podium.Shared.Services.State;
 namespace Podium.Shared.Services.Api;
 
 /// <summary>
-/// HTTP message handler that automatically injects the X-Session-Id header
-/// from the AuthStateService into all API requests (except auth endpoints)
-/// and handles session expiration (401 Unauthorized)
+/// HTTP message handler that automatically injects the X-Session-Id and Accept-Language
+/// headers from state services into all API requests, and handles session expiration.
 /// </summary>
 public class AuthenticationMessageHandler : DelegatingHandler
 {
     private readonly AuthStateService _authStateService;
+    private readonly LanguageStateService _languageStateService;
 
-    public AuthenticationMessageHandler(AuthStateService authStateService)
+    public AuthenticationMessageHandler(AuthStateService authStateService, LanguageStateService languageStateService)
     {
         _authStateService = authStateService;
+        _languageStateService = languageStateService;
     }
 
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
-        // Don't add session header to auth endpoints (they don't need it)
         var isAuthEndpoint = request.RequestUri?.PathAndQuery.Contains("/api/auth/") ?? false;
-        
+
         if (!isAuthEndpoint && !string.IsNullOrEmpty(_authStateService.SessionId))
         {
             request.Headers.Add("X-Session-Id", _authStateService.SessionId);
         }
 
+        // Always send Accept-Language so the API responds in the user's language
+        request.Headers.AcceptLanguage.Clear();
+        request.Headers.AcceptLanguage.ParseAdd(_languageStateService.CurrentLanguageCode);
+
         var response = await base.SendAsync(request, cancellationToken);
 
-        // Handle authentication failures - session expired or invalid
         if (response.StatusCode == HttpStatusCode.Unauthorized && !isAuthEndpoint)
         {
-            // Trigger session expiration handling
             await _authStateService.HandleSessionExpiredAsync();
         }
 

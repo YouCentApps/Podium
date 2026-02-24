@@ -29,11 +29,15 @@ public class BrowserStorageService : IStorageService
     {
         try
         {
-            var json = await _jsRuntime.InvokeAsync<string?>("localStorage.getItem", key);
-            if (string.IsNullOrEmpty(json))
+            var raw = await _jsRuntime.InvokeAsync<string?>("localStorage.getItem", key);
+            if (string.IsNullOrEmpty(raw))
                 return default;
 
-            return JsonSerializer.Deserialize<T>(json);
+            // Strings are stored raw (no JSON wrapper) for JS interop compatibility
+            if (typeof(T) == typeof(string))
+                return (T?)(object?)raw;
+
+            return JsonSerializer.Deserialize<T>(raw);
         }
         catch
         {
@@ -45,8 +49,9 @@ public class BrowserStorageService : IStorageService
     {
         try
         {
-            var json = JsonSerializer.Serialize(value);
-            await _jsRuntime.InvokeVoidAsync("localStorage.setItem", key, json);
+            // Strings are stored raw so plain JS (podiumCulture.get/set) can read them
+            var data = value is string str ? str : JsonSerializer.Serialize(value);
+            await _jsRuntime.InvokeVoidAsync("localStorage.setItem", key, data);
         }
         catch
         {

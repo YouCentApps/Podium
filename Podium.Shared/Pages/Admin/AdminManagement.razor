@@ -7,6 +7,7 @@
 @inject AdminStateService AdminState
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
+@inject IStringLocalizer<AdminRes> L
 
 <PageTitle>Manage Administrators - Admin</PageTitle>
 
@@ -18,7 +19,7 @@
 
     @if (loading)
     {
-        <div class="loading">Loading administrators...</div>
+        <div class="loading">@L["Admin_Loading"]</div>
     }
     else if (!string.IsNullOrEmpty(errorMessage))
     {
@@ -29,7 +30,7 @@
         @if (showForm)
         {
             <div class="admin-form">
-                <h3>@(editingAdmin == null ? "Create" : "Edit") Administrator</h3>
+                <h3>@(editingAdmin == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) Administrator</h3>
                 
                 @if (editingAdmin == null)
                 {
@@ -79,7 +80,7 @@
                 <div class="form-group">
                     <label>
                         <input type="checkbox" @bind="formIsActive" />
-                        Active (can access admin features)
+                        @L["Admin_Label_Active"] (can access admin features)
                     </label>
                 </div>
                 <div class="form-group">
@@ -89,11 +90,11 @@
                     </label>
                 </div>
                 <div class="form-actions">
-                    <button class="btn btn-secondary" @onclick="CancelForm">Cancel</button>
+                    <button class="btn btn-secondary" @onclick="CancelForm">@L["Admin_Btn_Cancel"]</button>
                     <button class="btn btn-primary" 
                             @onclick="SaveAdmin" 
                             disabled="@(saving || (editingAdmin == null && selectedUser == null))">
-                        @(saving ? "Saving..." : "Save")
+                        @(saving ? L["Admin_Btn_Saving"].Value : L["Admin_Btn_Save"].Value)
                     </button>
                 </div>
                 @if (!string.IsNullOrEmpty(formError))
@@ -124,7 +125,7 @@
                             <td>@GetEmail(admin.UserId)</td>
                             <td>
                                 <span class="badge @(admin.IsActive ? "badge-success" : "badge-inactive")">
-                                    @(admin.IsActive ? "Active" : "Inactive")
+                                    @(admin.IsActive ? L["Admin_Status_Active"].Value : L["Admin_Status_Inactive"].Value)
                                 </span>
                             </td>
                             <td>
@@ -151,10 +152,10 @@
                                 }
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" @onclick="() => EditAdmin(admin)">Edit</button>
+                                <button class="btn btn-sm btn-secondary" @onclick="() => EditAdmin(admin)">@L["Admin_Btn_Edit"]</button>
                                 <button class="btn btn-sm btn-danger" @onclick="() => ConfirmDelete(admin)" 
                                         disabled="@(admin.UserId == AuthState.UserId)">
-                                    Delete
+                                    @L["Admin_Btn_Delete"]
                                 </button>
                             </td>
                         </tr>

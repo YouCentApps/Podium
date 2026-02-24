@@ -2,16 +2,18 @@
 @inject IPodiumApiClient ApiClient
 @inject AuthStateService AuthState
 @inject NavigationManager Navigation
+@inject IStringLocalizer<Predictions> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>My Predictions - Podium</PageTitle>
 
 <div class="page-container">
-    <h1>My Predictions</h1>
+    <h1>@L["MyPredictions_Title"]</h1>
 
     @if (!AuthState.IsAuthenticated)
     {
         <div class="alert alert-warning">
-            Please <a href="/signin">sign in</a> to view your predictions.
+            @L["MyPredictions_SignIn"]
         </div>
         return;
     }
@@ -19,7 +21,7 @@
     @if (isLoading)
     {
         <div class="loading-spinner">
-            <p>Loading your predictions...</p>
+            <p>@L["MyPredictions_Loading"]</p>
         </div>
     }
     else if (!string.IsNullOrEmpty(errorMessage))
@@ -29,8 +31,8 @@
     else if (predictions.Count == 0)
     {
         <div class="alert alert-info">
-            <p>You haven't made any predictions yet.</p>
-            <a href="/disciplines" class="btn btn-primary">Make Your First Prediction</a>
+            <p>@L["MyPredictions_None"]</p>
+            <a href="/disciplines" class="btn btn-primary">@L["MyPredictions_FirstPrediction"]</a>
         </div>
     }
     else
@@ -39,9 +41,9 @@
 
             <div class="filter-row">
                 <label>
-                    Discipline:
+                    @L["MyPredictions_FilterDiscipline"]
                     <select @bind="selectedDisciplineId" @bind:after="OnDisciplineChanged">
-                        <option value="">All Disciplines</option>
+                        <option value="">@L["MyPredictions_AllDisciplines"]</option>
                         @foreach (var discipline in availableDisciplines)
                         {
                             <option value="@discipline.DisciplineId">@discipline.DisciplineDisplayName</option>
@@ -52,9 +54,9 @@
                 @if (!string.IsNullOrEmpty(selectedDisciplineId))
                 {
                     <label>
-                        Series:
+                        @L["MyPredictions_FilterSeries"]
                         <select @bind="selectedSeriesId" @bind:after="OnSeriesChanged">
-                            <option value="">All Series</option>
+                            <option value="">@L["MyPredictions_AllSeries"]</option>
                             @foreach (var series in availableSeries)
                             {
                                 <option value="@series.SeriesId">@series.SeriesDisplayName</option>
@@ -66,9 +68,9 @@
                 @if (!string.IsNullOrEmpty(selectedSeriesId))
                 {
                     <label>
-                        Season:
+                        @L["MyPredictions_FilterSeason"]
                         <select @bind="selectedSeasonId" @bind:after="ApplyFilters">
-                            <option value="">All Seasons</option>
+                            <option value="">@L["MyPredictions_AllSeasons"]</option>
                             @foreach (var season in availableSeasons)
                             {
                                 <option value="@season.SeasonId">@season.SeasonName</option>
@@ -80,7 +82,7 @@
             <div class="filter-row">
                 <label>
                     <input type="checkbox" @bind="showInactiveSeasons" @bind:after="ApplyFilters" />
-                    Include inactive seasons (need to update filter above after changing!)
+                    @L["MyPredictions_IncludeInactive"]
                 </label>
             </div>
         </div>
@@ -119,40 +121,40 @@
                                             <span class="season-badge">@pred.SeasonName</span>
                                             @if (!pred.SeasonIsActive)
                                             {
-                                                <span class="inactive-badge">Inactive</span>
+                                                <span class="inactive-badge">@L["MyPredictions_Inactive"]</span>
                                             }
                                         </div>
                                         <div class="event-meta">
-                                            <span>Location: @pred.EventLocation</span>
-                                            <span>Date: @pred.EventDate.ToString("MMM dd, yyyy")</span>
+                                            <span>@L["MyPredictions_Location"] @pred.EventLocation</span>
+                                            <span>@L["MyPredictions_Date"] @pred.EventDate.ToString("MMM dd, yyyy")</span>
                                             <span class="event-status @pred.EventStatus.ToLower()">@pred.EventStatus</span>
                                         </div>
                                     </div>
                                 </div>
                                 @if (pred.PointsEarned.HasValue)
                                 {
-                                    <span class="points-badge">@pred.PointsEarned pts</span>
+                                    <span class="points-badge">@pred.PointsEarned @L["MyPredictions_Pts"]</span>
                                 }
                                 else
                                 {
-                                    <span class="pending-badge">Pending</span>
+                                    <span class="pending-badge">@L["MyPredictions_Pending"]</span>
                                 }
                             </div>
 
                             <div class="prediction-content">
                                 <div class="prediction-section">
-                                    <h4>Your Prediction</h4>
+                                    <h4>@L["MyPredictions_YourPrediction"]</h4>
                                     <div class="prediction-podium">
                                         <div class="prediction-position">
-                                            <span class="medal gold">1st</span>
+                                            <span class="medal gold">@L["Predict_1st"]</span>
                                             <span>@pred.FirstPlaceName</span>
                                         </div>
                                         <div class="prediction-position">
-                                            <span class="medal silver">2nd</span>
+                                            <span class="medal silver">@L["Predict_2nd"]</span>
                                             <span>@pred.SecondPlaceName</span>
                                         </div>
                                         <div class="prediction-position">
-                                            <span class="medal bronze">3rd</span>
+                                            <span class="medal bronze">@L["Predict_3rd"]</span>
                                             <span>@pred.ThirdPlaceName</span>
                                         </div>
                                     </div>
@@ -161,22 +163,22 @@
                                 @if (pred.EventStatus == "Completed" && !string.IsNullOrEmpty(pred.ActualFirstPlaceName))
                                 {
                                     <div class="prediction-section actual-results">
-                                        <h4>Actual Results</h4>
+                                        <h4>@L["MyPredictions_ActualResults"]</h4>
                                         <div class="actual-podium">
                                             <div class="actual-position">
-                                                <span class="medal gold small">1st</span>
+                                                <span class="medal gold small">@L["Predict_1st"]</span>
                                                 <span class="@(pred.FirstPlaceId == pred.ActualFirstPlaceId ? "correct" : "")">
                                                     @pred.ActualFirstPlaceName
                                                 </span>
                                             </div>
                                             <div class="actual-position">
-                                                <span class="medal silver small">2nd</span>
+                                                <span class="medal silver small">@L["Predict_2nd"]</span>
                                                 <span class="@(pred.SecondPlaceId == pred.ActualSecondPlaceId ? "correct" : "")">
                                                     @pred.ActualSecondPlaceName
                                                 </span>
                                             </div>
                                             <div class="actual-position">
-                                                <span class="medal bronze small">3rd</span>
+                                                <span class="medal bronze small">@L["Predict_3rd"]</span>
                                                 <span class="@(pred.ThirdPlaceId == pred.ActualThirdPlaceId ? "correct" : "")">
                                                     @pred.ActualThirdPlaceName
                                                 </span>
@@ -187,7 +189,7 @@
                             </div>
 
                             <div class="prediction-footer">
-                                <small>Submitted: @pred.SubmittedDate.ToString("MMM dd, yyyy HH:mm")</small>
+                                <small>@L["MyPredictions_Submitted"] @pred.SubmittedDate.ToString("MMM dd, yyyy HH:mm")</small>
                             </div>
                         </div>
                     }
