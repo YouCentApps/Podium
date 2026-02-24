@@ -34,9 +34,9 @@ builder.Services.AddCors(options =>
         options.AddPolicy("AllowPodiumClients", policy =>
         {
             policy.WithOrigins(
-                "https://yourdomain.com",           // Your production web app domain
-                "https://www.yourdomain.com"        // www variant
-                // Add more production domains as needed
+                "https://youcentpodium.azurewebsites.net",           // Your production web app domain
+                "https://www.youcentpodium.azurewebsites.net"        // www variant
+                                                                  // Add more production domains as needed
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
