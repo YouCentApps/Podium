@@ -34,7 +34,7 @@ namespace Podium.Native
             // Production configuration
             var appConfig = new AppConfiguration 
             { 
-                ApiBaseUrl = "https://api.yourproductiondomain.com",
+                ApiBaseUrl = "https://youcent-podium-api.azurewebsites.net",
                 IsDevelopment = false
             };
 #endif
