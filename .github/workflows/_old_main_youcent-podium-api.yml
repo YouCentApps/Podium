@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Deploy youcent-podium-api
+name: Build and deploy ASP.Net Core app to Azure Web App - youcent-podium-api
 
 on:
   push:
@@ -24,10 +24,10 @@ jobs:
           dotnet-version: '10.x'
 
       - name: Build with dotnet
-        run: dotnet build Podium.Api/Podium.Api.csproj --configuration Release
+        run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish Podium.Api/Podium.Api.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -51,9 +51,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1A3674A440D34D8ABA1D7D23E8E084A4 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_20EB8113CE7447919812F1CAF826F120 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_F39F7B07A5AB4696B209E3DFD5A443B8 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_308B52DA7CAD4382AA5A0FFF4C47E614 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D1E3715A5EE2412094A8929629A8E783 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_756005EF29154299A36F6CD9AA130EDE }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -62,5 +62,4 @@ jobs:
           app-name: 'youcent-podium-api'
           slot-name: 'Production'
           package: .
-
           
