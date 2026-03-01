@@ -27,10 +27,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{3726A50E-B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podium.Migration", "Tools\Podium.Migration\Podium.Migration.csproj", "{DCEB8886-7019-AEE1-554C-66D8D49A5A18}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{2CEA3827-BE5C-4E05-9A08-B75AE4410484}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployments", "Deployments", "{2CEA3827-BE5C-4E05-9A08-B75AE4410484}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\api-deploy_youcent-podium-api.yml = .github\workflows\api-deploy_youcent-podium-api.yml
-		.github\workflows\web-app-deploy_youcentpodium.yml = .github\workflows\web-app-deploy_youcentpodium.yml
+		.github\workflows\main_youcent-podium-api.yml = .github\workflows\main_youcent-podium-api.yml
+		.github\workflows\main_youcentpodium.yml = .github\workflows\main_youcentpodium.yml
 	EndProjectSection
 EndProject
 Global
