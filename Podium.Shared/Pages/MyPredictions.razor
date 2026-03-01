@@ -81,7 +81,7 @@
             </div>
             <div class="filter-row">
                 <label>
-                    <input type="checkbox" @bind="showInactiveSeasons" @bind:after="ApplyFilters" />
+                    <input type="checkbox" @bind="showInactiveSeasons" @bind:after="OnIncludeInactiveChanged" />
                     @L["MyPredictions_IncludeInactive"]
                 </label>
             </div>
@@ -638,6 +638,11 @@
         // Reset dependent filters
         selectedSeasonId = "";
         UpdateAvailableFilters();
+        await LoadPredictions();
+    }
+
+    private async Task OnIncludeInactiveChanged()
+    {
         await LoadPredictions();
     }
 }

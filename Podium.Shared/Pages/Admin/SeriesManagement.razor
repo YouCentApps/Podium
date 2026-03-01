@@ -8,6 +8,7 @@
 @inject NavigationManager Navigation
 @inject IPodiumApiClient ApiClient
 @inject IStringLocalizer<AdminRes> L
+@inject IJSRuntime JS
 
 <PageTitle>Manage Series - Admin</PageTitle>
 
@@ -278,7 +279,7 @@
         showForm = true;
     }
 
-    private void EditSeries(Series series)
+    private async Task EditSeries(Series series)
     {
         editingSeries = series;
         formDisciplineId = series.DisciplineId;
@@ -291,6 +292,7 @@
         formIsActive = series.IsActive;
         formError = "";
         showForm = true;
+        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
     }
 
     private void CancelForm()
