@@ -10,15 +10,27 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-// Configure app settings
-var apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? "https://localhost:50001";
-var isDevelopment = builder.HostEnvironment.IsDevelopment();
 
-var appConfig = new AppConfiguration 
-{ 
-    ApiBaseUrl = apiBaseUrl,
-    IsDevelopment = isDevelopment
+#if DEBUG
+
+var appConfig = new AppConfiguration
+{
+    ApiBaseUrl = AppConfiguration.ApiBaseUrlDevelopment,
+    IsDevelopment = true
 };
+
+#else
+
+var appConfig = new AppConfiguration
+{
+    ApiBaseUrl = AppConfiguration.ApiBaseUrlProduction,
+    IsDevelopment = false
+};
+
+#endif
+
+
+
 
 builder.Services.AddSingleton<IAppConfiguration>(appConfig);
 

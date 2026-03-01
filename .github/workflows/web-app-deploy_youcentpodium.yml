@@ -6,7 +6,7 @@ name: Deploy youcentpodium
 on:
   push:
     branches:
-      - web-app-deploy
+      - main
   workflow_dispatch:
 
 jobs:

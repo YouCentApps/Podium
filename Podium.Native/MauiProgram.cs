@@ -27,14 +27,14 @@ namespace Podium.Native
             // Development configuration
             var appConfig = new AppConfiguration 
             { 
-                ApiBaseUrl = "https://localhost:50001",  // Use 10.0.2.2:50001 for Android emulator
+                ApiBaseUrl = AppConfiguration.ApiBaseUrlDevelopment,  // Use 10.0.2.2:50001 for Android emulator
                 IsDevelopment = true
             };
 #else
             // Production configuration
             var appConfig = new AppConfiguration 
             { 
-                ApiBaseUrl = "https://youcent-podium-api.azurewebsites.net",
+                ApiBaseUrl = AppConfiguration.ApiBaseUrlProduction,
                 IsDevelopment = false
             };
 #endif

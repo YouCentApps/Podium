@@ -6,7 +6,7 @@ name: Deploy youcent-podium-api
 on:
   push:
     branches:
-      - api-deploy
+      - main
   workflow_dispatch:
 
 jobs:
