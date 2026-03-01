@@ -11,14 +11,27 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 // Configure app settings
-var apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? "https://localhost:50001";
 var isDevelopment = builder.HostEnvironment.IsDevelopment();
+#if DEBUG
 
-var appConfig = new AppConfiguration 
-{ 
-    ApiBaseUrl = apiBaseUrl,
+var appConfig = new AppConfiguration
+{
+    ApiBaseUrl = AppConfiguration.ApiBaseUrlDevelopment,
     IsDevelopment = isDevelopment
 };
+
+#else
+
+var appConfig = new AppConfiguration
+{
+    ApiBaseUrl = AppConfiguration.ApiBaseUrlProduction,
+    IsDevelopment = isDevelopment
+};
+
+#endif
+
+
+
 
 builder.Services.AddSingleton<IAppConfiguration>(appConfig);
 

@@ -8,9 +8,9 @@ public interface IAppConfiguration
 
 public class AppConfiguration : IAppConfiguration
 {
-    //public string ApiBaseUrl { get; set; } = "https://localhost:50001";
-    //public bool IsDevelopment { get; set; } = true;
+    public string ApiBaseUrl { get; set; } = ApiBaseUrlDevelopment;
+    public bool IsDevelopment { get; set; } = true;
 
-    public string ApiBaseUrl { get; set; } = "https://youcent-podium-api.azurewebsites.net";
-    public bool IsDevelopment { get; set; } = false;
+    public static string ApiBaseUrlDevelopment = "https://localhost:50001";
+    public static string ApiBaseUrlProduction = "https://youcent-podium-api.azurewebsites.net";
 }
