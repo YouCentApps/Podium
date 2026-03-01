@@ -10,14 +10,13 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-// Configure app settings
-var isDevelopment = builder.HostEnvironment.IsDevelopment();
+
 #if DEBUG
 
 var appConfig = new AppConfiguration
 {
     ApiBaseUrl = AppConfiguration.ApiBaseUrlDevelopment,
-    IsDevelopment = isDevelopment
+    IsDevelopment = true
 };
 
 #else
@@ -25,7 +24,7 @@ var appConfig = new AppConfiguration
 var appConfig = new AppConfiguration
 {
     ApiBaseUrl = AppConfiguration.ApiBaseUrlProduction,
-    IsDevelopment = isDevelopment
+    IsDevelopment = false
 };
 
 #endif
