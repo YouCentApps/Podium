@@ -104,7 +104,7 @@ public static class LeaderboardEndpoints
                     {
                         UserId = user.UserId,
                         Username = user.Username,
-                        Email = user.Email,
+                        Email = "",
                         FirstPlaceId = prediction.FirstPlaceId,
                         FirstPlaceName = prediction.FirstPlaceName,
                         SecondPlaceId = prediction.SecondPlaceId,
@@ -116,7 +116,7 @@ public static class LeaderboardEndpoints
                     });
                 }
             }
-            
+
             // Sort by points (descending) then by submission date (ascending - older is better)
             userPredictions = userPredictions
                 .OrderByDescending(p => p.PointsEarned)
@@ -202,7 +202,7 @@ public static class LeaderboardEndpoints
                     {
                         UserId = user.UserId,
                         Username = user.Username,
-                        Email = user.Email,
+                        Email = "",
                         FirstPlaceId = prediction.FirstPlaceId,
                         FirstPlaceName = prediction.FirstPlaceName,
                         SecondPlaceId = prediction.SecondPlaceId,
@@ -214,7 +214,7 @@ public static class LeaderboardEndpoints
                     });
                 }
             }
-            
+
             // Sort by points (descending) then by submission date (ascending)
             userPredictions = userPredictions
                 .OrderByDescending(p => p.PointsEarned)

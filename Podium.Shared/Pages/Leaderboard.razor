@@ -201,9 +201,9 @@
                                     @foreach (var user in userSearchResults)
                                     {
                                         <div class="search-result-item" @onclick="() => SelectSearchUser(user)">
-                                            <strong>@user.Username</strong> (@user.Email)
-                                            <span class="points-badge">@user.PointsEarned @L["Leaderboard_Pts"]</span>
-                                        </div>
+                                                <strong>@user.Username</strong>
+                                                <span class="points-badge">@user.PointsEarned @L["Leaderboard_Pts"]</span>
+                                            </div>
                                     }
                                 </div>
                             }
@@ -254,7 +254,6 @@
                                                 </td>
                                                 <td>
                                                     <strong>@pred.Username</strong>
-                                                    <div class="user-email">@pred.Email</div>
                                                 </td>
                                                 <td>
                                                     <div class="prediction-display">
