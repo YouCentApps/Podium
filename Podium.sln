@@ -29,8 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podium.Migration", "Tools\P
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployments", "Deployments", "{2CEA3827-BE5C-4E05-9A08-B75AE4410484}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\_old_main_youcent-podium-api.yml = .github\workflows\_old_main_youcent-podium-api.yml
-		.github\workflows\_old_main_youcentpodium.yml = .github\workflows\_old_main_youcentpodium.yml
+		.github\workflows\main_youcent-podium-api.yml = .github\workflows\main_youcent-podium-api.yml
+		.github\workflows\main_youcentpodium.yml = .github\workflows\main_youcentpodium.yml
 	EndProjectSection
 EndProject
 Global
