@@ -28,7 +28,7 @@
     {
         <div class="alert alert-danger">@errorMessage</div>
     }
-    else if (predictions.Count == 0)
+    else if (!hasAnyPredictions)
     {
         <div class="alert alert-info">
             <p>@L["MyPredictions_None"]</p>
@@ -88,6 +88,13 @@
         </div>
 
         <div class="predictions-list">
+            @if (filteredPredictions.Count == 0)
+            {
+                <div class="alert alert-info">
+                    @L["MyPredictions_NoMatchingPredictions"]
+                </div>
+            }
+
             @{
                 var groupedPredictions = filteredPredictions
                     .GroupBy(p => new { p.SeasonId, p.SeasonName, p.SeasonYear, p.SeriesDisplayName })
@@ -518,6 +525,7 @@
     private bool isLoading = true;
     private string? errorMessage;
     private int totalPredictions = 0;
+    private bool hasAnyPredictions = false;
 
     // Filter state
     private bool showInactiveSeasons = false;
@@ -555,11 +563,28 @@
                 selectedDisciplineId,
                 showInactiveSeasons
             );
-            
+
             if (predsResponse.Success && predsResponse.Data != null)
             {
                 predictions = predsResponse.Data.OrderByDescending(p => p.SubmittedDate).ToList();
                 totalPredictions = predictions.Count;
+
+                // If no predictions returned, check if user has ANY predictions at all (including inactive)
+                if (predictions.Count == 0 && !hasAnyPredictions)
+                {
+                    var allPredsResponse = await ApiClient.GetUserPredictionsWithDetailsAsync(
+                        AuthState.UserId!,
+                        includeInactive: true
+                    );
+                    hasAnyPredictions = allPredsResponse.Success
+                        && allPredsResponse.Data != null
+                        && allPredsResponse.Data.Count > 0;
+                }
+                else if (predictions.Count > 0)
+                {
+                    hasAnyPredictions = true;
+                }
+
                 UpdateAvailableFilters();
                 ApplyFilters();
             }

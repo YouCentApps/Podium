@@ -60,4 +60,5 @@
   <data name="MyPredictions_YourPrediction" xml:space="preserve"><value>Ваш прогноз</value></data>
   <data name="MyPredictions_ActualResults" xml:space="preserve"><value>Фактические результаты</value></data>
   <data name="MyPredictions_Submitted" xml:space="preserve"><value>Отправлено:</value></data>
+  <data name="MyPredictions_NoMatchingPredictions" xml:space="preserve"><value>Прогнозы по текущим фильтрам не найдены. Попробуйте включить «Включить неактивные сезоны», чтобы увидеть ваши прошлые прогнозы.</value></data>
 </root>

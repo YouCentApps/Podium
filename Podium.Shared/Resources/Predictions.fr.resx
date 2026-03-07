@@ -60,4 +60,5 @@
   <data name="MyPredictions_YourPrediction" xml:space="preserve"><value>Votre prédiction</value></data>
   <data name="MyPredictions_ActualResults" xml:space="preserve"><value>Résultats réels</value></data>
   <data name="MyPredictions_Submitted" xml:space="preserve"><value>Soumis le :</value></data>
+  <data name="MyPredictions_NoMatchingPredictions" xml:space="preserve"><value>Aucune prédiction trouvée pour les filtres actuels. Essayez d'activer « Inclure les saisons inactives » pour voir vos prédictions passées.</value></data>
 </root>
