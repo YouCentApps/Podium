@@ -60,4 +60,5 @@
   <data name="MyPredictions_YourPrediction" xml:space="preserve"><value>Your Prediction</value></data>
   <data name="MyPredictions_ActualResults" xml:space="preserve"><value>Actual Results</value></data>
   <data name="MyPredictions_Submitted" xml:space="preserve"><value>Submitted:</value></data>
+  <data name="MyPredictions_NoMatchingPredictions" xml:space="preserve"><value>No predictions found for the current filters. Try enabling "Include inactive seasons" to see your past predictions.</value></data>
 </root>
