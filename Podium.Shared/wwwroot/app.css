@@ -611,6 +611,12 @@ input[type="number"].form-control {
     .position-3 {
         order: unset;
     }
+
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
 }
 
 /* Prediction Form */
@@ -795,7 +801,7 @@ input[type="number"].form-control {
 .admin-table {
     background: white;
     border-radius: 12px;
-    overflow: hidden;
+    overflow-x: auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
