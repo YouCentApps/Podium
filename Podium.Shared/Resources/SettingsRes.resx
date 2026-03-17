@@ -59,4 +59,60 @@
   <data name="ManageFavorites_SignInRequired" xml:space="preserve"><value>Please sign in to manage your favorite seasons.</value></data>
   <data name="ManageFavorites_NoSeasons" xml:space="preserve"><value>No seasons available for this series.</value></data>
   <data name="ManageFavorites_AlreadyFavorite" xml:space="preserve"><value>Already Favorite</value></data>
+  <data name="SignInSettings_CurrentMethod" xml:space="preserve"><value>Current method:</value></data>
+  <data name="SignInSettings_EmailOnly_Title" xml:space="preserve"><value>Email Code Only</value></data>
+  <data name="SignInSettings_EmailOnly_Desc" xml:space="preserve"><value>Sign in using a verification code sent to your email</value></data>
+  <data name="SignInSettings_SetupEmailFirst" xml:space="preserve"><value>Set up email first</value></data>
+  <data name="SignInSettings_PasswordOnly_Title" xml:space="preserve"><value>Password Only</value></data>
+  <data name="SignInSettings_PasswordOnly_Desc" xml:space="preserve"><value>Sign in using your email and password</value></data>
+  <data name="SignInSettings_SetupPasswordFirst" xml:space="preserve"><value>Set up password first</value></data>
+  <data name="SignInSettings_Both_Title" xml:space="preserve"><value>Both Methods</value></data>
+  <data name="SignInSettings_Both_Desc" xml:space="preserve"><value>Choose between password or email code when signing in</value></data>
+  <data name="SignInSettings_Both_Requires" xml:space="preserve"><value>Requires both email and password to be set up</value></data>
+  <data name="SignInSettings_Btn_Continue" xml:space="preserve"><value>Continue</value></data>
+  <data name="SignInSettings_ConfirmIdentity" xml:space="preserve"><value>Confirm your identity to change sign-in method to {0}</value></data>
+  <data name="SignInSettings_Verify_Password" xml:space="preserve"><value>Password</value></data>
+  <data name="SignInSettings_Verify_EmailCode" xml:space="preserve"><value>Email Code</value></data>
+  <data name="SignInSettings_Label_YourPassword" xml:space="preserve"><value>Your Password</value></data>
+  <data name="SignInSettings_Placeholder_Password" xml:space="preserve"><value>Enter your password</value></data>
+  <data name="SignInSettings_Btn_Updating" xml:space="preserve"><value>Updating...</value></data>
+  <data name="SignInSettings_Btn_ConfirmChange" xml:space="preserve"><value>Confirm Change</value></data>
+  <data name="SignInSettings_Btn_SendingCode" xml:space="preserve"><value>Sending code...</value></data>
+  <data name="SignInSettings_Btn_SendCode" xml:space="preserve"><value>Send Verification Code</value></data>
+  <data name="SignInSettings_Label_VerifCode" xml:space="preserve"><value>Verification Code</value></data>
+  <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Enter 6-digit code</value></data>
+  <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Verify &amp; Change Method</value></data>
+  <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Send a new code</value></data>
+  <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Enter your new email address. We'll send a verification code to confirm you have access to it.</value></data>
+  <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>New Email Address</value></data>
+  <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>your@email.com</value></data>
+  <data name="UpdateEmail_Btn_SendingCode" xml:space="preserve"><value>Sending code...</value></data>
+  <data name="UpdateEmail_Btn_SendCode" xml:space="preserve"><value>Send Verification Code</value></data>
+  <data name="UpdateEmail_CodeSentTo" xml:space="preserve"><value>We've sent a verification code to</value></data>
+  <data name="UpdateEmail_Label_VerifCode" xml:space="preserve"><value>Verification Code</value></data>
+  <data name="UpdateEmail_Placeholder_Code" xml:space="preserve"><value>Enter 6-digit code</value></data>
+  <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Verifying...</value></data>
+  <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Verify &amp; Update Email</value></data>
+  <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Use a different email</value></data>
+  <data name="UpdateName_Placeholder" xml:space="preserve"><value>Enter new display name</value></data>
+  <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Enter your password</value></data>
+  <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Enter 6-digit code</value></data>
+  <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>Password sign-in is not enabled for your account. To set up a password, first enable password sign-in in your sign-in method settings.</value></data>
+  <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Current Password</value></data>
+  <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Enter current password</value></data>
+  <data name="UpdatePassword_Label_New" xml:space="preserve"><value>New Password</value></data>
+  <data name="UpdatePassword_Placeholder_New" xml:space="preserve"><value>At least 6 characters</value></data>
+  <data name="UpdatePassword_Label_Confirm" xml:space="preserve"><value>Confirm New Password</value></data>
+  <data name="UpdatePassword_Placeholder_Confirm" xml:space="preserve"><value>Re-enter new password</value></data>
+  <data name="UpdatePassword_Btn_Updating" xml:space="preserve"><value>Updating...</value></data>
+  <data name="UpdatePassword_Btn_Update" xml:space="preserve"><value>Update Password</value></data>
+  <data name="UpdatePassword_OtpInfo" xml:space="preserve"><value>Since you don't have a password yet, we'll send a verification code to your email to confirm your identity.</value></data>
+  <data name="UpdatePassword_Btn_SendingCode" xml:space="preserve"><value>Sending code...</value></data>
+  <data name="UpdatePassword_Btn_SendCode" xml:space="preserve"><value>Send Verification Code</value></data>
+  <data name="UpdatePassword_CodeSent" xml:space="preserve"><value>We've sent a verification code to your email.</value></data>
+  <data name="UpdatePassword_Label_VerifCode" xml:space="preserve"><value>Verification Code</value></data>
+  <data name="UpdatePassword_Placeholder_Code" xml:space="preserve"><value>Enter 6-digit code</value></data>
+  <data name="UpdatePassword_Btn_SettingUp" xml:space="preserve"><value>Setting up...</value></data>
+  <data name="UpdatePassword_Btn_SetPassword" xml:space="preserve"><value>Set Password</value></data>
+  <data name="UpdatePassword_Btn_SendNewCode" xml:space="preserve"><value>Send a new code</value></data>
 </root>

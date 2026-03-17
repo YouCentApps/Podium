@@ -10,13 +10,14 @@
 @inject IPodiumApiClient ApiClient
 @inject IJSRuntime JS
 @inject IStringLocalizer<AdminRes> L
+@inject IStringLocalizer<Common> LC
 
 <PageTitle>Manage Competitors - Admin</PageTitle>
 
 <div class="admin-container">
     <div class="admin-header">
-        <h1><span style="font-size: 1.2em;">&#127933;&#65039;</span> Manage Competitors</h1>
-        <button class="btn btn-primary" @onclick="ShowCreateForm">+ Add Competitor</button>
+        <h1><span style="font-size: 1.2em;">&#127933;&#65039;</span> @L["Admin_Competitors_Title"]</h1>
+        <button class="btn btn-primary" @onclick="ShowCreateForm">+ @L["Admin_Competitors_AddCompetitor"]</button>
     </div>
 
     @if (loading)
@@ -44,36 +45,36 @@
         @if (showForm)
         {
             <div class="admin-form" id="competitorForm">
-                <h3>@(editingCompetitor == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) Competitor</h3>
-                
+                <h3>@(editingCompetitor == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) @L["Admin_Competitors_Competitor"]</h3>
+
                 <div class="form-group">
-                    <label>Type:</label>
+                    <label>@L["Admin_Competitors_Label_Type"]:</label>
                     <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
                         <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
                             <input type="radio" name="competitorType" value="Individual" 
                                    checked="@(formType == "Individual")"
                                    @onchange="@(() => formType = "Individual")" />
-                            <span>Individual (Driver)</span>
+                            <span>@L["Admin_Competitors_Type_Individual"]</span>
                         </label>
                         <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
                             <input type="radio" name="competitorType" value="Team" 
                                    checked="@(formType == "Team")"
                                    @onchange="@(() => formType = "Team")" />
-                            <span>Team (Constructor)</span>
+                            <span>@L["Admin_Competitors_Type_Team"]</span>
                         </label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Full Name:</label>
+                    <label>@L["Admin_Competitors_Label_FullName"]:</label>
                     <input type="text" class="form-control" @bind="formName" 
-                           placeholder="e.g., Lewis Hamilton or Red Bull Racing" />
+                           placeholder="@L["Admin_Competitors_Placeholder_Name"]" />
                 </div>
 
                 <div class="form-group">
-                    <label>Short Name:</label>
+                    <label>@L["Admin_Competitors_Label_ShortName"]:</label>
                     <input type="text" class="form-control" @bind="formShortName" 
-                           placeholder="e.g., HAM or RBR (for display)" />
+                           placeholder="@L["Admin_Competitors_Placeholder_ShortName"]" />
                 </div>
 
                 <div class="form-group">
@@ -86,7 +87,7 @@
                 @if (editingCompetitor != null)
                 {
                     <div class="form-group">
-                        <label><strong>Current Season Assignments:</strong></label>
+                        <label><strong>@L["Admin_Competitors_CurrentAssignments"]:</strong></label>
                         @if (assignedSeasonIds.Any())
                         {
                             <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
@@ -104,7 +105,7 @@
                                                 }
                                             </span>
                                             <button class="btn btn-sm btn-danger" @onclick="() => RemoveSeasonAssignment(seasonId)">
-                                                Remove
+                                                @LC["Btn_Remove"]
                                             </button>
                                         </div>
                                     }
@@ -113,15 +114,15 @@
                         }
                         else
                         {
-                            <p style="color: var(--text-light); margin-bottom: 1rem;">No season assignments yet.</p>
+                            <p style="color: var(--text-light); margin-bottom: 1rem;">@L["Admin_Competitors_NoAssignments"]</p>
                         }
 
-                        <label><strong>Add New Season Assignment:</strong></label>
+                        <label><strong>@L["Admin_Competitors_AddAssignment"]:</strong></label>
                         <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
                             <div style="flex: 1; min-width: 200px;">
-                                <label>Discipline:</label>
+                                <label>@L["Admin_Events_Label_Discipline"]:</label>
                                 <select class="form-control" @bind="selectedDisciplineForAssignment" @bind:after="OnAssignmentDisciplineChanged">
-                                    <option value="">-- Select Discipline --</option>
+                                    <option value="">-- @L["Admin_Events_SelectDiscipline"] --</option>
                                     @foreach (var discipline in disciplines)
                                     {
                                         <option value="@discipline.Id">@discipline.DisplayName</option>
@@ -129,10 +130,10 @@
                                 </select>
                             </div>
                             <div style="flex: 1; min-width: 200px;">
-                                <label>Series:</label>
+                                <label>@L["Admin_Events_Label_Series"]:</label>
                                 <select class="form-control" @bind="selectedSeriesForAssignment" @bind:after="OnAssignmentSeriesChanged" 
                                         disabled="@string.IsNullOrEmpty(selectedDisciplineForAssignment)">
-                                    <option value="">-- Select Series --</option>
+                                    <option value="">-- @L["Admin_Events_SelectSeries"] --</option>
                                     @foreach (var series in availableSeriesForAssignment)
                                     {
                                         <option value="@series.Id">@series.DisplayName</option>
@@ -140,10 +141,10 @@
                                 </select>
                             </div>
                             <div style="flex: 1; min-width: 200px;">
-                                <label>Season:</label>
+                                <label>@L["Admin_Events_Label_Season"]:</label>
                                 <select class="form-control" @bind="selectedSeasonForAssignment" 
                                         disabled="@string.IsNullOrEmpty(selectedSeriesForAssignment)">
-                                    <option value="">-- Select Season --</option>
+                                    <option value="">-- @L["Admin_Events_SelectSeason"] --</option>
                                     @foreach (var season in availableSeasonsForAssignment)
                                     {
                                         <option value="@season.Id">@season.Year - @season.Name</option>
@@ -153,7 +154,7 @@
                             <div style="display: flex; align-items: flex-end;">
                                 <button class="btn btn-sm btn-primary" @onclick="AddSeasonAssignment" 
                                         disabled="@string.IsNullOrEmpty(selectedSeasonForAssignment)">
-                                    Add Season
+                                    @L["Admin_Competitors_AddSeason"]
                                 </button>
                             </div>
                         </div>
@@ -175,22 +176,22 @@
 
         <div class="filter-section">
             <div style="flex: 1; max-width: 400px;">
-                <label>Search:</label>
+                <label>@L["Admin_Events_Label_Search"]:</label>
                 <input type="text" class="form-control" @bind="searchQuery" @bind:after="FilterCompetitors" 
-                       placeholder="Search by name..." />
+                       placeholder="@L["Admin_Competitors_SearchPlaceholder"]" />
             </div>
             <div style="flex: 1; max-width: 300px;">
-                <label>Filter by Type:</label>
+                <label>@L["Admin_Competitors_FilterByType"]:</label>
                 <select class="form-control" @bind="selectedTypeFilter" @bind:after="FilterCompetitors">
-                    <option value="">All Types</option>
-                    <option value="Individual">Individuals (Drivers)</option>
-                    <option value="Team">Teams (Constructors)</option>
+                    <option value="">@L["Admin_Competitors_AllTypes"]</option>
+                    <option value="Individual">@L["Admin_Competitors_Type_Individual"]</option>
+                    <option value="Team">@L["Admin_Competitors_Type_Team"]</option>
                 </select>
             </div>
             <div style="flex: 1; max-width: 400px;">
-                <label>Filter by Season:</label>
+                <label>@L["Admin_Competitors_FilterBySeason"]:</label>
                 <select class="form-control" @bind="selectedSeasonFilter" @bind:after="FilterCompetitors">
-                    <option value="">All Seasons</option>
+                    <option value="">@L["Admin_Competitors_AllSeasons"]</option>
                     @foreach (var season in allSeasons.OrderByDescending(s => s.Year))
                     {
                         <option value="@season.Id">@season.Year - @season.Name (@GetSeriesName(season.SeriesId))</option>
@@ -203,13 +204,13 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Short Name</th>
-                        <th>Type</th>
-                        <th>Status</th>
-                        <th>Season Assignments</th>
-                        <th>Podiums</th>
-                        <th>Actions</th>
+                        <th>@L["Admin_Col_Name"]</th>
+                        <th>@L["Admin_Competitors_Label_ShortName"]</th>
+                        <th>@L["Admin_Competitors_Label_Type"]</th>
+                        <th>@L["Admin_Col_Status"]</th>
+                        <th>@L["Admin_Competitors_Col_Assignments"]</th>
+                        <th>@L["Admin_Results_Col_Podium"]</th>
+                        <th>@L["Admin_Col_Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -233,12 +234,12 @@
                                 {
                                     var count = competitorSeasonAssignments[competitor.Id].Count;
                                     <small style="color: #2563eb;">
-                                        <strong>Seasons:</strong> @count
+                                        <strong>@L["Admin_Seasons_Dep_Seasons"]:</strong> @count
                                     </small>
                                 }
                                 else
                                 {
-                                    <small style="color: #6b7280;">None</small>
+                                    <small style="color: #6b7280;">@L["Admin_Seasons_Dep_None"]</small>
                                 }
                             </td>
                             <td>
@@ -249,12 +250,12 @@
                                         @if (deps.ResultCount > 0)
                                         {
                                             <span style="color: #10b981;">
-                                                <strong>@deps.ResultCount</strong> podiums
+                                                <strong>@deps.ResultCount</strong> @L["Admin_Results_Col_Podium"].Value.ToLower()
                                             </span>
                                         }
                                         else
                                         {
-                                            <span style="color: #6b7280;">None</span>
+                                            <span style="color: #6b7280;">@L["Admin_Seasons_Dep_None"]</span>
                                         }
                                     </small>
                                 }
@@ -270,7 +271,7 @@
             @if (!filteredCompetitors.Any())
             {
                 <div class="no-results">
-                    <p>No competitors found. @(string.IsNullOrEmpty(searchQuery) && string.IsNullOrEmpty(selectedTypeFilter) ? "Create one to get started!" : "Try adjusting your filters.")</p>
+                    <p>@L["Admin_Competitors_NoCompetitors"]</p>
                 </div>
             }
         </div>
@@ -279,13 +280,13 @@
         {
             <div class="pagination">
                 <button class="btn btn-secondary" @onclick="PreviousPage" disabled="@(currentPage == 1)">
-                    &laquo; Previous
+                    &laquo; @L["Admin_Pagination_Previous"]
                 </button>
                 <span style="margin: 0 1rem;">
                     Page @currentPage of @totalPages (@filteredCompetitors.Count total)
                 </span>
                 <button class="btn btn-secondary" @onclick="NextPage" disabled="@(currentPage == totalPages)">
-                    Next &raquo;
+                    @L["Admin_Pagination_Next"] &raquo;
                 </button>
             </div>
         }

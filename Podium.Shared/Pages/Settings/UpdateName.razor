@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                     <label>@L["UpdateName_NewName"]</label>
-                    <input type="text" class="form-control" @bind="newUsername" placeholder="Enter new display name" />
+                    <input type="text" class="form-control" @bind="newUsername" placeholder="@L["UpdateName_Placeholder"]" />
                 </div>
 
                 @if (!otpSent)
@@ -64,7 +64,7 @@
                     {
                         <div class="form-group">
                             <label>@L["UpdateName_Verify_Password"]</label>
-                            <input type="password" class="form-control" @bind="password" placeholder="Enter your password" />
+                            <input type="password" class="form-control" @bind="password" placeholder="@L["UpdateName_Placeholder_Password"]" />
                         </div>
 
                         <button class="btn btn-primary w-100" @onclick="UpdateWithPassword" disabled="@isLoading">
@@ -82,7 +82,7 @@
                 {
                     <div class="form-group">
                         <label>@L["UpdateName_Verify_EmailCode"]</label>
-                        <input type="text" class="form-control" @bind="otpCode" placeholder="Enter 6-digit code" maxlength="6" />
+                        <input type="text" class="form-control" @bind="otpCode" placeholder="@L["UpdateName_Placeholder_Code"]" maxlength="6" />
                     </div>
 
                     <button class="btn btn-primary w-100" @onclick="UpdateWithOtp" disabled="@isLoading">

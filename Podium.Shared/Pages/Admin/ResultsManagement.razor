@@ -14,7 +14,7 @@
 
 <div class="admin-container">
     <div class="admin-header">
-        <h1>&#128202; Manage Event Results</h1>
+        <h1>&#128202; @L["Admin_Results_Title"]</h1>
     </div>
 
     @if (loading)
@@ -41,16 +41,16 @@
 
         <div class="filter-section">
             <div style="flex: 1; max-width: 400px;">
-                <label>Search Events:</label>
+                <label>@L["Admin_Results_SearchEvents"]:</label>
                 <input type="text" class="form-control" @bind="searchQuery" @bind:after="FilterEvents" 
-                       placeholder="Search by event name..." />
+                       placeholder="@L["Admin_Results_SearchPlaceholder"]" />
             </div>
             <div style="flex: 1; max-width: 250px;">
-                <label>Filter by Results:</label>
+                <label>@L["Admin_Results_FilterByResults"]:</label>
                 <select class="form-control" @bind="selectedResultFilter" @bind:after="FilterEvents">
-                    <option value="">All Events</option>
-                    <option value="HasResult">Has Result</option>
-                    <option value="NoResult">No Result</option>
+                    <option value="">@L["Admin_Results_AllEvents"]</option>
+                    <option value="HasResult">@L["Admin_Results_HasResult"]</option>
+                    <option value="NoResult">@L["Admin_Results_NoResult"]</option>
                 </select>
             </div>
         </div>
@@ -60,12 +60,12 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Event</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Result Status</th>
-                        <th>Podium</th>
-                        <th>Actions</th>
+                        <th>@L["Admin_Events_Event"]</th>
+                        <th>@L["Admin_Events_Col_Date"]</th>
+                        <th>@L["Admin_Col_Status"]</th>
+                        <th>@L["Admin_Results_Col_ResultStatus"]</th>
+                        <th>@L["Admin_Results_Col_Podium"]</th>
+                        <th>@L["Admin_Col_Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,7 +90,7 @@
                             <td>
                                 @if (hasResult)
                                 {
-                                    <span class="badge badge-success">&#10004; Entered</span>
+                                    <span class="badge badge-success">&#10004; @L["Admin_Results_Entered"]</span>
                                 }
                                 else
                                 {
@@ -102,9 +102,9 @@
                                 {
                                     var result = eventResults[evt.Id];
                                     <small>
-                                        <strong>1st:</strong> @result.FirstPlaceName<br />
-                                        <strong>2nd:</strong> @result.SecondPlaceName<br />
-                                        <strong>3rd:</strong> @result.ThirdPlaceName
+                                        <strong>@L["Admin_Results_1st"]:</strong> @result.FirstPlaceName<br />
+                                        <strong>@L["Admin_Results_2nd"]:</strong> @result.SecondPlaceName<br />
+                                        <strong>@L["Admin_Results_3rd"]:</strong> @result.ThirdPlaceName
                                     </small>
                                 }
                                 else
@@ -116,7 +116,7 @@
                                 @if (evt.Status == "Completed")
                                 {
                                     <button class="btn btn-sm btn-primary" @onclick="() => EnterOrEditResult(evt)">
-                                        @(hasResult ? L["Admin_Btn_Edit"].Value : L["Admin_Btn_Create"].Value) Result
+                                        @(hasResult ? L["Admin_Btn_Edit"].Value : L["Admin_Btn_Create"].Value) @L["Admin_Events_Col_Result"]
                                     </button>
                                     @if (hasResult)
                                     {
@@ -126,7 +126,7 @@
                                 else
                                 {
                                     <small style="color: var(--text-light);">
-                                        Event must be Completed
+                                        @L["Admin_Results_MustBeCompleted"]
                                     </small>
                                 }
                             </td>
@@ -137,7 +137,7 @@
             @if (!filteredEvents.Any())
             {
                 <div class="no-results">
-                    <p>No events found. Try adjusting your filters.</p>
+                    <p>@L["Admin_Results_NoEvents"]</p>
                 </div>
             }
         </div>
@@ -146,13 +146,13 @@
         {
             <div class="pagination">
                 <button class="btn btn-secondary" @onclick="PreviousPage" disabled="@(currentPage == 1)">
-                    &laquo; Previous
+                    &laquo; @L["Admin_Pagination_Previous"]
                 </button>
                 <span style="margin: 0 1rem;">
                     Page @currentPage of @totalPages (@filteredEvents.Count total)
                 </span>
                 <button class="btn btn-secondary" @onclick="NextPage" disabled="@(currentPage == totalPages)">
-                    Next &raquo;
+                    @L["Admin_Pagination_Next"] &raquo;
                 </button>
             </div>
         }
@@ -164,7 +164,7 @@
     <div class="modal-overlay">
         <div class="modal-content" style="max-width: 700px;">
             <div class="modal-header">
-                <h3>@(isEditingResult ? L["Admin_Btn_Edit"].Value : L["Admin_Btn_Create"].Value) Result - @selectedEvent?.DisplayName</h3>
+                <h3>@(isEditingResult ? L["Admin_Btn_Edit"].Value : L["Admin_Btn_Create"].Value) @L["Admin_Events_Col_Result"] - @selectedEvent?.DisplayName</h3>
             </div>
             <div class="modal-body">
                 @if (!string.IsNullOrEmpty(formError))
@@ -173,15 +173,15 @@
                 }
 
                 <div style="margin-bottom: 1.5rem; padding: 1rem; background: var(--bg-light); border-radius: 8px;">
-                    <strong>Event:</strong> @selectedEvent?.DisplayName<br />
-                    <strong>Date:</strong> @selectedEvent?.EventDate.ToString("MMM dd, yyyy")<br />
-                    <strong>Season:</strong> @GetSeasonDisplay(selectedEvent?.SeasonId ?? "")
+                    <strong>@L["Admin_Events_Event"]:</strong> @selectedEvent?.DisplayName<br />
+                    <strong>@L["Admin_Events_Col_Date"]:</strong> @selectedEvent?.EventDate.ToString("MMM dd, yyyy")<br />
+                    <strong>@L["Admin_Events_Label_Season"]:</strong> @GetSeasonDisplay(selectedEvent?.SeasonId ?? "")
                 </div>
 
                 <div class="form-group">
-                    <label><strong>&#127941; First Place:</strong></label>
+                    <label><strong>&#127941; @L["Admin_Results_1st"]:</strong></label>
                     <select class="form-control" @bind="formFirstPlaceId" @bind:after="OnFirstPlaceChanged">
-                        <option value="">-- Select Competitor --</option>
+                        <option value="">-- @L["Admin_Results_SelectCompetitor"] --</option>
                         @foreach (var competitor in availableCompetitors)
                         {
                             <option value="@competitor.Id">@competitor.Name (@competitor.ShortName)</option>
@@ -190,15 +190,15 @@
                     @if (!availableCompetitors.Any())
                     {
                         <small style="color: var(--danger-color); display: block; margin-top: 0.5rem;">
-                            &#9888; No competitors assigned to this season. Please go to Competitor Management and assign competitors to this season first.
+                            &#9888; @L["Admin_Results_NoCompetitors"]
                         </small>
                     }
                 </div>
 
                 <div class="form-group">
-                    <label><strong>&#129352; Second Place:</strong></label>
+                    <label><strong>&#129352; @L["Admin_Results_2nd"]:</strong></label>
                     <select class="form-control" @bind="formSecondPlaceId" @bind:after="OnSecondPlaceChanged">
-                        <option value="">-- Select Competitor --</option>
+                        <option value="">-- @L["Admin_Results_SelectCompetitor"] --</option>
                         @foreach (var competitor in availableCompetitors.Where(c => c.Id != formFirstPlaceId))
                         {
                             <option value="@competitor.Id">@competitor.Name (@competitor.ShortName)</option>
@@ -207,9 +207,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label><strong>&#129353; Third Place:</strong></label>
+                    <label><strong>&#129353; @L["Admin_Results_3rd"]:</strong></label>
                     <select class="form-control" @bind="formThirdPlaceId" @bind:after="OnThirdPlaceChanged">
-                        <option value="">-- Select Competitor --</option>
+                        <option value="">-- @L["Admin_Results_SelectCompetitor"] --</option>
                         @foreach (var competitor in availableCompetitors.Where(c => c.Id != formFirstPlaceId && c.Id != formSecondPlaceId))
                         {
                             <option value="@competitor.Id">@competitor.Name (@competitor.ShortName)</option>
@@ -220,7 +220,7 @@
                 @if (!string.IsNullOrEmpty(formFirstPlaceId) && !string.IsNullOrEmpty(formSecondPlaceId) && !string.IsNullOrEmpty(formThirdPlaceId))
                 {
                     <div style="margin-top: 1.5rem; padding: 1rem; background: #d1fae5; border-radius: 8px; border: 1px solid #6ee7b7;">
-                        <h4 style="margin-top: 0;">Preview Podium:</h4>
+                        <h4 style="margin-top: 0;">@L["Admin_Results_PreviewPodium"]:</h4>
                         <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
                             <div style="text-align: center; order: 2;">
                                 <div style="font-size: 2rem;">&#127941;</div>
@@ -241,7 +241,7 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" @onclick="CancelResultForm">@L["Admin_Btn_Cancel"]</button>
                 <button class="btn btn-primary" @onclick="SaveResult" disabled="@saving">
-                    @(saving ? L["Admin_Btn_Saving"].Value : L["Admin_Btn_Save"].Value) Result
+                    @(saving ? L["Admin_Btn_Saving"].Value : L["Admin_Btn_Save"].Value) @L["Admin_Events_Col_Result"]
                 </button>
             </div>
         </div>
@@ -249,16 +249,16 @@
 }
 
 <ConfirmDialog IsVisible="showDeleteConfirm"
-               Title="Delete Result"
+               Title="@L["Admin_Results_DeleteResult"]"
                Message="@deleteConfirmMessage"
-               ConfirmText="Delete"
+               ConfirmText="@L["Admin_Btn_Delete"]"
                OnConfirm="DeleteResult"
                OnCancel="CancelDelete" />
 
 <ConfirmDialog IsVisible="showRecalculateWarning"
-               Title="Recalculate Points Warning"
+               Title="@L["Admin_Results_RecalcWarning"]"
                Message="@recalculateWarningMessage"
-               ConfirmText="Save & Recalculate"
+               ConfirmText="@L["Admin_Results_SaveRecalc"]"
                OnConfirm="ConfirmSaveAndRecalculate"
                OnCancel="CancelSaveResult" />
 

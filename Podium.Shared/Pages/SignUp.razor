@@ -28,7 +28,7 @@
             <div class="auth-form">
                 <div class="form-group">
                     <label>@L["SignUp_Label_Username"] <span class="text-danger">@L["SignUp_Required"]</span></label>
-                    <input type="text" class="form-control" @bind="username" placeholder="Your username (can be used to sign in)" maxlength="50" />
+                    <input type="text" class="form-control" @bind="username" placeholder="@L["SignUp_Placeholder_Username"]" maxlength="50" />
                     <small class="form-text text-muted">@L["SignUp_Hint_Username"]</small>
                 </div>
 
@@ -45,7 +45,7 @@
                 {
                     <div class="form-group">
                         <label>@L["SignUp_Label_Email"] <span class="text-danger">@L["SignUp_Required"]</span></label>
-                        <input type="email" class="form-control" @bind="email" placeholder="your@email.com" />
+                        <input type="email" class="form-control" @bind="email" placeholder="@L["SignUp_Placeholder_Email"]" />
                         <small class="form-text text-muted">@L["SignUp_Hint_EmailRequired"]</small>
                     </div>
                 }
@@ -53,7 +53,7 @@
                 {
                     <div class="form-group">
                         <label>@L["SignUp_Label_EmailOptional"]</label>
-                        <input type="email" class="form-control" @bind="email" placeholder="your@email.com" />
+                        <input type="email" class="form-control" @bind="email" placeholder="@L["SignUp_Placeholder_Email"]" />
                     </div>
                 }
 
@@ -61,7 +61,7 @@
                 {
                     <div class="form-group">
                         <label>@L["SignUp_Label_Password"] <span class="text-danger">@L["SignUp_Required"]</span></label>
-                        <input type="password" class="form-control" @bind="password" placeholder="6-100 characters, no spaces" maxlength="100" />
+                        <input type="password" class="form-control" @bind="password" placeholder="@L["SignUp_Placeholder_Password"]" maxlength="100" />
                         <small class="form-text text-muted">@L["SignUp_Hint_Password"]</small>
                     </div>
 

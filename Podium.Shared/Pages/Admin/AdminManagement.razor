@@ -13,8 +13,8 @@
 
 <div class="admin-container">
     <div class="admin-header">
-        <h1><span style="font-size: 1.2em;">&#128737;&#65039;</span> Manage Administrators</h1>
-        <button class="btn btn-primary" @onclick="ShowCreateForm">+ Add Administrator</button>
+        <h1><span style="font-size: 1.2em;">&#128737;&#65039;</span> @L["Admin_Admins_Title"]</h1>
+        <button class="btn btn-primary" @onclick="ShowCreateForm">+ @L["Admin_Admins_AddAdmin"]</button>
     </div>
 
     @if (loading)
@@ -30,18 +30,18 @@
         @if (showForm)
         {
             <div class="admin-form">
-                <h3>@(editingAdmin == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) Administrator</h3>
-                
+                <h3>@(editingAdmin == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) @L["Admin_Admins_Administrator"]</h3>
+
                 @if (editingAdmin == null)
                 {
                     <div class="form-group">
-                        <label>Search User:</label>
+                        <label>@L["Admin_Admins_SearchUser"]:</label>
                         <input type="text" 
                                class="form-control" 
                                @bind="searchQuery" 
                                @bind:event="oninput"
                                @onkeyup="SearchUsers"
-                               placeholder="Type username or email..." />
+                               placeholder="@L["Admin_Admins_SearchPlaceholder"]" />
                         
                         @if (searchResults.Any())
                         {
@@ -61,8 +61,8 @@
                         @if (selectedUser != null)
                         {
                             <div class="selected-user">
-                                <strong>Selected:</strong> @selectedUser.Username (@selectedUser.Email)
-                                <button class="btn-link" @onclick="ClearSelection">Clear</button>
+                                <strong>@L["Admin_Admins_Selected"]:</strong> @selectedUser.Username (@selectedUser.Email)
+                                <button class="btn-link" @onclick="ClearSelection">@L["Admin_Admins_Clear"]</button>
                             </div>
                         }
                     </div>
@@ -70,7 +70,7 @@
                 else
                 {
                     <div class="form-group">
-                        <label>User:</label>
+                        <label>@L["Admin_Admins_User"]:</label>
                         <div class="user-display">
                             <strong>@GetUserDisplay(editingAdmin.UserId)</strong>
                         </div>
@@ -80,13 +80,13 @@
                 <div class="form-group">
                     <label>
                         <input type="checkbox" @bind="formIsActive" />
-                        @L["Admin_Label_Active"] (can access admin features)
+                        @L["Admin_Label_Active"] @L["Admin_Admins_CanAccessAdmin"]
                     </label>
                 </div>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" @bind="formCanManageAdmins" />
-                        Can Manage Admins (can create/edit/remove other admins)
+                        @L["Admin_Admins_CanManageAdmins"]
                     </label>
                 </div>
                 <div class="form-actions">
@@ -108,13 +108,13 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Can Manage Admins</th>
-                        <th>Created</th>
-                        <th>Created By</th>
-                        <th>Actions</th>
+                        <th>@L["Admin_Users_Col_Username"]</th>
+                        <th>@L["Admin_Users_Col_Email"]</th>
+                        <th>@L["Admin_Col_Status"]</th>
+                        <th>@L["Admin_Admins_Col_CanManage"]</th>
+                        <th>@L["Admin_Col_Created"]</th>
+                        <th>@L["Admin_Admins_Col_CreatedBy"]</th>
+                        <th>@L["Admin_Col_Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -131,11 +131,11 @@
                             <td>
                                 @if (admin.CanManageAdmins)
                                 {
-                                    <span class="badge badge-success">Yes</span>
+                                    <span class="badge badge-success">@L["Admin_Admins_Yes"]</span>
                                 }
                                 else
                                 {
-                                    <span class="badge badge-inactive">No</span>
+                                    <span class="badge badge-inactive">@L["Admin_Admins_No"]</span>
                                 }
                             </td>
                             <td>@admin.CreatedDate.ToShortDateString()</td>

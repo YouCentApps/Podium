@@ -43,32 +43,32 @@
                 @if (!otpSent)
                 {
                     <div class="info-box info">
-                        <p>Enter your new email address. We'll send a verification code to confirm you have access to it.</p>
+                        <p>@L["UpdateEmail_EnterNewEmail"]</p>
                     </div>
 
                     <div class="form-group">
-                        <label>New Email Address</label>
-                        <input type="email" class="form-control" @bind="newEmail" placeholder="your@email.com" />
+                        <label>@L["UpdateEmail_Label_NewEmail"]</label>
+                        <input type="email" class="form-control" @bind="newEmail" placeholder="@L["UpdateEmail_Placeholder_Email"]" />
                     </div>
 
                     <button class="btn btn-primary w-100" @onclick="SendOtp" disabled="@isLoading">
-                        @if (isLoading) { <span>Sending code...</span> } else { <span>Send Verification Code</span> }
+                        @if (isLoading) { <span>@L["UpdateEmail_Btn_SendingCode"]</span> } else { <span>@L["UpdateEmail_Btn_SendCode"]</span> }
                     </button>
                 }
                 else
                 {
-                    <p class="text-center">We've sent a verification code to <strong>@newEmail</strong></p>
+                    <p class="text-center">@L["UpdateEmail_CodeSentTo"] <strong>@newEmail</strong></p>
 
                     <div class="form-group">
-                        <label>Verification Code</label>
-                        <input type="text" class="form-control" @bind="otpCode" placeholder="Enter 6-digit code" maxlength="6" />
+                        <label>@L["UpdateEmail_Label_VerifCode"]</label>
+                        <input type="text" class="form-control" @bind="otpCode" placeholder="@L["UpdateEmail_Placeholder_Code"]" maxlength="6" />
                     </div>
 
                     <button class="btn btn-primary w-100" @onclick="ConfirmEmail" disabled="@isLoading">
-                        @if (isLoading) { <span>Verifying...</span> } else { <span>Verify & Update Email</span> }
+                        @if (isLoading) { <span>@L["UpdateEmail_Btn_Verifying"]</span> } else { <span>@L["UpdateEmail_Btn_VerifyUpdate"]</span> }
                     </button>
 
-                    <button class="btn btn-link w-100" @onclick="ResetOtp">Use a different email</button>
+                    <button class="btn btn-link w-100" @onclick="ResetOtp">@L["UpdateEmail_Btn_DifferentEmail"]</button>
                 }
             </div>
         }

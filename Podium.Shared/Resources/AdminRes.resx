@@ -60,4 +60,157 @@
   <data name="Admin_User_NotFound_Desc" xml:space="preserve"><value>The requested user could not be found.</value></data>
   <data name="Admin_Btn_BackToUsers" xml:space="preserve"><value>Back to Users</value></data>
   <data name="Admin_Never" xml:space="preserve"><value>Never</value></data>
+  <data name="Admin_Users_SearchPlaceholder" xml:space="preserve"><value>Search users by username or email...</value></data>
+  <data name="Admin_Users_EditUser" xml:space="preserve"><value>Edit User</value></data>
+  <data name="Admin_Users_Col_Username" xml:space="preserve"><value>Username</value></data>
+  <data name="Admin_Users_Col_Email" xml:space="preserve"><value>Email</value></data>
+  <data name="Admin_Users_Col_Registered" xml:space="preserve"><value>Registered</value></data>
+  <data name="Admin_Users_Col_LastLogin" xml:space="preserve"><value>Last Login</value></data>
+  <data name="Admin_Users_NoUsers" xml:space="preserve"><value>No users found.</value></data>
+  <data name="Admin_Users_NoMatch" xml:space="preserve"><value>No users match your search query.</value></data>
+  <data name="Admin_UserDetails_AccountInfo" xml:space="preserve"><value>Account Information</value></data>
+  <data name="Admin_UserDetails_UserId" xml:space="preserve"><value>User ID:</value></data>
+  <data name="Admin_UserDetails_PreferredAuth" xml:space="preserve"><value>Preferred Auth:</value></data>
+  <data name="Admin_UserDetails_Activity" xml:space="preserve"><value>User Activity</value></data>
+  <data name="Admin_UserDetails_Predictions" xml:space="preserve"><value>Predictions:</value></data>
+  <data name="Admin_UserDetails_AdminStatus" xml:space="preserve"><value>Admin Status:</value></data>
+  <data name="Admin_UserDetails_IsAdmin" xml:space="preserve"><value>Is Admin</value></data>
+  <data name="Admin_UserDetails_NotAdmin" xml:space="preserve"><value>Not Admin</value></data>
+  <data name="Admin_UserDetails_HasDependencies" xml:space="preserve"><value>This user has existing data and cannot be deleted. You can deactivate the account instead.</value></data>
+  <data name="Admin_UserDetails_ManageAdminPriv" xml:space="preserve"><value>Manage Admin Privileges</value></data>
+  <data name="Admin_Events_AddEvent" xml:space="preserve"><value>Add Event</value></data>
+  <data name="Admin_Events_Event" xml:space="preserve"><value>Event</value></data>
+  <data name="Admin_Events_SelectSeason" xml:space="preserve"><value>Select Season</value></data>
+  <data name="Admin_Events_Label_Discipline" xml:space="preserve"><value>Discipline</value></data>
+  <data name="Admin_Events_SelectDiscipline" xml:space="preserve"><value>Select Discipline</value></data>
+  <data name="Admin_Events_Label_Series" xml:space="preserve"><value>Series</value></data>
+  <data name="Admin_Events_SelectSeries" xml:space="preserve"><value>Select Series</value></data>
+  <data name="Admin_Events_Label_Season" xml:space="preserve"><value>Season</value></data>
+  <data name="Admin_Events_SeasonReadonly" xml:space="preserve"><value>Season cannot be changed after creation</value></data>
+  <data name="Admin_Events_Label_EventNumber" xml:space="preserve"><value>Event Number</value></data>
+  <data name="Admin_Events_Placeholder_EventNumber" xml:space="preserve"><value>e.g., 1, 2, 3...</value></data>
+  <data name="Admin_Events_Suggested" xml:space="preserve"><value>Suggested</value></data>
+  <data name="Admin_Events_Label_EventName" xml:space="preserve"><value>Event Name</value></data>
+  <data name="Admin_Events_Placeholder_EventName" xml:space="preserve"><value>e.g., Australian Grand Prix</value></data>
+  <data name="Admin_Events_Placeholder_DisplayName" xml:space="preserve"><value>e.g., Australia - Melbourne</value></data>
+  <data name="Admin_Events_Label_EventDate" xml:space="preserve"><value>Event Date (UTC)</value></data>
+  <data name="Admin_Events_Label_Location" xml:space="preserve"><value>Location</value></data>
+  <data name="Admin_Events_Placeholder_Location" xml:space="preserve"><value>e.g., Albert Park Circuit, Melbourne</value></data>
+  <data name="Admin_Events_Status_Upcoming" xml:space="preserve"><value>Upcoming</value></data>
+  <data name="Admin_Events_Status_InProgress" xml:space="preserve"><value>In Progress</value></data>
+  <data name="Admin_Events_Status_Completed" xml:space="preserve"><value>Completed</value></data>
+  <data name="Admin_Events_Label_Search" xml:space="preserve"><value>Search</value></data>
+  <data name="Admin_Events_SearchPlaceholder" xml:space="preserve"><value>Search by name or location...</value></data>
+  <data name="Admin_Events_Label_FilterStatus" xml:space="preserve"><value>Filter by Status</value></data>
+  <data name="Admin_Events_AllStatuses" xml:space="preserve"><value>All Statuses</value></data>
+  <data name="Admin_Events_Col_Date" xml:space="preserve"><value>Date</value></data>
+  <data name="Admin_Events_Col_Predictions" xml:space="preserve"><value>Predictions</value></data>
+  <data name="Admin_Events_Col_Result" xml:space="preserve"><value>Result</value></data>
+  <data name="Admin_Events_NoEvents" xml:space="preserve"><value>No events found. Try adjusting your filters.</value></data>
+  <data name="Admin_Results_SearchEvents" xml:space="preserve"><value>Search Events</value></data>
+  <data name="Admin_Results_SearchPlaceholder" xml:space="preserve"><value>Search by event name...</value></data>
+  <data name="Admin_Results_FilterByResults" xml:space="preserve"><value>Filter by Results</value></data>
+  <data name="Admin_Results_AllEvents" xml:space="preserve"><value>All Events</value></data>
+  <data name="Admin_Results_HasResult" xml:space="preserve"><value>Has Result</value></data>
+  <data name="Admin_Results_NoResult" xml:space="preserve"><value>No Result</value></data>
+  <data name="Admin_Results_Col_ResultStatus" xml:space="preserve"><value>Result Status</value></data>
+  <data name="Admin_Results_Col_Podium" xml:space="preserve"><value>Podium</value></data>
+  <data name="Admin_Results_Entered" xml:space="preserve"><value>Entered</value></data>
+  <data name="Admin_Results_1st" xml:space="preserve"><value>1st</value></data>
+  <data name="Admin_Results_2nd" xml:space="preserve"><value>2nd</value></data>
+  <data name="Admin_Results_3rd" xml:space="preserve"><value>3rd</value></data>
+  <data name="Admin_Results_MustBeCompleted" xml:space="preserve"><value>Event must be Completed</value></data>
+  <data name="Admin_Results_NoEvents" xml:space="preserve"><value>No events found. Try adjusting your filters.</value></data>
+  <data name="Admin_Results_SelectCompetitor" xml:space="preserve"><value>Select Competitor</value></data>
+  <data name="Admin_Results_NoCompetitors" xml:space="preserve"><value>No competitors assigned to this season. Please go to Competitor Management and assign competitors first.</value></data>
+  <data name="Admin_Results_PreviewPodium" xml:space="preserve"><value>Preview Podium</value></data>
+  <data name="Admin_Results_DeleteResult" xml:space="preserve"><value>Delete Result</value></data>
+  <data name="Admin_Results_RecalcWarning" xml:space="preserve"><value>Recalculate Points Warning</value></data>
+  <data name="Admin_Results_SaveRecalc" xml:space="preserve"><value>Save &amp; Recalculate</value></data>
+  <data name="Admin_Seasons_AddSeason" xml:space="preserve"><value>Add Season</value></data>
+  <data name="Admin_Seasons_Season" xml:space="preserve"><value>Season</value></data>
+  <data name="Admin_Seasons_Label_Discipline" xml:space="preserve"><value>Discipline</value></data>
+  <data name="Admin_Seasons_SelectDiscipline" xml:space="preserve"><value>Select Discipline</value></data>
+  <data name="Admin_Seasons_Label_Series" xml:space="preserve"><value>Series</value></data>
+  <data name="Admin_Seasons_SelectSeries" xml:space="preserve"><value>Select Series</value></data>
+  <data name="Admin_Seasons_Label_Year" xml:space="preserve"><value>Year</value></data>
+  <data name="Admin_Seasons_Placeholder_Year" xml:space="preserve"><value>e.g., 2024</value></data>
+  <data name="Admin_Seasons_Placeholder_Name" xml:space="preserve"><value>e.g., 2024 Season</value></data>
+  <data name="Admin_Seasons_Label_StartDate" xml:space="preserve"><value>Start Date</value></data>
+  <data name="Admin_Seasons_Label_EndDate" xml:space="preserve"><value>End Date (Optional)</value></data>
+  <data name="Admin_Seasons_Label_BestN" xml:space="preserve"><value>Best N Results (for ranking)</value></data>
+  <data name="Admin_Seasons_Placeholder_BestN" xml:space="preserve"><value>Leave empty to use total points</value></data>
+  <data name="Admin_Seasons_Hint_BestN" xml:space="preserve"><value>Optional: Number of best results to count for leaderboard ranking</value></data>
+  <data name="Admin_Seasons_Col_EndDate" xml:space="preserve"><value>End Date</value></data>
+  <data name="Admin_Seasons_Col_Dependencies" xml:space="preserve"><value>Dependencies</value></data>
+  <data name="Admin_Seasons_Ongoing" xml:space="preserve"><value>Ongoing</value></data>
+  <data name="Admin_Seasons_SetActive" xml:space="preserve"><value>Set Active</value></data>
+  <data name="Admin_Seasons_Dep_Events" xml:space="preserve"><value>Events</value></data>
+  <data name="Admin_Seasons_Dep_Competitors" xml:space="preserve"><value>Competitors</value></data>
+  <data name="Admin_Seasons_Dep_Seasons" xml:space="preserve"><value>Seasons</value></data>
+  <data name="Admin_Seasons_Dep_None" xml:space="preserve"><value>None</value></data>
+  <data name="Admin_Seasons_Recalc" xml:space="preserve"><value>Recalc Stats</value></data>
+  <data name="Admin_Seasons_ShowCompetitors" xml:space="preserve"><value>Show Competitors</value></data>
+  <data name="Admin_Seasons_NoSeasons" xml:space="preserve"><value>No seasons found. Try adjusting your filters.</value></data>
+  <data name="Admin_Series_AddSeries" xml:space="preserve"><value>Add Series</value></data>
+  <data name="Admin_Series_Series" xml:space="preserve"><value>Series</value></data>
+  <data name="Admin_Series_Label_Discipline" xml:space="preserve"><value>Discipline</value></data>
+  <data name="Admin_Series_SelectDiscipline" xml:space="preserve"><value>Select Discipline</value></data>
+  <data name="Admin_Series_Placeholder_Name" xml:space="preserve"><value>e.g., Formula One World Championship</value></data>
+  <data name="Admin_Series_Placeholder_DisplayName" xml:space="preserve"><value>e.g., Formula 1</value></data>
+  <data name="Admin_Series_Label_GoverningBody" xml:space="preserve"><value>Governing Body</value></data>
+  <data name="Admin_Series_Placeholder_GoverningBody" xml:space="preserve"><value>e.g., FIA</value></data>
+  <data name="Admin_Series_Label_Region" xml:space="preserve"><value>Region</value></data>
+  <data name="Admin_Series_Placeholder_Region" xml:space="preserve"><value>e.g., Global, Europe, North America</value></data>
+  <data name="Admin_Series_Label_VehicleType" xml:space="preserve"><value>Vehicle Type</value></data>
+  <data name="Admin_Series_Placeholder_VehicleType" xml:space="preserve"><value>e.g., Formula Car, Rally Car</value></data>
+  <data name="Admin_Series_NoSeries" xml:space="preserve"><value>No series found. Try adjusting your filters.</value></data>
+  <data name="Admin_Competitors_AddCompetitor" xml:space="preserve"><value>Add Competitor</value></data>
+  <data name="Admin_Competitors_Competitor" xml:space="preserve"><value>Competitor</value></data>
+  <data name="Admin_Competitors_Label_Type" xml:space="preserve"><value>Type</value></data>
+  <data name="Admin_Competitors_Type_Individual" xml:space="preserve"><value>Individual (Driver)</value></data>
+  <data name="Admin_Competitors_Type_Team" xml:space="preserve"><value>Team (Constructor)</value></data>
+  <data name="Admin_Competitors_Label_FullName" xml:space="preserve"><value>Full Name</value></data>
+  <data name="Admin_Competitors_Placeholder_Name" xml:space="preserve"><value>e.g., Lewis Hamilton or Red Bull Racing</value></data>
+  <data name="Admin_Competitors_Label_ShortName" xml:space="preserve"><value>Short Name</value></data>
+  <data name="Admin_Competitors_Placeholder_ShortName" xml:space="preserve"><value>e.g., HAM or RBR (for display)</value></data>
+  <data name="Admin_Competitors_CurrentAssignments" xml:space="preserve"><value>Current Season Assignments</value></data>
+  <data name="Admin_Competitors_NoAssignments" xml:space="preserve"><value>No season assignments yet.</value></data>
+  <data name="Admin_Competitors_AddAssignment" xml:space="preserve"><value>Add New Season Assignment</value></data>
+  <data name="Admin_Competitors_AddSeason" xml:space="preserve"><value>Add Season</value></data>
+  <data name="Admin_Competitors_SearchPlaceholder" xml:space="preserve"><value>Search by name...</value></data>
+  <data name="Admin_Competitors_FilterByType" xml:space="preserve"><value>Filter by Type</value></data>
+  <data name="Admin_Competitors_AllTypes" xml:space="preserve"><value>All Types</value></data>
+  <data name="Admin_Competitors_FilterBySeason" xml:space="preserve"><value>Filter by Season</value></data>
+  <data name="Admin_Competitors_AllSeasons" xml:space="preserve"><value>All Seasons</value></data>
+  <data name="Admin_Competitors_Col_Assignments" xml:space="preserve"><value>Season Assignments</value></data>
+  <data name="Admin_Competitors_NoCompetitors" xml:space="preserve"><value>No competitors found. Try adjusting your filters.</value></data>
+  <data name="Admin_Disciplines_AddDiscipline" xml:space="preserve"><value>Add Discipline</value></data>
+  <data name="Admin_Disciplines_Discipline" xml:space="preserve"><value>Discipline</value></data>
+  <data name="Admin_Disciplines_Placeholder_Name" xml:space="preserve"><value>e.g., Single-Seater Racing</value></data>
+  <data name="Admin_Disciplines_Placeholder_DisplayName" xml:space="preserve"><value>e.g., Formula Racing</value></data>
+  <data name="Admin_Admins_AddAdmin" xml:space="preserve"><value>Add Administrator</value></data>
+  <data name="Admin_Admins_Administrator" xml:space="preserve"><value>Administrator</value></data>
+  <data name="Admin_Admins_SearchUser" xml:space="preserve"><value>Search User</value></data>
+  <data name="Admin_Admins_SearchPlaceholder" xml:space="preserve"><value>Type username or email...</value></data>
+  <data name="Admin_Admins_Selected" xml:space="preserve"><value>Selected</value></data>
+  <data name="Admin_Admins_Clear" xml:space="preserve"><value>Clear</value></data>
+  <data name="Admin_Admins_User" xml:space="preserve"><value>User</value></data>
+  <data name="Admin_Admins_CanManageAdmins" xml:space="preserve"><value>Can Manage Admins (can create/edit/remove other admins)</value></data>
+  <data name="Admin_Admins_Col_CanManage" xml:space="preserve"><value>Can Manage Admins</value></data>
+  <data name="Admin_Admins_Col_CreatedBy" xml:space="preserve"><value>Created By</value></data>
+  <data name="Admin_Admins_Yes" xml:space="preserve"><value>Yes</value></data>
+  <data name="Admin_Admins_No" xml:space="preserve"><value>No</value></data>
+  <data name="Admin_Admins_CanAccessAdmin" xml:space="preserve"><value>(can access admin features)</value></data>
+  <data name="Admin_Pagination_Previous" xml:space="preserve"><value>Previous</value></data>
+  <data name="Admin_Pagination_Next" xml:space="preserve"><value>Next</value></data>
+  <data name="Admin_Events_AcceptsPredictions" xml:space="preserve"><value>(accepts predictions)</value></data>
+  <data name="Admin_Seasons_RecalcStarting" xml:space="preserve"><value>⏳ Starting statistics recalculation for {0}...</value></data>
+  <data name="Admin_Seasons_RecalcProgress" xml:space="preserve"><value>⏳ Recalculating statistics for {0}... ({1}%)</value></data>
+  <data name="Admin_Seasons_RecalcProgressDetailed" xml:space="preserve"><value>⏳ Recalculating statistics for {0}... ({1}% - {2}/{3} users)</value></data>
+  <data name="Admin_Seasons_RecalcCompleted" xml:space="preserve"><value>✓ Statistics recalculation completed! Processed {0} user(s).</value></data>
+  <data name="Admin_Seasons_RecalcCompletedVerified" xml:space="preserve"><value>✓ Statistics recalculation completed! Updated {0} user(s).</value></data>
+  <data name="Admin_Seasons_RecalcFailed" xml:space="preserve"><value>❌ Recalculation failed: {0}</value></data>
+  <data name="Admin_Seasons_RecalcFailedStart" xml:space="preserve"><value>Failed to start recalculation</value></data>
+  <data name="Admin_Seasons_RecalcAlreadyRunning" xml:space="preserve"><value>Another recalculation is already in progress</value></data>
 </root>

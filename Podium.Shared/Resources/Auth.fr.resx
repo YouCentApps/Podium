@@ -65,4 +65,7 @@
   <data name="SignIn_OtpSent" xml:space="preserve"><value>Code de vérification envoyé ! Vérifiez votre email.</value></data>
   <data name="SignIn_OtpFailed" xml:space="preserve"><value>Échec de l'envoi du code. Veuillez réessayer.</value></data>
   <data name="SignIn_InvalidCode" xml:space="preserve"><value>Code invalide ou expiré.</value></data>
+  <data name="SignUp_Placeholder_Username" xml:space="preserve"><value>Votre nom d'utilisateur (peut être utilisé pour la connexion)</value></data>
+  <data name="SignUp_Placeholder_Email" xml:space="preserve"><value>votre@email.com</value></data>
+  <data name="SignUp_Placeholder_Password" xml:space="preserve"><value>6-100 caractères, sans espaces</value></data>
 </root>

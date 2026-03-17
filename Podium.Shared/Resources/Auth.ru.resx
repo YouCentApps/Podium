@@ -65,4 +65,7 @@
   <data name="SignIn_OtpSent" xml:space="preserve"><value>Код подтверждения отправлен! Проверьте почту.</value></data>
   <data name="SignIn_OtpFailed" xml:space="preserve"><value>Не удалось отправить код. Попробуйте ещё раз.</value></data>
   <data name="SignIn_InvalidCode" xml:space="preserve"><value>Неверный или просроченный код.</value></data>
+  <data name="SignUp_Placeholder_Username" xml:space="preserve"><value>Ваше имя пользователя (может использоваться для входа)</value></data>
+  <data name="SignUp_Placeholder_Email" xml:space="preserve"><value>ваш@email.com</value></data>
+  <data name="SignUp_Placeholder_Password" xml:space="preserve"><value>6-100 символов, без пробелов</value></data>
 </root>

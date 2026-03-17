@@ -40,4 +40,178 @@
   <data name="Admin_User_NotFound_Desc" xml:space="preserve"><value>Запрошенный пользователь не найден.</value></data>
   <data name="Admin_Btn_BackToUsers" xml:space="preserve"><value>Назад к пользователям</value></data>
   <data name="Admin_Never" xml:space="preserve"><value>Никогда</value></data>
+  <data name="Admin_Users_Title" xml:space="preserve"><value>Управление пользователями</value></data>
+  <data name="Admin_Disciplines_Title" xml:space="preserve"><value>Управление дисциплинами</value></data>
+  <data name="Admin_Series_Title" xml:space="preserve"><value>Управление сериями</value></data>
+  <data name="Admin_Seasons_Title" xml:space="preserve"><value>Управление сезонами</value></data>
+  <data name="Admin_Events_Title" xml:space="preserve"><value>Управление событиями</value></data>
+  <data name="Admin_Competitors_Title" xml:space="preserve"><value>Управление участниками</value></data>
+  <data name="Admin_Results_Title" xml:space="preserve"><value>Управление результатами</value></data>
+  <data name="Admin_Admins_Title" xml:space="preserve"><value>Управление администраторами</value></data>
+  <data name="Admin_Btn_Create" xml:space="preserve"><value>Создать</value></data>
+  <data name="Admin_Btn_Edit" xml:space="preserve"><value>Изменить</value></data>
+  <data name="Admin_Btn_Delete" xml:space="preserve"><value>Удалить</value></data>
+  <data name="Admin_Btn_Save" xml:space="preserve"><value>Сохранить</value></data>
+  <data name="Admin_Btn_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Admin_Btn_Confirm" xml:space="preserve"><value>Подтвердить</value></data>
+  <data name="Admin_NoData" xml:space="preserve"><value>Нет доступных данных.</value></data>
+  <data name="Admin_ConfirmDelete" xml:space="preserve"><value>Вы уверены, что хотите удалить этот элемент?</value></data>
+  <data name="Admin_DeleteSuccess" xml:space="preserve"><value>Элемент успешно удалён.</value></data>
+  <data name="Admin_SaveSuccess" xml:space="preserve"><value>Успешно сохранено.</value></data>
+  <data name="Admin_Error" xml:space="preserve"><value>Произошла ошибка. Пожалуйста, попробуйте ещё раз.</value></data>
+  <data name="Admin_Dashboard_Subtitle_Extended" xml:space="preserve"><value>Управлять дисциплинами, сериями, сезонами, участниками и многим другим</value></data>
+  <data name="Admin_Placeholders_Title" xml:space="preserve"><value>Управление заполнителями</value></data>
+  <data name="Admin_Users_SearchPlaceholder" xml:space="preserve"><value>Поиск по имени или email...</value></data>
+  <data name="Admin_Users_EditUser" xml:space="preserve"><value>Редактировать пользователя</value></data>
+  <data name="Admin_Users_Col_Username" xml:space="preserve"><value>Имя пользователя</value></data>
+  <data name="Admin_Users_Col_Email" xml:space="preserve"><value>Email</value></data>
+  <data name="Admin_Users_Col_Registered" xml:space="preserve"><value>Зарегистрирован</value></data>
+  <data name="Admin_Users_Col_LastLogin" xml:space="preserve"><value>Последний вход</value></data>
+  <data name="Admin_Users_NoUsers" xml:space="preserve"><value>Пользователи не найдены.</value></data>
+  <data name="Admin_Users_NoMatch" xml:space="preserve"><value>Нет пользователей, соответствующих запросу.</value></data>
+  <data name="Admin_UserDetails_AccountInfo" xml:space="preserve"><value>Информация об аккаунте</value></data>
+  <data name="Admin_UserDetails_UserId" xml:space="preserve"><value>ID пользователя:</value></data>
+  <data name="Admin_UserDetails_PreferredAuth" xml:space="preserve"><value>Предпочт. аутентификация:</value></data>
+  <data name="Admin_UserDetails_Activity" xml:space="preserve"><value>Активность пользователя</value></data>
+  <data name="Admin_UserDetails_Predictions" xml:space="preserve"><value>Прогнозы:</value></data>
+  <data name="Admin_UserDetails_AdminStatus" xml:space="preserve"><value>Статус администратора:</value></data>
+  <data name="Admin_UserDetails_IsAdmin" xml:space="preserve"><value>Администратор</value></data>
+  <data name="Admin_UserDetails_NotAdmin" xml:space="preserve"><value>Не администратор</value></data>
+  <data name="Admin_UserDetails_HasDependencies" xml:space="preserve"><value>У пользователя есть данные, удаление невозможно. Вы можете деактивировать аккаунт.</value></data>
+  <data name="Admin_UserDetails_ManageAdminPriv" xml:space="preserve"><value>Управление правами администратора</value></data>
+  <data name="Admin_Events_AddEvent" xml:space="preserve"><value>Добавить событие</value></data>
+  <data name="Admin_Events_Event" xml:space="preserve"><value>Событие</value></data>
+  <data name="Admin_Events_SelectSeason" xml:space="preserve"><value>Выберите сезон</value></data>
+  <data name="Admin_Events_Label_Discipline" xml:space="preserve"><value>Дисциплина</value></data>
+  <data name="Admin_Events_SelectDiscipline" xml:space="preserve"><value>Выберите дисциплину</value></data>
+  <data name="Admin_Events_Label_Series" xml:space="preserve"><value>Серия</value></data>
+  <data name="Admin_Events_SelectSeries" xml:space="preserve"><value>Выберите серию</value></data>
+  <data name="Admin_Events_Label_Season" xml:space="preserve"><value>Сезон</value></data>
+  <data name="Admin_Events_SeasonReadonly" xml:space="preserve"><value>Сезон нельзя изменить после создания</value></data>
+  <data name="Admin_Events_Label_EventNumber" xml:space="preserve"><value>Номер события</value></data>
+  <data name="Admin_Events_Placeholder_EventNumber" xml:space="preserve"><value>напр., 1, 2, 3...</value></data>
+  <data name="Admin_Events_Suggested" xml:space="preserve"><value>Предложено</value></data>
+  <data name="Admin_Events_Label_EventName" xml:space="preserve"><value>Название события</value></data>
+  <data name="Admin_Events_Placeholder_EventName" xml:space="preserve"><value>напр., Гран-при Австралии</value></data>
+  <data name="Admin_Events_Placeholder_DisplayName" xml:space="preserve"><value>напр., Австралия — Мельбурн</value></data>
+  <data name="Admin_Events_Label_EventDate" xml:space="preserve"><value>Дата события (UTC)</value></data>
+  <data name="Admin_Events_Label_Location" xml:space="preserve"><value>Место проведения</value></data>
+  <data name="Admin_Events_Placeholder_Location" xml:space="preserve"><value>напр., Автодром Альберт-Парк, Мельбурн</value></data>
+  <data name="Admin_Events_Status_Upcoming" xml:space="preserve"><value>Предстоящее</value></data>
+  <data name="Admin_Events_Status_InProgress" xml:space="preserve"><value>В процессе</value></data>
+  <data name="Admin_Events_Status_Completed" xml:space="preserve"><value>Завершено</value></data>
+  <data name="Admin_Events_Label_Search" xml:space="preserve"><value>Поиск</value></data>
+  <data name="Admin_Events_SearchPlaceholder" xml:space="preserve"><value>Поиск по названию или месту...</value></data>
+  <data name="Admin_Events_Label_FilterStatus" xml:space="preserve"><value>Фильтр по статусу</value></data>
+  <data name="Admin_Events_AllStatuses" xml:space="preserve"><value>Все статусы</value></data>
+  <data name="Admin_Events_Col_Date" xml:space="preserve"><value>Дата</value></data>
+  <data name="Admin_Events_Col_Predictions" xml:space="preserve"><value>Прогнозы</value></data>
+  <data name="Admin_Events_Col_Result" xml:space="preserve"><value>Результат</value></data>
+  <data name="Admin_Events_NoEvents" xml:space="preserve"><value>Событий не найдено. Попробуйте изменить фильтры.</value></data>
+  <data name="Admin_Results_SearchEvents" xml:space="preserve"><value>Поиск событий</value></data>
+  <data name="Admin_Results_SearchPlaceholder" xml:space="preserve"><value>Поиск по названию события...</value></data>
+  <data name="Admin_Results_FilterByResults" xml:space="preserve"><value>Фильтр по результатам</value></data>
+  <data name="Admin_Results_AllEvents" xml:space="preserve"><value>Все события</value></data>
+  <data name="Admin_Results_HasResult" xml:space="preserve"><value>С результатом</value></data>
+  <data name="Admin_Results_NoResult" xml:space="preserve"><value>Без результата</value></data>
+  <data name="Admin_Results_Col_ResultStatus" xml:space="preserve"><value>Статус результата</value></data>
+  <data name="Admin_Results_Col_Podium" xml:space="preserve"><value>Подиум</value></data>
+  <data name="Admin_Results_Entered" xml:space="preserve"><value>Внесён</value></data>
+  <data name="Admin_Results_1st" xml:space="preserve"><value>1-е место</value></data>
+  <data name="Admin_Results_2nd" xml:space="preserve"><value>2-е место</value></data>
+  <data name="Admin_Results_3rd" xml:space="preserve"><value>3-е место</value></data>
+  <data name="Admin_Results_MustBeCompleted" xml:space="preserve"><value>Событие должно быть завершено</value></data>
+  <data name="Admin_Results_NoEvents" xml:space="preserve"><value>Событий не найдено. Попробуйте изменить фильтры.</value></data>
+  <data name="Admin_Results_SelectCompetitor" xml:space="preserve"><value>Выберите участника</value></data>
+  <data name="Admin_Results_NoCompetitors" xml:space="preserve"><value>Нет участников для этого сезона. Сначала назначьте участников в управлении.</value></data>
+  <data name="Admin_Results_PreviewPodium" xml:space="preserve"><value>Предпросмотр подиума</value></data>
+  <data name="Admin_Results_DeleteResult" xml:space="preserve"><value>Удалить результат</value></data>
+  <data name="Admin_Results_RecalcWarning" xml:space="preserve"><value>Предупреждение о пересчёте очков</value></data>
+  <data name="Admin_Results_SaveRecalc" xml:space="preserve"><value>Сохранить и пересчитать</value></data>
+  <data name="Admin_Seasons_AddSeason" xml:space="preserve"><value>Добавить сезон</value></data>
+  <data name="Admin_Seasons_Season" xml:space="preserve"><value>Сезон</value></data>
+  <data name="Admin_Seasons_Label_Discipline" xml:space="preserve"><value>Дисциплина</value></data>
+  <data name="Admin_Seasons_SelectDiscipline" xml:space="preserve"><value>Выберите дисциплину</value></data>
+  <data name="Admin_Seasons_Label_Series" xml:space="preserve"><value>Серия</value></data>
+  <data name="Admin_Seasons_SelectSeries" xml:space="preserve"><value>Выберите серию</value></data>
+  <data name="Admin_Seasons_Label_Year" xml:space="preserve"><value>Год</value></data>
+  <data name="Admin_Seasons_Placeholder_Year" xml:space="preserve"><value>напр., 2024</value></data>
+  <data name="Admin_Seasons_Placeholder_Name" xml:space="preserve"><value>напр., Сезон 2024</value></data>
+  <data name="Admin_Seasons_Label_StartDate" xml:space="preserve"><value>Дата начала</value></data>
+  <data name="Admin_Seasons_Label_EndDate" xml:space="preserve"><value>Дата окончания (необязательно)</value></data>
+  <data name="Admin_Seasons_Label_BestN" xml:space="preserve"><value>Лучшие N результатов (для рейтинга)</value></data>
+  <data name="Admin_Seasons_Placeholder_BestN" xml:space="preserve"><value>Оставьте пустым для суммы всех очков</value></data>
+  <data name="Admin_Seasons_Hint_BestN" xml:space="preserve"><value>Необязательно: количество лучших результатов для рейтинга</value></data>
+  <data name="Admin_Seasons_Col_EndDate" xml:space="preserve"><value>Дата окончания</value></data>
+  <data name="Admin_Seasons_Col_Dependencies" xml:space="preserve"><value>Зависимости</value></data>
+  <data name="Admin_Seasons_Ongoing" xml:space="preserve"><value>Активен</value></data>
+  <data name="Admin_Seasons_SetActive" xml:space="preserve"><value>Активировать</value></data>
+  <data name="Admin_Seasons_Dep_Events" xml:space="preserve"><value>События</value></data>
+  <data name="Admin_Seasons_Dep_Competitors" xml:space="preserve"><value>Участники</value></data>
+  <data name="Admin_Seasons_Dep_Seasons" xml:space="preserve"><value>Сезоны</value></data>
+  <data name="Admin_Seasons_Dep_None" xml:space="preserve"><value>Нет</value></data>
+  <data name="Admin_Seasons_Recalc" xml:space="preserve"><value>Пересчёт</value></data>
+  <data name="Admin_Seasons_ShowCompetitors" xml:space="preserve"><value>Показать участников</value></data>
+  <data name="Admin_Seasons_NoSeasons" xml:space="preserve"><value>Сезоны не найдены. Попробуйте изменить фильтры.</value></data>
+  <data name="Admin_Series_AddSeries" xml:space="preserve"><value>Добавить серию</value></data>
+  <data name="Admin_Series_Series" xml:space="preserve"><value>Серия</value></data>
+  <data name="Admin_Series_Label_Discipline" xml:space="preserve"><value>Дисциплина</value></data>
+  <data name="Admin_Series_SelectDiscipline" xml:space="preserve"><value>Выберите дисциплину</value></data>
+  <data name="Admin_Series_Placeholder_Name" xml:space="preserve"><value>напр., Чемпионат мира Формулы-1</value></data>
+  <data name="Admin_Series_Placeholder_DisplayName" xml:space="preserve"><value>напр., Формула-1</value></data>
+  <data name="Admin_Series_Label_GoverningBody" xml:space="preserve"><value>Руководящий орган</value></data>
+  <data name="Admin_Series_Placeholder_GoverningBody" xml:space="preserve"><value>напр., FIA</value></data>
+  <data name="Admin_Series_Label_Region" xml:space="preserve"><value>Регион</value></data>
+  <data name="Admin_Series_Placeholder_Region" xml:space="preserve"><value>напр., Мировой, Европа, Северная Америка</value></data>
+  <data name="Admin_Series_Label_VehicleType" xml:space="preserve"><value>Тип техники</value></data>
+  <data name="Admin_Series_Placeholder_VehicleType" xml:space="preserve"><value>напр., Формула, Ралли</value></data>
+  <data name="Admin_Series_NoSeries" xml:space="preserve"><value>Серии не найдены. Попробуйте изменить фильтры.</value></data>
+  <data name="Admin_Competitors_AddCompetitor" xml:space="preserve"><value>Добавить участника</value></data>
+  <data name="Admin_Competitors_Competitor" xml:space="preserve"><value>Участник</value></data>
+  <data name="Admin_Competitors_Label_Type" xml:space="preserve"><value>Тип</value></data>
+  <data name="Admin_Competitors_Type_Individual" xml:space="preserve"><value>Индивидуальный (Пилот)</value></data>
+  <data name="Admin_Competitors_Type_Team" xml:space="preserve"><value>Команда (Конструктор)</value></data>
+  <data name="Admin_Competitors_Label_FullName" xml:space="preserve"><value>Полное имя</value></data>
+  <data name="Admin_Competitors_Placeholder_Name" xml:space="preserve"><value>напр., Льюис Хэмилтон или Red Bull Racing</value></data>
+  <data name="Admin_Competitors_Label_ShortName" xml:space="preserve"><value>Сокращённое имя</value></data>
+  <data name="Admin_Competitors_Placeholder_ShortName" xml:space="preserve"><value>напр., HAM или RBR (для отображения)</value></data>
+  <data name="Admin_Competitors_CurrentAssignments" xml:space="preserve"><value>Текущие назначения по сезонам</value></data>
+  <data name="Admin_Competitors_NoAssignments" xml:space="preserve"><value>Нет назначений по сезонам.</value></data>
+  <data name="Admin_Competitors_AddAssignment" xml:space="preserve"><value>Добавить назначение сезона</value></data>
+  <data name="Admin_Competitors_AddSeason" xml:space="preserve"><value>Добавить сезон</value></data>
+  <data name="Admin_Competitors_SearchPlaceholder" xml:space="preserve"><value>Поиск по имени...</value></data>
+  <data name="Admin_Competitors_FilterByType" xml:space="preserve"><value>Фильтр по типу</value></data>
+  <data name="Admin_Competitors_AllTypes" xml:space="preserve"><value>Все типы</value></data>
+  <data name="Admin_Competitors_FilterBySeason" xml:space="preserve"><value>Фильтр по сезону</value></data>
+  <data name="Admin_Competitors_AllSeasons" xml:space="preserve"><value>Все сезоны</value></data>
+  <data name="Admin_Competitors_Col_Assignments" xml:space="preserve"><value>Назначения по сезонам</value></data>
+  <data name="Admin_Competitors_NoCompetitors" xml:space="preserve"><value>Участники не найдены. Попробуйте изменить фильтры.</value></data>
+  <data name="Admin_Disciplines_AddDiscipline" xml:space="preserve"><value>Добавить дисциплину</value></data>
+  <data name="Admin_Disciplines_Discipline" xml:space="preserve"><value>Дисциплина</value></data>
+  <data name="Admin_Disciplines_Placeholder_Name" xml:space="preserve"><value>напр., Гонки на монопостах</value></data>
+  <data name="Admin_Disciplines_Placeholder_DisplayName" xml:space="preserve"><value>напр., Формула</value></data>
+  <data name="Admin_Admins_AddAdmin" xml:space="preserve"><value>Добавить администратора</value></data>
+  <data name="Admin_Admins_Administrator" xml:space="preserve"><value>Администратор</value></data>
+  <data name="Admin_Admins_SearchUser" xml:space="preserve"><value>Поиск пользователя</value></data>
+  <data name="Admin_Admins_SearchPlaceholder" xml:space="preserve"><value>Введите имя или email...</value></data>
+  <data name="Admin_Admins_Selected" xml:space="preserve"><value>Выбрано</value></data>
+  <data name="Admin_Admins_Clear" xml:space="preserve"><value>Очистить</value></data>
+  <data name="Admin_Admins_User" xml:space="preserve"><value>Пользователь</value></data>
+  <data name="Admin_Admins_CanManageAdmins" xml:space="preserve"><value>Может управлять админами (создавать/изменять/удалять других)</value></data>
+  <data name="Admin_Admins_Col_CanManage" xml:space="preserve"><value>Управление админами</value></data>
+  <data name="Admin_Admins_Col_CreatedBy" xml:space="preserve"><value>Создан</value></data>
+  <data name="Admin_Admins_Yes" xml:space="preserve"><value>Да</value></data>
+  <data name="Admin_Admins_No" xml:space="preserve"><value>Нет</value></data>
+  <data name="Admin_Admins_CanAccessAdmin" xml:space="preserve"><value>(доступ к функциям администратора)</value></data>
+  <data name="Admin_Pagination_Previous" xml:space="preserve"><value>Назад</value></data>
+  <data name="Admin_Pagination_Next" xml:space="preserve"><value>Вперёд</value></data>
+  <data name="Admin_Events_AcceptsPredictions" xml:space="preserve"><value>(принимает прогнозы)</value></data>
+  <data name="Admin_Seasons_RecalcStarting" xml:space="preserve"><value>⏳ Начинаем пересчёт статистики для {0}...</value></data>
+  <data name="Admin_Seasons_RecalcProgress" xml:space="preserve"><value>⏳ Пересчёт статистики для {0}... ({1}%)</value></data>
+  <data name="Admin_Seasons_RecalcProgressDetailed" xml:space="preserve"><value>⏳ Пересчёт статистики для {0}... ({1}% - {2}/{3} пользователей)</value></data>
+  <data name="Admin_Seasons_RecalcCompleted" xml:space="preserve"><value>✓ Пересчёт статистики завершён! Обработано {0} пользователь(ей).</value></data>
+  <data name="Admin_Seasons_RecalcCompletedVerified" xml:space="preserve"><value>✓ Пересчёт статистики завершён! Обновлено {0} пользователь(ей).</value></data>
+  <data name="Admin_Seasons_RecalcFailed" xml:space="preserve"><value>❌ Ошибка пересчёта: {0}</value></data>
+  <data name="Admin_Seasons_RecalcFailedStart" xml:space="preserve"><value>Не удалось запустить пересчёт</value></data>
+  <data name="Admin_Seasons_RecalcAlreadyRunning" xml:space="preserve"><value>Другой пересчёт уже выполняется</value></data>
 </root>
