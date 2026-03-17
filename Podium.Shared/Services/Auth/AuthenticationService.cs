@@ -228,6 +228,9 @@ public class AuthenticationService : IAuthenticationService
             // Create session with normalized email
             var sessionId = await CreateSessionAsync(user.UserId, normalizedEmail, user.Username);
 
+            // Update last login timestamp
+            await _userRepository.UpdateLastLoginAsync(user.UserId);
+
             return (true, user.UserId, user.Username, sessionId, user.LanguageCode, string.Empty);
         }
         catch (Exception)
@@ -278,6 +281,9 @@ public class AuthenticationService : IAuthenticationService
 
         // Create session
         var sessionId = await CreateSessionAsync(user.UserId, user.Email, user.Username);
+
+        // Update last login timestamp
+        await _userRepository.UpdateLastLoginAsync(user.UserId);
 
         return (true, user.UserId, user.Username, sessionId, user.LanguageCode, string.Empty);
     }
