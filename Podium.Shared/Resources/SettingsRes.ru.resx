@@ -59,4 +59,60 @@
   <data name="ManageFavorites_SignInRequired" xml:space="preserve"><value>Войдите для управления избранными сезонами.</value></data>
   <data name="ManageFavorites_NoSeasons" xml:space="preserve"><value>Нет доступных сезонов для этой серии.</value></data>
   <data name="ManageFavorites_AlreadyFavorite" xml:space="preserve"><value>Уже в избранном</value></data>
+  <data name="SignInSettings_CurrentMethod" xml:space="preserve"><value>Текущий способ:</value></data>
+  <data name="SignInSettings_EmailOnly_Title" xml:space="preserve"><value>Только код на почту</value></data>
+  <data name="SignInSettings_EmailOnly_Desc" xml:space="preserve"><value>Вход с помощью кода подтверждения, отправленного на email</value></data>
+  <data name="SignInSettings_SetupEmailFirst" xml:space="preserve"><value>Сначала настройте email</value></data>
+  <data name="SignInSettings_PasswordOnly_Title" xml:space="preserve"><value>Только пароль</value></data>
+  <data name="SignInSettings_PasswordOnly_Desc" xml:space="preserve"><value>Вход с помощью email и пароля</value></data>
+  <data name="SignInSettings_SetupPasswordFirst" xml:space="preserve"><value>Сначала настройте пароль</value></data>
+  <data name="SignInSettings_Both_Title" xml:space="preserve"><value>Оба способа</value></data>
+  <data name="SignInSettings_Both_Desc" xml:space="preserve"><value>Выбор между паролем или кодом на почту при входе</value></data>
+  <data name="SignInSettings_Both_Requires" xml:space="preserve"><value>Требуется настройка email и пароля</value></data>
+  <data name="SignInSettings_Btn_Continue" xml:space="preserve"><value>Продолжить</value></data>
+  <data name="SignInSettings_ConfirmIdentity" xml:space="preserve"><value>Подтвердите личность для смены способа входа на {0}</value></data>
+  <data name="SignInSettings_Verify_Password" xml:space="preserve"><value>Пароль</value></data>
+  <data name="SignInSettings_Verify_EmailCode" xml:space="preserve"><value>Код на почту</value></data>
+  <data name="SignInSettings_Label_YourPassword" xml:space="preserve"><value>Ваш пароль</value></data>
+  <data name="SignInSettings_Placeholder_Password" xml:space="preserve"><value>Введите ваш пароль</value></data>
+  <data name="SignInSettings_Btn_Updating" xml:space="preserve"><value>Обновление...</value></data>
+  <data name="SignInSettings_Btn_ConfirmChange" xml:space="preserve"><value>Подтвердить изменение</value></data>
+  <data name="SignInSettings_Btn_SendingCode" xml:space="preserve"><value>Отправка кода...</value></data>
+  <data name="SignInSettings_Btn_SendCode" xml:space="preserve"><value>Отправить код подтверждения</value></data>
+  <data name="SignInSettings_Label_VerifCode" xml:space="preserve"><value>Код подтверждения</value></data>
+  <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Введите 6-значный код</value></data>
+  <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Подтвердить и изменить способ</value></data>
+  <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Отправить новый код</value></data>
+  <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Введите новый адрес электронной почты. Мы отправим код подтверждения для проверки доступа.</value></data>
+  <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>Новый адрес email</value></data>
+  <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>ваш@email.com</value></data>
+  <data name="UpdateEmail_Btn_SendingCode" xml:space="preserve"><value>Отправка кода...</value></data>
+  <data name="UpdateEmail_Btn_SendCode" xml:space="preserve"><value>Отправить код подтверждения</value></data>
+  <data name="UpdateEmail_CodeSentTo" xml:space="preserve"><value>Мы отправили код подтверждения на</value></data>
+  <data name="UpdateEmail_Label_VerifCode" xml:space="preserve"><value>Код подтверждения</value></data>
+  <data name="UpdateEmail_Placeholder_Code" xml:space="preserve"><value>Введите 6-значный код</value></data>
+  <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Проверка...</value></data>
+  <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Подтвердить и обновить email</value></data>
+  <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Использовать другой email</value></data>
+  <data name="UpdateName_Placeholder" xml:space="preserve"><value>Введите новое отображаемое имя</value></data>
+  <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Введите ваш пароль</value></data>
+  <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Введите 6-значный код</value></data>
+  <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>Вход по паролю не активирован. Чтобы установить пароль, сначала включите вход по паролю в настройках способа входа.</value></data>
+  <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Текущий пароль</value></data>
+  <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Введите текущий пароль</value></data>
+  <data name="UpdatePassword_Label_New" xml:space="preserve"><value>Новый пароль</value></data>
+  <data name="UpdatePassword_Placeholder_New" xml:space="preserve"><value>Минимум 6 символов</value></data>
+  <data name="UpdatePassword_Label_Confirm" xml:space="preserve"><value>Подтвердите новый пароль</value></data>
+  <data name="UpdatePassword_Placeholder_Confirm" xml:space="preserve"><value>Повторите новый пароль</value></data>
+  <data name="UpdatePassword_Btn_Updating" xml:space="preserve"><value>Обновление...</value></data>
+  <data name="UpdatePassword_Btn_Update" xml:space="preserve"><value>Изменить пароль</value></data>
+  <data name="UpdatePassword_OtpInfo" xml:space="preserve"><value>Так как у вас ещё нет пароля, мы отправим код подтверждения на вашу почту для подтверждения личности.</value></data>
+  <data name="UpdatePassword_Btn_SendingCode" xml:space="preserve"><value>Отправка кода...</value></data>
+  <data name="UpdatePassword_Btn_SendCode" xml:space="preserve"><value>Отправить код подтверждения</value></data>
+  <data name="UpdatePassword_CodeSent" xml:space="preserve"><value>Мы отправили код подтверждения на вашу почту.</value></data>
+  <data name="UpdatePassword_Label_VerifCode" xml:space="preserve"><value>Код подтверждения</value></data>
+  <data name="UpdatePassword_Placeholder_Code" xml:space="preserve"><value>Введите 6-значный код</value></data>
+  <data name="UpdatePassword_Btn_SettingUp" xml:space="preserve"><value>Настройка...</value></data>
+  <data name="UpdatePassword_Btn_SetPassword" xml:space="preserve"><value>Установить пароль</value></data>
+  <data name="UpdatePassword_Btn_SendNewCode" xml:space="preserve"><value>Отправить новый код</value></data>
 </root>

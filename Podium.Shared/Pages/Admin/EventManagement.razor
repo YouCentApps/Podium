@@ -14,8 +14,8 @@
 
 <div class="admin-container">
     <div class="admin-header">
-        <h1><span style="font-size: 1.2em;">&#127937;</span> Manage Events</h1>
-        <button class="btn btn-primary" @onclick="ShowCreateForm">+ Add Event</button>
+        <h1><span style="font-size: 1.2em;">&#127937;</span> @L["Admin_Events_Title"]</h1>
+        <button class="btn btn-primary" @onclick="ShowCreateForm">+ @L["Admin_Events_AddEvent"]</button>
     </div>
 
     @if (loading)
@@ -43,17 +43,17 @@
         @if (showForm)
         {
             <div class="admin-form" id="eventForm">
-                <h3>@(editingEvent == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) Event</h3>
+                <h3>@(editingEvent == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) @L["Admin_Events_Event"]</h3>
                 
                 @if (editingEvent == null)
                 {
                     <div class="form-group">
-                        <label><strong>Select Season:</strong></label>
+                        <label><strong>@L["Admin_Events_SelectSeason"]:</strong></label>
                         <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
                             <div style="flex: 1; min-width: 200px;">
-                                <label>Discipline:</label>
+                                <label>@L["Admin_Events_Label_Discipline"]:</label>
                                 <select class="form-control" @bind="selectedDiscipline" @bind:after="OnDisciplineChanged">
-                                    <option value="">-- Select Discipline --</option>
+                                    <option value="">-- @L["Admin_Events_SelectDiscipline"] --</option>
                                     @foreach (var discipline in disciplines)
                                     {
                                         <option value="@discipline.Id">@discipline.DisplayName</option>
@@ -61,10 +61,10 @@
                                 </select>
                             </div>
                             <div style="flex: 1; min-width: 200px;">
-                                <label>Series:</label>
+                                <label>@L["Admin_Events_Label_Series"]:</label>
                                 <select class="form-control" @bind="selectedSeries" @bind:after="OnSeriesChanged" 
                                         disabled="@string.IsNullOrEmpty(selectedDiscipline)">
-                                    <option value="">-- Select Series --</option>
+                                    <option value="">-- @L["Admin_Events_SelectSeries"] --</option>
                                     @foreach (var series in availableSeries)
                                     {
                                         <option value="@series.Id">@series.DisplayName</option>
@@ -72,10 +72,10 @@
                                 </select>
                             </div>
                             <div style="flex: 1; min-width: 200px;">
-                                <label>Season:</label>
+                                <label>@L["Admin_Events_Label_Season"]:</label>
                                 <select class="form-control" @bind="formSeasonId" @bind:after="OnSeasonSelectedForCreate"
                                         disabled="@string.IsNullOrEmpty(selectedSeries)">
-                                    <option value="">-- Select Season --</option>
+                                    <option value="">-- @L["Admin_Events_SelectSeason"] --</option>
                                     @foreach (var season in availableSeasons)
                                     {
                                         <option value="@season.Id">@season.Year - @season.Name</option>
@@ -88,62 +88,62 @@
                 else
                 {
                     <div class="form-group">
-                        <label>Season:</label>
+                        <label>@L["Admin_Events_Label_Season"]:</label>
                         <div class="user-display">
                             @GetSeasonDisplay(editingEvent.SeasonId)
                             <small style="display: block; color: var(--text-light); margin-top: 0.25rem;">
-                                Season cannot be changed after creation
+                                @L["Admin_Events_SeasonReadonly"]
                             </small>
                         </div>
                     </div>
                 }
 
                 <div class="form-group">
-                    <label>Event Number:</label>
+                    <label>@L["Admin_Events_Label_EventNumber"]:</label>
                     <input type="number" class="form-control" @bind="formEventNumber" 
-                           placeholder="e.g., 1, 2, 3..." min="1" />
+                           placeholder="@L["Admin_Events_Placeholder_EventNumber"]" min="1" />
                     @if (suggestedEventNumber > 0 && editingEvent == null)
                     {
-                        <small style="color: var(--text-light);">Suggested: @suggestedEventNumber</small>
+                        <small style="color: var(--text-light);">@L["Admin_Events_Suggested"]: @suggestedEventNumber</small>
                     }
                 </div>
 
                 <div class="form-group">
-                    <label>Event Name:</label>
+                    <label>@L["Admin_Events_Label_EventName"]:</label>
                     <input type="text" class="form-control" @bind="formName" 
-                           placeholder="e.g., Australian Grand Prix" />
+                           placeholder="@L["Admin_Events_Placeholder_EventName"]" />
                 </div>
 
                 <div class="form-group">
-                    <label>Display Name:</label>
+                    <label>@L["Admin_Col_DisplayName"]:</label>
                     <input type="text" class="form-control" @bind="formDisplayName" 
-                           placeholder="e.g., Australia - Melbourne" />
+                           placeholder="@L["Admin_Events_Placeholder_DisplayName"]" />
                 </div>
 
                 <div class="form-group">
-                    <label>Event Date (UTC):</label>
+                    <label>@L["Admin_Events_Label_EventDate"]:</label>
                     <input type="datetime-local" class="form-control" @bind="formEventDate" />
                 </div>
 
                 <div class="form-group">
-                    <label>Location:</label>
+                    <label>@L["Admin_Events_Label_Location"]:</label>
                     <input type="text" class="form-control" @bind="formLocation" 
-                           placeholder="e.g., Albert Park Circuit, Melbourne" />
+                           placeholder="@L["Admin_Events_Placeholder_Location"]" />
                 </div>
 
                 <div class="form-group">
-                    <label>Status:</label>
+                    <label>@L["Admin_Col_Status"]:</label>
                     <select class="form-control" @bind="formStatus">
-                        <option value="Upcoming">Upcoming</option>
-                        <option value="InProgress">In Progress</option>
-                        <option value="Completed">Completed</option>
+                        <option value="Upcoming">@L["Admin_Events_Status_Upcoming"]</option>
+                        <option value="InProgress">@L["Admin_Events_Status_InProgress"]</option>
+                        <option value="Completed">@L["Admin_Events_Status_Completed"]</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>
                         <input type="checkbox" @bind="formIsActive" />
-                        @L["Admin_Label_Active"] (accepts predictions)
+                        @L["Admin_Label_Active"] @L["Admin_Events_AcceptsPredictions"]
                     </label>
                 </div>
 
@@ -162,17 +162,17 @@
 
         <div class="filter-section">
             <div style="flex: 1; max-width: 300px;">
-                <label>Search:</label>
+                <label>@L["Admin_Events_Label_Search"]:</label>
                 <input type="text" class="form-control" @bind="searchQuery" @bind:after="FilterEvents" 
-                       placeholder="Search by name or location..." />
+                       placeholder="@L["Admin_Events_SearchPlaceholder"]" />
             </div>
             <div style="flex: 1; max-width: 400px;">
-                <label>Filter by Status:</label>
+                <label>@L["Admin_Events_Label_FilterStatus"]:</label>
                 <select class="form-control" @bind="selectedStatusFilter" @bind:after="FilterEvents">
-                    <option value="">All Statuses</option>
-                    <option value="Upcoming">Upcoming</option>
-                    <option value="InProgress">In Progress</option>
-                    <option value="Completed">Completed</option>
+                    <option value="">@L["Admin_Events_AllStatuses"]</option>
+                    <option value="Upcoming">@L["Admin_Events_Status_Upcoming"]</option>
+                    <option value="InProgress">@L["Admin_Events_Status_InProgress"]</option>
+                    <option value="Completed">@L["Admin_Events_Status_Completed"]</option>
                 </select>
             </div>
         </div>
@@ -182,14 +182,14 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Event</th>
-                        <th>Season</th>
-                        <th>Date</th>
-                        <th>Location</th>
-                        <th>Status</th>
-                        <th>Predictions</th>
-                        <th>Result</th>
-                        <th>Actions</th>
+                        <th>@L["Admin_Events_Event"]</th>
+                        <th>@L["Admin_Events_Label_Season"]</th>
+                        <th>@L["Admin_Events_Col_Date"]</th>
+                        <th>@L["Admin_Events_Label_Location"]</th>
+                        <th>@L["Admin_Col_Status"]</th>
+                        <th>@L["Admin_Events_Col_Predictions"]</th>
+                        <th>@L["Admin_Events_Col_Result"]</th>
+                        <th>@L["Admin_Col_Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -260,7 +260,7 @@
             @if (!filteredEvents.Any())
             {
                 <div class="no-results">
-                    <p>No events found. @(string.IsNullOrEmpty(searchQuery) && string.IsNullOrEmpty(selectedStatusFilter) ? "Create one to get started!" : "Try adjusting your filters.")</p>
+                    <p>@L["Admin_Events_NoEvents"]</p>
                 </div>
             }
         </div>
@@ -269,13 +269,13 @@
         {
             <div class="pagination">
                 <button class="btn btn-secondary" @onclick="PreviousPage" disabled="@(currentPage == 1)">
-                    &laquo; Previous
+                    &laquo; @L["Admin_Pagination_Previous"]
                 </button>
                 <span style="margin: 0 1rem;">
                     Page @currentPage of @totalPages (@filteredEvents.Count total)
                 </span>
                 <button class="btn btn-secondary" @onclick="NextPage" disabled="@(currentPage == totalPages)">
-                    Next &raquo;
+                    @L["Admin_Pagination_Next"] &raquo;
                 </button>
             </div>
         }

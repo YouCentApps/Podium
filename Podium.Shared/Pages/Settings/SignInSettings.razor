@@ -33,7 +33,7 @@
         else if (profile != null)
         {
             <div class="current-value">
-                <strong>Current method:</strong> @GetMethodDisplayName(profile.PreferredAuthMethod)
+                <strong>@L["SignInSettings_CurrentMethod"]</strong> @GetMethodDisplayName(profile.PreferredAuthMethod)
             </div>
 
             @if (requiresSetup != null)
@@ -49,11 +49,11 @@
                          @onclick="@(() => SelectMethod("Email"))">
                         <div class="auth-method-radio"></div>
                         <div class="auth-method-content">
-                            <h4>Email Code Only</h4>
-                            <p>Sign in using a verification code sent to your email</p>
+                            <h4>@L["SignInSettings_EmailOnly_Title"]</h4>
+                            <p>@L["SignInSettings_EmailOnly_Desc"]</p>
                             @if (!profile.HasEmail)
                             {
-                                <p><em><a href="/settings/email">Set up email first</a></em></p>
+                                <p><em><a href="/settings/email">@L["SignInSettings_SetupEmailFirst"]</a></em></p>
                             }
                         </div>
                         <span class="auth-method-icon"><strong>&#64;</strong></span>
@@ -63,11 +63,11 @@
                          @onclick="@(() => SelectMethod("Password"))">
                         <div class="auth-method-radio"></div>
                         <div class="auth-method-content">
-                            <h4>Password Only</h4>
-                            <p>Sign in using your email and password</p>
+                            <h4>@L["SignInSettings_PasswordOnly_Title"]</h4>
+                            <p>@L["SignInSettings_PasswordOnly_Desc"]</p>
                             @if (!profile.HasPassword)
                             {
-                                <p><em><a href="/settings/password">Set up password first</a></em></p>
+                                <p><em><a href="/settings/password">@L["SignInSettings_SetupPasswordFirst"]</a></em></p>
                             }
                         </div>
                         <span class="auth-method-icon"><strong>KEY</strong></span>
@@ -77,11 +77,11 @@
                          @onclick="@(() => SelectMethod("Both"))">
                         <div class="auth-method-radio"></div>
                         <div class="auth-method-content">
-                            <h4>Both Methods</h4>
-                            <p>Choose between password or email code when signing in</p>
+                            <h4>@L["SignInSettings_Both_Title"]</h4>
+                            <p>@L["SignInSettings_Both_Desc"]</p>
                             @if (!profile.HasEmail || !profile.HasPassword)
                             {
-                                <p><em>Requires both email and password to be set up</em></p>
+                                <p><em>@L["SignInSettings_Both_Requires"]</em></p>
                             }
                         </div>
                         <span class="auth-method-icon"><strong>BOTH</strong></span>
@@ -91,14 +91,14 @@
                 @if (selectedMethod != profile.PreferredAuthMethod)
                 {
                     <button class="btn btn-primary w-100" @onclick="StartConfirmation" disabled="@isLoading">
-                        Continue
+                        @L["SignInSettings_Btn_Continue"]
                     </button>
                 }
             }
             else
             {
                 <div class="info-box info">
-                    <p>Confirm your identity to change sign-in method to <strong>@GetMethodDisplayName(selectedMethod)</strong></p>
+                    <p>@string.Format(L["SignInSettings_ConfirmIdentity"].Value, GetMethodDisplayName(selectedMethod))</p>
                 </div>
 
                 @if (!otpSent)
@@ -107,10 +107,10 @@
                     {
                         <div class="auth-tabs">
                             <button class="@(verifyMethod == "password" ? "active" : "")" @onclick="@(() => verifyMethod = "password")">
-                                Password
+                                @L["SignInSettings_Verify_Password"]
                             </button>
                             <button class="@(verifyMethod == "email" ? "active" : "")" @onclick="@(() => verifyMethod = "email")">
-                                Email Code
+                                @L["SignInSettings_Verify_EmailCode"]
                             </button>
                         </div>
                     }
@@ -119,18 +119,18 @@
                         @if (verifyMethod == "password" && profile.HasPassword)
                         {
                             <div class="form-group">
-                                <label>Your Password</label>
-                                <input type="password" class="form-control" @bind="password" placeholder="Enter your password" />
+                                <label>@L["SignInSettings_Label_YourPassword"]</label>
+                                <input type="password" class="form-control" @bind="password" placeholder="@L["SignInSettings_Placeholder_Password"]" />
                             </div>
 
                             <button class="btn btn-primary w-100" @onclick="UpdateWithPassword" disabled="@isLoading">
-                                @if (isLoading) { <span>Updating...</span> } else { <span>Confirm Change</span> }
+                                @if (isLoading) { <span>@L["SignInSettings_Btn_Updating"]</span> } else { <span>@L["SignInSettings_Btn_ConfirmChange"]</span> }
                             </button>
                         }
                         else if (verifyMethod == "email" && profile.HasEmail)
                         {
                             <button class="btn btn-primary w-100" @onclick="SendOtp" disabled="@isLoading">
-                                @if (isLoading) { <span>Sending code...</span> } else { <span>Send Verification Code</span> }
+                                @if (isLoading) { <span>@L["SignInSettings_Btn_SendingCode"]</span> } else { <span>@L["SignInSettings_Btn_SendCode"]</span> }
                             </button>
                         }
                     </div>
@@ -139,20 +139,20 @@
                 {
                     <div class="auth-form">
                         <div class="form-group">
-                            <label>Verification Code</label>
-                            <input type="text" class="form-control" @bind="otpCode" placeholder="Enter 6-digit code" maxlength="6" />
+                            <label>@L["SignInSettings_Label_VerifCode"]</label>
+                            <input type="text" class="form-control" @bind="otpCode" placeholder="@L["SignInSettings_Placeholder_Code"]" maxlength="6" />
                         </div>
 
                         <button class="btn btn-primary w-100" @onclick="UpdateWithOtp" disabled="@isLoading">
-                            @if (isLoading) { <span>Updating...</span> } else { <span>Verify & Change Method</span> }
+                            @if (isLoading) { <span>@L["SignInSettings_Btn_Updating"]</span> } else { <span>@L["SignInSettings_Btn_VerifyChange"]</span> }
                         </button>
 
-                        <button class="btn btn-link w-100" @onclick="ResetOtp">Send a new code</button>
+                        <button class="btn btn-link w-100" @onclick="ResetOtp">@L["SignInSettings_Btn_SendNewCode"]</button>
                     </div>
                 }
 
                 <button class="btn btn-secondary w-100" style="margin-top: 1rem;" @onclick="CancelConfirmation">
-                    Cancel
+                    @LC["Btn_Cancel"]
                 </button>
             }
         }
@@ -340,9 +340,9 @@
 
     private string GetMethodDisplayName(string method) => method switch
     {
-        "Email" => "Email Code Only",
-        "Password" => "Password Only",
-        "Both" => "Both Methods",
+        "Email" => L["SignInSettings_EmailOnly_Title"].Value,
+        "Password" => L["SignInSettings_PasswordOnly_Title"].Value,
+        "Both" => L["SignInSettings_Both_Title"].Value,
         _ => method
     };
 }

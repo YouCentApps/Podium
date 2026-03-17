@@ -14,8 +14,8 @@
 
 <div class="admin-container">
     <div class="admin-header">
-        <h1><span style="font-size: 1.2em;">&#127942;</span> Manage Series</h1>
-        <button class="btn btn-primary" @onclick="ShowCreateForm">+ Add Series</button>
+        <h1><span style="font-size: 1.2em;">&#127942;</span> @L["Admin_Series_Title"]</h1>
+        <button class="btn btn-primary" @onclick="ShowCreateForm">+ @L["Admin_Series_AddSeries"]</button>
     </div>
 
     @if (loading)
@@ -34,14 +34,14 @@
         @if (showForm)
         {
             <div class="admin-form">
-                <h3>@(editingSeries == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) Series</h3>
+                <h3>@(editingSeries == null ? L["Admin_Btn_Create"].Value : L["Admin_Btn_Edit"].Value) @L["Admin_Series_Series"]</h3>
 
                 <div class="form-group">
-                    <label>Discipline:</label>
+                    <label>@L["Admin_Series_Label_Discipline"]:</label>
                     @if (editingSeries == null)
                     {
                         <select class="form-control" @bind="formDisciplineId">
-                            <option value="">-- Select Discipline --</option>
+                            <option value="">-- @L["Admin_Series_SelectDiscipline"] --</option>
                             @foreach (var discipline in disciplines)
                             {
                                 <option value="@discipline.Id">@discipline.DisplayName (@discipline.Name)</option>
@@ -60,28 +60,28 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Name:</label>
-                    <input type="text" class="form-control" @bind="formName" placeholder="e.g., Formula One World Championship" />
+                    <label>@L["Admin_Col_Name"]:</label>
+                    <input type="text" class="form-control" @bind="formName" placeholder="@L["Admin_Series_Placeholder_Name"]" />
                 </div>
 
                 <div class="form-group">
-                    <label>Display Name:</label>
-                    <input type="text" class="form-control" @bind="formDisplayName" placeholder="e.g., Formula 1" />
+                    <label>@L["Admin_Col_DisplayName"]:</label>
+                    <input type="text" class="form-control" @bind="formDisplayName" placeholder="@L["Admin_Series_Placeholder_DisplayName"]" />
                 </div>
 
                 <div class="form-group">
-                    <label>Governing Body:</label>
-                    <input type="text" class="form-control" @bind="formGoverningBody" placeholder="e.g., FIA" />
+                    <label>@L["Admin_Series_Label_GoverningBody"]:</label>
+                    <input type="text" class="form-control" @bind="formGoverningBody" placeholder="@L["Admin_Series_Placeholder_GoverningBody"]" />
                 </div>
 
                 <div class="form-group">
-                    <label>Region:</label>
-                    <input type="text" class="form-control" @bind="formRegion" placeholder="e.g., Global, Europe, North America" />
+                    <label>@L["Admin_Series_Label_Region"]:</label>
+                    <input type="text" class="form-control" @bind="formRegion" placeholder="@L["Admin_Series_Placeholder_Region"]" />
                 </div>
 
                 <div class="form-group">
-                    <label>Vehicle Type:</label>
-                    <input type="text" class="form-control" @bind="formVehicleType" placeholder="e.g., Formula Car, Rally Car" />
+                    <label>@L["Admin_Series_Label_VehicleType"]:</label>
+                    <input type="text" class="form-control" @bind="formVehicleType" placeholder="@L["Admin_Series_Placeholder_VehicleType"]" />
                 </div>
 
                 <div class="form-group">
@@ -121,9 +121,9 @@
                     <tr>
                         <th>@L["Admin_Col_Name"]</th>
                         <th>@L["Admin_Col_DisplayName"]</th>
-                        <th>Discipline</th>
-                        <th>Governing Body</th>
-                        <th>Region</th>
+                        <th>@L["Admin_Series_Label_Discipline"]</th>
+                        <th>@L["Admin_Series_Label_GoverningBody"]</th>
+                        <th>@L["Admin_Series_Label_Region"]</th>
                         <th>@L["Admin_Col_Status"]</th>
                         <th>@L["Admin_Col_Created"]</th>
                         <th>@L["Admin_Col_Actions"]</th>
@@ -159,7 +159,7 @@
             @if (!filteredSeries.Any())
             {
                 <div class="no-results">
-                    <p>No series found. @(string.IsNullOrEmpty(selectedDisciplineFilter) ? "Create one to get started!" : "Try selecting a different discipline.")</p>
+                    <p>@L["Admin_Series_NoSeries"]</p>
                 </div>
             }
         </div>

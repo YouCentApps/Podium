@@ -59,4 +59,60 @@
   <data name="ManageFavorites_SignInRequired" xml:space="preserve"><value>Connectez-vous pour gérer vos saisons favorites.</value></data>
   <data name="ManageFavorites_NoSeasons" xml:space="preserve"><value>Aucune saison disponible pour cette série.</value></data>
   <data name="ManageFavorites_AlreadyFavorite" xml:space="preserve"><value>Déjà en favori</value></data>
+  <data name="SignInSettings_CurrentMethod" xml:space="preserve"><value>Méthode actuelle :</value></data>
+  <data name="SignInSettings_EmailOnly_Title" xml:space="preserve"><value>Code email uniquement</value></data>
+  <data name="SignInSettings_EmailOnly_Desc" xml:space="preserve"><value>Se connecter avec un code de vérification envoyé par email</value></data>
+  <data name="SignInSettings_SetupEmailFirst" xml:space="preserve"><value>Configurer d'abord l'email</value></data>
+  <data name="SignInSettings_PasswordOnly_Title" xml:space="preserve"><value>Mot de passe uniquement</value></data>
+  <data name="SignInSettings_PasswordOnly_Desc" xml:space="preserve"><value>Se connecter avec votre email et mot de passe</value></data>
+  <data name="SignInSettings_SetupPasswordFirst" xml:space="preserve"><value>Configurer d'abord le mot de passe</value></data>
+  <data name="SignInSettings_Both_Title" xml:space="preserve"><value>Les deux méthodes</value></data>
+  <data name="SignInSettings_Both_Desc" xml:space="preserve"><value>Choisir entre mot de passe ou code email lors de la connexion</value></data>
+  <data name="SignInSettings_Both_Requires" xml:space="preserve"><value>Nécessite la configuration de l'email et du mot de passe</value></data>
+  <data name="SignInSettings_Btn_Continue" xml:space="preserve"><value>Continuer</value></data>
+  <data name="SignInSettings_ConfirmIdentity" xml:space="preserve"><value>Confirmez votre identité pour changer la méthode de connexion à {0}</value></data>
+  <data name="SignInSettings_Verify_Password" xml:space="preserve"><value>Mot de passe</value></data>
+  <data name="SignInSettings_Verify_EmailCode" xml:space="preserve"><value>Code email</value></data>
+  <data name="SignInSettings_Label_YourPassword" xml:space="preserve"><value>Votre mot de passe</value></data>
+  <data name="SignInSettings_Placeholder_Password" xml:space="preserve"><value>Entrez votre mot de passe</value></data>
+  <data name="SignInSettings_Btn_Updating" xml:space="preserve"><value>Mise à jour...</value></data>
+  <data name="SignInSettings_Btn_ConfirmChange" xml:space="preserve"><value>Confirmer le changement</value></data>
+  <data name="SignInSettings_Btn_SendingCode" xml:space="preserve"><value>Envoi du code...</value></data>
+  <data name="SignInSettings_Btn_SendCode" xml:space="preserve"><value>Envoyer le code de vérification</value></data>
+  <data name="SignInSettings_Label_VerifCode" xml:space="preserve"><value>Code de vérification</value></data>
+  <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Entrez le code à 6 chiffres</value></data>
+  <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Vérifier et changer la méthode</value></data>
+  <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Renvoyer un code</value></data>
+  <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Entrez votre nouvelle adresse email. Nous enverrons un code de vérification pour confirmer l'accès.</value></data>
+  <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>Nouvelle adresse email</value></data>
+  <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>votre@email.com</value></data>
+  <data name="UpdateEmail_Btn_SendingCode" xml:space="preserve"><value>Envoi du code...</value></data>
+  <data name="UpdateEmail_Btn_SendCode" xml:space="preserve"><value>Envoyer le code de vérification</value></data>
+  <data name="UpdateEmail_CodeSentTo" xml:space="preserve"><value>Nous avons envoyé un code de vérification à</value></data>
+  <data name="UpdateEmail_Label_VerifCode" xml:space="preserve"><value>Code de vérification</value></data>
+  <data name="UpdateEmail_Placeholder_Code" xml:space="preserve"><value>Entrez le code à 6 chiffres</value></data>
+  <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Vérification...</value></data>
+  <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Vérifier et mettre à jour l'email</value></data>
+  <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Utiliser un autre email</value></data>
+  <data name="UpdateName_Placeholder" xml:space="preserve"><value>Entrez le nouveau nom d'affichage</value></data>
+  <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Entrez votre mot de passe</value></data>
+  <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Entrez le code à 6 chiffres</value></data>
+  <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>La connexion par mot de passe n'est pas activée. Pour configurer un mot de passe, activez d'abord la connexion par mot de passe dans les paramètres de méthode de connexion.</value></data>
+  <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Mot de passe actuel</value></data>
+  <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Entrez le mot de passe actuel</value></data>
+  <data name="UpdatePassword_Label_New" xml:space="preserve"><value>Nouveau mot de passe</value></data>
+  <data name="UpdatePassword_Placeholder_New" xml:space="preserve"><value>Au moins 6 caractères</value></data>
+  <data name="UpdatePassword_Label_Confirm" xml:space="preserve"><value>Confirmer le nouveau mot de passe</value></data>
+  <data name="UpdatePassword_Placeholder_Confirm" xml:space="preserve"><value>Ressaisissez le nouveau mot de passe</value></data>
+  <data name="UpdatePassword_Btn_Updating" xml:space="preserve"><value>Mise à jour...</value></data>
+  <data name="UpdatePassword_Btn_Update" xml:space="preserve"><value>Modifier le mot de passe</value></data>
+  <data name="UpdatePassword_OtpInfo" xml:space="preserve"><value>Comme vous n'avez pas encore de mot de passe, nous enverrons un code de vérification à votre email pour confirmer votre identité.</value></data>
+  <data name="UpdatePassword_Btn_SendingCode" xml:space="preserve"><value>Envoi du code...</value></data>
+  <data name="UpdatePassword_Btn_SendCode" xml:space="preserve"><value>Envoyer le code de vérification</value></data>
+  <data name="UpdatePassword_CodeSent" xml:space="preserve"><value>Nous avons envoyé un code de vérification à votre email.</value></data>
+  <data name="UpdatePassword_Label_VerifCode" xml:space="preserve"><value>Code de vérification</value></data>
+  <data name="UpdatePassword_Placeholder_Code" xml:space="preserve"><value>Entrez le code à 6 chiffres</value></data>
+  <data name="UpdatePassword_Btn_SettingUp" xml:space="preserve"><value>Configuration...</value></data>
+  <data name="UpdatePassword_Btn_SetPassword" xml:space="preserve"><value>Définir le mot de passe</value></data>
+  <data name="UpdatePassword_Btn_SendNewCode" xml:space="preserve"><value>Renvoyer un code</value></data>
 </root>

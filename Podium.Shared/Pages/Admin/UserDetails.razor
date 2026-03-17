@@ -35,35 +35,35 @@
 
         <div class="user-details-grid">
             <div class="detail-card">
-                <h3>Account Information</h3>
+                <h3>@L["Admin_UserDetails_AccountInfo"]</h3>
                 <div class="detail-row">
-                    <span class="detail-label">User ID:</span>
+                    <span class="detail-label">@L["Admin_UserDetails_UserId"]</span>
                     <span class="detail-value">@user.UserId</span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">Username:</span>
+                    <span class="detail-label">@L["Admin_Users_Col_Username"]:</span>
                     <span class="detail-value">@user.Username</span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">Email:</span>
+                    <span class="detail-label">@L["Admin_Users_Col_Email"]:</span>
                     <span class="detail-value">@user.Email</span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">Status:</span>
+                    <span class="detail-label">@L["Admin_Col_Status"]:</span>
                     <span class="badge @(user.IsActive ? "badge-success" : "badge-inactive")">
                         @(user.IsActive ? L["Admin_Status_Active"].Value : L["Admin_Status_Inactive"].Value)
                     </span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">Preferred Auth:</span>
+                    <span class="detail-label">@L["Admin_UserDetails_PreferredAuth"]</span>
                     <span class="detail-value">@user.PreferredAuthMethod</span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">Registered:</span>
+                    <span class="detail-label">@L["Admin_Users_Col_Registered"]:</span>
                     <span class="detail-value">@user.CreatedDate.ToString("MMMM dd, yyyy")</span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">Last Login:</span>
+                    <span class="detail-label">@L["Admin_Users_Col_LastLogin"]:</span>
                     <span class="detail-value">@(user.LastLoginDate?.ToString("MMMM dd, yyyy HH:mm") ?? L["Admin_Never"].Value)</span>
                 </div>
             </div>
@@ -71,21 +71,21 @@
             @if (dependencies != null)
             {
                 <div class="detail-card">
-                    <h3>User Activity</h3>
+                    <h3>@L["Admin_UserDetails_Activity"]</h3>
                     <div class="detail-row">
-                        <span class="detail-label">Predictions:</span>
+                        <span class="detail-label">@L["Admin_UserDetails_Predictions"]</span>
                         <span class="detail-value">@dependencies.PredictionCount</span>
                     </div>
                     <div class="detail-row">
-                        <span class="detail-label">Admin Status:</span>
+                        <span class="detail-label">@L["Admin_UserDetails_AdminStatus"]</span>
                         <span class="badge @(dependencies.IsAdmin ? "badge-success" : "badge-inactive")">
-                            @(dependencies.IsAdmin ? "Is Admin" : "Not Admin")
+                            @(dependencies.IsAdmin ? L["Admin_UserDetails_IsAdmin"].Value : L["Admin_UserDetails_NotAdmin"].Value)
                         </span>
                     </div>
                     @if (dependencies.HasDependencies)
                     {
                         <div class="alert alert-info" style="margin-top: 1rem;">
-                            This user has existing data and cannot be deleted. You can deactivate the account instead.
+                            @L["Admin_UserDetails_HasDependencies"]
                         </div>
                     }
                 </div>
@@ -93,10 +93,10 @@
         </div>
 
         <div class="action-buttons">
-            <button class="btn btn-primary" @onclick="EditUser">Edit User</button>
+            <button class="btn btn-primary" @onclick="EditUser">@L["Admin_Users_EditUser"]</button>
             @if (dependencies != null && dependencies.IsAdmin)
             {
-                <a href="/admin/admins" class="btn btn-outline">Manage Admin Privileges</a>
+                <a href="/admin/admins" class="btn btn-outline">@L["Admin_UserDetails_ManageAdminPriv"]</a>
             }
         </div>
     }
