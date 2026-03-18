@@ -8,7 +8,7 @@
 <PageTitle>Leaderboard - Podium</PageTitle>
 
 <div class="page-container">
-    <h1><span class="trophy-icon">&#127942;</span> @L["Leaderboard_Title"]</h1>
+    <h1><span class="trophy-icon" aria-hidden="true">&#127942;</span> @L["Leaderboard_Title"]</h1>
 
     @if (isLoadingInitial)
     {
@@ -18,7 +18,7 @@
     }
     else if (!string.IsNullOrEmpty(errorMessage))
     {
-        <div class="alert alert-danger">@errorMessage</div>
+        <div class="alert alert-danger" role="alert">@errorMessage</div>
     }
     else
     {
@@ -26,13 +26,16 @@
         {
             <div class="favorites-section">
                 <h2>
-                    <span><span class="card-icon">⭐</span> @LC["Favorites_QuickAccess"]</span>
+                    <span><span class="card-icon" aria-hidden="true">⭐</span> @LC["Favorites_QuickAccess"]</span>
                     <a href="/settings/favorites" class="manage-link">@LC["Favorites_Manage"]</a>
                 </h2>
                 <div class="favorites-quick-links">
                     @foreach (var favorite in favoriteSeasons)
                     {
-                        <div class="favorite-link" @onclick="() => SelectFavoriteSeason(favorite.SeasonId)">
+                        var favId = favorite.SeasonId;
+                        <div class="favorite-link" role="button" tabindex="0"
+                             @onclick="() => SelectFavoriteSeason(favId)"
+                             @onkeydown="@(e => { if (e.Key is "Enter" or " ") SelectFavoriteSeason(favId); })">
                             <h4>@favorite.SeriesName</h4>
                             <p>@favorite.SeasonName (@favorite.Year)</p>
                         </div>
@@ -106,17 +109,17 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>@L["Leaderboard_Col_Rank"]</th>
-                            <th>@L["Leaderboard_Col_Player"]</th>
+                            <th scope="col">@L["Leaderboard_Col_Rank"]</th>
+                            <th scope="col">@L["Leaderboard_Col_Player"]</th>
                             @if (ShouldShowBestResultsColumn())
                             {
-                                <th>@GetBestResultsColumnHeader()</th>
+                                <th scope="col">@GetBestResultsColumnHeader()</th>
                             }
-                            <th>@L["Leaderboard_Col_Total"]</th>
-                            <th>@L["Leaderboard_Col_Predictions"]</th>
-                            <th>@L["Leaderboard_Col_Exact"]</th>
-                            <th>@L["Leaderboard_Col_1Off"]</th>
-                            <th>@L["Leaderboard_Col_2Off"]</th>
+                            <th scope="col">@L["Leaderboard_Col_Total"]</th>
+                            <th scope="col">@L["Leaderboard_Col_Predictions"]</th>
+                            <th scope="col">@L["Leaderboard_Col_Exact"]</th>
+                            <th scope="col">@L["Leaderboard_Col_1Off"]</th>
+                            <th scope="col">@L["Leaderboard_Col_2Off"]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -156,22 +159,22 @@
             else if (lastEventResult != null)
             {
                 <div class="last-event-section">
-                    <h2><span class="flag-icon">&#127937;</span> @L["Leaderboard_LastEvent"] @lastEventResult.EventName</h2>
+                    <h2><span class="flag-icon" aria-hidden="true">&#127937;</span> @L["Leaderboard_LastEvent"] @lastEventResult.EventName</h2>
                     <p class="event-date">@lastEventResult.EventDate.ToShortDateString()</p>
 
                     <div class="actual-result-box">
                         <h3>@L["Leaderboard_ActualPodium"]</h3>
                         <div class="podium-display">
                             <div class="podium-position position-1">
-                                <div class="position-label"><span class="medal-icon">&#129351;</span> @L["Leaderboard_Pos1st"]</div>
+                                <div class="position-label"><span class="medal-icon" aria-hidden="true">&#129351;</span> @L["Leaderboard_Pos1st"]</div>
                                 <div class="competitor-name">@lastEventResult.FirstPlaceName</div>
                             </div>
                             <div class="podium-position position-2">
-                                <div class="position-label"><span class="medal-icon">&#129352;</span> @L["Leaderboard_Pos2nd"]</div>
+                                <div class="position-label"><span class="medal-icon" aria-hidden="true">&#129352;</span> @L["Leaderboard_Pos2nd"]</div>
                                 <div class="competitor-name">@lastEventResult.SecondPlaceName</div>
                             </div>
                             <div class="podium-position position-3">
-                                <div class="position-label"><span class="medal-icon">&#129353;</span> @L["Leaderboard_Pos3rd"]</div>
+                                <div class="position-label"><span class="medal-icon" aria-hidden="true">&#129353;</span> @L["Leaderboard_Pos3rd"]</div>
                                 <div class="competitor-name">@lastEventResult.ThirdPlaceName</div>
                             </div>
                         </div>
@@ -181,9 +184,9 @@
                         <h3>@L["Leaderboard_Top10"]</h3>
 
                         <div class="search-section">
-                            <label>@L["Leaderboard_SearchUser"]</label>
+                            <label for="leaderboard-search">@L["Leaderboard_SearchUser"]</label>
                             <div class="search-input-container">
-                                <input type="text" 
+                                <input id="leaderboard-search" type="text" 
                                        class="form-control" 
                                        @bind="searchUserQuery" 
                                        @bind:event="oninput"
@@ -191,16 +194,19 @@
                                        placeholder="@L["Leaderboard_SearchPlaceholder"]" />
                                 @if (searchingUsers)
                                 {
-                                    <span class="search-spinner">?</span>
+                                    <span class="search-spinner" aria-hidden="true">?</span>
                                 }
                             </div>
-                            
+
                             @if (userSearchResults.Any())
                             {
-                                <div class="search-results-dropdown">
+                                <div class="search-results-dropdown" role="listbox">
                                     @foreach (var user in userSearchResults)
                                     {
-                                        <div class="search-result-item" @onclick="() => SelectSearchUser(user)">
+                                        var u = user;
+                                        <div class="search-result-item" role="option" tabindex="0"
+                                             @onclick="() => SelectSearchUser(u)"
+                                             @onkeydown="@(e => { if (e.Key is "Enter" or " ") SelectSearchUser(u); })">
                                                 <strong>@user.Username</strong>
                                                 <span class="points-badge">@user.PointsEarned @L["Leaderboard_Pts"]</span>
                                             </div>
@@ -236,11 +242,11 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>@L["Leaderboard_Col_Rank"]</th>
-                                            <th>@L["Leaderboard_Col_Player"]</th>
-                                            <th>@L["Leaderboard_Col_Prediction"]</th>
-                                            <th>@L["Leaderboard_Col_Points"]</th>
-                                            <th>@L["Leaderboard_Col_Submitted"]</th>
+                                            <th scope="col">@L["Leaderboard_Col_Rank"]</th>
+                                            <th scope="col">@L["Leaderboard_Col_Player"]</th>
+                                            <th scope="col">@L["Leaderboard_Col_Prediction"]</th>
+                                            <th scope="col">@L["Leaderboard_Col_Points"]</th>
+                                            <th scope="col">@L["Leaderboard_Col_Submitted"]</th>
                                         </tr>
                                     </thead>
                                     <tbody>

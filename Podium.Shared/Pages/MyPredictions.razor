@@ -26,7 +26,7 @@
     }
     else if (!string.IsNullOrEmpty(errorMessage))
     {
-        <div class="alert alert-danger">@errorMessage</div>
+        <div class="alert alert-danger" role="alert">@errorMessage</div>
     }
     else if (!hasAnyPredictions)
     {
@@ -175,18 +175,21 @@
                                             <div class="actual-position">
                                                 <span class="medal gold small">@L["Predict_1st"]</span>
                                                 <span class="@(pred.FirstPlaceId == pred.ActualFirstPlaceId ? "correct" : "")">
+                                                    @if (pred.FirstPlaceId == pred.ActualFirstPlaceId) { <span class="sr-only">Correct:</span> }
                                                     @pred.ActualFirstPlaceName
                                                 </span>
                                             </div>
                                             <div class="actual-position">
                                                 <span class="medal silver small">@L["Predict_2nd"]</span>
                                                 <span class="@(pred.SecondPlaceId == pred.ActualSecondPlaceId ? "correct" : "")">
+                                                    @if (pred.SecondPlaceId == pred.ActualSecondPlaceId) { <span class="sr-only">Correct:</span> }
                                                     @pred.ActualSecondPlaceName
                                                 </span>
                                             </div>
                                             <div class="actual-position">
                                                 <span class="medal bronze small">@L["Predict_3rd"]</span>
                                                 <span class="@(pred.ThirdPlaceId == pred.ActualThirdPlaceId ? "correct" : "")">
+                                                    @if (pred.ThirdPlaceId == pred.ActualThirdPlaceId) { <span class="sr-only">Correct:</span> }
                                                     @pred.ActualThirdPlaceName
                                                 </span>
                                             </div>

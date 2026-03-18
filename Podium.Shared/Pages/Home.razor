@@ -21,12 +21,15 @@
         {
             <div class="favorites-section">
                 <h2>
-                    <span><span class="card-icon">⭐</span> @L["Favorites_QuickAccess"]</span>
+                    <span><span class="card-icon" aria-hidden="true">⭐</span> @L["Favorites_QuickAccess"]</span>
                 </h2>
                 <div class="favorites-quick-links">
                     @foreach (var favorite in favoriteSeasons)
                     {
-                        <div class="favorite-link" @onclick="() => NavigateToSeason(favorite.SeasonId)">
+                        var favId = favorite.SeasonId;
+                        <div class="favorite-link" role="button" tabindex="0"
+                             @onclick="() => NavigateToSeason(favId)"
+                             @onkeydown="@(e => { if (e.Key is "Enter" or " ") NavigateToSeason(favId); })">
                             <h4>@favorite.SeriesName</h4>
                             <p>@favorite.SeasonName (@favorite.Year)</p>
                         </div>
@@ -37,17 +40,17 @@
 
         <div class="quick-actions">
             <a href="/disciplines" class="action-card">
-                <h3><span class="card-icon">🏆</span> @L["Nav_MakePredictions"]</h3>
+                <h3><span class="card-icon" aria-hidden="true">🏆</span> @L["Nav_MakePredictions"]</h3>
                 <p>@L["Home_MakePredictions_Desc"]</p>
             </a>
 
             <a href="/my-predictions" class="action-card">
-                <h3><span class="card-icon">📊</span> @L["Nav_MyPredictions"]</h3>
+                <h3><span class="card-icon" aria-hidden="true">📊</span> @L["Nav_MyPredictions"]</h3>
                 <p>@L["Home_MyPredictions_Desc"]</p>
             </a>
 
             <a href="/leaderboard" class="action-card">
-                <h3><span class="card-icon">🏅</span> @L["Nav_Leaderboard"]</h3>
+                <h3><span class="card-icon" aria-hidden="true">🏅</span> @L["Nav_Leaderboard"]</h3>
                 <p>@L["Home_Leaderboard_Desc"]</p>
             </a>
         </div>
@@ -66,17 +69,17 @@
 
         <div class="features">
             <div class="feature-card">
-                <h3><span class="card-icon">🏁</span> @L["Home_Feature1_Title"]</h3>
+                <h3><span class="card-icon" aria-hidden="true">🏁</span> @L["Home_Feature1_Title"]</h3>
                 <p>@L["Home_Feature1_Desc"]</p>
             </div>
 
             <div class="feature-card">
-                <h3><span class="card-icon">🎯</span> @L["Home_Feature2_Title"]</h3>
+                <h3><span class="card-icon" aria-hidden="true">🎯</span> @L["Home_Feature2_Title"]</h3>
                 <p>@L["Home_Feature2_Desc"]</p>
             </div>
 
             <div class="feature-card">
-                <h3><span class="card-icon">🏆</span> @L["Home_Feature3_Title"]</h3>
+                <h3><span class="card-icon" aria-hidden="true">🏆</span> @L["Home_Feature3_Title"]</h3>
                 <p>@L["Home_Feature3_Desc"]</p>
             </div>
         </div>

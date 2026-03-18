@@ -8,11 +8,12 @@
 @inject IStringLocalizer<Common> L
 
 <div class="app-container">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="app-header">
         <div class="header-content">
-            <a href="/" class="logo"><span class="logo-icon">🏆</span> Podium</a>
+            <a href="/" class="logo"><span class="logo-icon" aria-hidden="true">🏆</span> Podium</a>
 
-            <nav class="main-nav">
+            <nav class="main-nav" aria-label="Main navigation">
                 @if (AuthState.IsAuthenticated)
                 {
                     <a href="/disciplines">@L["Nav_MakePredictions"]</a>
@@ -23,21 +24,22 @@
                         <a href="/admin" class="admin-link">@L["Nav_Admin"]</a>
                     }
                     <div class="profile-dropdown" @onfocusout="CloseDropdownDelayed">
-                        <button class="profile-btn" @onclick="ToggleDropdown" @onclick:stopPropagation="true">
+                        <button class="profile-btn" @onclick="ToggleDropdown" @onclick:stopPropagation="true"
+                                aria-haspopup="true" aria-expanded="@showProfileDropdown.ToString().ToLower()">
                             <span class="profile-name">@AuthState.Username</span>
-                            <span class="dropdown-arrow">▼</span>
+                            <span class="dropdown-arrow" aria-hidden="true">▼</span>
                         </button>
                         @if (showProfileDropdown)
                         {
-                            <div class="dropdown-menu">
-                                <a href="/settings" class="dropdown-item" @onclick="CloseDropdown">
-                                    <span class="dropdown-icon">⚙️</span> @L["Nav_Settings"]
+                            <div class="dropdown-menu" role="menu">
+                                <a href="/settings" class="dropdown-item" role="menuitem" @onclick="CloseDropdown">
+                                    <span class="dropdown-icon" aria-hidden="true">⚙️</span> @L["Nav_Settings"]
                                 </a>
-                                <a href="/settings/favorites" class="dropdown-item" @onclick="CloseDropdown">
-                                    <span class="dropdown-icon">⭐</span> @L["Nav_Favorites"]
+                                <a href="/settings/favorites" class="dropdown-item" role="menuitem" @onclick="CloseDropdown">
+                                    <span class="dropdown-icon" aria-hidden="true">⭐</span> @L["Nav_Favorites"]
                                 </a>
-                                <a class="dropdown-item" @onclick="SignOut">
-                                    <span class="dropdown-icon">🚪</span> @L["Nav_SignOut"]
+                                <a class="dropdown-item" role="menuitem" @onclick="SignOut">
+                                    <span class="dropdown-icon" aria-hidden="true">🚪</span> @L["Nav_SignOut"]
                                 </a>
                             </div>
                         }
@@ -50,7 +52,8 @@
                 }
 
                 <div class="lang-picker">
-                    <select class="lang-select" @onchange="OnLanguageChanged">
+                    <label for="lang-select" class="sr-only">Language</label>
+                    <select id="lang-select" class="lang-select" @onchange="OnLanguageChanged" aria-label="Select language">
                         <option value="en" selected="@(LangState.CurrentLanguageCode == "en")">EN – English</option>
                         <option value="fr" selected="@(LangState.CurrentLanguageCode == "fr")">FR – Français</option>
                         <option value="ru" selected="@(LangState.CurrentLanguageCode == "ru")">RU – Русский</option>
@@ -60,7 +63,7 @@
         </div>
     </header>
 
-    <main class="app-main" @key="renderKey">
+    <main class="app-main" id="main-content" @key="renderKey">
         @Body
     </main>
 
@@ -132,6 +135,7 @@
             return;
         await LangState.SetLanguageAsync(code);
         try { await JSRuntime.InvokeVoidAsync("podiumCulture.set", code); } catch { }
+        try { await JSRuntime.InvokeVoidAsync("eval", $"document.documentElement.setAttribute('lang', '{code}')"); } catch { }
 
         // In MAUI Blazor Hybrid forceLoad destroys the WebView; use soft navigation instead
         var isWasm = OperatingSystem.IsBrowser();
