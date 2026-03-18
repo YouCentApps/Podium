@@ -24,13 +24,16 @@
     {
         <div class="favorites-section">
             <h2>
-                <span><span class="card-icon">⭐</span> @LC["Favorites_QuickAccess"]</span>
+                <span><span class="card-icon" aria-hidden="true">⭐</span> @LC["Favorites_QuickAccess"]</span>
                 <a href="/settings/favorites" class="manage-link">@LC["Favorites_Manage"]</a>
             </h2>
             <div class="favorites-quick-links">
                 @foreach (var favorite in favoriteSeasons)
                 {
-                    <div class="favorite-link" @onclick="() => NavigateToSeason(favorite.SeasonId)">
+                    var favId = favorite.SeasonId;
+                    <div class="favorite-link" role="button" tabindex="0"
+                         @onclick="() => NavigateToSeason(favId)"
+                         @onkeydown="@(e => { if (e.Key is "Enter" or " ") NavigateToSeason(favId); })">
                         <h4>@favorite.SeriesName</h4>
                         <p>@favorite.SeasonName (@favorite.Year)</p>
                     </div>
@@ -47,7 +50,7 @@
     }
     else if (!string.IsNullOrEmpty(errorMessage))
     {
-        <div class="alert alert-danger">@errorMessage</div>
+        <div class="alert alert-danger" role="alert">@errorMessage</div>
     }
     else if (disciplines.Count == 0)
     {
@@ -60,7 +63,10 @@
         <div class="sport-grid">
             @foreach (var discipline in disciplines)
             {
-                <div class="sport-card" @onclick="() => SelectDiscipline(discipline.Id)">
+                var discId = discipline.Id;
+                <div class="sport-card" role="button" tabindex="0"
+                     @onclick="() => SelectDiscipline(discId)"
+                     @onkeydown="@(e => { if (e.Key is "Enter" or " ") SelectDiscipline(discId); })">
                     <h3>@discipline.DisplayName</h3>
                     <p>@L["Disciplines_ViewSeries"]</p>
                 </div>

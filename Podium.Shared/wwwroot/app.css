@@ -7,14 +7,28 @@
     --danger-color: #ef4444;
     --warning-color: #f59e0b;
     --text-color: #1f2937;
-    --text-light: #6b7280;
+    --text-light: #4a4e59;
     --border-color: #e5e7eb;
     --bg-light: #f9fafb;
     --header-bg: #ffffff;
+    --focus-ring: 2px solid var(--primary-color);
 }
 
 * {
     box-sizing: border-box;
+}
+
+/* Visually hidden but accessible to screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 body {
@@ -201,7 +215,8 @@ input[type="number"].form-control {
 }
 
 .form-control:focus {
-    outline: none;
+    outline: var(--focus-ring);
+    outline-offset: 2px;
     border-color: var(--primary-color);
 }
 
@@ -246,8 +261,11 @@ input[type="number"].form-control {
 }
 
 .btn:disabled {
-    opacity: 0.6;
+    opacity: 1;
     cursor: not-allowed;
+    background: #9ca3af;
+    color: #e5e7eb;
+    border-color: #9ca3af;
 }
 
 .btn-lg {
@@ -478,9 +496,9 @@ input[type="number"].form-control {
     font-size: 1.1rem;
 }
 
-.position-1 { order: 2; }
-.position-2 { order: 1; }
-.position-3 { order: 3; }
+.position-1 { /* gold - rendered in DOM order */ }
+.position-2 { /* silver */ }
+.position-3 { /* bronze */ }
 
 /* Alerts */
 .alert {
@@ -575,7 +593,7 @@ input[type="number"].form-control {
 
 .rank-3 {
     background: #cd7f32;
-    color: white;
+    color: #1a1a1a;
 }
 
 /* Responsive */
@@ -1580,5 +1598,78 @@ input[type="number"].form-control {
     font-size: 0.875rem;
 }
 
+/* ===== WCAG 2.2 Accessibility Enhancements ===== */
+
+/* WCAG 2.4.1: Skip Navigation Link */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    z-index: 9999;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 8px 0;
+}
+
+.skip-link:focus {
+    left: 0;
+    top: 0;
+}
+
+/* WCAG 2.4.7: Global Focus Visible for all interactive elements */
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible,
+[role="menuitem"]:focus-visible,
+[tabindex]:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+/* WCAG 2.5.8: Target Size (Minimum 24x24, prefer 44x44 for touch) */
+.main-nav a,
+.main-nav button {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* WCAG 2.1.1: Keyboard-accessible cards */
+.sport-card[role="button"],
+.favorite-link[role="button"],
+.tier-card[role="button"],
+.competitor-option[role="button"],
+.action-card[role="button"],
+.search-result-item[role="button"] {
+    cursor: pointer;
+}
+
+.sport-card[role="button"]:focus-visible,
+.favorite-link[role="button"]:focus-visible,
+.tier-card[role="button"]:focus-visible,
+.competitor-option[role="button"]:focus-visible,
+.action-card[role="button"]:focus-visible,
+.search-result-item[role="button"]:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
+/* WCAG 2.1.2: Modal focus trap visual indicator */
+.modal-overlay:focus-within .modal-content {
+    outline: var(--focus-ring);
+    outline-offset: 4px;
+}
+
+/* WCAG 1.4.1: Correct/Incorrect with text indicator (not color-only) */
+.actual-position span.correct::before {
+    content: "\2713 ";
+}
 
 

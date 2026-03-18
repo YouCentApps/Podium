@@ -15,26 +15,26 @@
 
         @if (!string.IsNullOrEmpty(errorMessage))
         {
-            <div class="alert alert-danger">@errorMessage</div>
+            <div class="alert alert-danger" role="alert">@errorMessage</div>
         }
 
         @if (!string.IsNullOrEmpty(successMessage))
         {
-            <div class="alert alert-success">@successMessage</div>
+            <div class="alert alert-success" role="status">@successMessage</div>
         }
 
         @if (!verificationSent)
         {
             <div class="auth-form">
                 <div class="form-group">
-                    <label>@L["SignUp_Label_Username"] <span class="text-danger">@L["SignUp_Required"]</span></label>
-                    <input type="text" class="form-control" @bind="username" placeholder="@L["SignUp_Placeholder_Username"]" maxlength="50" />
+                    <label for="signup-username">@L["SignUp_Label_Username"] <span class="text-danger">@L["SignUp_Required"]</span></label>
+                    <input id="signup-username" type="text" class="form-control" @bind="username" placeholder="@L["SignUp_Placeholder_Username"]" maxlength="50" autocomplete="username" />
                     <small class="form-text text-muted">@L["SignUp_Hint_Username"]</small>
                 </div>
 
                 <div class="form-group">
-                    <label>@L["SignUp_Label_AuthMethod"] <span class="text-danger">@L["SignUp_Required"]</span></label>
-                    <select class="form-control" @bind="preferredAuthMethod">
+                    <label for="signup-authmethod">@L["SignUp_Label_AuthMethod"] <span class="text-danger">@L["SignUp_Required"]</span></label>
+                    <select id="signup-authmethod" class="form-control" @bind="preferredAuthMethod">
                         <option value="Both">@L["SignUp_Method_Both"]</option>
                         <option value="Password">@L["SignUp_Method_Password"]</option>
                         <option value="Email">@L["SignUp_Method_Email"]</option>
@@ -44,30 +44,30 @@
                 @if (preferredAuthMethod == "Email" || preferredAuthMethod == "Both")
                 {
                     <div class="form-group">
-                        <label>@L["SignUp_Label_Email"] <span class="text-danger">@L["SignUp_Required"]</span></label>
-                        <input type="email" class="form-control" @bind="email" placeholder="@L["SignUp_Placeholder_Email"]" />
+                        <label for="signup-email">@L["SignUp_Label_Email"] <span class="text-danger">@L["SignUp_Required"]</span></label>
+                        <input id="signup-email" type="email" class="form-control" @bind="email" placeholder="@L["SignUp_Placeholder_Email"]" autocomplete="email" />
                         <small class="form-text text-muted">@L["SignUp_Hint_EmailRequired"]</small>
                     </div>
                 }
                 else
                 {
                     <div class="form-group">
-                        <label>@L["SignUp_Label_EmailOptional"]</label>
-                        <input type="email" class="form-control" @bind="email" placeholder="@L["SignUp_Placeholder_Email"]" />
+                        <label for="signup-email-optional">@L["SignUp_Label_EmailOptional"]</label>
+                        <input id="signup-email-optional" type="email" class="form-control" @bind="email" placeholder="@L["SignUp_Placeholder_Email"]" autocomplete="email" />
                     </div>
                 }
 
                 @if (preferredAuthMethod == "Password" || preferredAuthMethod == "Both")
                 {
                     <div class="form-group">
-                        <label>@L["SignUp_Label_Password"] <span class="text-danger">@L["SignUp_Required"]</span></label>
-                        <input type="password" class="form-control" @bind="password" placeholder="@L["SignUp_Placeholder_Password"]" maxlength="100" />
+                        <label for="signup-password">@L["SignUp_Label_Password"] <span class="text-danger">@L["SignUp_Required"]</span></label>
+                        <input id="signup-password" type="password" class="form-control" @bind="password" placeholder="@L["SignUp_Placeholder_Password"]" maxlength="100" autocomplete="new-password" />
                         <small class="form-text text-muted">@L["SignUp_Hint_Password"]</small>
                     </div>
 
                     <div class="form-group">
-                        <label>@L["SignUp_Label_ConfirmPassword"] <span class="text-danger">@L["SignUp_Required"]</span></label>
-                        <input type="password" class="form-control" @bind="confirmPassword" placeholder="@L["SignUp_Placeholder_ConfirmPassword"]" maxlength="100" />
+                        <label for="signup-confirm-password">@L["SignUp_Label_ConfirmPassword"] <span class="text-danger">@L["SignUp_Required"]</span></label>
+                        <input id="signup-confirm-password" type="password" class="form-control" @bind="confirmPassword" placeholder="@L["SignUp_Placeholder_ConfirmPassword"]" maxlength="100" autocomplete="new-password" />
                     </div>
                 }
 
@@ -84,8 +84,8 @@
                 <p class="text-center text-muted">@L["SignUp_VerifyHint"]</p>
 
                 <div class="form-group">
-                    <label>@L["SignUp_Label_VerifCode"]</label>
-                    <input type="text" class="form-control" @bind="verificationCode" placeholder="@L["SignIn_Placeholder_Code"]" maxlength="6" />
+                    <label for="signup-verify-code">@L["SignUp_Label_VerifCode"]</label>
+                    <input id="signup-verify-code" type="text" class="form-control" @bind="verificationCode" placeholder="@L["SignIn_Placeholder_Code"]" maxlength="6" autocomplete="one-time-code" inputmode="numeric" />
                 </div>
 
                 <button class="btn btn-primary w-100" @onclick="VerifyAndCompleteRegistration" disabled="@isLoading">

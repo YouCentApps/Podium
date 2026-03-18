@@ -16,19 +16,19 @@
 
         @if (!string.IsNullOrEmpty(errorMessage))
         {
-            <div class="alert alert-danger">@errorMessage</div>
+            <div class="alert alert-danger" role="alert">@errorMessage</div>
         }
 
         @if (!string.IsNullOrEmpty(successMessage))
         {
-            <div class="alert alert-success">@successMessage</div>
+            <div class="alert alert-success" role="status">@successMessage</div>
         }
 
-        <div class="auth-tabs">
-            <button class="@(authMethod == "password" ? "active" : "")" @onclick="@(() => authMethod = "password")">
+        <div class="auth-tabs" role="tablist">
+            <button role="tab" aria-selected="@(authMethod == "password")" class="@(authMethod == "password" ? "active" : "")" @onclick="@(() => authMethod = "password")">
                 @L["SignIn_Tab_Password"]
             </button>
-            <button class="@(authMethod == "email" ? "active" : "")" @onclick="@(() => authMethod = "email")">
+            <button role="tab" aria-selected="@(authMethod == "email")" class="@(authMethod == "email" ? "active" : "")" @onclick="@(() => authMethod = "email")">
                 @L["SignIn_Tab_EmailCode"]
             </button>
         </div>
@@ -37,13 +37,13 @@
         {
             <div class="auth-form">
                 <div class="form-group">
-                    <label>@L["SignIn_Label_EmailOrUsername"]</label>
-                    <input type="text" class="form-control" @bind="emailOrUsername" placeholder="@L["SignIn_Placeholder_EmailOrUsername"]" />
+                    <label for="signin-email">@L["SignIn_Label_EmailOrUsername"]</label>
+                    <input id="signin-email" type="text" class="form-control" @bind="emailOrUsername" placeholder="@L["SignIn_Placeholder_EmailOrUsername"]" autocomplete="username" />
                 </div>
 
                 <div class="form-group">
-                    <label>@L["SignIn_Label_Password"]</label>
-                    <input type="password" class="form-control" @bind="password" placeholder="@L["SignIn_Placeholder_Password"]" />
+                    <label for="signin-password">@L["SignIn_Label_Password"]</label>
+                    <input id="signin-password" type="password" class="form-control" @bind="password" placeholder="@L["SignIn_Placeholder_Password"]" autocomplete="current-password" />
                 </div>
 
                 <button class="btn btn-primary w-100" @onclick="SignInWithPassword" disabled="@isLoading">
@@ -58,8 +58,8 @@
             {
                 <div class="auth-form">
                     <div class="form-group">
-                        <label>@L["SignIn_Label_EmailOrUsername"]</label>
-                        <input type="text" class="form-control" @bind="emailOrUsernameForOtp" placeholder="@L["SignIn_Placeholder_EmailOrUsername"]" />
+                        <label for="signin-otp-email">@L["SignIn_Label_EmailOrUsername"]</label>
+                        <input id="signin-otp-email" type="text" class="form-control" @bind="emailOrUsernameForOtp" placeholder="@L["SignIn_Placeholder_EmailOrUsername"]" autocomplete="username" />
                     </div>
 
                     <button class="btn btn-primary w-100" @onclick="SendOtp" disabled="@isLoading">
@@ -74,8 +74,8 @@
                     <p class="text-center">@L["SignIn_SentTo"] <strong>@displayEmail</strong></p>
 
                     <div class="form-group">
-                        <label>@L["SignIn_Label_Code"]</label>
-                        <input type="text" class="form-control" @bind="otpCode" placeholder="@L["SignIn_Placeholder_Code"]" maxlength="6" />
+                        <label for="signin-otp-code">@L["SignIn_Label_Code"]</label>
+                        <input id="signin-otp-code" type="text" class="form-control" @bind="otpCode" placeholder="@L["SignIn_Placeholder_Code"]" maxlength="6" autocomplete="one-time-code" inputmode="numeric" />
                     </div>
 
                     <button class="btn btn-primary w-100" @onclick="VerifyOtp" disabled="@isLoading">
