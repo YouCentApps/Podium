@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Disciplines_Title" xml:space="preserve"><value>Disziplin wählen</value></data>
+  <data name="Disciplines_None" xml:space="preserve"><value>Derzeit keine Disziplinen verfügbar. Schau später nochmal vorbei!</value></data>
+  <data name="Disciplines_ViewSeries" xml:space="preserve"><value>Serien ansehen →</value></data>
+  <data name="Disciplines_SignInToPredict" xml:space="preserve"><value>Bitte melde dich an, um Vorhersagen zu machen.</value></data>
+  <data name="SeriesSelection_Title" xml:space="preserve"><value>Serie wählen</value></data>
+  <data name="SeriesSelection_None" xml:space="preserve"><value>Keine Serien für diese Disziplin verfügbar.</value></data>
+  <data name="SeriesSelection_Breadcrumb" xml:space="preserve"><value>Disziplinen</value></data>
+  <data name="SeriesSelection_ViewEvents" xml:space="preserve"><value>Events ansehen →</value></data>
+  <data name="SeasonEvents_Title" xml:space="preserve"><value>Event wählen</value></data>
+  <data name="SeasonEvents_Breadcrumb" xml:space="preserve"><value>Start</value></data>
+  <data name="SeasonEvents_None" xml:space="preserve"><value>Keine anstehenden Events. Schau später nochmal vorbei!</value></data>
+  <data name="SeasonEvents_OpenPredictions" xml:space="preserve"><value>Vorhersagen offen</value></data>
+  <data name="SeasonEvents_Closed" xml:space="preserve"><value>Geschlossen</value></data>
+  <data name="Predict_Title" xml:space="preserve"><value>Podium vorhersagen</value></data>
+  <data name="Predict_FirstPlace" xml:space="preserve"><value>Erster Platz</value></data>
+  <data name="Predict_SecondPlace" xml:space="preserve"><value>Zweiter Platz</value></data>
+  <data name="Predict_ThirdPlace" xml:space="preserve"><value>Dritter Platz</value></data>
+  <data name="Predict_YourPrediction" xml:space="preserve"><value>Deine Vorhersage</value></data>
+  <data name="Predict_Btn_Submit" xml:space="preserve"><value>Vorhersage absenden</value></data>
+  <data name="Predict_Btn_Update" xml:space="preserve"><value>Vorhersage aktualisieren</value></data>
+  <data name="Predict_Btn_Submitting" xml:space="preserve"><value>Wird gesendet...</value></data>
+  <data name="Predict_SignIn" xml:space="preserve"><value>Bitte melde dich an, um Vorhersagen zu machen.</value></data>
+  <data name="Predict_SelectAll" xml:space="preserve"><value>Wähle alle drei Positionen aus, um abzusenden.</value></data>
+  <data name="Predict_Closed" xml:space="preserve"><value>Vorhersagen für dieses Event sind geschlossen.</value></data>
+  <data name="Predict_PreviousPrediction" xml:space="preserve"><value>Deine vorherige Vorhersage:</value></data>
+  <data name="Predict_1st" xml:space="preserve"><value>1.:</value></data>
+  <data name="Predict_2nd" xml:space="preserve"><value>2.:</value></data>
+  <data name="Predict_3rd" xml:space="preserve"><value>3.:</value></data>
+  <data name="MyPredictions_Title" xml:space="preserve"><value>Meine Vorhersagen</value></data>
+  <data name="MyPredictions_SignIn" xml:space="preserve"><value>Bitte melde dich an, um deine Vorhersagen zu sehen.</value></data>
+  <data name="MyPredictions_None" xml:space="preserve"><value>Du hast noch keine Vorhersagen gemacht.</value></data>
+  <data name="MyPredictions_FirstPrediction" xml:space="preserve"><value>Erste Vorhersage machen</value></data>
+  <data name="MyPredictions_Loading" xml:space="preserve"><value>Vorhersagen werden geladen...</value></data>
+  <data name="MyPredictions_FilterDiscipline" xml:space="preserve"><value>Disziplin:</value></data>
+  <data name="MyPredictions_FilterSeries" xml:space="preserve"><value>Serie:</value></data>
+  <data name="MyPredictions_FilterSeason" xml:space="preserve"><value>Saison:</value></data>
+  <data name="MyPredictions_AllDisciplines" xml:space="preserve"><value>Alle Disziplinen</value></data>
+  <data name="MyPredictions_AllSeries" xml:space="preserve"><value>Alle Serien</value></data>
+  <data name="MyPredictions_AllSeasons" xml:space="preserve"><value>Alle Saisons</value></data>
+  <data name="MyPredictions_IncludeInactive" xml:space="preserve"><value>Inaktive Saisons einschließen</value></data>
+  <data name="Predict_Submitted" xml:space="preserve"><value>Vorhersage erfolgreich abgesendet!</value></data>
+  <data name="Predict_SubmitFailed" xml:space="preserve"><value>Vorhersage konnte nicht gesendet werden. Bitte versuche es erneut.</value></data>
+  <data name="Events_Breadcrumb_Series" xml:space="preserve"><value>Serien</value></data>
+  <data name="Events_Breadcrumb_Events" xml:space="preserve"><value>Events</value></data>
+  <data name="Events_NoActiveSeason" xml:space="preserve"><value>Keine aktive Saison für diese Serie gefunden.</value></data>
+  <data name="Events_LoadFailed" xml:space="preserve"><value>Events konnten nicht geladen werden.</value></data>
+  <data name="Predict_EventNotFound" xml:space="preserve"><value>Event nicht gefunden.</value></data>
+  <data name="Predict_CompetitorsLoadFailed" xml:space="preserve"><value>Teilnehmer konnten nicht geladen werden.</value></data>
+  <data name="MyPredictions_Inactive" xml:space="preserve"><value>Inaktiv</value></data>
+  <data name="MyPredictions_Location" xml:space="preserve"><value>Ort:</value></data>
+  <data name="MyPredictions_Date" xml:space="preserve"><value>Datum:</value></data>
+  <data name="MyPredictions_Pts" xml:space="preserve"><value>Pkt</value></data>
+  <data name="MyPredictions_Pending" xml:space="preserve"><value>Ausstehend</value></data>
+  <data name="MyPredictions_YourPrediction" xml:space="preserve"><value>Deine Vorhersage</value></data>
+  <data name="MyPredictions_ActualResults" xml:space="preserve"><value>Tatsächliche Ergebnisse</value></data>
+  <data name="MyPredictions_Submitted" xml:space="preserve"><value>Eingereicht:</value></data>
+  <data name="MyPredictions_NoMatchingPredictions" xml:space="preserve"><value>Keine Vorhersagen für die aktuellen Filter gefunden. Aktiviere "Inaktive Saisons einschließen", um vergangene Vorhersagen zu sehen.</value></data>
+</root>

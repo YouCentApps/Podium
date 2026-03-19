@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Leaderboard_Title" xml:space="preserve"><value>Classifica</value></data>
+  <data name="Leaderboard_SelectInfo" xml:space="preserve"><value>Seleziona disciplina, serie e stagione per vedere la classifica.</value></data>
+  <data name="Leaderboard_NoPredictions" xml:space="preserve"><value>Nessuna previsione ancora per questa stagione.</value></data>
+  <data name="Leaderboard_Loading" xml:space="preserve"><value>Caricamento classifica...</value></data>
+  <data name="Leaderboard_LoadingLastEvent" xml:space="preserve"><value>Caricamento risultati ultimo evento...</value></data>
+  <data name="Leaderboard_SelectDiscipline" xml:space="preserve"><value>-- Seleziona disciplina --</value></data>
+  <data name="Leaderboard_SelectSeries" xml:space="preserve"><value>-- Seleziona serie --</value></data>
+  <data name="Leaderboard_SelectSeason" xml:space="preserve"><value>-- Seleziona stagione --</value></data>
+  <data name="Leaderboard_Label_Discipline" xml:space="preserve"><value>Disciplina:</value></data>
+  <data name="Leaderboard_Label_Series" xml:space="preserve"><value>Serie:</value></data>
+  <data name="Leaderboard_Label_Season" xml:space="preserve"><value>Stagione:</value></data>
+  <data name="Leaderboard_Col_Rank" xml:space="preserve"><value>Posizione</value></data>
+  <data name="Leaderboard_Col_Player" xml:space="preserve"><value>Giocatore</value></data>
+  <data name="Leaderboard_Col_BestResults" xml:space="preserve"><value>Migliori {0} risultati</value></data>
+  <data name="Leaderboard_Col_BestResults_Short" xml:space="preserve"><value>Migliori risultati</value></data>
+  <data name="Leaderboard_Col_Total" xml:space="preserve"><value>Totale</value></data>
+  <data name="Leaderboard_Col_Predictions" xml:space="preserve"><value>Previsioni</value></data>
+  <data name="Leaderboard_Col_Exact" xml:space="preserve"><value>Esatto</value></data>
+  <data name="Leaderboard_Col_1Off" xml:space="preserve"><value>1 fuori</value></data>
+  <data name="Leaderboard_Col_2Off" xml:space="preserve"><value>2 fuori</value></data>
+  <data name="Leaderboard_LastEvent" xml:space="preserve"><value>Ultimo evento completato:</value></data>
+  <data name="Leaderboard_ActualPodium" xml:space="preserve"><value>Podio effettivo</value></data>
+  <data name="Leaderboard_Top10" xml:space="preserve"><value>Top 10 pronostici</value></data>
+  <data name="Leaderboard_SearchUser" xml:space="preserve"><value>Cerca un utente specifico:</value></data>
+  <data name="Leaderboard_SearchPlaceholder" xml:space="preserve"><value>Digita nome utente o email...</value></data>
+  <data name="Leaderboard_ShowingFor" xml:space="preserve"><value>Risultati per:</value></data>
+  <data name="Leaderboard_ClearAll" xml:space="preserve"><value>Cancella tutto</value></data>
+  <data name="Leaderboard_NoPredictionsFound" xml:space="preserve"><value>Nessuna previsione trovata per gli utenti selezionati.</value></data>
+  <data name="Leaderboard_Col_Prediction" xml:space="preserve"><value>Previsione</value></data>
+  <data name="Leaderboard_Col_Points" xml:space="preserve"><value>Punti</value></data>
+  <data name="Leaderboard_Col_Submitted" xml:space="preserve"><value>Inviata</value></data>
+  <data name="Leaderboard_Pos1st" xml:space="preserve"><value>1°:</value></data>
+  <data name="Leaderboard_Pos2nd" xml:space="preserve"><value>2°:</value></data>
+  <data name="Leaderboard_Pos3rd" xml:space="preserve"><value>3°:</value></data>
+  <data name="Leaderboard_Pts" xml:space="preserve"><value>pt</value></data>
+</root>

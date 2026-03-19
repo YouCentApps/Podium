@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <!-- Authentication -->
+  <data name="Auth_UserNotFound" xml:space="preserve"><value>Benutzer nicht gefunden. Bitte registriere dich zuerst.</value></data>
+  <data name="Auth_EmailCodeDisabled" xml:space="preserve"><value>E-Mail-Code-Authentifizierung ist für dieses Konto nicht aktiviert. Bitte verwende dein Passwort.</value></data>
+  <data name="Auth_NoEmail" xml:space="preserve"><value>Keine E-Mail-Adresse mit diesem Konto verknüpft. Bitte verwende dein Passwort.</value></data>
+  <data name="Auth_FailedToGenerateCode" xml:space="preserve"><value>Code konnte nicht generiert werden. Bitte versuche es erneut.</value></data>
+  <data name="Auth_InvalidOtp" xml:space="preserve"><value>Ungültiger oder abgelaufener Bestätigungscode.</value></data>
+  <data name="Auth_InvalidCredentials" xml:space="preserve"><value>Ungültige E-Mail/Benutzername oder Passwort.</value></data>
+  <data name="Auth_PasswordNotEnabled" xml:space="preserve"><value>Passwort-Authentifizierung ist für dieses Konto nicht aktiviert.</value></data>
+  <data name="Auth_SessionExpired" xml:space="preserve"><value>Sitzung abgelaufen oder ungültig. Bitte melde dich erneut an.</value></data>
+  <data name="Auth_DbError" xml:space="preserve"><value>Ein Datenbankfehler ist aufgetreten. Bitte versuche es erneut.</value></data>
+  <data name="Auth_OtpSent" xml:space="preserve"><value>OTP an E-Mail gesendet</value></data>
+  <data name="Auth_RegistrationSuccess" xml:space="preserve"><value>Registrierung erfolgreich</value></data>
+  <data name="Auth_VerificationSent" xml:space="preserve"><value>Bestätigungscode an deine E-Mail gesendet</value></data>
+  <data name="Auth_SignOutSuccess" xml:space="preserve"><value>Erfolgreich abgemeldet</value></data>
+  <!-- Registration -->
+  <data name="Reg_UsernameTaken" xml:space="preserve"><value>Benutzername bereits vergeben. Bitte wähle einen anderen.</value></data>
+  <data name="Reg_EmailTaken" xml:space="preserve"><value>E-Mail bereits registriert.</value></data>
+  <data name="Reg_VerificationFailed" xml:space="preserve"><value>Ungültiger oder abgelaufener Bestätigungscode.</value></data>
+  <data name="Reg_Expired" xml:space="preserve"><value>Registrierungssitzung abgelaufen. Bitte starte die Registrierung erneut.</value></data>
+  <data name="Reg_Failed" xml:space="preserve"><value>Registrierung fehlgeschlagen. Bitte versuche es erneut.</value></data>
+  <data name="Reg_PendingFailed" xml:space="preserve"><value>Registrierung konnte nicht erstellt werden. Bitte versuche es erneut.</value></data>
+  <data name="Reg_CodeFailed" xml:space="preserve"><value>Bestätigungscode konnte nicht generiert werden. Bitte versuche es erneut.</value></data>
+  <!-- Validation -->
+  <data name="Val_UsernameInvalid" xml:space="preserve"><value>Ungültiger Benutzername. 3–50 Zeichen: nur lateinische Buchstaben, Zahlen und Leerzeichen.</value></data>
+  <data name="Val_PasswordInvalid" xml:space="preserve"><value>Ungültiges Passwort. 6–100 Zeichen, keine Leerzeichen, nur lateinische Buchstaben/Zahlen/Sonderzeichen.</value></data>
+  <data name="Val_EmailInvalid" xml:space="preserve"><value>Ungültige E-Mail-Adresse. Bitte gib eine gültige E-Mail ein.</value></data>
+  <!-- Profile -->
+  <data name="Profile_NotFound" xml:space="preserve"><value>Benutzer nicht gefunden</value></data>
+  <data name="Profile_UsernameUpdated" xml:space="preserve"><value>Benutzername erfolgreich aktualisiert</value></data>
+  <data name="Profile_UsernameTaken" xml:space="preserve"><value>Benutzername bereits vergeben</value></data>
+  <data name="Profile_UpdateFailed" xml:space="preserve"><value>Aktualisierung fehlgeschlagen. Bitte versuche es erneut.</value></data>
+  <data name="Profile_InvalidAuthMethod" xml:space="preserve"><value>Ungültige Authentifizierungsmethode</value></data>
+  <data name="Profile_AuthMethodUpdated" xml:space="preserve"><value>Authentifizierungsmethode erfolgreich aktualisiert</value></data>
+  <data name="Profile_PasswordUpdated" xml:space="preserve"><value>Passwort erfolgreich aktualisiert</value></data>
+  <data name="Profile_EmailUpdated" xml:space="preserve"><value>E-Mail erfolgreich aktualisiert</value></data>
+  <data name="Profile_VerificationSent" xml:space="preserve"><value>Bestätigungscode an deine neue E-Mail gesendet</value></data>
+  <data name="Profile_VerificationFailed" xml:space="preserve"><value>Bestätigung fehlgeschlagen. Bitte versuche es erneut.</value></data>
+  <data name="Profile_LanguageUpdated" xml:space="preserve"><value>Sprache erfolgreich aktualisiert</value></data>
+  <data name="Profile_IdentityVerificationFailed" xml:space="preserve"><value>Identitätsprüfung fehlgeschlagen. Bitte überprüfe deine Anmeldedaten.</value></data>
+  <data name="Profile_PasswordSetupSent" xml:space="preserve"><value>Code zur Passwort-Einrichtung an deine E-Mail gesendet</value></data>
+  <data name="Profile_PasswordsDoNotMatch" xml:space="preserve"><value>Passwörter stimmen nicht überein</value></data>
+  <data name="Profile_PasswordRequired" xml:space="preserve"><value>Neues Passwort ist erforderlich</value></data>
+  <data name="Profile_NeedPasswordFirst" xml:space="preserve"><value>Du musst zuerst ein Passwort festlegen, um die Passwort-Anmeldung zu aktivieren</value></data>
+  <data name="Profile_NeedEmailFirst" xml:space="preserve"><value>Du musst zuerst eine E-Mail festlegen, um die E-Mail-Anmeldung zu aktivieren</value></data>
+  <data name="Profile_OldPasswordRequired" xml:space="preserve"><value>Aktuelles Passwort ist erforderlich</value></data>
+  <data name="Profile_OldPasswordIncorrect" xml:space="preserve"><value>Aktuelles Passwort ist falsch</value></data>
+  <data name="Profile_OtpRequired" xml:space="preserve"><value>Bestätigungscode wird benötigt, um das Passwort einzurichten</value></data>
+  <data name="Profile_NoEmailForSetup" xml:space="preserve"><value>Keine E-Mail-Adresse festgelegt. Bitte füge zuerst eine E-Mail hinzu.</value></data>
+  <data name="Profile_PasswordAuthDisabled" xml:space="preserve"><value>Passwort-Authentifizierung ist nicht aktiviert. Verwende den an deine E-Mail gesendeten Bestätigungscode.</value></data>
+  <data name="Profile_NoPasswordSet" xml:space="preserve"><value>Kein Passwort festgelegt. Verwende den an deine E-Mail gesendeten Bestätigungscode.</value></data>
+  <data name="Profile_EmailAuthDisabled" xml:space="preserve"><value>E-Mail-Code-Authentifizierung ist nicht aktiviert. Verwende dein Passwort.</value></data>
+  <data name="Profile_NoEmailSet" xml:space="preserve"><value>Keine E-Mail festgelegt. Verwende dein Passwort.</value></data>
+  <data name="Profile_ProvidePasswordOrCode" xml:space="preserve"><value>Bitte gib dein Passwort oder den Bestätigungscode ein</value></data>
+  <data name="Profile_ProvidePassword" xml:space="preserve"><value>Bitte gib dein Passwort ein</value></data>
+  <data name="Profile_ProvideCode" xml:space="preserve"><value>Bitte gib den Bestätigungscode ein</value></data>
+  <data name="Profile_InvalidLanguage" xml:space="preserve"><value>Ungültiger Sprachcode. Unterstützt: en, fr, ru</value></data>
+  <!-- Favorites -->
+  <data name="Favorites_LimitReached" xml:space="preserve"><value>Du kannst maximal 5 Lieblingssaisons haben</value></data>
+  <data name="Favorites_AlreadyFavorited" xml:space="preserve"><value>Saison ist bereits in deinen Favoriten</value></data>
+  <data name="Favorites_NotFound" xml:space="preserve"><value>Saison nicht gefunden</value></data>
+  <data name="Favorites_AddFailed" xml:space="preserve"><value>Lieblingssaison konnte nicht hinzugefügt werden</value></data>
+  <data name="Favorites_Added" xml:space="preserve"><value>Saison zu Favoriten hinzugefügt</value></data>
+  <data name="Favorites_RemoveFailed" xml:space="preserve"><value>Lieblingssaison konnte nicht entfernt werden</value></data>
+  <data name="Favorites_Removed" xml:space="preserve"><value>Saison aus Favoriten entfernt</value></data>
+  <!-- Admin -->
+  <data name="Admin_SetActiveFailed" xml:space="preserve"><value>Aktive Saison konnte nicht gesetzt werden. Die Saison existiert möglicherweise nicht.</value></data>
+  <data name="Admin_SetActiveSuccess" xml:space="preserve"><value>Saison erfolgreich aktiviert. Andere Saisons dieser Serie wurden deaktiviert.</value></data>
+  <data name="Admin_Unauthorized" xml:space="preserve"><value>Admin-Zugriff erforderlich</value></data>
+  <!-- Sport / General -->
+  <data name="General_NotFound" xml:space="preserve"><value>Nicht gefunden</value></data>
+  <data name="General_Failed" xml:space="preserve"><value>Vorgang fehlgeschlagen. Bitte versuche es erneut.</value></data>
+  <data name="General_Success" xml:space="preserve"><value>Vorgang erfolgreich abgeschlossen</value></data>
+  <!-- Email templates -->
+  <data name="Email_Subject" xml:space="preserve"><value>Dein Bestätigungscode für YouCent Podium</value></data>
+  <data name="Email_Header" xml:space="preserve"><value>YouCent Podium</value></data>
+  <data name="Email_Title" xml:space="preserve"><value>Dein Bestätigungscode</value></data>
+  <data name="Email_Body" xml:space="preserve"><value>Verwende diesen Code, um dich bei deinem Podium-Konto anzumelden:</value></data>
+  <data name="Email_Expiry" xml:space="preserve"><value>Dieser Code läuft in 10 Minuten ab.</value></data>
+  <data name="Email_Ignore" xml:space="preserve"><value>Wenn du diesen Code nicht angefordert hast, kannst du diese E-Mail ignorieren.</value></data>
+  <data name="Email_Automated" xml:space="preserve"><value>Dies ist eine automatische Nachricht, bitte nicht antworten.</value></data>
+  <data name="Email_Copyright" xml:space="preserve"><value>Alle Rechte vorbehalten.</value></data>
+</root>

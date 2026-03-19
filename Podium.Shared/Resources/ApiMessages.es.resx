@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <!-- Authentication -->
+  <data name="Auth_UserNotFound" xml:space="preserve"><value>Usuario no encontrado. Regístrate primero.</value></data>
+  <data name="Auth_EmailCodeDisabled" xml:space="preserve"><value>La autenticación por código de email no está habilitada para esta cuenta. Usa tu contraseña para iniciar sesión.</value></data>
+  <data name="Auth_NoEmail" xml:space="preserve"><value>No hay dirección de email asociada a esta cuenta. Usa tu contraseña para iniciar sesión.</value></data>
+  <data name="Auth_FailedToGenerateCode" xml:space="preserve"><value>Error al generar el código. Inténtalo de nuevo.</value></data>
+  <data name="Auth_InvalidOtp" xml:space="preserve"><value>Código de verificación no válido o caducado.</value></data>
+  <data name="Auth_InvalidCredentials" xml:space="preserve"><value>Email/nombre de usuario o contraseña no válidos.</value></data>
+  <data name="Auth_PasswordNotEnabled" xml:space="preserve"><value>La autenticación por contraseña no está habilitada para esta cuenta.</value></data>
+  <data name="Auth_SessionExpired" xml:space="preserve"><value>Sesión expirada o no válida. Inicia sesión de nuevo.</value></data>
+  <data name="Auth_DbError" xml:space="preserve"><value>Se produjo un error de base de datos. Inténtalo de nuevo.</value></data>
+  <data name="Auth_OtpSent" xml:space="preserve"><value>OTP enviado al email</value></data>
+  <data name="Auth_RegistrationSuccess" xml:space="preserve"><value>Registro exitoso</value></data>
+  <data name="Auth_VerificationSent" xml:space="preserve"><value>Código de verificación enviado a tu email</value></data>
+  <data name="Auth_SignOutSuccess" xml:space="preserve"><value>Sesión cerrada correctamente</value></data>
+  <!-- Registration -->
+  <data name="Reg_UsernameTaken" xml:space="preserve"><value>Nombre de usuario ya en uso. Elige otro.</value></data>
+  <data name="Reg_EmailTaken" xml:space="preserve"><value>Email ya registrado.</value></data>
+  <data name="Reg_VerificationFailed" xml:space="preserve"><value>Código de verificación no válido o caducado.</value></data>
+  <data name="Reg_Expired" xml:space="preserve"><value>Sesión de registro expirada. Inicia el registro de nuevo.</value></data>
+  <data name="Reg_Failed" xml:space="preserve"><value>Registro fallido. Inténtalo de nuevo.</value></data>
+  <data name="Reg_PendingFailed" xml:space="preserve"><value>Error al crear el registro. Inténtalo de nuevo.</value></data>
+  <data name="Reg_CodeFailed" xml:space="preserve"><value>Error al generar el código de verificación. Inténtalo de nuevo.</value></data>
+  <!-- Validation -->
+  <data name="Val_UsernameInvalid" xml:space="preserve"><value>Nombre de usuario no válido. 3-50 caracteres: solo letras latinas, números y espacios.</value></data>
+  <data name="Val_PasswordInvalid" xml:space="preserve"><value>Contraseña no válida. 6-100 caracteres, sin espacios, solo letras latinas/números/caracteres especiales.</value></data>
+  <data name="Val_EmailInvalid" xml:space="preserve"><value>Dirección de email no válida. Introduce un email válido.</value></data>
+  <!-- Profile -->
+  <data name="Profile_NotFound" xml:space="preserve"><value>Usuario no encontrado</value></data>
+  <data name="Profile_UsernameUpdated" xml:space="preserve"><value>Nombre de usuario actualizado correctamente</value></data>
+  <data name="Profile_UsernameTaken" xml:space="preserve"><value>Nombre de usuario ya en uso</value></data>
+  <data name="Profile_UpdateFailed" xml:space="preserve"><value>Error al actualizar. Inténtalo de nuevo.</value></data>
+  <data name="Profile_InvalidAuthMethod" xml:space="preserve"><value>Método de autenticación no válido</value></data>
+  <data name="Profile_AuthMethodUpdated" xml:space="preserve"><value>Método de autenticación actualizado correctamente</value></data>
+  <data name="Profile_PasswordUpdated" xml:space="preserve"><value>Contraseña actualizada correctamente</value></data>
+  <data name="Profile_EmailUpdated" xml:space="preserve"><value>Email actualizado correctamente</value></data>
+  <data name="Profile_VerificationSent" xml:space="preserve"><value>Código de verificación enviado a tu nuevo email</value></data>
+  <data name="Profile_VerificationFailed" xml:space="preserve"><value>Verificación fallida. Inténtalo de nuevo.</value></data>
+  <data name="Profile_LanguageUpdated" xml:space="preserve"><value>Idioma actualizado correctamente</value></data>
+  <data name="Profile_IdentityVerificationFailed" xml:space="preserve"><value>Verificación de identidad fallida. Comprueba tus credenciales.</value></data>
+  <data name="Profile_PasswordSetupSent" xml:space="preserve"><value>Código para configurar contraseña enviado a tu email</value></data>
+  <data name="Profile_PasswordsDoNotMatch" xml:space="preserve"><value>Las contraseñas no coinciden</value></data>
+  <data name="Profile_PasswordRequired" xml:space="preserve"><value>La nueva contraseña es obligatoria</value></data>
+  <data name="Profile_NeedPasswordFirst" xml:space="preserve"><value>Debes configurar una contraseña primero para habilitar el inicio de sesión por contraseña</value></data>
+  <data name="Profile_NeedEmailFirst" xml:space="preserve"><value>Debes configurar un email primero para habilitar el inicio de sesión por email</value></data>
+  <data name="Profile_OldPasswordRequired" xml:space="preserve"><value>La contraseña actual es obligatoria</value></data>
+  <data name="Profile_OldPasswordIncorrect" xml:space="preserve"><value>La contraseña actual es incorrecta</value></data>
+  <data name="Profile_OtpRequired" xml:space="preserve"><value>Se necesita el código de verificación para configurar la contraseña</value></data>
+  <data name="Profile_NoEmailForSetup" xml:space="preserve"><value>No hay email configurado. Agrega un email primero.</value></data>
+  <data name="Profile_PasswordAuthDisabled" xml:space="preserve"><value>La autenticación por contraseña no está habilitada. Usa el código de verificación enviado a tu email.</value></data>
+  <data name="Profile_NoPasswordSet" xml:space="preserve"><value>No hay contraseña configurada. Usa el código de verificación enviado a tu email.</value></data>
+  <data name="Profile_EmailAuthDisabled" xml:space="preserve"><value>La autenticación por código de email no está habilitada. Usa tu contraseña.</value></data>
+  <data name="Profile_NoEmailSet" xml:space="preserve"><value>No hay email configurado. Usa tu contraseña.</value></data>
+  <data name="Profile_ProvidePasswordOrCode" xml:space="preserve"><value>Proporciona tu contraseña o código de verificación</value></data>
+  <data name="Profile_ProvidePassword" xml:space="preserve"><value>Proporciona tu contraseña</value></data>
+  <data name="Profile_ProvideCode" xml:space="preserve"><value>Proporciona el código de verificación</value></data>
+  <data name="Profile_InvalidLanguage" xml:space="preserve"><value>Código de idioma no válido. Soportados: en, fr, ru</value></data>
+  <!-- Favorites -->
+  <data name="Favorites_LimitReached" xml:space="preserve"><value>Solo puedes tener hasta 5 temporadas favoritas</value></data>
+  <data name="Favorites_AlreadyFavorited" xml:space="preserve"><value>La temporada ya está en tus favoritos</value></data>
+  <data name="Favorites_NotFound" xml:space="preserve"><value>Temporada no encontrada</value></data>
+  <data name="Favorites_AddFailed" xml:space="preserve"><value>Error al agregar temporada favorita</value></data>
+  <data name="Favorites_Added" xml:space="preserve"><value>Temporada agregada a favoritos</value></data>
+  <data name="Favorites_RemoveFailed" xml:space="preserve"><value>Error al eliminar temporada favorita</value></data>
+  <data name="Favorites_Removed" xml:space="preserve"><value>Temporada eliminada de favoritos</value></data>
+  <!-- Admin -->
+  <data name="Admin_SetActiveFailed" xml:space="preserve"><value>Error al activar la temporada. La temporada puede no existir.</value></data>
+  <data name="Admin_SetActiveSuccess" xml:space="preserve"><value>Temporada activada correctamente. Las demás temporadas de esta serie han sido desactivadas.</value></data>
+  <data name="Admin_Unauthorized" xml:space="preserve"><value>Se requiere acceso de administrador</value></data>
+  <!-- Sport / General -->
+  <data name="General_NotFound" xml:space="preserve"><value>No encontrado</value></data>
+  <data name="General_Failed" xml:space="preserve"><value>Operación fallida. Inténtalo de nuevo.</value></data>
+  <data name="General_Success" xml:space="preserve"><value>Operación completada correctamente</value></data>
+  <!-- Email templates -->
+  <data name="Email_Subject" xml:space="preserve"><value>Tu código de verificación para YouCent Podium</value></data>
+  <data name="Email_Header" xml:space="preserve"><value>YouCent Podium</value></data>
+  <data name="Email_Title" xml:space="preserve"><value>Tu código de verificación</value></data>
+  <data name="Email_Body" xml:space="preserve"><value>Usa este código para iniciar sesión en tu cuenta de Podium:</value></data>
+  <data name="Email_Expiry" xml:space="preserve"><value>Este código caduca en 10 minutos.</value></data>
+  <data name="Email_Ignore" xml:space="preserve"><value>Si no solicitaste este código, puedes ignorar este email.</value></data>
+  <data name="Email_Automated" xml:space="preserve"><value>Este es un mensaje automático, por favor no respondas.</value></data>
+  <data name="Email_Copyright" xml:space="preserve"><value>Todos los derechos reservados.</value></data>
+</root>

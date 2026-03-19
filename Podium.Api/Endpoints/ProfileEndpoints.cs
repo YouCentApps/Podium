@@ -18,6 +18,9 @@ public static class ProfileEndpoints
         ("en", "English"),
         ("fr", "Français"),
         ("ru", "Русский"),
+        ("it", "Italiano"),
+        ("de", "Deutsch"),
+        ("es", "Español"),
     ];
 
     public static void MapProfileEndpoints(this WebApplication app)
