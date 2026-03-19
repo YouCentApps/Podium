@@ -15,6 +15,7 @@
   <data name="Nav_Admin" xml:space="preserve"><value>Администратор</value></data>
   <data name="Nav_Language" xml:space="preserve"><value>Язык</value></data>
   <data name="Footer_Copyright" xml:space="preserve"><value>Предсказывай и побеждай.</value></data>
+  <data name="SkipToMainContent" xml:space="preserve"><value>Перейти к основному содержимому</value></data>
   <data name="Loading" xml:space="preserve"><value>Загрузка...</value></data>
   <data name="Btn_Save" xml:space="preserve"><value>Сохранить</value></data>
   <data name="Btn_Cancel" xml:space="preserve"><value>Отмена</value></data>
