@@ -1442,6 +1442,40 @@ input[type="number"].form-control {
     color: var(--text-color);
 }
 
+/* Language Option Cards */
+.lang-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.lang-option-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.lang-option-card:hover {
+    border-color: var(--primary-color);
+    background: #f8fafc;
+}
+
+.lang-option-card.selected {
+    border-color: var(--success-color, #22c55e);
+    background: #f0fdf4;
+}
+
+.lang-name {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
 /* Favorite Seasons Section */
 .favorites-section {
     background: white;

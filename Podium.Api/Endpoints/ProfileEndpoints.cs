@@ -11,18 +11,6 @@ namespace Podium.Api.Endpoints;
 
 public static class ProfileEndpoints
 {
-    // Single source of truth for supported languages.
-    // Add new entries here — validation and the GET /languages endpoint both use this list.
-    internal static readonly (string Code, string Name)[] SupportedLanguages =
-    [
-        ("en", "English"),
-        ("fr", "Français"),
-        ("ru", "Русский"),
-        ("it", "Italiano"),
-        ("de", "Deutsch"),
-        ("es", "Español"),
-    ];
-
     public static void MapProfileEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/api/profile")
@@ -305,7 +293,7 @@ public static class ProfileEndpoints
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
-            if (!SupportedLanguages.Any(l => l.Code == request.LanguageCode))
+            if (!Podium.Shared.Models.SupportedLanguages.All.Any(l => l.Code == request.LanguageCode))
                 return Results.BadRequest(new { error = localizer["Profile_InvalidLanguage"].Value });
 
             user.LanguageCode = request.LanguageCode;
@@ -340,7 +328,7 @@ public static class ProfileEndpoints
         // Get supported languages (static list, no auth required)
         group.MapGet("/languages", () =>
         {
-            var languages = SupportedLanguages
+            var languages = Podium.Shared.Models.SupportedLanguages.All
                 .Select(l => new { l.Code, l.Name });
             return Results.Ok(languages);
         })
