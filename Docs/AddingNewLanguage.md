@@ -1,3 +1,24 @@
+NEW: the prompt created for adding new languages
+
+it is in the file:
+ 
+ AddNewLanguagePrompt.md.
+
+To add a new language in the future, just:
+1.	Open the prompt
+2.	Replace the 3 placeholders (LANGUAGE_NAME, LANGUAGE_CODE, NATIVE_NAME) — e.g. "Portuguese", "pt", "Português"
+3.	Paste the prompt into Copilot Chat
+ 
+That's it — one file to edit (Language.cs) + 7 AdminRes.de.resx files to create. The API, top-right picker, settings page, and request localization all pick it up automatically from All.
+
+
+
+
+
+=====================================================
+
+
+
 # Adding a New Language to Podium
 
 ## Overview
