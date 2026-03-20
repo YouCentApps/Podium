@@ -1,19 +1,22 @@
 # Add New Language Prompt
 
-Copy the prompt below, replace `LANGUAGE_NAME`, `LANGUAGE_CODE`, and `NATIVE_NAME` with the desired values, then run it.
+Copy the prompt below, replace `LANGUAGE' with the desired language name. (in the first line) - leave the rest of the prompt as is, and follow the instructions to add a new language to the Podium app.
 
-**Example values:** `LANGUAGE_NAME` = Portuguese, `LANGUAGE_CODE` = pt, `NATIVE_NAME` = Português
+
+
 
 ---
 
 ## Prompt
 
 ```
-Add LANGUAGE_NAME (LANGUAGE_CODE / NATIVE_NAME) translation to the Podium app. Follow these steps in order:
+Add LANGUAGE  translation to the Podium app. Follow these steps in order:
+
+everywhere below where you see Language Code or Native Language name placeholders you substitute it with correct value which you need to create yourself based on the language above.
 
 ### 1. Register the language
 In `Podium.Shared/Models/Language.cs`, add a new entry to `SupportedLanguages.All`:
-  new() { Code = "LANGUAGE_CODE", Name = "NATIVE_NAME", IsActive = true },
+  new() { Code = "LANGUAGE CODE, Name = NATIVE LANGUAGE NAME, IsActive = true },
 
 This is the single source of truth — the API, settings page fallback, and top-right picker all read from here. No other registration is needed.
 

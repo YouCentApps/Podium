@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Leaderboard_SelectInfo" xml:space="preserve"><value>Vennligst velg en disiplin, serie og sesong for å se resultattavlen.</value></data>
+  <data name="Leaderboard_NoPredictions" xml:space="preserve"><value>Ingen spådommer er laget ennå for denne sesongen.</value></data>
+  <data name="Leaderboard_Loading" xml:space="preserve"><value>Laster resultattavle...</value></data>
+  <data name="Leaderboard_LoadingLastEvent" xml:space="preserve"><value>Laster siste arrangementsresultater...</value></data>
+  <data name="Leaderboard_SelectDiscipline" xml:space="preserve"><value>-- Velg disiplin --</value></data>
+  <data name="Leaderboard_SelectSeries" xml:space="preserve"><value>-- Velg serie --</value></data>
+  <data name="Leaderboard_SelectSeason" xml:space="preserve"><value>-- Velg sesong --</value></data>
+  <data name="Leaderboard_Label_Discipline" xml:space="preserve"><value>Disiplin:</value></data>
+  <data name="Leaderboard_Label_Series" xml:space="preserve"><value>Serie:</value></data>
+  <data name="Leaderboard_Label_Season" xml:space="preserve"><value>Sesong:</value></data>
+  <data name="Leaderboard_Col_Rank" xml:space="preserve"><value>Rangering</value></data>
+  <data name="Leaderboard_Col_Player" xml:space="preserve"><value>Spiller</value></data>
+  <data name="Leaderboard_Col_BestResults" xml:space="preserve"><value>Beste {0} resultater</value></data>
+  <data name="Leaderboard_Col_Total" xml:space="preserve"><value>Totalt</value></data>
+  <data name="Leaderboard_Col_Predictions" xml:space="preserve"><value>Spådommer</value></data>
+  <data name="Leaderboard_Col_Exact" xml:space="preserve"><value>Eksakt</value></data>
+  <data name="Leaderboard_Col_1Off" xml:space="preserve"><value>1 avvik</value></data>
+  <data name="Leaderboard_Col_2Off" xml:space="preserve"><value>2 avvik</value></data>
+  <data name="Leaderboard_LastEvent" xml:space="preserve"><value>Siste gjennomførte arrangement:</value></data>
+  <data name="Leaderboard_ActualPodium" xml:space="preserve"><value>Faktisk pallresultat</value></data>
+  <data name="Leaderboard_Top10" xml:space="preserve"><value>Topp 10 spåmenn</value></data>
+  <data name="Leaderboard_SearchUser" xml:space="preserve"><value>Søk etter en bestemt bruker:</value></data>
+  <data name="Leaderboard_SearchPlaceholder" xml:space="preserve"><value>Skriv brukernavn eller e-post...</value></data>
+  <data name="Leaderboard_ShowingFor" xml:space="preserve"><value>Viser resultater for:</value></data>
+  <data name="Leaderboard_ClearAll" xml:space="preserve"><value>Fjern alle</value></data>
+  <data name="Leaderboard_NoPredictionsFound" xml:space="preserve"><value>Ingen spådommer funnet for de valgte brukerne.</value></data>
+  <data name="Leaderboard_Col_Prediction" xml:space="preserve"><value>Spådom</value></data>
+  <data name="Leaderboard_Col_Points" xml:space="preserve"><value>Poeng</value></data>
+  <data name="Leaderboard_Col_Submitted" xml:space="preserve"><value>Sendt inn</value></data>
+  <data name="Leaderboard_Pos1st" xml:space="preserve"><value>1.:</value></data>
+  <data name="Leaderboard_Pos2nd" xml:space="preserve"><value>2.:</value></data>
+  <data name="Leaderboard_Pos3rd" xml:space="preserve"><value>3.:</value></data>
+  <data name="Leaderboard_Col_BestResults_Short" xml:space="preserve"><value>Beste resultater</value></data>
+  <data name="Leaderboard_Title" xml:space="preserve"><value>Resultattavle</value></data>
+  <data name="Leaderboard_Pts" xml:space="preserve"><value>poeng</value></data>
+</root>

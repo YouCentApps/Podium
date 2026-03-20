@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Settings_Title" xml:space="preserve"><value>Innstillinger</value></data>
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Administrer kontopreferanser og sikkerhetsinnstillinger</value></data>
+  <data name="Settings_SignInRequired" xml:space="preserve"><value>Vennligst logg inn for å få tilgang til innstillinger.</value></data>
+  <data name="Settings_UpdateName_Title" xml:space="preserve"><value>Oppdater visningsnavn</value></data>
+  <data name="Settings_UpdateName_Desc" xml:space="preserve"><value>Endre hvordan navnet ditt vises på resultattavler og spådommer (kan også brukes til å logge inn)</value></data>
+  <data name="Settings_AuthMethod_Title" xml:space="preserve"><value>Innloggingsmetode</value></data>
+  <data name="Settings_AuthMethod_Desc" xml:space="preserve"><value>Velg hvordan du vil logge inn: passord, e-postkode eller begge</value></data>
+  <data name="Settings_UpdatePassword_Title" xml:space="preserve"><value>Oppdater passord</value></data>
+  <data name="Settings_UpdatePassword_Desc" xml:space="preserve"><value>Endre kontopassordet ditt</value></data>
+  <data name="Settings_UpdateEmail_Title" xml:space="preserve"><value>Oppdater e-post</value></data>
+  <data name="Settings_UpdateEmail_Desc" xml:space="preserve"><value>Endre e-postadressen din for innlogging og varsler</value></data>
+  <data name="Settings_Favorites_Title" xml:space="preserve"><value>Favorittsesonger</value></data>
+  <data name="Settings_Favorites_Desc" xml:space="preserve"><value>Administrer favorittsesonger for hurtigtilgang</value></data>
+  <data name="Settings_Language_Title" xml:space="preserve"><value>Språk</value></data>
+  <data name="Settings_Language_Desc" xml:space="preserve"><value>Endre visningsspråk</value></data>
+  <data name="LangSettings_Title" xml:space="preserve"><value>Språkinnstillinger</value></data>
+  <data name="LangSettings_Subtitle" xml:space="preserve"><value>Velg ditt foretrukne språk. Siden vil lastes på nytt for å ta i bruk endringen.</value></data>
+  <data name="LangSettings_Current" xml:space="preserve"><value>Gjeldende språk:</value></data>
+  <data name="LangSettings_Btn_Select" xml:space="preserve"><value>Velg</value></data>
+  <data name="LangSettings_Btn_Selected" xml:space="preserve"><value>✓ Valgt</value></data>
+  <data name="LangSettings_Saving" xml:space="preserve"><value>Bruker endringer...</value></data>
+  <data name="UpdateName_Title" xml:space="preserve"><value>Oppdater visningsnavn</value></data>
+  <data name="UpdateName_Subtitle" xml:space="preserve"><value>Endre hvordan navnet ditt vises på resultattavler og spådommer (kan også brukes til å logge inn)</value></data>
+  <data name="UpdateName_CurrentName" xml:space="preserve"><value>Gjeldende navn:</value></data>
+  <data name="UpdateName_NewName" xml:space="preserve"><value>Nytt visningsnavn</value></data>
+  <data name="UpdateName_Verify_Choose" xml:space="preserve"><value>Velg hvordan du vil bekrefte identiteten din:</value></data>
+  <data name="UpdateName_Verify_Password" xml:space="preserve"><value>Passord</value></data>
+  <data name="UpdateName_Verify_EmailCode" xml:space="preserve"><value>E-postkode</value></data>
+  <data name="UpdateName_Btn_Update" xml:space="preserve"><value>Oppdater visningsnavn</value></data>
+  <data name="UpdateName_Btn_Updating" xml:space="preserve"><value>Oppdaterer...</value></data>
+  <data name="ManageFavorites_Title" xml:space="preserve"><value>Administrer favorittsesonger</value></data>
+  <data name="ManageFavorites_Subtitle" xml:space="preserve"><value>Velg opptil 5 favorittsesonger for hurtigtilgang på spådomssiden</value></data>
+  <data name="ManageFavorites_Current" xml:space="preserve"><value>Dine favorittsesonger ({0}/5)</value></data>
+  <data name="ManageFavorites_None" xml:space="preserve"><value>Du har ikke lagt til noen favorittsesonger ennå. Bla gjennom sesonger og legg til dine favoritter!</value></data>
+  <data name="ManageFavorites_Add_Title" xml:space="preserve"><value>Legg til favorittsesong</value></data>
+  <data name="ManageFavorites_Add_Desc" xml:space="preserve"><value>Bla gjennom disipliner og serier for å finne sesonger å legge til i favorittene dine.</value></data>
+  <data name="ManageFavorites_Btn_Remove" xml:space="preserve"><value>Fjern</value></data>
+  <data name="ManageFavorites_Btn_Add" xml:space="preserve"><value>Legg til i favoritter</value></data>
+  <data name="ManageFavorites_Btn_Adding" xml:space="preserve"><value>Legger til...</value></data>
+  <data name="ManageFavorites_SelectDiscipline" xml:space="preserve"><value>Velg disiplin</value></data>
+  <data name="ManageFavorites_SelectSeries" xml:space="preserve"><value>Velg serie</value></data>
+  <data name="ManageFavorites_SelectSeason" xml:space="preserve"><value>Velg sesong</value></data>
+  <data name="ManageFavorites_MaxReached" xml:space="preserve"><value>Du har nådd maksimalt 5 favorittsesonger.</value></data>
+  <data name="UpdatePassword_Title" xml:space="preserve"><value>Oppdater passord</value></data>
+  <data name="UpdateEmail_Title" xml:space="preserve"><value>Oppdater e-post</value></data>
+  <data name="SignInSettings_Title" xml:space="preserve"><value>Innloggingsmetode</value></data>
+  <data name="SignInSettings_Subtitle" xml:space="preserve"><value>Velg hvordan du vil logge inn på Podium</value></data>
+  <data name="UpdatePassword_Setup_Title" xml:space="preserve"><value>Sett opp passord</value></data>
+  <data name="UpdatePassword_Setup_Desc" xml:space="preserve"><value>Opprett et passord for kontoen din</value></data>
+  <data name="UpdateEmail_Setup_Title" xml:space="preserve"><value>Sett opp e-post</value></data>
+  <data name="UpdateEmail_Setup_Desc" xml:space="preserve"><value>Legg til en e-postadresse på kontoen din</value></data>
+  <data name="UpdateEmail_CurrentEmail" xml:space="preserve"><value>Gjeldende e-post:</value></data>
+  <data name="ManageFavorites_SignInRequired" xml:space="preserve"><value>Vennligst logg inn for å administrere favorittsesonger.</value></data>
+  <data name="ManageFavorites_NoSeasons" xml:space="preserve"><value>Ingen sesonger tilgjengelig for denne serien.</value></data>
+  <data name="ManageFavorites_AlreadyFavorite" xml:space="preserve"><value>Allerede favoritt</value></data>
+  <data name="SignInSettings_CurrentMethod" xml:space="preserve"><value>Gjeldende metode:</value></data>
+  <data name="SignInSettings_EmailOnly_Title" xml:space="preserve"><value>Kun e-postkode</value></data>
+  <data name="SignInSettings_EmailOnly_Desc" xml:space="preserve"><value>Logg inn med en bekreftelseskode sendt til din e-post</value></data>
+  <data name="SignInSettings_SetupEmailFirst" xml:space="preserve"><value>Sett opp e-post først</value></data>
+  <data name="SignInSettings_PasswordOnly_Title" xml:space="preserve"><value>Kun passord</value></data>
+  <data name="SignInSettings_PasswordOnly_Desc" xml:space="preserve"><value>Logg inn med e-post og passord</value></data>
+  <data name="SignInSettings_SetupPasswordFirst" xml:space="preserve"><value>Sett opp passord først</value></data>
+  <data name="SignInSettings_Both_Title" xml:space="preserve"><value>Begge metoder</value></data>
+  <data name="SignInSettings_Both_Desc" xml:space="preserve"><value>Velg mellom passord eller e-postkode når du logger inn</value></data>
+  <data name="SignInSettings_Both_Requires" xml:space="preserve"><value>Krever at både e-post og passord er satt opp</value></data>
+  <data name="SignInSettings_Btn_Continue" xml:space="preserve"><value>Fortsett</value></data>
+  <data name="SignInSettings_ConfirmIdentity" xml:space="preserve"><value>Bekreft identiteten din for å endre innloggingsmetode til {0}</value></data>
+  <data name="SignInSettings_Verify_Password" xml:space="preserve"><value>Passord</value></data>
+  <data name="SignInSettings_Verify_EmailCode" xml:space="preserve"><value>E-postkode</value></data>
+  <data name="SignInSettings_Label_YourPassword" xml:space="preserve"><value>Ditt passord</value></data>
+  <data name="SignInSettings_Placeholder_Password" xml:space="preserve"><value>Skriv inn passordet ditt</value></data>
+  <data name="SignInSettings_Btn_Updating" xml:space="preserve"><value>Oppdaterer...</value></data>
+  <data name="SignInSettings_Btn_ConfirmChange" xml:space="preserve"><value>Bekreft endring</value></data>
+  <data name="SignInSettings_Btn_SendingCode" xml:space="preserve"><value>Sender kode...</value></data>
+  <data name="SignInSettings_Btn_SendCode" xml:space="preserve"><value>Send bekreftelseskode</value></data>
+  <data name="SignInSettings_Label_VerifCode" xml:space="preserve"><value>Bekreftelseskode</value></data>
+  <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Skriv inn 6-sifret kode</value></data>
+  <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Bekreft &amp; Endre metode</value></data>
+  <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Send en ny kode</value></data>
+  <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Skriv inn din nye e-postadresse. Vi sender en bekreftelseskode for å bekrefte at du har tilgang til den.</value></data>
+  <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>Ny e-postadresse</value></data>
+  <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>din@epost.com</value></data>
+  <data name="UpdateEmail_Btn_SendingCode" xml:space="preserve"><value>Sender kode...</value></data>
+  <data name="UpdateEmail_Btn_SendCode" xml:space="preserve"><value>Send bekreftelseskode</value></data>
+  <data name="UpdateEmail_CodeSentTo" xml:space="preserve"><value>Vi har sendt en bekreftelseskode til</value></data>
+  <data name="UpdateEmail_Label_VerifCode" xml:space="preserve"><value>Bekreftelseskode</value></data>
+  <data name="UpdateEmail_Placeholder_Code" xml:space="preserve"><value>Skriv inn 6-sifret kode</value></data>
+  <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Bekrefter...</value></data>
+  <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Bekreft &amp; Oppdater e-post</value></data>
+  <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Bruk en annen e-post</value></data>
+  <data name="UpdateName_Placeholder" xml:space="preserve"><value>Skriv inn nytt visningsnavn</value></data>
+  <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Skriv inn passordet ditt</value></data>
+  <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Skriv inn 6-sifret kode</value></data>
+  <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>Passordinnlogging er ikke aktivert for kontoen din. For å sette opp et passord, aktiver først passordinnlogging i innloggingsmetodeinnstillingene.</value></data>
+  <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Gjeldende passord</value></data>
+  <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Skriv inn gjeldende passord</value></data>
+  <data name="UpdatePassword_Label_New" xml:space="preserve"><value>Nytt passord</value></data>
+  <data name="UpdatePassword_Placeholder_New" xml:space="preserve"><value>Minst 6 tegn</value></data>
+  <data name="UpdatePassword_Label_Confirm" xml:space="preserve"><value>Bekreft nytt passord</value></data>
+  <data name="UpdatePassword_Placeholder_Confirm" xml:space="preserve"><value>Skriv inn nytt passord på nytt</value></data>
+  <data name="UpdatePassword_Btn_Updating" xml:space="preserve"><value>Oppdaterer...</value></data>
+  <data name="UpdatePassword_Btn_Update" xml:space="preserve"><value>Oppdater passord</value></data>
+  <data name="UpdatePassword_OtpInfo" xml:space="preserve"><value>Siden du ikke har et passord ennå, sender vi en bekreftelseskode til e-posten din for å bekrefte identiteten din.</value></data>
+  <data name="UpdatePassword_Btn_SendingCode" xml:space="preserve"><value>Sender kode...</value></data>
+  <data name="UpdatePassword_Btn_SendCode" xml:space="preserve"><value>Send bekreftelseskode</value></data>
+  <data name="UpdatePassword_CodeSent" xml:space="preserve"><value>Vi har sendt en bekreftelseskode til e-posten din.</value></data>
+  <data name="UpdatePassword_Label_VerifCode" xml:space="preserve"><value>Bekreftelseskode</value></data>
+  <data name="UpdatePassword_Placeholder_Code" xml:space="preserve"><value>Skriv inn 6-sifret kode</value></data>
+  <data name="UpdatePassword_Btn_SettingUp" xml:space="preserve"><value>Setter opp...</value></data>
+  <data name="UpdatePassword_Btn_SetPassword" xml:space="preserve"><value>Sett passord</value></data>
+  <data name="UpdatePassword_Btn_SendNewCode" xml:space="preserve"><value>Send en ny kode</value></data>
+</root>

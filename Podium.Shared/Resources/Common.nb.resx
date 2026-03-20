@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Nav_MakePredictions" xml:space="preserve"><value>Lag spådommer</value></data>
+  <data name="Nav_MyPredictions" xml:space="preserve"><value>Mine spådommer</value></data>
+  <data name="Nav_Leaderboard" xml:space="preserve"><value>Resultattavle</value></data>
+  <data name="Nav_SignIn" xml:space="preserve"><value>Logg inn</value></data>
+  <data name="Nav_SignUp" xml:space="preserve"><value>Registrer deg</value></data>
+  <data name="Nav_Settings" xml:space="preserve"><value>Innstillinger</value></data>
+  <data name="Nav_Favorites" xml:space="preserve"><value>Favoritter</value></data>
+  <data name="Nav_SignOut" xml:space="preserve"><value>Logg ut</value></data>
+  <data name="Nav_Admin" xml:space="preserve"><value>Admin</value></data>
+  <data name="Nav_Language" xml:space="preserve"><value>Språk</value></data>
+  <data name="Footer_Copyright" xml:space="preserve"><value>Spå &amp; Vinn.</value></data>
+  <data name="SkipToMainContent" xml:space="preserve"><value>Gå til hovedinnhold</value></data>
+  <data name="Loading" xml:space="preserve"><value>Laster...</value></data>
+  <data name="Btn_Save" xml:space="preserve"><value>Lagre</value></data>
+  <data name="Btn_Cancel" xml:space="preserve"><value>Avbryt</value></data>
+  <data name="Btn_BackToSettings" xml:space="preserve"><value>Tilbake til innstillinger</value></data>
+  <data name="Btn_Remove" xml:space="preserve"><value>Fjern</value></data>
+  <data name="Favorites_QuickAccess" xml:space="preserve"><value>Hurtigtilgang - Dine favorittsesonger</value></data>
+  <data name="Favorites_Manage" xml:space="preserve"><value>Administrer</value></data>
+  <data name="NotFound_Title" xml:space="preserve"><value>Ikke funnet</value></data>
+  <data name="NotFound_Message" xml:space="preserve"><value>Beklager, innholdet du leter etter finnes ikke.</value></data>
+  <data name="Alert_SignInRequired" xml:space="preserve"><value>Vennligst logg inn for å se denne siden.</value></data>
+  <data name="Alert_SignInLink" xml:space="preserve"><value>logg inn</value></data>
+  <data name="Home_Welcome" xml:space="preserve"><value>Velkommen tilbake, {0}!</value></data>
+  <data name="Home_Subtitle" xml:space="preserve"><value>Klar for å lage dine spådommer?</value></data>
+  <data name="Home_MakePredictions_Desc" xml:space="preserve"><value>Velg en disiplin og spå pallen</value></data>
+  <data name="Home_MyPredictions_Desc" xml:space="preserve"><value>Se dine spådommer og resultater</value></data>
+  <data name="Home_Leaderboard_Desc" xml:space="preserve"><value>Se hvordan du rangerer mot andre</value></data>
+  <data name="Home_Hero_Title" xml:space="preserve"><value>Spå pallen</value></data>
+  <data name="Home_Hero_Lead" xml:space="preserve"><value>Konkurrer med venner. Spå løpsvinnere. Klatre på resultattavlen.</value></data>
+  <data name="Home_GetStarted" xml:space="preserve"><value>Kom i gang</value></data>
+  <data name="Home_Feature1_Title" xml:space="preserve"><value>Flere disipliner</value></data>
+  <data name="Home_Feature1_Desc" xml:space="preserve"><value>Fra Formel 1 til andre motorsporter og mer</value></data>
+  <data name="Home_Feature2_Title" xml:space="preserve"><value>Enkle spådommer</value></data>
+  <data name="Home_Feature2_Desc" xml:space="preserve"><value>Bare velg dine topp 3 for hvert arrangement</value></data>
+  <data name="Home_Feature3_Title" xml:space="preserve"><value>Konkurrer &amp; Vinn</value></data>
+  <data name="Home_Feature3_Desc" xml:space="preserve"><value>Tjen poeng og klatre på resultattavlen</value></data>
+  <data name="Error_LoadFailed" xml:space="preserve"><value>Kunne ikke laste data. Vennligst prøv igjen.</value></data>
+</root>

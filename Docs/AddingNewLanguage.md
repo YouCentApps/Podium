@@ -6,7 +6,7 @@ it is in the file:
 
 To add a new language in the future, just:
 1.	Open the prompt
-2.	Replace the 3 placeholders (LANGUAGE_NAME, LANGUAGE_CODE, NATIVE_NAME) — e.g. "Portuguese", "pt", "Português"
+2.	Replace the placeholders LANGUAGE in the first line with whatever the new language is (e.g. German)
 3.	Paste the prompt into Copilot Chat
  
 That's it — one file to edit (Language.cs) + 7 AdminRes.de.resx files to create. The API, top-right picker, settings page, and request localization all pick it up automatically from All.
