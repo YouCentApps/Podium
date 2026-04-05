@@ -34,7 +34,7 @@
                     <div class="favorite-link" role="button" tabindex="0"
                          @onclick="() => NavigateToSeason(favId)"
                          @onkeydown="@(e => { if (e.Key is "Enter" or " ") NavigateToSeason(favId); })">
-                        <h4>@favorite.SeriesName</h4>
+                        <h3>@favorite.SeriesName</h3>
                         <p>@favorite.SeasonName (@favorite.Year)</p>
                     </div>
                 }
@@ -67,7 +67,7 @@
                 <div class="sport-card" role="button" tabindex="0"
                      @onclick="() => SelectDiscipline(discId)"
                      @onkeydown="@(e => { if (e.Key is "Enter" or " ") SelectDiscipline(discId); })">
-                    <h3>@discipline.DisplayName</h3>
+                    <h2>@discipline.DisplayName</h2>
                     <p>@L["Disciplines_ViewSeries"]</p>
                 </div>
             }

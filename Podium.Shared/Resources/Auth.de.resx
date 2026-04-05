@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="SignIn_Title" xml:space="preserve"><value>Bei Podium anmelden</value></data>
+  <data name="SignIn_Tab_Password" xml:space="preserve"><value>Passwort</value></data>
+  <data name="SignIn_Tab_EmailCode" xml:space="preserve"><value>E-Mail-Code</value></data>
+  <data name="SignIn_Label_EmailOrUsername" xml:space="preserve"><value>E-Mail oder Benutzername</value></data>
+  <data name="SignIn_Placeholder_EmailOrUsername" xml:space="preserve"><value>deine@email.com oder Benutzername</value></data>
+  <data name="SignIn_Label_Password" xml:space="preserve"><value>Passwort</value></data>
+  <data name="SignIn_Placeholder_Password" xml:space="preserve"><value>••••••••</value></data>
+  <data name="SignIn_Btn_SignIn" xml:space="preserve"><value>Anmelden</value></data>
+  <data name="SignIn_Btn_SigningIn" xml:space="preserve"><value>Anmeldung läuft...</value></data>
+  <data name="SignIn_Btn_SendCode" xml:space="preserve"><value>Bestätigungscode senden</value></data>
+  <data name="SignIn_Btn_Sending" xml:space="preserve"><value>Code wird gesendet...</value></data>
+  <data name="SignIn_Btn_Verify" xml:space="preserve"><value>Bestätigen &amp; Anmelden</value></data>
+  <data name="SignIn_Btn_Verifying" xml:space="preserve"><value>Wird überprüft...</value></data>
+  <data name="SignIn_Label_Code" xml:space="preserve"><value>Bestätigungscode</value></data>
+  <data name="SignIn_Placeholder_Code" xml:space="preserve"><value>000000</value></data>
+  <data name="SignIn_SentTo" xml:space="preserve"><value>Wir haben einen Bestätigungscode gesendet an</value></data>
+  <data name="SignIn_NoAccount" xml:space="preserve"><value>Noch kein Konto?</value></data>
+  <data name="SignIn_SignUpLink" xml:space="preserve"><value>Hier registrieren</value></data>
+  <data name="SignUp_Title" xml:space="preserve"><value>Konto erstellen</value></data>
+  <data name="SignUp_Label_Username" xml:space="preserve"><value>Benutzername</value></data>
+  <data name="SignUp_Hint_Username" xml:space="preserve"><value>3–50 Zeichen. Nur lateinische Buchstaben, Zahlen und Leerzeichen. Kann zum Anmelden verwendet werden.</value></data>
+  <data name="SignUp_Label_AuthMethod" xml:space="preserve"><value>Bevorzugte Anmeldemethode</value></data>
+  <data name="SignUp_Method_Both" xml:space="preserve"><value>Beide (Passwort &amp; E-Mail-Code)</value></data>
+  <data name="SignUp_Method_Password" xml:space="preserve"><value>Nur Passwort</value></data>
+  <data name="SignUp_Method_Email" xml:space="preserve"><value>Nur E-Mail-Code</value></data>
+  <data name="SignUp_Label_Email" xml:space="preserve"><value>E-Mail</value></data>
+  <data name="SignUp_Label_EmailOptional" xml:space="preserve"><value>E-Mail (Optional)</value></data>
+  <data name="SignUp_Hint_EmailRequired" xml:space="preserve"><value>Erforderlich für die E-Mail-Code-Authentifizierung</value></data>
+  <data name="SignUp_Label_Password" xml:space="preserve"><value>Passwort</value></data>
+  <data name="SignUp_Hint_Password" xml:space="preserve"><value>Lateinische Buchstaben, Zahlen und Sonderzeichen. Keine Leerzeichen.</value></data>
+  <data name="SignUp_Label_ConfirmPassword" xml:space="preserve"><value>Passwort bestätigen</value></data>
+  <data name="SignUp_Placeholder_ConfirmPassword" xml:space="preserve"><value>Passwort erneut eingeben</value></data>
+  <data name="SignUp_Btn_Create" xml:space="preserve"><value>Konto erstellen</value></data>
+  <data name="SignUp_Btn_Creating" xml:space="preserve"><value>Konto wird erstellt...</value></data>
+  <data name="SignUp_AlreadyHave" xml:space="preserve"><value>Bereits ein Konto?</value></data>
+  <data name="SignUp_SignInLink" xml:space="preserve"><value>Hier anmelden</value></data>
+  <data name="SignUp_CodeSent" xml:space="preserve"><value>Bestätigungscode gesendet! Überprüfe deine E-Mail.</value></data>
+  <data name="SignUp_Label_VerifCode" xml:space="preserve"><value>Bestätigungscode</value></data>
+  <data name="SignUp_Btn_Verify" xml:space="preserve"><value>Bestätigen &amp; Konto erstellen</value></data>
+  <data name="SignUp_Btn_Verifying" xml:space="preserve"><value>Wird überprüft...</value></data>
+  <data name="SignUp_HaveCode" xml:space="preserve"><value>Hast du bereits einen Code?</value></data>
+  <data name="SignUp_Required" xml:space="preserve"><value>Pflichtfeld</value></data>
+  <data name="SignUp_Btn_Processing" xml:space="preserve"><value>Wird verarbeitet...</value></data>
+  <data name="SignIn_Required" xml:space="preserve"><value>Bitte gib E-Mail/Benutzername und Passwort ein.</value></data>
+  <data name="SignIn_Failed" xml:space="preserve"><value>Anmeldung fehlgeschlagen. Bitte versuche es erneut.</value></data>
+  <data name="SignIn_EnterEmailOrUsername" xml:space="preserve"><value>Bitte gib deine E-Mail oder deinen Benutzernamen ein.</value></data>
+  <data name="SignIn_EnterCode" xml:space="preserve"><value>Bitte gib den Bestätigungscode ein.</value></data>
+  <data name="SignIn_SendNewCode" xml:space="preserve"><value>Neuen Code senden</value></data>
+  <data name="SignUp_EnterCode" xml:space="preserve"><value>Bitte gib den Bestätigungscode ein.</value></data>
+  <data name="SignUp_UsernameRequired" xml:space="preserve"><value>Benutzername ist erforderlich.</value></data>
+  <data name="SignUp_EmailRequired" xml:space="preserve"><value>E-Mail ist für die E-Mail-Code-Authentifizierung erforderlich.</value></data>
+  <data name="SignUp_PasswordRequired2" xml:space="preserve"><value>Passwort ist für die Passwort-Authentifizierung erforderlich.</value></data>
+  <data name="SignUp_PasswordMismatch" xml:space="preserve"><value>Die Passwörter stimmen nicht überein.</value></data>
+  <data name="SignUp_Failed" xml:space="preserve"><value>Registrierung fehlgeschlagen. Bitte versuche es erneut.</value></data>
+  <data name="SignUp_VerifyHint" xml:space="preserve"><value>Überprüfe deine E-Mail und gib den Code unten ein, um die Registrierung abzuschließen.</value></data>
+  <data name="SignUp_StartOver" xml:space="preserve"><value>Neu beginnen</value></data>
+  <data name="SignUp_SignIn" xml:space="preserve"><value>Anmelden</value></data>
+  <data name="Reg_VerificationFailed" xml:space="preserve"><value>Ungültiger oder abgelaufener Bestätigungscode.</value></data>
+  <data name="SignIn_OtpSent" xml:space="preserve"><value>Bestätigungscode gesendet! Überprüfe deine E-Mail.</value></data>
+  <data name="SignIn_OtpFailed" xml:space="preserve"><value>Code konnte nicht gesendet werden. Bitte versuche es erneut.</value></data>
+  <data name="SignIn_InvalidCode" xml:space="preserve"><value>Ungültiger oder abgelaufener Code.</value></data>
+  <data name="SignUp_Placeholder_Username" xml:space="preserve"><value>Dein Benutzername (kann zum Anmelden verwendet werden)</value></data>
+  <data name="SignUp_Placeholder_Email" xml:space="preserve"><value>deine@email.com</value></data>
+  <data name="SignUp_Placeholder_Password" xml:space="preserve"><value>6–100 Zeichen, keine Leerzeichen</value></data>
+</root>

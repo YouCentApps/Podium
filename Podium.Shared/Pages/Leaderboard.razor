@@ -36,7 +36,7 @@
                         <div class="favorite-link" role="button" tabindex="0"
                              @onclick="() => SelectFavoriteSeason(favId)"
                              @onkeydown="@(e => { if (e.Key is "Enter" or " ") SelectFavoriteSeason(favId); })">
-                            <h4>@favorite.SeriesName</h4>
+                            <h3>@favorite.SeriesName</h3>
                             <p>@favorite.SeasonName (@favorite.Year)</p>
                         </div>
                     }

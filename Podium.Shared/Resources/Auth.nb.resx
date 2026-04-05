@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="SignIn_Title" xml:space="preserve"><value>Logg inn på Podium</value></data>
+  <data name="SignIn_Tab_Password" xml:space="preserve"><value>Passord</value></data>
+  <data name="SignIn_Tab_EmailCode" xml:space="preserve"><value>E-postkode</value></data>
+  <data name="SignIn_Label_EmailOrUsername" xml:space="preserve"><value>E-post eller brukernavn</value></data>
+  <data name="SignIn_Placeholder_EmailOrUsername" xml:space="preserve"><value>din@epost.com eller brukernavn</value></data>
+  <data name="SignIn_Label_Password" xml:space="preserve"><value>Passord</value></data>
+  <data name="SignIn_Placeholder_Password" xml:space="preserve"><value>••••••••</value></data>
+  <data name="SignIn_Btn_SignIn" xml:space="preserve"><value>Logg inn</value></data>
+  <data name="SignIn_Btn_SigningIn" xml:space="preserve"><value>Logger inn...</value></data>
+  <data name="SignIn_Btn_SendCode" xml:space="preserve"><value>Send bekreftelseskode</value></data>
+  <data name="SignIn_Btn_Sending" xml:space="preserve"><value>Sender kode...</value></data>
+  <data name="SignIn_Btn_Verify" xml:space="preserve"><value>Bekreft &amp; Logg inn</value></data>
+  <data name="SignIn_Btn_Verifying" xml:space="preserve"><value>Bekrefter...</value></data>
+  <data name="SignIn_Label_Code" xml:space="preserve"><value>Bekreftelseskode</value></data>
+  <data name="SignIn_Placeholder_Code" xml:space="preserve"><value>000000</value></data>
+  <data name="SignIn_SentTo" xml:space="preserve"><value>Vi har sendt en bekreftelseskode til</value></data>
+  <data name="SignIn_NoAccount" xml:space="preserve"><value>Har du ikke en konto?</value></data>
+  <data name="SignIn_SignUpLink" xml:space="preserve"><value>Registrer deg her</value></data>
+  <data name="SignUp_Title" xml:space="preserve"><value>Opprett din konto</value></data>
+  <data name="SignUp_Label_Username" xml:space="preserve"><value>Brukernavn</value></data>
+  <data name="SignUp_Hint_Username" xml:space="preserve"><value>3-50 tegn. Bare latinske bokstaver, tall og mellomrom. Du kan bruke dette til å logge inn.</value></data>
+  <data name="SignUp_Label_AuthMethod" xml:space="preserve"><value>Foretrukket innloggingsmetode</value></data>
+  <data name="SignUp_Method_Both" xml:space="preserve"><value>Begge (Passord &amp; E-postkode)</value></data>
+  <data name="SignUp_Method_Password" xml:space="preserve"><value>Kun passord</value></data>
+  <data name="SignUp_Method_Email" xml:space="preserve"><value>Kun e-postkode</value></data>
+  <data name="SignUp_Label_Email" xml:space="preserve"><value>E-post</value></data>
+  <data name="SignUp_Label_EmailOptional" xml:space="preserve"><value>E-post (Valgfritt)</value></data>
+  <data name="SignUp_Hint_EmailRequired" xml:space="preserve"><value>Påkrevd for autentisering med e-postkode</value></data>
+  <data name="SignUp_Label_Password" xml:space="preserve"><value>Passord</value></data>
+  <data name="SignUp_Hint_Password" xml:space="preserve"><value>Latinske bokstaver, tall og spesialtegn. Ingen mellomrom.</value></data>
+  <data name="SignUp_Label_ConfirmPassword" xml:space="preserve"><value>Bekreft passord</value></data>
+  <data name="SignUp_Placeholder_ConfirmPassword" xml:space="preserve"><value>Skriv inn passordet på nytt</value></data>
+  <data name="SignUp_Btn_Create" xml:space="preserve"><value>Opprett konto</value></data>
+  <data name="SignUp_Btn_Creating" xml:space="preserve"><value>Oppretter konto...</value></data>
+  <data name="SignUp_AlreadyHave" xml:space="preserve"><value>Har du allerede en konto?</value></data>
+  <data name="SignUp_SignInLink" xml:space="preserve"><value>Logg inn her</value></data>
+  <data name="SignUp_CodeSent" xml:space="preserve"><value>Bekreftelseskode sendt! Vennligst sjekk e-posten din.</value></data>
+  <data name="SignUp_Label_VerifCode" xml:space="preserve"><value>Bekreftelseskode</value></data>
+  <data name="SignUp_Btn_Verify" xml:space="preserve"><value>Bekreft &amp; Opprett konto</value></data>
+  <data name="SignUp_Btn_Verifying" xml:space="preserve"><value>Bekrefter...</value></data>
+  <data name="SignUp_HaveCode" xml:space="preserve"><value>Har du allerede en kode?</value></data>
+  <data name="SignUp_Required" xml:space="preserve"><value>Påkrevd</value></data>
+  <data name="SignUp_Btn_Processing" xml:space="preserve"><value>Behandler...</value></data>
+  <data name="SignIn_Required" xml:space="preserve"><value>Vennligst skriv inn både e-post/brukernavn og passord.</value></data>
+  <data name="SignIn_Failed" xml:space="preserve"><value>Innlogging mislyktes. Vennligst prøv igjen.</value></data>
+  <data name="SignIn_EnterEmailOrUsername" xml:space="preserve"><value>Vennligst skriv inn e-post eller brukernavn.</value></data>
+  <data name="SignIn_EnterCode" xml:space="preserve"><value>Vennligst skriv inn bekreftelseskoden.</value></data>
+  <data name="SignIn_SendNewCode" xml:space="preserve"><value>Send en ny kode</value></data>
+  <data name="SignUp_EnterCode" xml:space="preserve"><value>Vennligst skriv inn bekreftelseskoden.</value></data>
+  <data name="SignUp_UsernameRequired" xml:space="preserve"><value>Brukernavn er påkrevd.</value></data>
+  <data name="SignUp_EmailRequired" xml:space="preserve"><value>E-post er påkrevd for autentisering med e-postkode.</value></data>
+  <data name="SignUp_PasswordRequired2" xml:space="preserve"><value>Passord er påkrevd for passordautentisering.</value></data>
+  <data name="SignUp_PasswordMismatch" xml:space="preserve"><value>Passordene stemmer ikke overens.</value></data>
+  <data name="SignUp_Failed" xml:space="preserve"><value>Registrering mislyktes. Vennligst prøv igjen.</value></data>
+  <data name="SignUp_VerifyHint" xml:space="preserve"><value>Vennligst sjekk e-posten din og skriv inn koden nedenfor for å fullføre registreringen.</value></data>
+  <data name="SignUp_StartOver" xml:space="preserve"><value>Start på nytt</value></data>
+  <data name="SignUp_SignIn" xml:space="preserve"><value>Logg inn</value></data>
+  <data name="Reg_VerificationFailed" xml:space="preserve"><value>Ugyldig eller utløpt bekreftelseskode.</value></data>
+  <data name="SignIn_OtpSent" xml:space="preserve"><value>Bekreftelseskode sendt! Sjekk e-posten din.</value></data>
+  <data name="SignIn_OtpFailed" xml:space="preserve"><value>Kunne ikke sende kode. Vennligst prøv igjen.</value></data>
+  <data name="SignIn_InvalidCode" xml:space="preserve"><value>Ugyldig eller utløpt kode.</value></data>
+  <data name="SignUp_Placeholder_Username" xml:space="preserve"><value>Ditt brukernavn (kan brukes til å logge inn)</value></data>
+  <data name="SignUp_Placeholder_Email" xml:space="preserve"><value>din@epost.com</value></data>
+  <data name="SignUp_Placeholder_Password" xml:space="preserve"><value>6-100 tegn, ingen mellomrom</value></data>
+</root>

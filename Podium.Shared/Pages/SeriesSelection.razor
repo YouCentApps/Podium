@@ -37,7 +37,7 @@
             @foreach (var series in seriesList)
             {
                 <div class="tier-card" @onclick="() => SelectSeries(series.Id)">
-                    <h3>@series.DisplayName</h3>
+                    <h2>@series.DisplayName</h2>
                     <p class="series-info">@series.GoverningBody &middot; @series.Region</p>
                     <p>@L["SeriesSelection_ViewEvents"]</p>
                 </div>

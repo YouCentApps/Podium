@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <!-- Authentication -->
+  <data name="Auth_UserNotFound" xml:space="preserve"><value>Utente non trovato. Registrati prima.</value></data>
+  <data name="Auth_EmailCodeDisabled" xml:space="preserve"><value>L'autenticazione tramite codice email non è abilitata per questo account. Usa la password per accedere.</value></data>
+  <data name="Auth_NoEmail" xml:space="preserve"><value>Nessun indirizzo email associato a questo account. Usa la password per accedere.</value></data>
+  <data name="Auth_FailedToGenerateCode" xml:space="preserve"><value>Generazione codice fallita. Riprova.</value></data>
+  <data name="Auth_InvalidOtp" xml:space="preserve"><value>Codice di verifica non valido o scaduto.</value></data>
+  <data name="Auth_InvalidCredentials" xml:space="preserve"><value>Email/nome utente o password non validi.</value></data>
+  <data name="Auth_PasswordNotEnabled" xml:space="preserve"><value>L'autenticazione tramite password non è abilitata per questo account.</value></data>
+  <data name="Auth_SessionExpired" xml:space="preserve"><value>Sessione scaduta o non valida. Accedi di nuovo.</value></data>
+  <data name="Auth_DbError" xml:space="preserve"><value>Si è verificato un errore del database. Riprova.</value></data>
+  <data name="Auth_OtpSent" xml:space="preserve"><value>OTP inviato all'email</value></data>
+  <data name="Auth_RegistrationSuccess" xml:space="preserve"><value>Registrazione completata</value></data>
+  <data name="Auth_VerificationSent" xml:space="preserve"><value>Codice di verifica inviato alla tua email</value></data>
+  <data name="Auth_SignOutSuccess" xml:space="preserve"><value>Disconnessione riuscita</value></data>
+  <!-- Registration -->
+  <data name="Reg_UsernameTaken" xml:space="preserve"><value>Nome utente già in uso. Scegline un altro.</value></data>
+  <data name="Reg_EmailTaken" xml:space="preserve"><value>Email già registrata.</value></data>
+  <data name="Reg_VerificationFailed" xml:space="preserve"><value>Codice di verifica non valido o scaduto.</value></data>
+  <data name="Reg_Expired" xml:space="preserve"><value>Sessione di registrazione scaduta. Ricomincia la registrazione.</value></data>
+  <data name="Reg_Failed" xml:space="preserve"><value>Registrazione fallita. Riprova.</value></data>
+  <data name="Reg_PendingFailed" xml:space="preserve"><value>Creazione registrazione fallita. Riprova.</value></data>
+  <data name="Reg_CodeFailed" xml:space="preserve"><value>Generazione codice di verifica fallita. Riprova.</value></data>
+  <!-- Validation -->
+  <data name="Val_UsernameInvalid" xml:space="preserve"><value>Nome utente non valido. Deve essere 3-50 caratteri: solo lettere latine, numeri e spazi.</value></data>
+  <data name="Val_PasswordInvalid" xml:space="preserve"><value>Password non valida. Deve essere 6-100 caratteri, senza spazi, solo lettere latine/numeri/caratteri speciali.</value></data>
+  <data name="Val_EmailInvalid" xml:space="preserve"><value>Indirizzo email non valido. Inserisci un'email valida.</value></data>
+  <!-- Profile -->
+  <data name="Profile_NotFound" xml:space="preserve"><value>Utente non trovato</value></data>
+  <data name="Profile_UsernameUpdated" xml:space="preserve"><value>Nome utente aggiornato con successo</value></data>
+  <data name="Profile_UsernameTaken" xml:space="preserve"><value>Nome utente già in uso</value></data>
+  <data name="Profile_UpdateFailed" xml:space="preserve"><value>Aggiornamento fallito. Riprova.</value></data>
+  <data name="Profile_InvalidAuthMethod" xml:space="preserve"><value>Metodo di autenticazione non valido</value></data>
+  <data name="Profile_AuthMethodUpdated" xml:space="preserve"><value>Metodo di autenticazione aggiornato con successo</value></data>
+  <data name="Profile_PasswordUpdated" xml:space="preserve"><value>Password aggiornata con successo</value></data>
+  <data name="Profile_EmailUpdated" xml:space="preserve"><value>Email aggiornata con successo</value></data>
+  <data name="Profile_VerificationSent" xml:space="preserve"><value>Codice di verifica inviato alla nuova email</value></data>
+  <data name="Profile_VerificationFailed" xml:space="preserve"><value>Verifica fallita. Riprova.</value></data>
+  <data name="Profile_LanguageUpdated" xml:space="preserve"><value>Lingua aggiornata con successo</value></data>
+  <data name="Profile_IdentityVerificationFailed" xml:space="preserve"><value>Verifica identità fallita. Controlla le tue credenziali.</value></data>
+  <data name="Profile_PasswordSetupSent" xml:space="preserve"><value>Codice per impostare la password inviato alla tua email</value></data>
+  <data name="Profile_PasswordsDoNotMatch" xml:space="preserve"><value>Le password non corrispondono</value></data>
+  <data name="Profile_PasswordRequired" xml:space="preserve"><value>La nuova password è obbligatoria</value></data>
+  <data name="Profile_NeedPasswordFirst" xml:space="preserve"><value>Devi prima impostare una password per abilitare l'accesso tramite password</value></data>
+  <data name="Profile_NeedEmailFirst" xml:space="preserve"><value>Devi prima impostare un'email per abilitare l'accesso tramite email</value></data>
+  <data name="Profile_OldPasswordRequired" xml:space="preserve"><value>La password attuale è obbligatoria</value></data>
+  <data name="Profile_OldPasswordIncorrect" xml:space="preserve"><value>La password attuale non è corretta</value></data>
+  <data name="Profile_OtpRequired" xml:space="preserve"><value>Il codice di verifica è necessario per impostare la password</value></data>
+  <data name="Profile_NoEmailForSetup" xml:space="preserve"><value>Nessun indirizzo email impostato. Aggiungi prima un'email.</value></data>
+  <data name="Profile_PasswordAuthDisabled" xml:space="preserve"><value>L'autenticazione tramite password non è abilitata. Usa il codice di verifica inviato alla tua email.</value></data>
+  <data name="Profile_NoPasswordSet" xml:space="preserve"><value>Nessuna password impostata. Usa il codice di verifica inviato alla tua email.</value></data>
+  <data name="Profile_EmailAuthDisabled" xml:space="preserve"><value>L'autenticazione tramite codice email non è abilitata. Usa la tua password.</value></data>
+  <data name="Profile_NoEmailSet" xml:space="preserve"><value>Nessuna email impostata. Usa la tua password.</value></data>
+  <data name="Profile_ProvidePasswordOrCode" xml:space="preserve"><value>Fornisci la password o il codice di verifica</value></data>
+  <data name="Profile_ProvidePassword" xml:space="preserve"><value>Fornisci la tua password</value></data>
+  <data name="Profile_ProvideCode" xml:space="preserve"><value>Fornisci il codice di verifica</value></data>
+  <data name="Profile_InvalidLanguage" xml:space="preserve"><value>Codice lingua non valido. Supportati: en, fr, ru</value></data>
+  <!-- Favorites -->
+  <data name="Favorites_LimitReached" xml:space="preserve"><value>Puoi avere al massimo 5 stagioni preferite</value></data>
+  <data name="Favorites_AlreadyFavorited" xml:space="preserve"><value>Stagione già nei preferiti</value></data>
+  <data name="Favorites_NotFound" xml:space="preserve"><value>Stagione non trovata</value></data>
+  <data name="Favorites_AddFailed" xml:space="preserve"><value>Aggiunta stagione preferita fallita</value></data>
+  <data name="Favorites_Added" xml:space="preserve"><value>Stagione aggiunta ai preferiti</value></data>
+  <data name="Favorites_RemoveFailed" xml:space="preserve"><value>Rimozione stagione preferita fallita</value></data>
+  <data name="Favorites_Removed" xml:space="preserve"><value>Stagione rimossa dai preferiti</value></data>
+  <!-- Admin -->
+  <data name="Admin_SetActiveFailed" xml:space="preserve"><value>Attivazione stagione fallita. La stagione potrebbe non esistere.</value></data>
+  <data name="Admin_SetActiveSuccess" xml:space="preserve"><value>Stagione attivata con successo. Le altre stagioni di questa serie sono state disattivate.</value></data>
+  <data name="Admin_Unauthorized" xml:space="preserve"><value>Accesso amministratore richiesto</value></data>
+  <!-- Sport / General -->
+  <data name="General_NotFound" xml:space="preserve"><value>Non trovato</value></data>
+  <data name="General_Failed" xml:space="preserve"><value>Operazione fallita. Riprova.</value></data>
+  <data name="General_Success" xml:space="preserve"><value>Operazione completata con successo</value></data>
+  <!-- Email templates -->
+  <data name="Email_Subject" xml:space="preserve"><value>Il tuo codice di verifica per YouCent Podium</value></data>
+  <data name="Email_Header" xml:space="preserve"><value>YouCent Podium</value></data>
+  <data name="Email_Title" xml:space="preserve"><value>Il tuo codice di verifica</value></data>
+  <data name="Email_Body" xml:space="preserve"><value>Usa questo codice per accedere al tuo account Podium:</value></data>
+  <data name="Email_Expiry" xml:space="preserve"><value>Questo codice scade in 10 minuti.</value></data>
+  <data name="Email_Ignore" xml:space="preserve"><value>Se non hai richiesto questo codice, puoi ignorare questa email.</value></data>
+  <data name="Email_Automated" xml:space="preserve"><value>Questo è un messaggio automatico, non rispondere.</value></data>
+  <data name="Email_Copyright" xml:space="preserve"><value>Tutti i diritti riservati.</value></data>
+</root>

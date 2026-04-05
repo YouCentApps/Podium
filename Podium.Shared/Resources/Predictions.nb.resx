@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Disciplines_Title" xml:space="preserve"><value>Velg en disiplin</value></data>
+  <data name="Disciplines_None" xml:space="preserve"><value>Ingen disipliner tilgjengelig for øyeblikket. Kom tilbake senere!</value></data>
+  <data name="Disciplines_ViewSeries" xml:space="preserve"><value>Se serier →</value></data>
+  <data name="Disciplines_SignInToPredict" xml:space="preserve"><value>Vennligst logg inn for å lage spådommer.</value></data>
+  <data name="SeriesSelection_Title" xml:space="preserve"><value>Velg en serie</value></data>
+  <data name="SeriesSelection_None" xml:space="preserve"><value>Ingen serier tilgjengelig for denne disiplinen ennå.</value></data>
+  <data name="SeriesSelection_Breadcrumb" xml:space="preserve"><value>Disipliner</value></data>
+  <data name="SeriesSelection_ViewEvents" xml:space="preserve"><value>Se arrangementer →</value></data>
+  <data name="SeasonEvents_Title" xml:space="preserve"><value>Velg et arrangement</value></data>
+  <data name="SeasonEvents_Breadcrumb" xml:space="preserve"><value>Hjem</value></data>
+  <data name="SeasonEvents_None" xml:space="preserve"><value>Ingen kommende arrangementer tilgjengelig. Kom tilbake senere!</value></data>
+  <data name="SeasonEvents_OpenPredictions" xml:space="preserve"><value>Åpen for spådommer</value></data>
+  <data name="SeasonEvents_Closed" xml:space="preserve"><value>Stengt</value></data>
+  <data name="Predict_Title" xml:space="preserve"><value>Spå pallen</value></data>
+  <data name="Predict_FirstPlace" xml:space="preserve"><value>Førsteplass</value></data>
+  <data name="Predict_SecondPlace" xml:space="preserve"><value>Andreplass</value></data>
+  <data name="Predict_ThirdPlace" xml:space="preserve"><value>Tredjeplass</value></data>
+  <data name="Predict_YourPrediction" xml:space="preserve"><value>Din spådom</value></data>
+  <data name="Predict_Btn_Submit" xml:space="preserve"><value>Send inn spådom</value></data>
+  <data name="Predict_Btn_Update" xml:space="preserve"><value>Oppdater spådom</value></data>
+  <data name="Predict_Btn_Submitting" xml:space="preserve"><value>Sender inn...</value></data>
+  <data name="Predict_SignIn" xml:space="preserve"><value>Vennligst logg inn for å lage spådommer.</value></data>
+  <data name="Predict_SelectAll" xml:space="preserve"><value>Vennligst velg alle tre plasseringene for å sende inn.</value></data>
+  <data name="Predict_Closed" xml:space="preserve"><value>Dette arrangementet er stengt for spådommer.</value></data>
+  <data name="Predict_PreviousPrediction" xml:space="preserve"><value>Din forrige spådom:</value></data>
+  <data name="Predict_1st" xml:space="preserve"><value>1.:</value></data>
+  <data name="Predict_2nd" xml:space="preserve"><value>2.:</value></data>
+  <data name="Predict_3rd" xml:space="preserve"><value>3.:</value></data>
+  <data name="MyPredictions_Title" xml:space="preserve"><value>Mine spådommer</value></data>
+  <data name="MyPredictions_SignIn" xml:space="preserve"><value>Vennligst logg inn for å se dine spådommer.</value></data>
+  <data name="MyPredictions_None" xml:space="preserve"><value>Du har ikke laget noen spådommer ennå.</value></data>
+  <data name="MyPredictions_FirstPrediction" xml:space="preserve"><value>Lag din første spådom</value></data>
+  <data name="MyPredictions_Loading" xml:space="preserve"><value>Laster dine spådommer...</value></data>
+  <data name="MyPredictions_FilterDiscipline" xml:space="preserve"><value>Disiplin:</value></data>
+  <data name="MyPredictions_FilterSeries" xml:space="preserve"><value>Serie:</value></data>
+  <data name="MyPredictions_FilterSeason" xml:space="preserve"><value>Sesong:</value></data>
+  <data name="MyPredictions_AllDisciplines" xml:space="preserve"><value>Alle disipliner</value></data>
+  <data name="MyPredictions_AllSeries" xml:space="preserve"><value>Alle serier</value></data>
+  <data name="MyPredictions_AllSeasons" xml:space="preserve"><value>Alle sesonger</value></data>
+  <data name="MyPredictions_IncludeInactive" xml:space="preserve"><value>Inkluder inaktive sesonger</value></data>
+  <data name="Predict_Submitted" xml:space="preserve"><value>Spådom sendt inn!</value></data>
+  <data name="Predict_SubmitFailed" xml:space="preserve"><value>Kunne ikke sende inn spådom. Vennligst prøv igjen.</value></data>
+  <data name="Events_Breadcrumb_Series" xml:space="preserve"><value>Serier</value></data>
+  <data name="Events_Breadcrumb_Events" xml:space="preserve"><value>Arrangementer</value></data>
+  <data name="Events_NoActiveSeason" xml:space="preserve"><value>Ingen aktiv sesong funnet for denne serien.</value></data>
+  <data name="Events_LoadFailed" xml:space="preserve"><value>Kunne ikke laste arrangementer.</value></data>
+  <data name="Predict_EventNotFound" xml:space="preserve"><value>Arrangement ikke funnet.</value></data>
+  <data name="Predict_CompetitorsLoadFailed" xml:space="preserve"><value>Kunne ikke laste konkurrenter.</value></data>
+  <data name="MyPredictions_Inactive" xml:space="preserve"><value>Inaktiv</value></data>
+  <data name="MyPredictions_Location" xml:space="preserve"><value>Sted:</value></data>
+  <data name="MyPredictions_Date" xml:space="preserve"><value>Dato:</value></data>
+  <data name="MyPredictions_Pts" xml:space="preserve"><value>poeng</value></data>
+  <data name="MyPredictions_Pending" xml:space="preserve"><value>Venter</value></data>
+  <data name="MyPredictions_YourPrediction" xml:space="preserve"><value>Din spådom</value></data>
+  <data name="MyPredictions_ActualResults" xml:space="preserve"><value>Faktiske resultater</value></data>
+  <data name="MyPredictions_Submitted" xml:space="preserve"><value>Sendt inn:</value></data>
+  <data name="MyPredictions_NoMatchingPredictions" xml:space="preserve"><value>Ingen spådommer funnet for gjeldende filtre. Prøv å aktivere «Inkluder inaktive sesonger» for å se dine tidligere spådommer.</value></data>
+</root>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Settings_Title" xml:space="preserve"><value>Configuración</value></data>
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Gestiona las preferencias de tu cuenta y la configuración de seguridad</value></data>
+  <data name="Settings_SignInRequired" xml:space="preserve"><value>Inicia sesión para acceder a la configuración.</value></data>
+  <data name="Settings_UpdateName_Title" xml:space="preserve"><value>Actualizar nombre visible</value></data>
+  <data name="Settings_UpdateName_Desc" xml:space="preserve"><value>Cambia cómo aparece tu nombre en las clasificaciones y predicciones (también se puede usar para iniciar sesión)</value></data>
+  <data name="Settings_AuthMethod_Title" xml:space="preserve"><value>Método de inicio de sesión</value></data>
+  <data name="Settings_AuthMethod_Desc" xml:space="preserve"><value>Elige cómo quieres iniciar sesión: contraseña, código por email o ambos</value></data>
+  <data name="Settings_UpdatePassword_Title" xml:space="preserve"><value>Actualizar contraseña</value></data>
+  <data name="Settings_UpdatePassword_Desc" xml:space="preserve"><value>Cambia la contraseña de tu cuenta</value></data>
+  <data name="Settings_UpdateEmail_Title" xml:space="preserve"><value>Actualizar email</value></data>
+  <data name="Settings_UpdateEmail_Desc" xml:space="preserve"><value>Cambia tu dirección de email para el inicio de sesión y las notificaciones</value></data>
+  <data name="Settings_Favorites_Title" xml:space="preserve"><value>Temporadas favoritas</value></data>
+  <data name="Settings_Favorites_Desc" xml:space="preserve"><value>Gestiona tus temporadas favoritas para acceso rápido</value></data>
+  <data name="Settings_Language_Title" xml:space="preserve"><value>Idioma</value></data>
+  <data name="Settings_Language_Desc" xml:space="preserve"><value>Cambia el idioma de visualización</value></data>
+  <data name="LangSettings_Title" xml:space="preserve"><value>Configuración de idioma</value></data>
+  <data name="LangSettings_Subtitle" xml:space="preserve"><value>Elige tu idioma preferido. La página se recargará para aplicar el cambio.</value></data>
+  <data name="LangSettings_Current" xml:space="preserve"><value>Idioma actual:</value></data>
+  <data name="LangSettings_Btn_Select" xml:space="preserve"><value>Seleccionar</value></data>
+  <data name="LangSettings_Btn_Selected" xml:space="preserve"><value>✓ Seleccionado</value></data>
+  <data name="LangSettings_Saving" xml:space="preserve"><value>Aplicando...</value></data>
+  <data name="UpdateName_Title" xml:space="preserve"><value>Actualizar nombre visible</value></data>
+  <data name="UpdateName_Subtitle" xml:space="preserve"><value>Cambia cómo aparece tu nombre en las clasificaciones y predicciones (también se puede usar para iniciar sesión)</value></data>
+  <data name="UpdateName_CurrentName" xml:space="preserve"><value>Nombre actual:</value></data>
+  <data name="UpdateName_NewName" xml:space="preserve"><value>Nuevo nombre visible</value></data>
+  <data name="UpdateName_Verify_Choose" xml:space="preserve"><value>Elige cómo verificar tu identidad:</value></data>
+  <data name="UpdateName_Verify_Password" xml:space="preserve"><value>Contraseña</value></data>
+  <data name="UpdateName_Verify_EmailCode" xml:space="preserve"><value>Código por email</value></data>
+  <data name="UpdateName_Btn_Update" xml:space="preserve"><value>Actualizar nombre visible</value></data>
+  <data name="UpdateName_Btn_Updating" xml:space="preserve"><value>Actualizando...</value></data>
+  <data name="ManageFavorites_Title" xml:space="preserve"><value>Gestionar temporadas favoritas</value></data>
+  <data name="ManageFavorites_Subtitle" xml:space="preserve"><value>Selecciona hasta 5 temporadas favoritas para acceso rápido en la página de predicciones</value></data>
+  <data name="ManageFavorites_Current" xml:space="preserve"><value>Tus temporadas favoritas ({0}/5)</value></data>
+  <data name="ManageFavorites_None" xml:space="preserve"><value>Aún no has añadido temporadas favoritas. ¡Explora las temporadas y añade tus favoritas!</value></data>
+  <data name="ManageFavorites_Add_Title" xml:space="preserve"><value>Añadir temporada favorita</value></data>
+  <data name="ManageFavorites_Add_Desc" xml:space="preserve"><value>Explora disciplinas y series para encontrar temporadas que añadir a tus favoritas.</value></data>
+  <data name="ManageFavorites_Btn_Remove" xml:space="preserve"><value>Eliminar</value></data>
+  <data name="ManageFavorites_Btn_Add" xml:space="preserve"><value>Añadir a favoritas</value></data>
+  <data name="ManageFavorites_Btn_Adding" xml:space="preserve"><value>Añadiendo...</value></data>
+  <data name="ManageFavorites_SelectDiscipline" xml:space="preserve"><value>Seleccionar disciplina</value></data>
+  <data name="ManageFavorites_SelectSeries" xml:space="preserve"><value>Seleccionar serie</value></data>
+  <data name="ManageFavorites_SelectSeason" xml:space="preserve"><value>Seleccionar temporada</value></data>
+  <data name="ManageFavorites_MaxReached" xml:space="preserve"><value>Has alcanzado el máximo de 5 temporadas favoritas.</value></data>
+  <data name="UpdatePassword_Title" xml:space="preserve"><value>Actualizar contraseña</value></data>
+  <data name="UpdateEmail_Title" xml:space="preserve"><value>Actualizar email</value></data>
+  <data name="SignInSettings_Title" xml:space="preserve"><value>Método de inicio de sesión</value></data>
+  <data name="SignInSettings_Subtitle" xml:space="preserve"><value>Elige cómo quieres iniciar sesión en Podium</value></data>
+  <data name="UpdatePassword_Setup_Title" xml:space="preserve"><value>Configurar contraseña</value></data>
+  <data name="UpdatePassword_Setup_Desc" xml:space="preserve"><value>Crea una contraseña para tu cuenta</value></data>
+  <data name="UpdateEmail_Setup_Title" xml:space="preserve"><value>Configurar email</value></data>
+  <data name="UpdateEmail_Setup_Desc" xml:space="preserve"><value>Añade una dirección de email a tu cuenta</value></data>
+  <data name="UpdateEmail_CurrentEmail" xml:space="preserve"><value>Email actual:</value></data>
+  <data name="ManageFavorites_SignInRequired" xml:space="preserve"><value>Inicia sesión para gestionar tus temporadas favoritas.</value></data>
+  <data name="ManageFavorites_NoSeasons" xml:space="preserve"><value>No hay temporadas disponibles para esta serie.</value></data>
+  <data name="ManageFavorites_AlreadyFavorite" xml:space="preserve"><value>Ya es favorita</value></data>
+  <data name="SignInSettings_CurrentMethod" xml:space="preserve"><value>Método actual:</value></data>
+  <data name="SignInSettings_EmailOnly_Title" xml:space="preserve"><value>Solo código por email</value></data>
+  <data name="SignInSettings_EmailOnly_Desc" xml:space="preserve"><value>Inicia sesión con un código de verificación enviado a tu email</value></data>
+  <data name="SignInSettings_SetupEmailFirst" xml:space="preserve"><value>Configura primero el email</value></data>
+  <data name="SignInSettings_PasswordOnly_Title" xml:space="preserve"><value>Solo contraseña</value></data>
+  <data name="SignInSettings_PasswordOnly_Desc" xml:space="preserve"><value>Inicia sesión con email y contraseña</value></data>
+  <data name="SignInSettings_SetupPasswordFirst" xml:space="preserve"><value>Configura primero la contraseña</value></data>
+  <data name="SignInSettings_Both_Title" xml:space="preserve"><value>Ambos métodos</value></data>
+  <data name="SignInSettings_Both_Desc" xml:space="preserve"><value>Elige entre contraseña o código por email al iniciar sesión</value></data>
+  <data name="SignInSettings_Both_Requires" xml:space="preserve"><value>Requiere que email y contraseña estén configurados</value></data>
+  <data name="SignInSettings_Btn_Continue" xml:space="preserve"><value>Continuar</value></data>
+  <data name="SignInSettings_ConfirmIdentity" xml:space="preserve"><value>Confirma tu identidad para cambiar el método de inicio de sesión a {0}</value></data>
+  <data name="SignInSettings_Verify_Password" xml:space="preserve"><value>Contraseña</value></data>
+  <data name="SignInSettings_Verify_EmailCode" xml:space="preserve"><value>Código por email</value></data>
+  <data name="SignInSettings_Label_YourPassword" xml:space="preserve"><value>Tu contraseña</value></data>
+  <data name="SignInSettings_Placeholder_Password" xml:space="preserve"><value>Introduce tu contraseña</value></data>
+  <data name="SignInSettings_Btn_Updating" xml:space="preserve"><value>Actualizando...</value></data>
+  <data name="SignInSettings_Btn_ConfirmChange" xml:space="preserve"><value>Confirmar cambio</value></data>
+  <data name="SignInSettings_Btn_SendingCode" xml:space="preserve"><value>Enviando código...</value></data>
+  <data name="SignInSettings_Btn_SendCode" xml:space="preserve"><value>Enviar código de verificación</value></data>
+  <data name="SignInSettings_Label_VerifCode" xml:space="preserve"><value>Código de verificación</value></data>
+  <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Introduce código de 6 dígitos</value></data>
+  <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Verificar &amp; Cambiar método</value></data>
+  <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Enviar un nuevo código</value></data>
+  <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Introduce tu nueva dirección de email. Enviaremos un código de verificación para confirmar el acceso.</value></data>
+  <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>Nueva dirección de email</value></data>
+  <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>tu@email.com</value></data>
+  <data name="UpdateEmail_Btn_SendingCode" xml:space="preserve"><value>Enviando código...</value></data>
+  <data name="UpdateEmail_Btn_SendCode" xml:space="preserve"><value>Enviar código de verificación</value></data>
+  <data name="UpdateEmail_CodeSentTo" xml:space="preserve"><value>Hemos enviado un código de verificación a</value></data>
+  <data name="UpdateEmail_Label_VerifCode" xml:space="preserve"><value>Código de verificación</value></data>
+  <data name="UpdateEmail_Placeholder_Code" xml:space="preserve"><value>Introduce código de 6 dígitos</value></data>
+  <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Verificando...</value></data>
+  <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Verificar &amp; Actualizar email</value></data>
+  <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Usar otro email</value></data>
+  <data name="UpdateName_Placeholder" xml:space="preserve"><value>Introduce el nuevo nombre visible</value></data>
+  <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Introduce tu contraseña</value></data>
+  <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Introduce código de 6 dígitos</value></data>
+  <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>El inicio de sesión con contraseña no está habilitado para tu cuenta. Para configurar una contraseña, habilita primero el inicio de sesión con contraseña en la configuración del método de acceso.</value></data>
+  <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Contraseña actual</value></data>
+  <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Introduce la contraseña actual</value></data>
+  <data name="UpdatePassword_Label_New" xml:space="preserve"><value>Nueva contraseña</value></data>
+  <data name="UpdatePassword_Placeholder_New" xml:space="preserve"><value>Al menos 6 caracteres</value></data>
+  <data name="UpdatePassword_Label_Confirm" xml:space="preserve"><value>Confirmar nueva contraseña</value></data>
+  <data name="UpdatePassword_Placeholder_Confirm" xml:space="preserve"><value>Reintroduce la nueva contraseña</value></data>
+  <data name="UpdatePassword_Btn_Updating" xml:space="preserve"><value>Actualizando...</value></data>
+  <data name="UpdatePassword_Btn_Update" xml:space="preserve"><value>Actualizar contraseña</value></data>
+  <data name="UpdatePassword_OtpInfo" xml:space="preserve"><value>Como aún no tienes contraseña, enviaremos un código de verificación a tu email para confirmar tu identidad.</value></data>
+  <data name="UpdatePassword_Btn_SendingCode" xml:space="preserve"><value>Enviando código...</value></data>
+  <data name="UpdatePassword_Btn_SendCode" xml:space="preserve"><value>Enviar código de verificación</value></data>
+  <data name="UpdatePassword_CodeSent" xml:space="preserve"><value>Hemos enviado un código de verificación a tu email.</value></data>
+  <data name="UpdatePassword_Label_VerifCode" xml:space="preserve"><value>Código de verificación</value></data>
+  <data name="UpdatePassword_Placeholder_Code" xml:space="preserve"><value>Introduce código de 6 dígitos</value></data>
+  <data name="UpdatePassword_Btn_SettingUp" xml:space="preserve"><value>Configurando...</value></data>
+  <data name="UpdatePassword_Btn_SetPassword" xml:space="preserve"><value>Establecer contraseña</value></data>
+  <data name="UpdatePassword_Btn_SendNewCode" xml:space="preserve"><value>Enviar un nuevo código</value></data>
+</root>

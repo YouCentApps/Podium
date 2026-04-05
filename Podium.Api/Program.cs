@@ -1,6 +1,7 @@
 using Podium.Shared.Services.Data;
 using Podium.Shared.Services.Auth;
 using Podium.Shared.Services.Business;
+using Podium.Shared.Models;
 using Podium.Api.Endpoints;
 using Podium.Api.Services;
 using Microsoft.Extensions.Localization;
@@ -142,8 +143,8 @@ app.UseHttpsRedirection();
 app.UseCors("AllowPodiumClients");
 
 // Enable request localization - reads Accept-Language header and sets CultureInfo for the request
-// Keep this list in sync with ProfileEndpoints.SupportedLanguages when adding new languages.
-var supportedCultures = ProfileEndpoints.SupportedLanguages.Select(l => l.Code).ToArray();
+// Uses the shared single source of truth for supported languages.
+var supportedCultures = SupportedLanguages.All.Select(l => l.Code).ToArray();
 app.UseRequestLocalization(new RequestLocalizationOptions()
     .SetDefaultCulture("en")
     .AddSupportedCultures(supportedCultures)

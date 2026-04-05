@@ -82,13 +82,10 @@
         }
         else
         {
-            // Fallback if API unreachable
-            supportedLanguages = new()
-            {
-                new("en", "English"),
-                new("fr", "Français"),
-                new("ru", "Русский"),
-            };
+            // Fallback if API unreachable — uses shared single source of truth
+            supportedLanguages = SupportedLanguages.All
+                .Select(l => new LangOption(l.Code, l.Name))
+                .ToList();
         }
 
         // Load the user's saved language from DB

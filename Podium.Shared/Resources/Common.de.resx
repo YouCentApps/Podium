@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Nav_MakePredictions" xml:space="preserve"><value>Vorhersagen machen</value></data>
+  <data name="Nav_MyPredictions" xml:space="preserve"><value>Meine Vorhersagen</value></data>
+  <data name="Nav_Leaderboard" xml:space="preserve"><value>Rangliste</value></data>
+  <data name="Nav_SignIn" xml:space="preserve"><value>Anmelden</value></data>
+  <data name="Nav_SignUp" xml:space="preserve"><value>Registrieren</value></data>
+  <data name="Nav_Settings" xml:space="preserve"><value>Einstellungen</value></data>
+  <data name="Nav_Favorites" xml:space="preserve"><value>Favoriten</value></data>
+  <data name="Nav_SignOut" xml:space="preserve"><value>Abmelden</value></data>
+  <data name="Nav_Admin" xml:space="preserve"><value>Verwaltung</value></data>
+  <data name="Nav_Language" xml:space="preserve"><value>Sprache</value></data>
+  <data name="Footer_Copyright" xml:space="preserve"><value>Vorhersagen &amp; Gewinnen.</value></data>
+  <data name="SkipToMainContent" xml:space="preserve"><value>Zum Hauptinhalt springen</value></data>
+  <data name="Loading" xml:space="preserve"><value>Wird geladen...</value></data>
+  <data name="Btn_Save" xml:space="preserve"><value>Speichern</value></data>
+  <data name="Btn_Cancel" xml:space="preserve"><value>Abbrechen</value></data>
+  <data name="Btn_BackToSettings" xml:space="preserve"><value>Zurück zu Einstellungen</value></data>
+  <data name="Btn_Remove" xml:space="preserve"><value>Entfernen</value></data>
+  <data name="Favorites_QuickAccess" xml:space="preserve"><value>Schnellzugriff — Deine Lieblingssaisons</value></data>
+  <data name="Favorites_Manage" xml:space="preserve"><value>Verwalten</value></data>
+  <data name="NotFound_Title" xml:space="preserve"><value>Nicht gefunden</value></data>
+  <data name="NotFound_Message" xml:space="preserve"><value>Der gesuchte Inhalt existiert leider nicht.</value></data>
+  <data name="Alert_SignInRequired" xml:space="preserve"><value>Bitte melde dich an, um diese Seite zu sehen.</value></data>
+  <data name="Alert_SignInLink" xml:space="preserve"><value>anmelden</value></data>
+  <data name="Home_Welcome" xml:space="preserve"><value>Willkommen zurück, {0}!</value></data>
+  <data name="Home_Subtitle" xml:space="preserve"><value>Bereit für deine Vorhersagen?</value></data>
+  <data name="Home_MakePredictions_Desc" xml:space="preserve"><value>Wähle eine Disziplin und sage das Podium vorher</value></data>
+  <data name="Home_MyPredictions_Desc" xml:space="preserve"><value>Sieh dir deine Vorhersagen und Ergebnisse an</value></data>
+  <data name="Home_Leaderboard_Desc" xml:space="preserve"><value>Sieh wie du im Vergleich zu anderen stehst</value></data>
+  <data name="Home_Hero_Title" xml:space="preserve"><value>Sage das Podium vorher</value></data>
+  <data name="Home_Hero_Lead" xml:space="preserve"><value>Tritt gegen Freunde an. Sage Rennsieger vorher. Klettere die Rangliste hoch.</value></data>
+  <data name="Home_GetStarted" xml:space="preserve"><value>Jetzt starten</value></data>
+  <data name="Home_Feature1_Title" xml:space="preserve"><value>Mehrere Disziplinen</value></data>
+  <data name="Home_Feature1_Desc" xml:space="preserve"><value>Von Formel 1 bis zu anderen Motorsportarten und mehr</value></data>
+  <data name="Home_Feature2_Title" xml:space="preserve"><value>Einfache Vorhersagen</value></data>
+  <data name="Home_Feature2_Desc" xml:space="preserve"><value>Wähle einfach deine Top 3 für jedes Event</value></data>
+  <data name="Home_Feature3_Title" xml:space="preserve"><value>Wettkämpfen &amp; Gewinnen</value></data>
+  <data name="Home_Feature3_Desc" xml:space="preserve"><value>Sammle Punkte und klettere die Rangliste hoch</value></data>
+  <data name="Error_LoadFailed" xml:space="preserve"><value>Daten konnten nicht geladen werden. Bitte versuche es erneut.</value></data>
+</root>

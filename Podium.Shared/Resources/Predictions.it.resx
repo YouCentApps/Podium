@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Disciplines_Title" xml:space="preserve"><value>Scegli una disciplina</value></data>
+  <data name="Disciplines_None" xml:space="preserve"><value>Nessuna disciplina disponibile al momento. Riprova più tardi!</value></data>
+  <data name="Disciplines_ViewSeries" xml:space="preserve"><value>Vedi serie →</value></data>
+  <data name="Disciplines_SignInToPredict" xml:space="preserve"><value>Accedi per fare previsioni.</value></data>
+  <data name="SeriesSelection_Title" xml:space="preserve"><value>Scegli una serie</value></data>
+  <data name="SeriesSelection_None" xml:space="preserve"><value>Nessuna serie disponibile per questa disciplina.</value></data>
+  <data name="SeriesSelection_Breadcrumb" xml:space="preserve"><value>Discipline</value></data>
+  <data name="SeriesSelection_ViewEvents" xml:space="preserve"><value>Vedi eventi →</value></data>
+  <data name="SeasonEvents_Title" xml:space="preserve"><value>Scegli un evento</value></data>
+  <data name="SeasonEvents_Breadcrumb" xml:space="preserve"><value>Home</value></data>
+  <data name="SeasonEvents_None" xml:space="preserve"><value>Nessun evento in programma. Riprova più tardi!</value></data>
+  <data name="SeasonEvents_OpenPredictions" xml:space="preserve"><value>Aperto alle previsioni</value></data>
+  <data name="SeasonEvents_Closed" xml:space="preserve"><value>Chiuso</value></data>
+  <data name="Predict_Title" xml:space="preserve"><value>Prevedi il podio</value></data>
+  <data name="Predict_FirstPlace" xml:space="preserve"><value>Primo posto</value></data>
+  <data name="Predict_SecondPlace" xml:space="preserve"><value>Secondo posto</value></data>
+  <data name="Predict_ThirdPlace" xml:space="preserve"><value>Terzo posto</value></data>
+  <data name="Predict_YourPrediction" xml:space="preserve"><value>La tua previsione</value></data>
+  <data name="Predict_Btn_Submit" xml:space="preserve"><value>Invia previsione</value></data>
+  <data name="Predict_Btn_Update" xml:space="preserve"><value>Aggiorna previsione</value></data>
+  <data name="Predict_Btn_Submitting" xml:space="preserve"><value>Invio in corso...</value></data>
+  <data name="Predict_SignIn" xml:space="preserve"><value>Accedi per fare previsioni.</value></data>
+  <data name="Predict_SelectAll" xml:space="preserve"><value>Seleziona tutte e tre le posizioni per inviare.</value></data>
+  <data name="Predict_Closed" xml:space="preserve"><value>Le previsioni per questo evento sono chiuse.</value></data>
+  <data name="Predict_PreviousPrediction" xml:space="preserve"><value>La tua previsione precedente:</value></data>
+  <data name="Predict_1st" xml:space="preserve"><value>1°:</value></data>
+  <data name="Predict_2nd" xml:space="preserve"><value>2°:</value></data>
+  <data name="Predict_3rd" xml:space="preserve"><value>3°:</value></data>
+  <data name="MyPredictions_Title" xml:space="preserve"><value>Le mie previsioni</value></data>
+  <data name="MyPredictions_SignIn" xml:space="preserve"><value>Accedi per vedere le tue previsioni.</value></data>
+  <data name="MyPredictions_None" xml:space="preserve"><value>Non hai ancora fatto nessuna previsione.</value></data>
+  <data name="MyPredictions_FirstPrediction" xml:space="preserve"><value>Fai la tua prima previsione</value></data>
+  <data name="MyPredictions_Loading" xml:space="preserve"><value>Caricamento previsioni...</value></data>
+  <data name="MyPredictions_FilterDiscipline" xml:space="preserve"><value>Disciplina:</value></data>
+  <data name="MyPredictions_FilterSeries" xml:space="preserve"><value>Serie:</value></data>
+  <data name="MyPredictions_FilterSeason" xml:space="preserve"><value>Stagione:</value></data>
+  <data name="MyPredictions_AllDisciplines" xml:space="preserve"><value>Tutte le discipline</value></data>
+  <data name="MyPredictions_AllSeries" xml:space="preserve"><value>Tutte le serie</value></data>
+  <data name="MyPredictions_AllSeasons" xml:space="preserve"><value>Tutte le stagioni</value></data>
+  <data name="MyPredictions_IncludeInactive" xml:space="preserve"><value>Includi stagioni inattive</value></data>
+  <data name="Predict_Submitted" xml:space="preserve"><value>Previsione inviata con successo!</value></data>
+  <data name="Predict_SubmitFailed" xml:space="preserve"><value>Invio previsione fallito. Riprova.</value></data>
+  <data name="Events_Breadcrumb_Series" xml:space="preserve"><value>Serie</value></data>
+  <data name="Events_Breadcrumb_Events" xml:space="preserve"><value>Eventi</value></data>
+  <data name="Events_NoActiveSeason" xml:space="preserve"><value>Nessuna stagione attiva trovata per questa serie.</value></data>
+  <data name="Events_LoadFailed" xml:space="preserve"><value>Caricamento eventi fallito.</value></data>
+  <data name="Predict_EventNotFound" xml:space="preserve"><value>Evento non trovato.</value></data>
+  <data name="Predict_CompetitorsLoadFailed" xml:space="preserve"><value>Caricamento concorrenti fallito.</value></data>
+  <data name="MyPredictions_Inactive" xml:space="preserve"><value>Inattiva</value></data>
+  <data name="MyPredictions_Location" xml:space="preserve"><value>Luogo:</value></data>
+  <data name="MyPredictions_Date" xml:space="preserve"><value>Data:</value></data>
+  <data name="MyPredictions_Pts" xml:space="preserve"><value>pt</value></data>
+  <data name="MyPredictions_Pending" xml:space="preserve"><value>In attesa</value></data>
+  <data name="MyPredictions_YourPrediction" xml:space="preserve"><value>La tua previsione</value></data>
+  <data name="MyPredictions_ActualResults" xml:space="preserve"><value>Risultati effettivi</value></data>
+  <data name="MyPredictions_Submitted" xml:space="preserve"><value>Inviata:</value></data>
+  <data name="MyPredictions_NoMatchingPredictions" xml:space="preserve"><value>Nessuna previsione trovata per i filtri attuali. Prova ad attivare "Includi stagioni inattive" per vedere le previsioni passate.</value></data>
+</root>

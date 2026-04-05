@@ -6,9 +6,10 @@
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 @inject IStringLocalizer<Common> L
+@inject IPodiumApiClient ApiClient
 
 <div class="app-container">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">@L["SkipToMainContent"]</a>
     <header class="app-header">
         <div class="header-content">
             <a href="/" class="logo"><span class="logo-icon" aria-hidden="true">🏆</span> Podium</a>
@@ -54,9 +55,10 @@
                 <div class="lang-picker">
                     <label for="lang-select" class="sr-only">Language</label>
                     <select id="lang-select" class="lang-select" @onchange="OnLanguageChanged" aria-label="Select language">
-                        <option value="en" selected="@(LangState.CurrentLanguageCode == "en")">EN – English</option>
-                        <option value="fr" selected="@(LangState.CurrentLanguageCode == "fr")">FR – Français</option>
-                        <option value="ru" selected="@(LangState.CurrentLanguageCode == "ru")">RU – Русский</option>
+                        @foreach (var lang in languages)
+                        {
+                            <option value="@lang.Code" selected="@(LangState.CurrentLanguageCode == lang.Code)">@lang.Code.ToUpperInvariant() – @lang.Name</option>
+                        }
                     </select>
                 </div>
             </nav>
@@ -76,6 +78,7 @@
     private bool showProfileDropdown = false;
     private System.Timers.Timer? closeTimer;
     private int renderKey;
+    private List<Language> languages = [.. SupportedLanguages.All];
 
     protected override async Task OnInitializedAsync()
     {
@@ -87,6 +90,16 @@
         {
             await AdminState.InitializeAsync();
         }
+
+        try
+        {
+            var response = await ApiClient.GetLanguagesAsync();
+            if (response.Success && response.Data is { Count: > 0 })
+            {
+                languages = response.Data;
+            }
+        }
+        catch { /* keep fallback */ }
     }
 
     private void ToggleDropdown()

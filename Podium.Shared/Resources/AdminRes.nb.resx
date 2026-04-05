@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Admin_Dashboard_Title" xml:space="preserve"><value>Administrasjonspanel</value></data>
+  <data name="Admin_Dashboard_Subtitle" xml:space="preserve"><value>Administrer Podium-plattformen din</value></data>
+  <data name="Admin_Users_Title" xml:space="preserve"><value>Brukeradministrasjon</value></data>
+  <data name="Admin_Disciplines_Title" xml:space="preserve"><value>Disiplinadministrasjon</value></data>
+  <data name="Admin_Series_Title" xml:space="preserve"><value>Serieadministrasjon</value></data>
+  <data name="Admin_Seasons_Title" xml:space="preserve"><value>Sesongadministrasjon</value></data>
+  <data name="Admin_Events_Title" xml:space="preserve"><value>Arrangementsadministrasjon</value></data>
+  <data name="Admin_Competitors_Title" xml:space="preserve"><value>Konkurrentadministrasjon</value></data>
+  <data name="Admin_Results_Title" xml:space="preserve"><value>Resultatadministrasjon</value></data>
+  <data name="Admin_Admins_Title" xml:space="preserve"><value>Administratoradministrasjon</value></data>
+  <data name="Admin_Btn_Create" xml:space="preserve"><value>Opprett</value></data>
+  <data name="Admin_Btn_Edit" xml:space="preserve"><value>Rediger</value></data>
+  <data name="Admin_Btn_Delete" xml:space="preserve"><value>Slett</value></data>
+  <data name="Admin_Btn_Save" xml:space="preserve"><value>Lagre</value></data>
+  <data name="Admin_Btn_Cancel" xml:space="preserve"><value>Avbryt</value></data>
+  <data name="Admin_Btn_Confirm" xml:space="preserve"><value>Bekreft</value></data>
+  <data name="Admin_NotAuthorized" xml:space="preserve"><value>Du har ikke tilgang til dette området.</value></data>
+  <data name="Admin_Loading" xml:space="preserve"><value>Laster...</value></data>
+  <data name="Admin_NoData" xml:space="preserve"><value>Ingen data tilgjengelig.</value></data>
+  <data name="Admin_ConfirmDelete" xml:space="preserve"><value>Er du sikker på at du vil slette dette elementet?</value></data>
+  <data name="Admin_DeleteSuccess" xml:space="preserve"><value>Element slettet.</value></data>
+  <data name="Admin_SaveSuccess" xml:space="preserve"><value>Lagret.</value></data>
+  <data name="Admin_Error" xml:space="preserve"><value>En feil oppstod. Vennligst prøv igjen.</value></data>
+  <data name="Admin_AuthRequired" xml:space="preserve"><value>Autentisering påkrevd</value></data>
+  <data name="Admin_AuthRequired_Desc" xml:space="preserve"><value>Vennligst logg inn for å få tilgang til administrasjonspanelet.</value></data>
+  <data name="Admin_AccessDenied" xml:space="preserve"><value>Tilgang nektet</value></data>
+  <data name="Admin_BackToHome" xml:space="preserve"><value>Tilbake til forsiden</value></data>
+  <data name="Admin_Dashboard_Subtitle_Extended" xml:space="preserve"><value>Administrer disipliner, serier, sesonger, konkurrenter og mer</value></data>
+  <data name="Admin_Disciplines_Desc" xml:space="preserve"><value>Administrer løpskategorier og disipliner</value></data>
+  <data name="Admin_Series_Desc" xml:space="preserve"><value>Administrer løpsserier innen disipliner</value></data>
+  <data name="Admin_Seasons_Desc" xml:space="preserve"><value>Administrer sesonger for hver serie</value></data>
+  <data name="Admin_Competitors_Desc" xml:space="preserve"><value>Administrer sjåfører, ryttere og lag</value></data>
+  <data name="Admin_Events_Desc" xml:space="preserve"><value>Administrer løp og arrangementer</value></data>
+  <data name="Admin_Results_Desc" xml:space="preserve"><value>Registrer og administrer arrangementsresultater</value></data>
+  <data name="Admin_Users_Desc" xml:space="preserve"><value>Administrer brukerkontoer</value></data>
+  <data name="Admin_Admins_Desc" xml:space="preserve"><value>Administrer administratorrettigheter</value></data>
+  <data name="Admin_Placeholders_Title" xml:space="preserve"><value>Plassholdreadministrasjon</value></data>
+  <data name="Admin_Status_Active" xml:space="preserve"><value>Aktiv</value></data>
+  <data name="Admin_Status_Inactive" xml:space="preserve"><value>Inaktiv</value></data>
+  <data name="Admin_Btn_Saving" xml:space="preserve"><value>Lagrer...</value></data>
+  <data name="Admin_Col_Name" xml:space="preserve"><value>Navn</value></data>
+  <data name="Admin_Col_DisplayName" xml:space="preserve"><value>Visningsnavn</value></data>
+  <data name="Admin_Col_Status" xml:space="preserve"><value>Status</value></data>
+  <data name="Admin_Col_Created" xml:space="preserve"><value>Opprettet</value></data>
+  <data name="Admin_Col_Actions" xml:space="preserve"><value>Handlinger</value></data>
+  <data name="Admin_Label_Active" xml:space="preserve"><value>Aktiv</value></data>
+  <data name="Admin_Label_Name" xml:space="preserve"><value>Navn:</value></data>
+  <data name="Admin_Label_DisplayName" xml:space="preserve"><value>Visningsnavn:</value></data>
+  <data name="Admin_Filter_AllDisciplines" xml:space="preserve"><value>Alle disipliner</value></data>
+  <data name="Admin_Filter_Discipline" xml:space="preserve"><value>Filtrer etter disiplin:</value></data>
+  <data name="Admin_Filter_Series" xml:space="preserve"><value>Filtrer etter serie:</value></data>
+  <data name="Admin_Filter_AllSeries" xml:space="preserve"><value>Alle serier</value></data>
+  <data name="Admin_User_NotFound" xml:space="preserve"><value>Bruker ikke funnet</value></data>
+  <data name="Admin_User_NotFound_Desc" xml:space="preserve"><value>Den forespurte brukeren ble ikke funnet.</value></data>
+  <data name="Admin_Btn_BackToUsers" xml:space="preserve"><value>Tilbake til brukere</value></data>
+  <data name="Admin_Never" xml:space="preserve"><value>Aldri</value></data>
+  <data name="Admin_Users_SearchPlaceholder" xml:space="preserve"><value>Søk brukere etter brukernavn eller e-post...</value></data>
+  <data name="Admin_Users_EditUser" xml:space="preserve"><value>Rediger bruker</value></data>
+  <data name="Admin_Users_Col_Username" xml:space="preserve"><value>Brukernavn</value></data>
+  <data name="Admin_Users_Col_Email" xml:space="preserve"><value>E-post</value></data>
+  <data name="Admin_Users_Col_Registered" xml:space="preserve"><value>Registrert</value></data>
+  <data name="Admin_Users_Col_LastLogin" xml:space="preserve"><value>Siste innlogging</value></data>
+  <data name="Admin_Users_NoUsers" xml:space="preserve"><value>Ingen brukere funnet.</value></data>
+  <data name="Admin_Users_NoMatch" xml:space="preserve"><value>Ingen brukere samsvarer med søket ditt.</value></data>
+  <data name="Admin_UserDetails_AccountInfo" xml:space="preserve"><value>Kontoinformasjon</value></data>
+  <data name="Admin_UserDetails_UserId" xml:space="preserve"><value>Bruker-ID:</value></data>
+  <data name="Admin_UserDetails_PreferredAuth" xml:space="preserve"><value>Foretrukket autentisering:</value></data>
+  <data name="Admin_UserDetails_Activity" xml:space="preserve"><value>Brukeraktivitet</value></data>
+  <data name="Admin_UserDetails_Predictions" xml:space="preserve"><value>Spådommer:</value></data>
+  <data name="Admin_UserDetails_AdminStatus" xml:space="preserve"><value>Administratorstatus:</value></data>
+  <data name="Admin_UserDetails_IsAdmin" xml:space="preserve"><value>Er administrator</value></data>
+  <data name="Admin_UserDetails_NotAdmin" xml:space="preserve"><value>Ikke administrator</value></data>
+  <data name="Admin_UserDetails_HasDependencies" xml:space="preserve"><value>Denne brukeren har eksisterende data og kan ikke slettes. Du kan deaktivere kontoen i stedet.</value></data>
+  <data name="Admin_UserDetails_ManageAdminPriv" xml:space="preserve"><value>Administrer administratorrettigheter</value></data>
+  <data name="Admin_Events_AddEvent" xml:space="preserve"><value>Legg til arrangement</value></data>
+  <data name="Admin_Events_Event" xml:space="preserve"><value>Arrangement</value></data>
+  <data name="Admin_Events_SelectSeason" xml:space="preserve"><value>Velg sesong</value></data>
+  <data name="Admin_Events_Label_Discipline" xml:space="preserve"><value>Disiplin</value></data>
+  <data name="Admin_Events_SelectDiscipline" xml:space="preserve"><value>Velg disiplin</value></data>
+  <data name="Admin_Events_Label_Series" xml:space="preserve"><value>Serie</value></data>
+  <data name="Admin_Events_SelectSeries" xml:space="preserve"><value>Velg serie</value></data>
+  <data name="Admin_Events_Label_Season" xml:space="preserve"><value>Sesong</value></data>
+  <data name="Admin_Events_SeasonReadonly" xml:space="preserve"><value>Sesong kan ikke endres etter opprettelse</value></data>
+  <data name="Admin_Events_Label_EventNumber" xml:space="preserve"><value>Arrangementsnummer</value></data>
+  <data name="Admin_Events_Placeholder_EventNumber" xml:space="preserve"><value>f.eks. 1, 2, 3...</value></data>
+  <data name="Admin_Events_Suggested" xml:space="preserve"><value>Foreslått</value></data>
+  <data name="Admin_Events_Label_EventName" xml:space="preserve"><value>Arrangementsnavn</value></data>
+  <data name="Admin_Events_Placeholder_EventName" xml:space="preserve"><value>f.eks. Australian Grand Prix</value></data>
+  <data name="Admin_Events_Placeholder_DisplayName" xml:space="preserve"><value>f.eks. Australia - Melbourne</value></data>
+  <data name="Admin_Events_Label_EventDate" xml:space="preserve"><value>Arrangementsdato (UTC)</value></data>
+  <data name="Admin_Events_Label_Location" xml:space="preserve"><value>Sted</value></data>
+  <data name="Admin_Events_Placeholder_Location" xml:space="preserve"><value>f.eks. Albert Park Circuit, Melbourne</value></data>
+  <data name="Admin_Events_Status_Upcoming" xml:space="preserve"><value>Kommende</value></data>
+  <data name="Admin_Events_Status_InProgress" xml:space="preserve"><value>Pågår</value></data>
+  <data name="Admin_Events_Status_Completed" xml:space="preserve"><value>Fullført</value></data>
+  <data name="Admin_Events_Label_Search" xml:space="preserve"><value>Søk</value></data>
+  <data name="Admin_Events_SearchPlaceholder" xml:space="preserve"><value>Søk etter navn eller sted...</value></data>
+  <data name="Admin_Events_Label_FilterStatus" xml:space="preserve"><value>Filtrer etter status</value></data>
+  <data name="Admin_Events_AllStatuses" xml:space="preserve"><value>Alle statuser</value></data>
+  <data name="Admin_Events_Col_Date" xml:space="preserve"><value>Dato</value></data>
+  <data name="Admin_Events_Col_Predictions" xml:space="preserve"><value>Spådommer</value></data>
+  <data name="Admin_Events_Col_Result" xml:space="preserve"><value>Resultat</value></data>
+  <data name="Admin_Events_NoEvents" xml:space="preserve"><value>Ingen arrangementer funnet. Prøv å justere filtrene dine.</value></data>
+  <data name="Admin_Results_SearchEvents" xml:space="preserve"><value>Søk arrangementer</value></data>
+  <data name="Admin_Results_SearchPlaceholder" xml:space="preserve"><value>Søk etter arrangementsnavn...</value></data>
+  <data name="Admin_Results_FilterByResults" xml:space="preserve"><value>Filtrer etter resultater</value></data>
+  <data name="Admin_Results_AllEvents" xml:space="preserve"><value>Alle arrangementer</value></data>
+  <data name="Admin_Results_HasResult" xml:space="preserve"><value>Har resultat</value></data>
+  <data name="Admin_Results_NoResult" xml:space="preserve"><value>Ingen resultat</value></data>
+  <data name="Admin_Results_Col_ResultStatus" xml:space="preserve"><value>Resultatstatus</value></data>
+  <data name="Admin_Results_Col_Podium" xml:space="preserve"><value>Pall</value></data>
+  <data name="Admin_Results_Entered" xml:space="preserve"><value>Registrert</value></data>
+  <data name="Admin_Results_1st" xml:space="preserve"><value>1.</value></data>
+  <data name="Admin_Results_2nd" xml:space="preserve"><value>2.</value></data>
+  <data name="Admin_Results_3rd" xml:space="preserve"><value>3.</value></data>
+  <data name="Admin_Results_MustBeCompleted" xml:space="preserve"><value>Arrangementet må være fullført</value></data>
+  <data name="Admin_Results_NoEvents" xml:space="preserve"><value>Ingen arrangementer funnet. Prøv å justere filtrene dine.</value></data>
+  <data name="Admin_Results_SelectCompetitor" xml:space="preserve"><value>Velg konkurrent</value></data>
+  <data name="Admin_Results_NoCompetitors" xml:space="preserve"><value>Ingen konkurrenter tildelt denne sesongen. Vennligst gå til konkurrentadministrasjon og tildel konkurrenter først.</value></data>
+  <data name="Admin_Results_PreviewPodium" xml:space="preserve"><value>Forhåndsvis pall</value></data>
+  <data name="Admin_Results_DeleteResult" xml:space="preserve"><value>Slett resultat</value></data>
+  <data name="Admin_Results_RecalcWarning" xml:space="preserve"><value>Advarsel om omberegning av poeng</value></data>
+  <data name="Admin_Results_SaveRecalc" xml:space="preserve"><value>Lagre &amp; Omberegn</value></data>
+  <data name="Admin_Seasons_AddSeason" xml:space="preserve"><value>Legg til sesong</value></data>
+  <data name="Admin_Seasons_Season" xml:space="preserve"><value>Sesong</value></data>
+  <data name="Admin_Seasons_Label_Discipline" xml:space="preserve"><value>Disiplin</value></data>
+  <data name="Admin_Seasons_SelectDiscipline" xml:space="preserve"><value>Velg disiplin</value></data>
+  <data name="Admin_Seasons_Label_Series" xml:space="preserve"><value>Serie</value></data>
+  <data name="Admin_Seasons_SelectSeries" xml:space="preserve"><value>Velg serie</value></data>
+  <data name="Admin_Seasons_Label_Year" xml:space="preserve"><value>År</value></data>
+  <data name="Admin_Seasons_Placeholder_Year" xml:space="preserve"><value>f.eks. 2024</value></data>
+  <data name="Admin_Seasons_Placeholder_Name" xml:space="preserve"><value>f.eks. Sesong 2024</value></data>
+  <data name="Admin_Seasons_Label_StartDate" xml:space="preserve"><value>Startdato</value></data>
+  <data name="Admin_Seasons_Label_EndDate" xml:space="preserve"><value>Sluttdato (Valgfritt)</value></data>
+  <data name="Admin_Seasons_Label_BestN" xml:space="preserve"><value>Beste N resultater (for rangering)</value></data>
+  <data name="Admin_Seasons_Placeholder_BestN" xml:space="preserve"><value>La stå tom for å bruke totalpoeng</value></data>
+  <data name="Admin_Seasons_Hint_BestN" xml:space="preserve"><value>Valgfritt: Antall beste resultater som teller for resultattavlerangering</value></data>
+  <data name="Admin_Seasons_Col_EndDate" xml:space="preserve"><value>Sluttdato</value></data>
+  <data name="Admin_Seasons_Col_Dependencies" xml:space="preserve"><value>Avhengigheter</value></data>
+  <data name="Admin_Seasons_Ongoing" xml:space="preserve"><value>Pågående</value></data>
+  <data name="Admin_Seasons_SetActive" xml:space="preserve"><value>Sett aktiv</value></data>
+  <data name="Admin_Seasons_Dep_Events" xml:space="preserve"><value>Arrangementer</value></data>
+  <data name="Admin_Seasons_Dep_Competitors" xml:space="preserve"><value>Konkurrenter</value></data>
+  <data name="Admin_Seasons_Dep_Seasons" xml:space="preserve"><value>Sesonger</value></data>
+  <data name="Admin_Seasons_Dep_None" xml:space="preserve"><value>Ingen</value></data>
+  <data name="Admin_Seasons_Recalc" xml:space="preserve"><value>Omberegn statistikk</value></data>
+  <data name="Admin_Seasons_ShowCompetitors" xml:space="preserve"><value>Vis konkurrenter</value></data>
+  <data name="Admin_Seasons_NoSeasons" xml:space="preserve"><value>Ingen sesonger funnet. Prøv å justere filtrene dine.</value></data>
+  <data name="Admin_Series_AddSeries" xml:space="preserve"><value>Legg til serie</value></data>
+  <data name="Admin_Series_Series" xml:space="preserve"><value>Serie</value></data>
+  <data name="Admin_Series_Label_Discipline" xml:space="preserve"><value>Disiplin</value></data>
+  <data name="Admin_Series_SelectDiscipline" xml:space="preserve"><value>Velg disiplin</value></data>
+  <data name="Admin_Series_Placeholder_Name" xml:space="preserve"><value>f.eks. Formula One World Championship</value></data>
+  <data name="Admin_Series_Placeholder_DisplayName" xml:space="preserve"><value>f.eks. Formel 1</value></data>
+  <data name="Admin_Series_Label_GoverningBody" xml:space="preserve"><value>Styrende organ</value></data>
+  <data name="Admin_Series_Placeholder_GoverningBody" xml:space="preserve"><value>f.eks. FIA</value></data>
+  <data name="Admin_Series_Label_Region" xml:space="preserve"><value>Region</value></data>
+  <data name="Admin_Series_Placeholder_Region" xml:space="preserve"><value>f.eks. Global, Europa, Nord-Amerika</value></data>
+  <data name="Admin_Series_Label_VehicleType" xml:space="preserve"><value>Kjøretøytype</value></data>
+  <data name="Admin_Series_Placeholder_VehicleType" xml:space="preserve"><value>f.eks. Formelbil, Rallybil</value></data>
+  <data name="Admin_Series_NoSeries" xml:space="preserve"><value>Ingen serier funnet. Prøv å justere filtrene dine.</value></data>
+  <data name="Admin_Competitors_AddCompetitor" xml:space="preserve"><value>Legg til konkurrent</value></data>
+  <data name="Admin_Competitors_Competitor" xml:space="preserve"><value>Konkurrent</value></data>
+  <data name="Admin_Competitors_Label_Type" xml:space="preserve"><value>Type</value></data>
+  <data name="Admin_Competitors_Type_Individual" xml:space="preserve"><value>Individuell (Sjåfør)</value></data>
+  <data name="Admin_Competitors_Type_Team" xml:space="preserve"><value>Lag (Konstruktør)</value></data>
+  <data name="Admin_Competitors_Label_FullName" xml:space="preserve"><value>Fullt navn</value></data>
+  <data name="Admin_Competitors_Placeholder_Name" xml:space="preserve"><value>f.eks. Lewis Hamilton eller Red Bull Racing</value></data>
+  <data name="Admin_Competitors_Label_ShortName" xml:space="preserve"><value>Kortnavn</value></data>
+  <data name="Admin_Competitors_Placeholder_ShortName" xml:space="preserve"><value>f.eks. HAM eller RBR (for visning)</value></data>
+  <data name="Admin_Competitors_CurrentAssignments" xml:space="preserve"><value>Gjeldende sesongtildelinger</value></data>
+  <data name="Admin_Competitors_NoAssignments" xml:space="preserve"><value>Ingen sesongtildelinger ennå.</value></data>
+  <data name="Admin_Competitors_AddAssignment" xml:space="preserve"><value>Legg til ny sesongtildeling</value></data>
+  <data name="Admin_Competitors_AddSeason" xml:space="preserve"><value>Legg til sesong</value></data>
+  <data name="Admin_Competitors_SearchPlaceholder" xml:space="preserve"><value>Søk etter navn...</value></data>
+  <data name="Admin_Competitors_FilterByType" xml:space="preserve"><value>Filtrer etter type</value></data>
+  <data name="Admin_Competitors_AllTypes" xml:space="preserve"><value>Alle typer</value></data>
+  <data name="Admin_Competitors_FilterBySeason" xml:space="preserve"><value>Filtrer etter sesong</value></data>
+  <data name="Admin_Competitors_AllSeasons" xml:space="preserve"><value>Alle sesonger</value></data>
+  <data name="Admin_Competitors_Col_Assignments" xml:space="preserve"><value>Sesongtildelinger</value></data>
+  <data name="Admin_Competitors_NoCompetitors" xml:space="preserve"><value>Ingen konkurrenter funnet. Prøv å justere filtrene dine.</value></data>
+  <data name="Admin_Disciplines_AddDiscipline" xml:space="preserve"><value>Legg til disiplin</value></data>
+  <data name="Admin_Disciplines_Discipline" xml:space="preserve"><value>Disiplin</value></data>
+  <data name="Admin_Disciplines_Placeholder_Name" xml:space="preserve"><value>f.eks. Enseterbilløp</value></data>
+  <data name="Admin_Disciplines_Placeholder_DisplayName" xml:space="preserve"><value>f.eks. Formelløp</value></data>
+  <data name="Admin_Admins_AddAdmin" xml:space="preserve"><value>Legg til administrator</value></data>
+  <data name="Admin_Admins_Administrator" xml:space="preserve"><value>Administrator</value></data>
+  <data name="Admin_Admins_SearchUser" xml:space="preserve"><value>Søk bruker</value></data>
+  <data name="Admin_Admins_SearchPlaceholder" xml:space="preserve"><value>Skriv brukernavn eller e-post...</value></data>
+  <data name="Admin_Admins_Selected" xml:space="preserve"><value>Valgt</value></data>
+  <data name="Admin_Admins_Clear" xml:space="preserve"><value>Fjern</value></data>
+  <data name="Admin_Admins_User" xml:space="preserve"><value>Bruker</value></data>
+  <data name="Admin_Admins_CanManageAdmins" xml:space="preserve"><value>Kan administrere administratorer (kan opprette/redigere/fjerne andre administratorer)</value></data>
+  <data name="Admin_Admins_Col_CanManage" xml:space="preserve"><value>Kan administrere administratorer</value></data>
+  <data name="Admin_Admins_Col_CreatedBy" xml:space="preserve"><value>Opprettet av</value></data>
+  <data name="Admin_Admins_Yes" xml:space="preserve"><value>Ja</value></data>
+  <data name="Admin_Admins_No" xml:space="preserve"><value>Nei</value></data>
+  <data name="Admin_Admins_CanAccessAdmin" xml:space="preserve"><value>(kan få tilgang til administrasjonsfunksjoner)</value></data>
+  <data name="Admin_Pagination_Previous" xml:space="preserve"><value>Forrige</value></data>
+  <data name="Admin_Pagination_Next" xml:space="preserve"><value>Neste</value></data>
+  <data name="Admin_Events_AcceptsPredictions" xml:space="preserve"><value>(aksepterer spådommer)</value></data>
+  <data name="Admin_Seasons_RecalcStarting" xml:space="preserve"><value>⏳ Starter omberegning av statistikk for {0}...</value></data>
+  <data name="Admin_Seasons_RecalcProgress" xml:space="preserve"><value>⏳ Omberegner statistikk for {0}... ({1}%)</value></data>
+  <data name="Admin_Seasons_RecalcProgressDetailed" xml:space="preserve"><value>⏳ Omberegner statistikk for {0}... ({1}% - {2}/{3} brukere)</value></data>
+  <data name="Admin_Seasons_RecalcCompleted" xml:space="preserve"><value>✓ Omberegning av statistikk fullført! Behandlet {0} bruker(e).</value></data>
+  <data name="Admin_Seasons_RecalcCompletedVerified" xml:space="preserve"><value>✓ Omberegning av statistikk fullført! Oppdatert {0} bruker(e).</value></data>
+  <data name="Admin_Seasons_RecalcFailed" xml:space="preserve"><value>❌ Omberegning mislyktes: {0}</value></data>
+  <data name="Admin_Seasons_RecalcFailedStart" xml:space="preserve"><value>Kunne ikke starte omberegning</value></data>
+  <data name="Admin_Seasons_RecalcAlreadyRunning" xml:space="preserve"><value>En annen omberegning pågår allerede</value></data>
+</root>

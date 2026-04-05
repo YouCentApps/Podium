@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <!-- Autentisering -->
+  <data name="Auth_UserNotFound" xml:space="preserve"><value>Bruker ikke funnet. Vennligst registrer deg først.</value></data>
+  <data name="Auth_EmailCodeDisabled" xml:space="preserve"><value>E-postkodeautentisering er ikke aktivert for denne kontoen. Vennligst bruk passord for å logge inn.</value></data>
+  <data name="Auth_NoEmail" xml:space="preserve"><value>Ingen e-postadresse knyttet til denne kontoen. Vennligst bruk passord for å logge inn.</value></data>
+  <data name="Auth_FailedToGenerateCode" xml:space="preserve"><value>Kunne ikke generere kode. Vennligst prøv igjen.</value></data>
+  <data name="Auth_InvalidOtp" xml:space="preserve"><value>Ugyldig eller utløpt bekreftelseskode.</value></data>
+  <data name="Auth_InvalidCredentials" xml:space="preserve"><value>Ugyldig e-post/brukernavn eller passord.</value></data>
+  <data name="Auth_PasswordNotEnabled" xml:space="preserve"><value>Passordautentisering er ikke aktivert for denne kontoen.</value></data>
+  <data name="Auth_SessionExpired" xml:space="preserve"><value>Økt utløpt eller ugyldig. Vennligst logg inn igjen.</value></data>
+  <data name="Auth_DbError" xml:space="preserve"><value>En databasefeil oppstod. Vennligst prøv igjen.</value></data>
+  <data name="Auth_OtpSent" xml:space="preserve"><value>Engangskode sendt til e-post</value></data>
+  <data name="Auth_RegistrationSuccess" xml:space="preserve"><value>Registrering vellykket</value></data>
+  <data name="Auth_VerificationSent" xml:space="preserve"><value>Bekreftelseskode sendt til din e-post</value></data>
+  <data name="Auth_SignOutSuccess" xml:space="preserve"><value>Logget ut</value></data>
+  <!-- Registrering -->
+  <data name="Reg_UsernameTaken" xml:space="preserve"><value>Brukernavnet er allerede tatt. Vennligst velg et annet brukernavn.</value></data>
+  <data name="Reg_EmailTaken" xml:space="preserve"><value>E-posten er allerede registrert.</value></data>
+  <data name="Reg_VerificationFailed" xml:space="preserve"><value>Ugyldig eller utløpt bekreftelseskode.</value></data>
+  <data name="Reg_Expired" xml:space="preserve"><value>Registreringsøkten har utløpt. Vennligst start registreringen på nytt.</value></data>
+  <data name="Reg_Failed" xml:space="preserve"><value>Registrering mislyktes. Vennligst prøv igjen.</value></data>
+  <data name="Reg_PendingFailed" xml:space="preserve"><value>Kunne ikke opprette registrering. Vennligst prøv igjen.</value></data>
+  <data name="Reg_CodeFailed" xml:space="preserve"><value>Kunne ikke generere bekreftelseskode. Vennligst prøv igjen.</value></data>
+  <!-- Validering -->
+  <data name="Val_UsernameInvalid" xml:space="preserve"><value>Ugyldig brukernavn. Må være 3-50 tegn: bare latinske bokstaver, tall og mellomrom.</value></data>
+  <data name="Val_PasswordInvalid" xml:space="preserve"><value>Ugyldig passord. Må være 6-100 tegn, ingen mellomrom, bare latinske bokstaver/tall/spesialtegn.</value></data>
+  <data name="Val_EmailInvalid" xml:space="preserve"><value>Ugyldig e-postadresse. Vennligst skriv inn en gyldig e-post.</value></data>
+  <!-- Profil -->
+  <data name="Profile_NotFound" xml:space="preserve"><value>Bruker ikke funnet</value></data>
+  <data name="Profile_UsernameUpdated" xml:space="preserve"><value>Brukernavn oppdatert</value></data>
+  <data name="Profile_UsernameTaken" xml:space="preserve"><value>Brukernavnet er allerede tatt</value></data>
+  <data name="Profile_UpdateFailed" xml:space="preserve"><value>Oppdatering mislyktes. Vennligst prøv igjen.</value></data>
+  <data name="Profile_InvalidAuthMethod" xml:space="preserve"><value>Ugyldig autentiseringsmetode</value></data>
+  <data name="Profile_AuthMethodUpdated" xml:space="preserve"><value>Autentiseringsmetode oppdatert</value></data>
+  <data name="Profile_PasswordUpdated" xml:space="preserve"><value>Passord oppdatert</value></data>
+  <data name="Profile_EmailUpdated" xml:space="preserve"><value>E-post oppdatert</value></data>
+  <data name="Profile_VerificationSent" xml:space="preserve"><value>Bekreftelseskode sendt til din nye e-post</value></data>
+  <data name="Profile_VerificationFailed" xml:space="preserve"><value>Bekreftelse mislyktes. Vennligst prøv igjen.</value></data>
+  <data name="Profile_LanguageUpdated" xml:space="preserve"><value>Språk oppdatert</value></data>
+  <data name="Profile_IdentityVerificationFailed" xml:space="preserve"><value>Identitetsbekreftelse mislyktes. Vennligst sjekk legitimasjonen din.</value></data>
+  <data name="Profile_PasswordSetupSent" xml:space="preserve"><value>Passordoppsettkode sendt til din e-post</value></data>
+  <data name="Profile_PasswordsDoNotMatch" xml:space="preserve"><value>Passordene stemmer ikke overens</value></data>
+  <data name="Profile_PasswordRequired" xml:space="preserve"><value>Nytt passord er påkrevd</value></data>
+  <data name="Profile_NeedPasswordFirst" xml:space="preserve"><value>Du må sette et passord først før du kan aktivere passordinnlogging</value></data>
+  <data name="Profile_NeedEmailFirst" xml:space="preserve"><value>Du må sette en e-post først før du kan aktivere e-postinnlogging</value></data>
+  <data name="Profile_OldPasswordRequired" xml:space="preserve"><value>Gjeldende passord er påkrevd</value></data>
+  <data name="Profile_OldPasswordIncorrect" xml:space="preserve"><value>Gjeldende passord er feil</value></data>
+  <data name="Profile_OtpRequired" xml:space="preserve"><value>Bekreftelseskode er påkrevd for å sette opp passord</value></data>
+  <data name="Profile_NoEmailForSetup" xml:space="preserve"><value>Ingen e-postadresse er satt. Vennligst legg til en e-post først.</value></data>
+  <data name="Profile_PasswordAuthDisabled" xml:space="preserve"><value>Passordautentisering er ikke aktivert for kontoen din. Vennligst bruk bekreftelseskoden sendt til din e-post.</value></data>
+  <data name="Profile_NoPasswordSet" xml:space="preserve"><value>Ingen passord er satt for kontoen din. Vennligst bruk bekreftelseskoden sendt til din e-post.</value></data>
+  <data name="Profile_EmailAuthDisabled" xml:space="preserve"><value>E-postkodeautentisering er ikke aktivert for kontoen din. Vennligst bruk passordet ditt.</value></data>
+  <data name="Profile_NoEmailSet" xml:space="preserve"><value>Ingen e-post er satt for kontoen din. Vennligst bruk passordet ditt.</value></data>
+  <data name="Profile_ProvidePasswordOrCode" xml:space="preserve"><value>Vennligst oppgi passordet ditt eller bekreftelseskoden</value></data>
+  <data name="Profile_ProvidePassword" xml:space="preserve"><value>Vennligst oppgi passordet ditt</value></data>
+  <data name="Profile_ProvideCode" xml:space="preserve"><value>Vennligst oppgi bekreftelseskoden</value></data>
+  <data name="Profile_InvalidLanguage" xml:space="preserve"><value>Ugyldig språkkode. Støttet: en, fr, ru</value></data>
+  <!-- Favoritter -->
+  <data name="Favorites_LimitReached" xml:space="preserve"><value>Du kan bare ha opptil 5 favorittsesonger</value></data>
+  <data name="Favorites_AlreadyFavorited" xml:space="preserve"><value>Sesongen er allerede i favorittene dine</value></data>
+  <data name="Favorites_NotFound" xml:space="preserve"><value>Sesong ikke funnet</value></data>
+  <data name="Favorites_AddFailed" xml:space="preserve"><value>Kunne ikke legge til favorittsesong</value></data>
+  <data name="Favorites_Added" xml:space="preserve"><value>Sesong lagt til i favoritter</value></data>
+  <data name="Favorites_RemoveFailed" xml:space="preserve"><value>Kunne ikke fjerne favorittsesong</value></data>
+  <data name="Favorites_Removed" xml:space="preserve"><value>Sesong fjernet fra favoritter</value></data>
+  <!-- Admin -->
+  <data name="Admin_SetActiveFailed" xml:space="preserve"><value>Kunne ikke sette aktiv sesong. Sesongen finnes kanskje ikke.</value></data>
+  <data name="Admin_SetActiveSuccess" xml:space="preserve"><value>Sesong aktivert. Andre sesonger i denne serien er deaktivert.</value></data>
+  <data name="Admin_Unauthorized" xml:space="preserve"><value>Administratortilgang påkrevd</value></data>
+  <!-- Sport / Generelt -->
+  <data name="General_NotFound" xml:space="preserve"><value>Ikke funnet</value></data>
+  <data name="General_Failed" xml:space="preserve"><value>Operasjonen mislyktes. Vennligst prøv igjen.</value></data>
+  <data name="General_Success" xml:space="preserve"><value>Operasjonen er fullført</value></data>
+  <!-- E-postmaler -->
+  <data name="Email_Subject" xml:space="preserve"><value>Din bekreftelseskode for YouCent Podium</value></data>
+  <data name="Email_Header" xml:space="preserve"><value>YouCent Podium</value></data>
+  <data name="Email_Title" xml:space="preserve"><value>Din bekreftelseskode</value></data>
+  <data name="Email_Body" xml:space="preserve"><value>Bruk denne koden for å logge inn på Podium-kontoen din:</value></data>
+  <data name="Email_Expiry" xml:space="preserve"><value>Denne koden utløper om 10 minutter.</value></data>
+  <data name="Email_Ignore" xml:space="preserve"><value>Hvis du ikke ba om denne koden, kan du trygt ignorere denne e-posten.</value></data>
+  <data name="Email_Automated" xml:space="preserve"><value>Dette er en automatisk melding, vennligst ikke svar.</value></data>
+  <data name="Email_Copyright" xml:space="preserve"><value>Alle rettigheter forbeholdt.</value></data>
+</root>

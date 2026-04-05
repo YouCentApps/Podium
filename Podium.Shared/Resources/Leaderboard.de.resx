@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Leaderboard_Title" xml:space="preserve"><value>Rangliste</value></data>
+  <data name="Leaderboard_SelectInfo" xml:space="preserve"><value>Wähle Disziplin, Serie und Saison, um die Rangliste anzuzeigen.</value></data>
+  <data name="Leaderboard_NoPredictions" xml:space="preserve"><value>Noch keine Vorhersagen für diese Saison.</value></data>
+  <data name="Leaderboard_Loading" xml:space="preserve"><value>Rangliste wird geladen...</value></data>
+  <data name="Leaderboard_LoadingLastEvent" xml:space="preserve"><value>Letztes Event wird geladen...</value></data>
+  <data name="Leaderboard_SelectDiscipline" xml:space="preserve"><value>-- Disziplin wählen --</value></data>
+  <data name="Leaderboard_SelectSeries" xml:space="preserve"><value>-- Serie wählen --</value></data>
+  <data name="Leaderboard_SelectSeason" xml:space="preserve"><value>-- Saison wählen --</value></data>
+  <data name="Leaderboard_Label_Discipline" xml:space="preserve"><value>Disziplin:</value></data>
+  <data name="Leaderboard_Label_Series" xml:space="preserve"><value>Serie:</value></data>
+  <data name="Leaderboard_Label_Season" xml:space="preserve"><value>Saison:</value></data>
+  <data name="Leaderboard_Col_Rank" xml:space="preserve"><value>Rang</value></data>
+  <data name="Leaderboard_Col_Player" xml:space="preserve"><value>Spieler</value></data>
+  <data name="Leaderboard_Col_BestResults" xml:space="preserve"><value>Beste {0} Ergebnisse</value></data>
+  <data name="Leaderboard_Col_BestResults_Short" xml:space="preserve"><value>Beste Ergebnisse</value></data>
+  <data name="Leaderboard_Col_Total" xml:space="preserve"><value>Gesamt</value></data>
+  <data name="Leaderboard_Col_Predictions" xml:space="preserve"><value>Vorhersagen</value></data>
+  <data name="Leaderboard_Col_Exact" xml:space="preserve"><value>Exakt</value></data>
+  <data name="Leaderboard_Col_1Off" xml:space="preserve"><value>1 daneben</value></data>
+  <data name="Leaderboard_Col_2Off" xml:space="preserve"><value>2 daneben</value></data>
+  <data name="Leaderboard_LastEvent" xml:space="preserve"><value>Letztes abgeschlossenes Event:</value></data>
+  <data name="Leaderboard_ActualPodium" xml:space="preserve"><value>Tatsächliches Podium</value></data>
+  <data name="Leaderboard_Top10" xml:space="preserve"><value>Top 10 Vorhersager</value></data>
+  <data name="Leaderboard_SearchUser" xml:space="preserve"><value>Bestimmten Benutzer suchen:</value></data>
+  <data name="Leaderboard_SearchPlaceholder" xml:space="preserve"><value>Benutzername oder E-Mail eingeben...</value></data>
+  <data name="Leaderboard_ShowingFor" xml:space="preserve"><value>Ergebnisse für:</value></data>
+  <data name="Leaderboard_ClearAll" xml:space="preserve"><value>Alle löschen</value></data>
+  <data name="Leaderboard_NoPredictionsFound" xml:space="preserve"><value>Keine Vorhersagen für die ausgewählten Benutzer gefunden.</value></data>
+  <data name="Leaderboard_Col_Prediction" xml:space="preserve"><value>Vorhersage</value></data>
+  <data name="Leaderboard_Col_Points" xml:space="preserve"><value>Punkte</value></data>
+  <data name="Leaderboard_Col_Submitted" xml:space="preserve"><value>Eingereicht</value></data>
+  <data name="Leaderboard_Pos1st" xml:space="preserve"><value>1.:</value></data>
+  <data name="Leaderboard_Pos2nd" xml:space="preserve"><value>2.:</value></data>
+  <data name="Leaderboard_Pos3rd" xml:space="preserve"><value>3.:</value></data>
+  <data name="Leaderboard_Pts" xml:space="preserve"><value>Pkt</value></data>
+</root>
