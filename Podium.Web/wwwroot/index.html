@@ -13,10 +13,18 @@
 
 <body>
     <div id="app">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1f2937;">
             <p style="font-size: 1.5em;">Loading...</p>
+            <p style="font-size: 0.9em; color: #4a4e59;">First launch may take a few moments</p>
         </div>
     </div>
+
+    <noscript>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1f2937; max-width: 420px;">
+            <p style="font-size: 1.5em; margin-bottom: 0.5em;">JavaScript is required</p>
+            <p style="font-size: 0.95em; color: #4a4e59;">Podium is an interactive web application that requires JavaScript to run. Please enable JavaScript in your browser settings and reload the page.</p>
+        </div>
+    </noscript>
     <script>
         // Expose localStorage language so Blazor WASM can read it before first render
         window.podiumCulture = {
