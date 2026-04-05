@@ -14,7 +14,7 @@
 {
     <div class="admin-container">
         <div class="admin-error">
-            <h2><span style="font-size: 1.3em;">&#128274;</span> @L["Admin_AuthRequired"]</h2>
+            <h1><span style="font-size: 1.3em;">&#128274;</span> @L["Admin_AuthRequired"]</h1>
             <p>@L["Admin_AuthRequired_Desc"]</p>
             <button class="btn btn-primary" @onclick="@(() => Navigation.NavigateTo("/signin"))">@LC["Nav_SignIn"]</button>
         </div>
@@ -24,7 +24,7 @@ else if (!AdminState.IsAdmin)
 {
     <div class="admin-container">
         <div class="admin-error">
-            <h2><span style="font-size: 1.3em;">&#128737;</span> @L["Admin_AccessDenied"]</h2>
+            <h1><span style="font-size: 1.3em;">&#128737;</span> @L["Admin_AccessDenied"]</h1>
             <p>@L["Admin_NotAuthorized"]</p>
             <button class="btn btn-secondary" @onclick="@(() => Navigation.NavigateTo("/"))">@L["Admin_BackToHome"]</button>
         </div>
@@ -41,43 +41,43 @@ else
         <div class="admin-cards">
             <a href="/admin/disciplines" class="admin-card">
                 <div class="card-icon"><span style="font-size: 1.2em;">&#127950;&#65039;</span></div>
-                <h3>@L["Admin_Disciplines_Title"]</h3>
+                <h2>@L["Admin_Disciplines_Title"]</h2>
                 <p>@L["Admin_Disciplines_Desc"]</p>
             </a>
 
             <a href="/admin/series" class="admin-card">
                 <div class="card-icon">&#127942;</div>
-                <h3>@L["Admin_Series_Title"]</h3>
+                <h2>@L["Admin_Series_Title"]</h2>
                 <p>@L["Admin_Series_Desc"]</p>
             </a>
 
             <a href="/admin/seasons" class="admin-card">
                 <div class="card-icon">&#128197;</div>
-                <h3>@L["Admin_Seasons_Title"]</h3>
+                <h2>@L["Admin_Seasons_Title"]</h2>
                 <p>@L["Admin_Seasons_Desc"]</p>
             </a>
 
             <a href="/admin/competitors" class="admin-card">
                 <div class="card-icon"><span style="font-size: 1.2em;">&#127933;&#65039;</span></div>
-                <h3>@L["Admin_Competitors_Title"]</h3>
+                <h2>@L["Admin_Competitors_Title"]</h2>
                 <p>@L["Admin_Competitors_Desc"]</p>
             </a>
 
             <a href="/admin/events" class="admin-card">
                 <div class="card-icon">&#127937;</div>
-                <h3>@L["Admin_Events_Title"]</h3>
+                <h2>@L["Admin_Events_Title"]</h2>
                 <p>@L["Admin_Events_Desc"]</p>
             </a>
 
             <a href="/admin/results" class="admin-card">
                 <div class="card-icon">&#128202;</div>
-                <h3>@L["Admin_Results_Title"]</h3>
+                <h2>@L["Admin_Results_Title"]</h2>
                 <p>@L["Admin_Results_Desc"]</p>
             </a>
 
             <a href="/admin/users" class="admin-card">
                 <div class="card-icon">&#128101;</div>
-                <h3>@L["Admin_Users_Title"]</h3>
+                <h2>@L["Admin_Users_Title"]</h2>
                 <p>@L["Admin_Users_Desc"]</p>
             </a>
 
@@ -85,7 +85,7 @@ else
             {
                 <a href="/admin/admins" class="admin-card">
                     <div class="card-icon"><span style="font-size: 1.2em;">&#128737;&#65039;</span></div>
-                    <h3>@L["Admin_Admins_Title"]</h3>
+                    <h2>@L["Admin_Admins_Title"]</h2>
                     <p>@L["Admin_Admins_Desc"]</p>
                 </a>
             }
@@ -94,7 +94,7 @@ else
         @if (!string.IsNullOrEmpty(diagnosticMessage))
         {
             <div class="admin-diagnostics">
-                <h3>[!] Quick Diagnostics</h3>
+                <h2>[!] Quick Diagnostics</h2>
                 <button class="btn btn-secondary" @onclick="CheckDuplicateSeasons">Check for Duplicate Active Seasons</button>
                 <div class="diagnostic-result">@diagnosticMessage</div>
             </div>

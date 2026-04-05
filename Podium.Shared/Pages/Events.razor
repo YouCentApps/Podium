@@ -35,7 +35,7 @@
             @foreach (var evt in events)
             {
                 <div class="event-card" @onclick="() => SelectEvent(evt.Id, seasonId)">
-                    <h3>@evt.DisplayName</h3>
+                    <h2>@evt.DisplayName</h2>
                     <p>@evt.Location</p>
                     <p class="event-date">
                         <span class="event-icon">&#128197;</span> @evt.EventDate.ToString("MMM dd, yyyy HH:mm") UTC
