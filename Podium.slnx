@@ -4,6 +4,9 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/Common/">
+    <File Path="Directory.Build.props" />
+  </Folder>
   <Folder Name="/Deployments/">
     <File Path=".github/workflows/main_youcent-podium-api.yml" />
     <File Path=".github/workflows/main_youcentpodium.yml" />
