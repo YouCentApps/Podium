@@ -1,0 +1,30 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Deployments/">
+    <File Path=".github/workflows/main_youcent-podium-api.yml" />
+    <File Path=".github/workflows/main_youcentpodium.yml" />
+  </Folder>
+  <Folder Name="/Docs/">
+    <File Path="Docs/AddingNewLanguage.md" />
+    <File Path="Docs/AddNewLanguagePrompt.md" />
+    <File Path="Docs/DatabaseStructure.md" />
+    <File Path="Docs/EmailConfiguration.md" />
+    <File Path="Docs/QUICKSTART.md" />
+    <File Path="Docs/README.md" />
+    <File Path="Docs/ScoringRulesImplementation.md" />
+  </Folder>
+  <Folder Name="/Tools/">
+    <Project Path="Tools/Podium.DbInit/Podium.DbInit.csproj" />
+    <Project Path="Tools/Podium.Migration/Podium.Migration.csproj" />
+  </Folder>
+  <Project Path="Podium.Api/Podium.Api.csproj" />
+  <Project Path="Podium.Native/Podium.Native.csproj">
+    <Deploy Solution="Debug|Any CPU" />
+  </Project>
+  <Project Path="Podium.Shared/Podium.Shared.csproj" />
+  <Project Path="Podium.Web/Podium.Web.csproj" />
+</Solution>
