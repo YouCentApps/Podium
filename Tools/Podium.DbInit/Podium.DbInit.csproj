@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <UserSecretsId>podium-dbinit-secrets</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

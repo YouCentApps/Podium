@@ -1,11 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
+  <PropertyGroup>
+    <UserSecretsId>podium-api-secrets</UserSecretsId>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Content Remove="appsettings.Development(template).json" />
+    <Content Remove="appsettings.Development(placeholder).json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="appsettings.Development%28template%29.json" />
+    <None Include="appsettings.Development%28placeholder%29.json" />
   </ItemGroup>
 
   <ItemGroup>
