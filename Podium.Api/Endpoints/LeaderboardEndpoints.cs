@@ -5,7 +5,7 @@ using Podium.Shared.Models;
 
 namespace Podium.Api.Endpoints;
 
-public static class LeaderboardEndpoints
+internal static class LeaderboardEndpoints
 {
     public static void MapLeaderboardEndpoints(this WebApplication app)
     {
@@ -73,14 +73,14 @@ public static class LeaderboardEndpoints
                 }
             }
             
-            if (!completedEvents.Any())
+            if (completedEvents.Count == 0)
             {
                 return Results.Ok(null); // No completed events yet
             }
-            
+
             var lastEvent = completedEvents.First();
             var eventResult = await eventRepo.GetEventResultAsync(lastEvent.Id);
-            
+
             if (eventResult == null)
             {
                 return Results.Ok(null);
@@ -174,14 +174,12 @@ public static class LeaderboardEndpoints
                 }
             }
             
-            if (!completedEvents.Any())
+            if (completedEvents.Count == 0)
             {
                 return Results.Ok(new List<UserEventPrediction>());
             }
-            
+
             var lastEvent = completedEvents.First();
-            
-            // Get all predictions for this event
             var predictions = await predictionRepo.GetPredictionsByEventAsync(lastEvent.Id);
             
             // Search users by query

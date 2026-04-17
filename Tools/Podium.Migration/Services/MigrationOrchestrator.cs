@@ -1,11 +1,12 @@
 using Podium.Migration.Models;
+#pragma warning disable CA1303
 
 namespace Podium.Migration.Services;
 
 /// <summary>
 /// Main orchestrator for the migration process
 /// </summary>
-public class MigrationOrchestrator
+internal sealed class MigrationOrchestrator
 {
     private readonly LegacyDataExtractor _extractor;
     private readonly DataTransformer _transformer;
@@ -45,7 +46,7 @@ public class MigrationOrchestrator
             if (_season2024) yearsToMigrate.Add(2024);
             if (_season2025) yearsToMigrate.Add(2025);
 
-            if (!yearsToMigrate.Any())
+            if (yearsToMigrate.Count == 0)
             {
                 _result.AddWarning("No seasons selected for migration");
                 return _result;
@@ -73,7 +74,7 @@ public class MigrationOrchestrator
             Console.WriteLine("\n? Migration completed!");
             _transformer.PrintMappingSummary();
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException)
         {
             _result.AddError($"Critical error: {ex.Message}");
             Console.WriteLine($"\n? Migration failed: {ex.Message}");
@@ -126,7 +127,7 @@ public class MigrationOrchestrator
                 await _inserter.InsertUserAsync(newUserId, user.Email, user.Name);
                 _result.UsersCreated++;
             }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException)
             {
                 _result.AddError($"Failed to migrate user {user.Name}: {ex.Message}");
             }
@@ -144,7 +145,7 @@ public class MigrationOrchestrator
             try
             {
                 var driverId = _transformer.GetOrCreateDriverId(driverName);
-                var shortName = _transformer.GenerateShortName(driverName);
+                var shortName = DataTransformer.GenerateShortName(driverName);
                 
                 await _inserter.InsertCompetitorAsync(
                     driverId,
@@ -154,7 +155,7 @@ public class MigrationOrchestrator
                 
                 _result.DriversCreated++;
             }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException)
             {
                 _result.AddError($"Failed to migrate driver {driverName}: {ex.Message}");
             }
@@ -242,7 +243,7 @@ public class MigrationOrchestrator
                     additionalDrivers.Add(p3Trimmed);
             }
 
-            if (additionalDrivers.Any())
+            if (additionalDrivers.Count > 0)
             {
                 Console.WriteLine($"  Found {additionalDrivers.Count} additional drivers in results (substitutes/reserves)");
                 foreach (var driverName in additionalDrivers)
@@ -268,7 +269,7 @@ public class MigrationOrchestrator
             // Calculate and insert user statistics with proper match calculations
             await CalculateUserStatisticsAsync(seasonId, year, predictions, raceResults, users);
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException)
         {
             _result.AddError($"Failed to migrate season {year}: {ex.Message}");
             Console.WriteLine($"  Exception: {ex}");
@@ -291,7 +292,7 @@ public class MigrationOrchestrator
             try
             {
                 var eventId = _transformer.GetOrCreateEventId(year, race.NumberRace);
-                var status = _transformer.DetermineEventStatus(race.Date);
+                var status = DataTransformer.DetermineEventStatus(race.Date);
                 
                 Console.WriteLine($"  Processing Race #{race.NumberRace}: {race.Name}");
                 
@@ -364,12 +365,12 @@ public class MigrationOrchestrator
                     if (anyMissing)
                     {
                         Console.WriteLine($"    ? MISSING DRIVER DETAILS:");
-                        Console.WriteLine($"       P1: '{actualResult.P1}' (Length: {actualResult.P1.Length}, Has leading space: {actualResult.P1.StartsWith(" ")})");
-                        Console.WriteLine($"       P2: '{actualResult.P2}' (Length: {actualResult.P2.Length}, Has leading space: {actualResult.P2.StartsWith(" ")})");
-                        Console.WriteLine($"       P3: '{actualResult.P3}' (Length: {actualResult.P3.Length}, Has leading space: {actualResult.P3.StartsWith(" ")})");
+                        Console.WriteLine($"       P1: '{actualResult.P1}' (Length: {actualResult.P1.Length}, Has leading space: {actualResult.P1.StartsWith(' ')})");
+                        Console.WriteLine($"       P2: '{actualResult.P2}' (Length: {actualResult.P2.Length}, Has leading space: {actualResult.P2.StartsWith(' ')})");
+                        Console.WriteLine($"       P3: '{actualResult.P3}' (Length: {actualResult.P3.Length}, Has leading space: {actualResult.P3.StartsWith(' ')})");
                         
                         // Try to find these drivers in the known list for debugging
-                        var allDriverIds = _transformer.GetAllDriverNames();
+                        var allDriverIds = _transformer.AllDriverNames;
                         Console.WriteLine($"    Known drivers containing similar names:");
                         foreach (var knownDriver in allDriverIds.Where(d => 
                             d.Contains(actualResult.P1.Trim(), StringComparison.OrdinalIgnoreCase) ||
@@ -419,14 +420,14 @@ public class MigrationOrchestrator
                         _result.PredictionsMigrated++;
                         predsMigrated++;
                     }
-                    catch (Exception ex)
+                    catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException)
                     {
                         _result.AddWarning($"Failed to migrate prediction for race {race.NumberRace}, user {pred.UserId}: {ex.Message}");
                     }
                 }
                 Console.WriteLine($"    Migrated {predsMigrated} predictions");
             }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException)
             {
                 _result.AddError($"Failed to migrate event {race.Name}: {ex.Message}");
                 Console.WriteLine($"    Exception: {ex}");
@@ -447,7 +448,7 @@ public class MigrationOrchestrator
         {
             var userId = _transformer.GetOrCreateUserId(pred.UserId);
             
-            if (!userStats.ContainsKey(userId))
+            if (!userStats.TryGetValue(userId, out _))
             {
                 userStats[userId] = (0, 0, 0, 0, 0);
             }

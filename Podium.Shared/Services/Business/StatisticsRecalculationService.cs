@@ -202,7 +202,7 @@ public class StatisticsRecalculationService : IStatisticsRecalculationService
         }
     }
 
-    private (int ExactMatches, int OneOffMatches, int TwoOffMatches) CalculateMatchesPerDriver(
+    private static (int ExactMatches, int OneOffMatches, int TwoOffMatches) CalculateMatchesPerDriver(
         string predictedP1, string predictedP2, string predictedP3,
         string actualP1, string actualP2, string actualP3)
     {

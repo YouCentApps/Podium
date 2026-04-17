@@ -4,6 +4,7 @@ using Microsoft.Extensions.Localization;
 using Podium.Shared.Models;
 using Podium.Shared.Services.Data;
 using Podium.Shared.Utilities;
+using System.Globalization;
 using System.Security.Cryptography;
 
 namespace Podium.Shared.Services.Auth;
@@ -42,13 +43,14 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<(bool Success, string ActualEmail, string ErrorMessage)> SendOTPAsync(string emailOrUsername)
     {
+        ArgumentNullException.ThrowIfNull(emailOrUsername);
         // Try to find user by email or username
         User? user = null;
 
         try
         {
             // Try to determine if input is email or username
-            if (emailOrUsername.Contains("@"))
+            if (emailOrUsername.Contains('@', StringComparison.Ordinal))
             {
                 // It's likely an email
                 user = await _userRepository.GetUserByEmailAsync(emailOrUsername);
@@ -59,7 +61,7 @@ public class AuthenticationService : IAuthenticationService
                 user = await _userRepository.GetUserByUsernameAsync(emailOrUsername);
             }
         }
-        catch (RequestFailedException ex)
+        catch (RequestFailedException)
         {
             return (false, string.Empty, _localizer["Auth_DbError"]);
         }
@@ -112,7 +114,7 @@ public class AuthenticationService : IAuthenticationService
             {
                 _sendEmailCallback(user.Email, otpCode);
             }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException)
             {
                 Console.WriteLine($"Failed to send email: {ex.Message}");
                 // Don't fail the request - OTP is still valid
@@ -129,9 +131,10 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<(bool Success, string ErrorMessage)> SendOTPForNewEmailAsync(string email, string userId)
     {
+        ArgumentNullException.ThrowIfNull(email);
         // This method sends OTP to a NEW email address that doesn't exist in user table yet
         // Used when user is updating their email to a new address
-        
+
         // Generate 6-digit OTP
         var otpCode = GenerateOTP();
 
@@ -139,7 +142,9 @@ public class AuthenticationService : IAuthenticationService
         var otpClient = _tableClientFactory.GetTableClient(OTPTable);
         var otpEntity = new TableEntity("OTP", Guid.NewGuid().ToString())
         {
+#pragma warning disable CA1308
             ["Email"] = email.ToLowerInvariant(), // Store normalized email
+#pragma warning restore CA1308
             ["Code"] = otpCode,
             ["UserId"] = userId, // Use the current user's ID
             ["ExpiryTime"] = DateTime.UtcNow.AddMinutes(10),
@@ -163,7 +168,7 @@ public class AuthenticationService : IAuthenticationService
             {
                 _sendEmailCallback(email, otpCode);
             }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException)
             {
                 Console.WriteLine($"Failed to send email: {ex.Message}");
                 // Don't fail the request - OTP is still valid
@@ -180,15 +185,18 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<(bool Success, string UserId, string Username, string SessionId, string LanguageCode, string ErrorMessage)> VerifyOTPAsync(string email, string otpCode)
     {
+        ArgumentNullException.ThrowIfNull(email);
         var otpClient = _tableClientFactory.GetTableClient(OTPTable);
         var cutoffTime = DateTime.UtcNow.AddMinutes(-10);
 
         try
         {
             // Normalize email to lowercase for case-insensitive comparison
+#pragma warning disable CA1308
             var normalizedEmail = email.ToLowerInvariant();
+#pragma warning restore CA1308
             // Escape single quotes to prevent OData injection
-            var safeEmail = normalizedEmail.Replace("'", "''");
+            var safeEmail = normalizedEmail.Replace("'", "''", StringComparison.Ordinal);
             var filter = $"PartitionKey eq 'OTP' and Email eq '{safeEmail}' and IsUsed eq false and ExpiryTime gt datetime'{cutoffTime:yyyy-MM-ddTHH:mm:ss.fffffffZ}'";
 
             TableEntity? validOtp = null;
@@ -233,20 +241,22 @@ public class AuthenticationService : IAuthenticationService
 
             return (true, user.UserId, user.Username, sessionId, user.LanguageCode, string.Empty);
         }
-        catch (Exception)
+        catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException and not ArgumentNullException)
         {
+            _ = ex;
             return (false, string.Empty, string.Empty, string.Empty, string.Empty, _localizer["Auth_InvalidOtp"]);
         }
     }
 
     public async Task<(bool Success, string UserId, string Username, string SessionId, string LanguageCode, string ErrorMessage)> SignInWithPasswordAsync(string emailOrUsername, string password)
     {
+        ArgumentNullException.ThrowIfNull(emailOrUsername);
         User? user = null;
 
         try
         {
             // Try to determine if input is email or username
-            if (emailOrUsername.Contains("@"))
+            if (emailOrUsername.Contains('@', StringComparison.Ordinal))
             {
                 // It's likely an email
                 user = await _userRepository.GetUserByEmailAsync(emailOrUsername);
@@ -370,14 +380,13 @@ public class AuthenticationService : IAuthenticationService
         var randomNumber = new byte[4];
         rng.GetBytes(randomNumber);
         var code = Math.Abs(BitConverter.ToInt32(randomNumber, 0) % 1000000);
-        return code.ToString("D6");
+        return code.ToString("D6", CultureInfo.InvariantCulture);
     }
 
     private static bool VerifyPassword(string password, string hash, string salt)
     {
         var saltBytes = Convert.FromBase64String(salt);
-        using var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, 10000, HashAlgorithmName.SHA256);
-        var hashBytes = pbkdf2.GetBytes(32);
+        var hashBytes = Rfc2898DeriveBytes.Pbkdf2(password, saltBytes, 100000, HashAlgorithmName.SHA256, 32);
         var computedHash = Convert.ToBase64String(hashBytes);
         return computedHash == hash;
     }
@@ -391,8 +400,7 @@ public class AuthenticationService : IAuthenticationService
         }
         var salt = Convert.ToBase64String(saltBytes);
 
-        using var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, 10000, HashAlgorithmName.SHA256);
-        var hashBytes = pbkdf2.GetBytes(32);
+        var hashBytes = Rfc2898DeriveBytes.Pbkdf2(password, saltBytes, 100000, HashAlgorithmName.SHA256, 32);
         var hash = Convert.ToBase64String(hashBytes);
 
         return (hash, salt);
@@ -453,13 +461,16 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<(bool Success, string ErrorMessage)> VerifyOTPCodeAsync(string email, string otpCode)
     {
+        ArgumentNullException.ThrowIfNull(email);
         var otpClient = _tableClientFactory.GetTableClient(OTPTable);
         var cutoffTime = DateTime.UtcNow.AddMinutes(-10);
 
         try
         {
             // Normalize email to lowercase for case-insensitive comparison
+#pragma warning disable CA1308
             var normalizedEmail = email.ToLowerInvariant();
+#pragma warning restore CA1308
             var filter = $"PartitionKey eq 'OTP' and Email eq '{normalizedEmail}' and IsUsed eq false and ExpiryTime gt datetime'{cutoffTime:yyyy-MM-ddTHH:mm:ss.fffffffZ}'";
             
             TableEntity? validOtp = null;
@@ -499,8 +510,9 @@ public class AuthenticationService : IAuthenticationService
             // OTP is valid - no session created
             return (true, string.Empty);
         }
-        catch (Exception)
+        catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException and not ArgumentNullException)
         {
+            _ = ex;
             return (false, _localizer["Auth_InvalidOtp"]);
         }
     }

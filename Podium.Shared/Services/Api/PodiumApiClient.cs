@@ -762,7 +762,7 @@ public class PodiumApiClient : IPodiumApiClient
         }
     }
 
-    private async Task<string> ParseErrorResponseAsync(HttpResponseMessage response)
+    private static async Task<string> ParseErrorResponseAsync(HttpResponseMessage response)
     {
         try
         {

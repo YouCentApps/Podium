@@ -12,6 +12,8 @@ public static class AuthorizationExtensions
         HttpContext context,
         IAuthenticationService authService)
     {
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(authService);
         if (!context.Request.Headers.TryGetValue("X-Session-Id", out var sessionId) || 
             string.IsNullOrEmpty(sessionId))
         {
@@ -42,7 +44,9 @@ public static class AuthorizationExtensions
         IAuthenticationService authService,
         IAdminRepository adminRepo)
     {
-        // First validate session
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(authService);
+        ArgumentNullException.ThrowIfNull(adminRepo);
         var sessionResult = await ValidateSession(context, authService);
         if (sessionResult != null)
         {
@@ -75,7 +79,9 @@ public static class AuthorizationExtensions
         IAuthenticationService authService,
         IAdminRepository adminRepo)
     {
-        // First validate admin session
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(authService);
+        ArgumentNullException.ThrowIfNull(adminRepo);
         var adminResult = await ValidateAdminSession(context, authService, adminRepo);
         if (adminResult != null)
         {
@@ -105,6 +111,7 @@ public static class AuthorizationExtensions
     /// </summary>
     public static string? GetUserId(this HttpContext context)
     {
+        ArgumentNullException.ThrowIfNull(context);
         return context.Items["UserId"] as string;
     }
 
@@ -113,6 +120,7 @@ public static class AuthorizationExtensions
     /// </summary>
     public static string? GetUsername(this HttpContext context)
     {
+        ArgumentNullException.ThrowIfNull(context);
         return context.Items["Username"] as string;
     }
 
@@ -121,6 +129,7 @@ public static class AuthorizationExtensions
     /// </summary>
     public static string? GetSessionId(this HttpContext context)
     {
+        ArgumentNullException.ThrowIfNull(context);
         return context.Items["SessionId"] as string;
     }
 }

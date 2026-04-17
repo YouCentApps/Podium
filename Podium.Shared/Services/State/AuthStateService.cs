@@ -4,7 +4,7 @@ public class AuthStateService
 {
     private const string StorageKey = "podium_session";
     private readonly IStorageService? _storageService;
-    private bool _isHandlingExpiration = false;
+    private bool _isHandlingExpiration;
     
     private string? _userId;
     private string? _username;

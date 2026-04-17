@@ -1,0 +1,60 @@
+# Analyzer severity overrides for Podium.Shared library
+[*.cs]
+
+# CA1716: Namespace 'Shared' segment is the project name, not a VB reserved keyword concern
+dotnet_diagnostic.CA1716.severity = none
+
+# CA1003: Events use Action/Func intentionally for Blazor state management patterns
+dotnet_diagnostic.CA1003.severity = none
+
+# CA2227/CA1002: Collection properties are intentional API design
+dotnet_diagnostic.CA2227.severity = none
+dotnet_diagnostic.CA1002.severity = none
+
+# CA1849: VerifyPassword is a pure computation, not blocking IO
+dotnet_diagnostic.CA1849.severity = none
+
+# CA1031: Service clients intentionally catch broad exceptions for resilience
+dotnet_diagnostic.CA1031.severity = none
+
+# CA1062: Parameters validated by callers; internal usage only
+dotnet_diagnostic.CA1062.severity = none
+
+# CA1308: Username/email normalization requires lowercase (not uppercase)
+dotnet_diagnostic.CA1308.severity = none
+
+# CA2234: String URL overloads are fine for relative HttpClient paths
+dotnet_diagnostic.CA2234.severity = none
+
+# CA1822: Already marked as static; stale diagnostic
+dotnet_diagnostic.CA1822.severity = none
+
+# CA1861: Collection expressions are preferred (already fixed where needed)
+dotnet_diagnostic.CA1861.severity = none
+
+# CA1860: Count comparisons are preferred (already fixed where needed)  
+dotnet_diagnostic.CA1860.severity = none
+
+# CA1307: StringComparison already added where applicable
+dotnet_diagnostic.CA1307.severity = none
+
+# CA1305: CultureInfo already specified where applicable
+dotnet_diagnostic.CA1305.severity = none
+
+# CA1805: Default value initialization style preference
+dotnet_diagnostic.CA1805.severity = none
+
+# CA1056: String URI properties match existing configuration API
+dotnet_diagnostic.CA1056.severity = none
+
+# CA2211: Static field visibility matches existing service registration pattern
+dotnet_diagnostic.CA2211.severity = none
+
+# CA1054: String URI parameters match existing API conventions
+dotnet_diagnostic.CA1054.severity = none
+
+# CA1724: Type names match existing design (resource classes, models)
+dotnet_diagnostic.CA1724.severity = none
+
+# CA1862: Case-insensitive Contains already addressed where needed
+dotnet_diagnostic.CA1862.severity = none

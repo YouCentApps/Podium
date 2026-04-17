@@ -5,9 +5,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
+#pragma warning disable CA1303
 namespace Podium.DbInit;
 
-class Program
+sealed class Program
 {
     private static IConfiguration? _configuration;
     private static string? _storageUri;
@@ -51,7 +52,7 @@ class Program
         {
             Console.Write("WARNING: This will delete all existing Podium tables. Are you sure? (yes/no): ");
             var confirm = Console.ReadLine();
-            if (confirm?.ToLower() != "yes")
+            if (!string.Equals(confirm, "yes", StringComparison.OrdinalIgnoreCase))
             {
                 Console.WriteLine("Operation cancelled.");
                 return;
@@ -62,24 +63,24 @@ class Program
         {
             if (dropExisting)
             {
-                await DropTablesAsync();
+                await DropTablesAsync().ConfigureAwait(false);
             }
 
             if (createTables)
             {
-                await CreateTablesAsync();
+                await CreateTablesAsync().ConfigureAwait(false);
             }
 
             if (addSampleData)
             {
-                await AddSampleDataAsync();
+                await AddSampleDataAsync().ConfigureAwait(false);
             }
 
             Console.WriteLine("\n===========================================");
             Console.WriteLine("Database initialization completed successfully!");
             Console.WriteLine("===========================================");
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException)
         {
             Console.WriteLine($"\nERROR: {ex.Message}");
             Console.WriteLine($"Details: {ex}");
@@ -104,7 +105,7 @@ class Program
             try
             {
                 var client = CreateTableClient(tableName);
-                await client.DeleteAsync();
+                await client.DeleteAsync().ConfigureAwait(false);
                 Console.WriteLine($"? Dropped table: {tableName}");
             }
             catch (RequestFailedException ex) when (ex.Status == 404)
@@ -130,7 +131,7 @@ class Program
         foreach (var tableName in tableNames)
         {
             var client = CreateTableClient(tableName);
-            await client.CreateIfNotExistsAsync();
+            await client.CreateIfNotExistsAsync().ConfigureAwait(false);
             Console.WriteLine($"? Created table: {tableName}");
         }
     }
@@ -238,7 +239,7 @@ class Program
                 ["IsActive"] = true,
                 ["CreatedDate"] = DateTime.UtcNow
             };
-            await disciplineClient.UpsertEntityAsync(disciplineEntity);
+            await disciplineClient.UpsertEntityAsync(disciplineEntity).ConfigureAwait(false);
             Console.WriteLine($"? Created discipline: {discipline.Name}");
 
             // Create series for this discipline
@@ -263,7 +264,7 @@ class Program
                     ["IsActive"] = true,
                     ["CreatedDate"] = DateTime.UtcNow
                 };
-                await seriesClient.UpsertEntityAsync(seriesEntity);
+                await seriesClient.UpsertEntityAsync(seriesEntity).ConfigureAwait(false);
                 Console.WriteLine($"  ? Created series: {series.Name}");
             }
         }
@@ -285,7 +286,7 @@ class Program
                 ["EndDate"] = new DateTime(2026, 12, 1, 0, 0, 0, DateTimeKind.Utc),
                 ["CreatedDate"] = DateTime.UtcNow
             };
-            await seasonClient.UpsertEntityAsync(seasonEntity);
+            await seasonClient.UpsertEntityAsync(seasonEntity).ConfigureAwait(false);
             Console.WriteLine($"? Created 2026 F1 season");
 
             // Create scoring rules
@@ -297,7 +298,7 @@ class Program
                 ["TwoOffPoints"] = 15,
                 ["CreatedDate"] = DateTime.UtcNow
             };
-            await scoringClient.UpsertEntityAsync(scoringEntity);
+            await scoringClient.UpsertEntityAsync(scoringEntity).ConfigureAwait(false);
             Console.WriteLine($"? Created scoring rules");
 
             // Create F1 drivers
@@ -375,7 +376,7 @@ class Program
                     ["IsActive"] = true,
                     ["CreatedDate"] = DateTime.UtcNow
                 };
-                await eventClient.UpsertEntityAsync(eventEntity);
+                await eventClient.UpsertEntityAsync(eventEntity).ConfigureAwait(false);
             }
             Console.WriteLine($"? Created {races.Length} F1 races");
         }
@@ -409,7 +410,7 @@ class Program
                 ["CreatedDate"] = DateTime.UtcNow,
                 ["LastLoginDate"] = null
             };
-            await userClient.UpsertEntityAsync(userEntity);
+            await userClient.UpsertEntityAsync(userEntity).ConfigureAwait(false);
         }
         Console.WriteLine($"? Created {sampleUsers.Length} sample users");
 
@@ -453,8 +454,7 @@ class Program
         var salt = Convert.ToBase64String(saltBytes);
 
         // Hash password with salt
-        using var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, 10000, HashAlgorithmName.SHA256);
-        var hashBytes = pbkdf2.GetBytes(32);
+        var hashBytes = Rfc2898DeriveBytes.Pbkdf2(password, saltBytes, 100000, HashAlgorithmName.SHA256, 32);
         var hash = Convert.ToBase64String(hashBytes);
 
         return (hash, salt);

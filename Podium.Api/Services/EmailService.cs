@@ -52,7 +52,7 @@ public class EmailService : IEmailService
                 Credentials = new NetworkCredential(_smtpUsername, _smtpPassword)
             };
 
-            var message = new MailMessage
+            using var message = new MailMessage
             {
                 From = new MailAddress(_senderEmail, _senderName),
                 Subject = subject,

@@ -11,6 +11,8 @@ namespace Podium.Api.Endpoints;
 
 public static class AdminEndpoints
 {
+    private static readonly string[] ValidEventStatuses = ["Upcoming", "InProgress", "Completed"];
+
     public static void MapAdminEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/api/admin").WithTags("Admin");
@@ -846,8 +848,7 @@ public static class AdminEndpoints
                 return Results.BadRequest(new { error = "Season not found" });
 
             // Validate status
-            var validStatuses = new[] { "Upcoming", "InProgress", "Completed" };
-            if (!validStatuses.Contains(request.Status))
+            if (!ValidEventStatuses.Contains(request.Status))
             {
                 return Results.BadRequest(new { error = "Status must be 'Upcoming', 'InProgress', or 'Completed'" });
             }
@@ -902,8 +903,7 @@ public static class AdminEndpoints
                 return Results.BadRequest(new { error = "Season not found" });
 
             // Validate status
-            var validStatuses = new[] { "Upcoming", "InProgress", "Completed" };
-            if (!validStatuses.Contains(request.Status))
+            if (!ValidEventStatuses.Contains(request.Status))
             {
                 return Results.BadRequest(new { error = "Status must be 'Upcoming', 'InProgress', or 'Completed'" });
             }

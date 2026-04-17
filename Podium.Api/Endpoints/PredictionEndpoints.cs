@@ -147,14 +147,14 @@ public static class PredictionEndpoints
             // Get disciplines based on filter
             var disciplines = string.IsNullOrEmpty(disciplineId)
                 ? (includeInactiveSeasons ? await disciplineRepo.GetAllDisciplinesAsync() : await disciplineRepo.GetActiveDisciplinesAsync())
-                : new List<Discipline> { await disciplineRepo.GetDisciplineByIdAsync(disciplineId) }.Where(d => d != null).ToList()!;
+                : (await disciplineRepo.GetDisciplineByIdAsync(disciplineId) is { } d ? new List<Discipline> { d } : new List<Discipline>());
 
             foreach (var discipline in disciplines)
             {
                 // Get series based on filter
                 var seriesList = string.IsNullOrEmpty(seriesId)
                     ? (includeInactiveSeasons ? await seriesRepo.GetSeriesByDisciplineAsync(discipline.Id) : await seriesRepo.GetActiveSeriesByDisciplineAsync(discipline.Id))
-                    : new List<Series> { await seriesRepo.GetSeriesByIdOnlyAsync(seriesId) }.Where(s => s != null).ToList()!;
+                    : (await seriesRepo.GetSeriesByIdOnlyAsync(seriesId) is { } s ? new List<Series> { s } : new List<Series>());
 
                 foreach (var series in seriesList)
                 {
@@ -360,7 +360,7 @@ public static class PredictionEndpoints
                             .OrderByDescending(p => p.UpdatedDate)
                             .ToList();
                         
-                        if (scoredPredictions.Any())
+                        if (scoredPredictions.Count > 0)
                         {
                             var candidate = scoredPredictions.First();
                             

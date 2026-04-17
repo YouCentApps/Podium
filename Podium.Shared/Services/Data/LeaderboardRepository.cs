@@ -99,7 +99,7 @@ public class LeaderboardRepository : ILeaderboardRepository
         try
         {
             var filter = $"PartitionKey eq '{seasonId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter, select: new[] { "RowKey" }))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter, select: ["RowKey"]))
             {
                 userIds.Add(entity.RowKey);
             }

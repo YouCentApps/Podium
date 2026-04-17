@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Podium.Migration.Services;
+#pragma warning disable CA1303
 
 namespace Podium.Migration;
 
-class Program
+sealed class Program
 {
     static async Task Main(string[] args)
     {
@@ -64,7 +65,7 @@ class Program
             {
                 Console.Write("⚠️  This will migrate data to the Podium tables. Continue? (yes/no): ");
                 var confirm = Console.ReadLine();
-                if (confirm?.ToLower() != "yes")
+                if (!string.Equals(confirm, "yes", StringComparison.OrdinalIgnoreCase))
                 {
                     Console.WriteLine("Migration cancelled.");
                     return;
@@ -96,9 +97,9 @@ class Program
                 Console.WriteLine("\n⚠️  Migration completed with errors. Please review the log above.");
             }
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OutOfMemoryException and not StackOverflowException)
         {
-            Console.WriteLine($"\n❌ CRITICAL ERROR: {ex.Message}");
+            Console.WriteLine($"\n\u274c CRITICAL ERROR: {ex.Message}");
             Console.WriteLine($"Stack trace: {ex.StackTrace}");
         }
 

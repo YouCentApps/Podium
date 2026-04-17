@@ -22,7 +22,7 @@ public class AuthenticationMessageHandler : DelegatingHandler
         HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
-        var isAuthEndpoint = request.RequestUri?.PathAndQuery.Contains("/api/auth/") ?? false;
+        var isAuthEndpoint = request.RequestUri?.PathAndQuery.Contains("/api/auth/", StringComparison.Ordinal) ?? false;
 
         if (!isAuthEndpoint && !string.IsNullOrEmpty(_authStateService.SessionId))
         {

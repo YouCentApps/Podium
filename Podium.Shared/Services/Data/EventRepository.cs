@@ -337,7 +337,7 @@ public class EventRepository : IEventRepository
     public async Task<int> GetNextEventNumberAsync(string seasonId)
     {
         var events = await GetEventsBySeasonAsync(seasonId);
-        if (!events.Any())
+        if (events.Count == 0)
         {
             return 1;
         }

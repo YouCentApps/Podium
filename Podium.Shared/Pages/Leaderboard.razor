@@ -35,7 +35,7 @@
                         var favId = favorite.SeasonId;
                         <div class="favorite-link" role="button" tabindex="0"
                              @onclick="() => SelectFavoriteSeason(favId)"
-                             @onkeydown="@(e => { if (e.Key is "Enter" or " ") SelectFavoriteSeason(favId); })">
+                             @onkeydown="@(async e => { if (e.Key is "Enter" or " ") await SelectFavoriteSeason(favId); })">
                             <h3>@favorite.SeriesName</h3>
                             <p>@favorite.SeasonName (@favorite.Year)</p>
                         </div>

@@ -9,8 +9,10 @@ using Podium.Shared.Utilities;
 
 namespace Podium.Api.Endpoints;
 
-public static class ProfileEndpoints
+internal static class ProfileEndpoints
 {
+    private static readonly string[] ValidAuthMethods = ["Email", "Password", "Both"];
+
     public static void MapProfileEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/api/profile")
@@ -97,8 +99,7 @@ public static class ProfileEndpoints
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
-            var validMethods = new[] { "Email", "Password", "Both" };
-            if (!validMethods.Contains(request.NewAuthMethod))
+            if (!ValidAuthMethods.Contains(request.NewAuthMethod))
                 return Results.BadRequest(new { error = localizer["Profile_InvalidAuthMethod"].Value });
 
             var hasPassword = !string.IsNullOrEmpty(user.PasswordHash);
@@ -226,7 +227,7 @@ public static class ProfileEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            if (string.IsNullOrWhiteSpace(request.NewEmail) || !request.NewEmail.Contains("@"))
+            if (string.IsNullOrWhiteSpace(request.NewEmail) || !request.NewEmail.Contains('@', StringComparison.Ordinal))
                 return Results.BadRequest(new { error = localizer["Val_EmailInvalid"].Value });
 
             var existingUser = await userRepository.GetUserByEmailAsync(request.NewEmail);
@@ -258,7 +259,7 @@ public static class ProfileEndpoints
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
-            if (string.IsNullOrWhiteSpace(request.NewEmail) || !request.NewEmail.Contains("@"))
+            if (string.IsNullOrWhiteSpace(request.NewEmail) || !request.NewEmail.Contains('@', StringComparison.Ordinal))
                 return Results.BadRequest(new { error = localizer["Val_EmailInvalid"].Value });
 
             if (string.IsNullOrEmpty(request.OtpCode))
@@ -268,7 +269,9 @@ public static class ProfileEndpoints
             if (!success)
                 return Results.BadRequest(new { error = localizer["Auth_InvalidOtp"].Value });
 
+#pragma warning disable CA1308
             user.Email = request.NewEmail.ToLowerInvariant();
+#pragma warning restore CA1308
             var updateSuccess = await userRepository.UpdateUserAsync(user);
             if (!updateSuccess)
                 return Results.BadRequest(new { error = localizer["Profile_UpdateFailed"].Value });

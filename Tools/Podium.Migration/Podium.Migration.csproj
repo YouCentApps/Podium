@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <UserSecretsId>podium-migration-secrets</UserSecretsId>
+    <NoWarn>$(NoWarn);CA2007;CA1303;CA1515;CA1031</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
