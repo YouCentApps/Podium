@@ -1,7 +1,5 @@
 using Podium.Shared.Services.Data;
-using Podium.Shared.Models;
 using Podium.Shared.Utilities;
-using Azure.Data.Tables;
 using Microsoft.Extensions.Localization;
 using System.Security.Cryptography;
 

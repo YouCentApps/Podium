@@ -1,8 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using Podium.Shared.Models;
-using Podium.Shared.Services.Data;
-using Podium.Api.Middleware;
-
 namespace Podium.Api.Endpoints;
 
 public static class PredictionEndpoints

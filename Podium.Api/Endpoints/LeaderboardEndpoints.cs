@@ -1,8 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using Podium.Shared.Services.Data;
-using Podium.Api.Middleware;
-using Podium.Shared.Models;
-
 namespace Podium.Api.Endpoints;
 
 internal static class LeaderboardEndpoints

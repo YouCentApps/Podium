@@ -1,8 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
-using Podium.Shared;
-using Podium.Shared.Services.Auth;
-
 namespace Podium.Api.Endpoints;
 
 public static class AuthEndpoints

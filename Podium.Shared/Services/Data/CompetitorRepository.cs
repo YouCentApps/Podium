@@ -1,7 +1,3 @@
-using Azure;
-using Azure.Data.Tables;
-using Podium.Shared.Models;
-
 namespace Podium.Shared.Services.Data;
 
 public interface ICompetitorRepository

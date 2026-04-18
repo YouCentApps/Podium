@@ -1,11 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
-using Podium.Shared;
-using Podium.Shared.Services.Data;
 using Podium.Shared.Services.Business;
-using Podium.Shared.Models;
 using Podium.Shared.Services.Api;
-using Podium.Api.Middleware;
 
 namespace Podium.Api.Endpoints;
 

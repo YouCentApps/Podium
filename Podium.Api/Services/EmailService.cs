@@ -1,7 +1,5 @@
 using System.Net;
 using System.Net.Mail;
-using Microsoft.Extensions.Localization;
-using Podium.Shared;
 
 namespace Podium.Api.Services;
 

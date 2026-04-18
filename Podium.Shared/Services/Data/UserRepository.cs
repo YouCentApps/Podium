@@ -1,6 +1,3 @@
-using Azure;
-using Azure.Data.Tables;
-using Podium.Shared.Models;
 using Podium.Shared.Utilities;
 
 namespace Podium.Shared.Services.Data;

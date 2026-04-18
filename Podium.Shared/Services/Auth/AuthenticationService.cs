@@ -1,7 +1,4 @@
-using Azure;
-using Azure.Data.Tables;
 using Microsoft.Extensions.Localization;
-using Podium.Shared.Models;
 using Podium.Shared.Services.Data;
 using Podium.Shared.Utilities;
 using System.Globalization;

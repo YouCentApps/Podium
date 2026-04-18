@@ -1,5 +1,3 @@
-using Azure.Data.Tables;
-
 namespace Podium.Shared.Services.Data;
 
 public interface ITableClientFactory

@@ -1,6 +1,3 @@
-using Podium.Shared.Services.Auth;
-using Podium.Shared.Services.Data;
-
 namespace Podium.Api.Middleware;
 
 public static class AuthorizationExtensions

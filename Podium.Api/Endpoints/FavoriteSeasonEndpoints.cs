@@ -1,9 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
-using Podium.Api.Middleware;
-using Podium.Shared;
-using Podium.Shared.Services.Data;
-
 namespace Podium.Api.Endpoints;
 
 public static class FavoriteSeasonEndpoints
