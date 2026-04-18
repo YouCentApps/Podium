@@ -6,7 +6,6 @@ using Podium.Api.Endpoints;
 using Podium.Api.Services;
 using Microsoft.Extensions.Localization;
 using Podium.Shared;
-using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 

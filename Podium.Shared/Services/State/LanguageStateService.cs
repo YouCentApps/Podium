@@ -1,4 +1,3 @@
-using Microsoft.JSInterop;
 using System.Globalization;
 
 namespace Podium.Shared.Services.State;

@@ -2,8 +2,6 @@ using Azure;
 using Azure.Data.Tables;
 using Microsoft.Extensions.Configuration;
 using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
 
 #pragma warning disable CA1303
 namespace Podium.DbInit;

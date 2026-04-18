@@ -1,4 +1,3 @@
-using Podium.Shared.Models;
 using Podium.Shared.Services.Data;
 
 namespace Podium.Shared.Services.Business;
