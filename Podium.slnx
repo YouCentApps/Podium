@@ -6,6 +6,7 @@
   </Configurations>
   <Folder Name="/Common/">
     <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
   </Folder>
   <Folder Name="/Deployments/">
     <File Path=".github/workflows/main_youcent-podium-api.yml" />
