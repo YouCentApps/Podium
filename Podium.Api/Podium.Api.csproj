@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <UserSecretsId>podium-api-secrets</UserSecretsId>
-    <!-- CA2007: ConfigureAwait is a no-op in ASP.NET Core (no SynchronizationContext) -->
+    
     <!-- CA1515: Application types don't need public accessibility -->
     <!-- CA1303: Dev tool console/log strings don't need localization -->
     <!-- CA1812: Internal record types instantiated via JSON model binding -->
     <!-- CA1852: Records are sealed by default in C# -->
-    <NoWarn>$(NoWarn);CA2007;CA1515;CA1303;CA1812;CA1852</NoWarn>
+    <NoWarn>$(NoWarn);CA1515;CA1303;CA1812;CA1852</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

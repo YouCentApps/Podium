@@ -21,7 +21,7 @@ internal static class ProfileEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var user = await userRepository.GetUserByIdAsync(userId);
+            var user = await userRepository.GetUserByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
@@ -49,11 +49,11 @@ internal static class ProfileEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var user = await userRepository.GetUserByIdAsync(userId);
+            var user = await userRepository.GetUserByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
-            var verified = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService, localizer);
+            var verified = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService, localizer).ConfigureAwait(false);
             if (!verified.Success)
                 return Results.BadRequest(new { error = verified.Error });
 
@@ -61,13 +61,13 @@ internal static class ProfileEndpoints
             if (!usernameValid)
                 return Results.BadRequest(new { error = localizer["Val_UsernameInvalid"].Value });
 
-            var existingUser = await userRepository.GetUserByUsernameAsync(request.NewUsername);
+            var existingUser = await userRepository.GetUserByUsernameAsync(request.NewUsername).ConfigureAwait(false);
             if (existingUser != null && existingUser.UserId != userId)
                 return Results.BadRequest(new { error = localizer["Profile_UsernameTaken"].Value });
 
             user.Username = request.NewUsername;
             user.NormalizedUsername = InputValidator.NormalizeUsername(request.NewUsername);
-            var success = await userRepository.UpdateUserAsync(user);
+            var success = await userRepository.UpdateUserAsync(user).ConfigureAwait(false);
             if (!success)
                 return Results.BadRequest(new { error = localizer["Profile_UpdateFailed"].Value });
 
@@ -88,7 +88,7 @@ internal static class ProfileEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var user = await userRepository.GetUserByIdAsync(userId);
+            var user = await userRepository.GetUserByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
@@ -114,12 +114,12 @@ internal static class ProfileEndpoints
                 });
             }
 
-            var verified = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService, localizer);
+            var verified = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService, localizer).ConfigureAwait(false);
             if (!verified.Success)
                 return Results.BadRequest(new { error = verified.Error });
 
             user.PreferredAuthMethod = request.NewAuthMethod;
-            var success = await userRepository.UpdateUserAsync(user);
+            var success = await userRepository.UpdateUserAsync(user).ConfigureAwait(false);
             if (!success)
                 return Results.BadRequest(new { error = localizer["Profile_UpdateFailed"].Value });
 
@@ -140,7 +140,7 @@ internal static class ProfileEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var user = await userRepository.GetUserByIdAsync(userId);
+            var user = await userRepository.GetUserByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
@@ -154,7 +154,7 @@ internal static class ProfileEndpoints
                 if (string.IsNullOrEmpty(request.OldPassword))
                     return Results.BadRequest(new { error = localizer["Profile_OldPasswordRequired"].Value });
 
-                var verified = await VerifyIdentityAsync(user, request.OldPassword, null, authService, localizer);
+                var verified = await VerifyIdentityAsync(user, request.OldPassword, null, authService, localizer).ConfigureAwait(false);
                 if (!verified.Success)
                     return Results.BadRequest(new { error = localizer["Profile_OldPasswordIncorrect"].Value });
             }
@@ -163,7 +163,7 @@ internal static class ProfileEndpoints
                 if (string.IsNullOrEmpty(request.OtpCode))
                     return Results.BadRequest(new { error = localizer["Profile_OtpRequired"].Value });
 
-                var verified = await VerifyIdentityAsync(user, null, request.OtpCode, authService, localizer);
+                var verified = await VerifyIdentityAsync(user, null, request.OtpCode, authService, localizer).ConfigureAwait(false);
                 if (!verified.Success)
                     return Results.BadRequest(new { error = verified.Error });
             }
@@ -172,7 +172,7 @@ internal static class ProfileEndpoints
             user.PasswordHash = hash;
             user.PasswordSalt = salt;
 
-            var success = await userRepository.UpdateUserAsync(user);
+            var success = await userRepository.UpdateUserAsync(user).ConfigureAwait(false);
             if (!success)
                 return Results.BadRequest(new { error = localizer["Profile_UpdateFailed"].Value });
 
@@ -192,14 +192,14 @@ internal static class ProfileEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var user = await userRepository.GetUserByIdAsync(userId);
+            var user = await userRepository.GetUserByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
             if (string.IsNullOrEmpty(user.Email))
                 return Results.BadRequest(new { error = localizer["Profile_NoEmailForSetup"].Value });
 
-            var (success, _, error) = await authService.SendOTPAsync(user.Email);
+            var (success, _, error) = await authService.SendOTPAsync(user.Email).ConfigureAwait(false);
             if (!success)
                 return Results.BadRequest(new { error });
 
@@ -223,11 +223,11 @@ internal static class ProfileEndpoints
             if (string.IsNullOrWhiteSpace(request.NewEmail) || !request.NewEmail.Contains('@', StringComparison.Ordinal))
                 return Results.BadRequest(new { error = localizer["Val_EmailInvalid"].Value });
 
-            var existingUser = await userRepository.GetUserByEmailAsync(request.NewEmail);
+            var existingUser = await userRepository.GetUserByEmailAsync(request.NewEmail).ConfigureAwait(false);
             if (existingUser != null && existingUser.UserId != userId)
                 return Results.BadRequest(new { error = localizer["Reg_EmailTaken"].Value });
 
-            var (success, error) = await authService.SendOTPForNewEmailAsync(request.NewEmail, userId);
+            var (success, error) = await authService.SendOTPForNewEmailAsync(request.NewEmail, userId).ConfigureAwait(false);
             if (!success)
                 return Results.BadRequest(new { error });
 
@@ -248,7 +248,7 @@ internal static class ProfileEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var user = await userRepository.GetUserByIdAsync(userId);
+            var user = await userRepository.GetUserByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
@@ -258,14 +258,14 @@ internal static class ProfileEndpoints
             if (string.IsNullOrEmpty(request.OtpCode))
                 return Results.BadRequest(new { error = localizer["Auth_InvalidOtp"].Value });
 
-            var (success, error) = await authService.VerifyOTPCodeAsync(request.NewEmail, request.OtpCode);
+            var (success, error) = await authService.VerifyOTPCodeAsync(request.NewEmail, request.OtpCode).ConfigureAwait(false);
             if (!success)
                 return Results.BadRequest(new { error = localizer["Auth_InvalidOtp"].Value });
 
 #pragma warning disable CA1308
             user.Email = request.NewEmail.ToLowerInvariant();
 #pragma warning restore CA1308
-            var updateSuccess = await userRepository.UpdateUserAsync(user);
+            var updateSuccess = await userRepository.UpdateUserAsync(user).ConfigureAwait(false);
             if (!updateSuccess)
                 return Results.BadRequest(new { error = localizer["Profile_UpdateFailed"].Value });
 
@@ -285,7 +285,7 @@ internal static class ProfileEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var user = await userRepository.GetUserByIdAsync(userId);
+            var user = await userRepository.GetUserByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
@@ -293,7 +293,7 @@ internal static class ProfileEndpoints
                 return Results.BadRequest(new { error = localizer["Profile_InvalidLanguage"].Value });
 
             user.LanguageCode = request.LanguageCode;
-            var success = await userRepository.UpdateUserAsync(user);
+            var success = await userRepository.UpdateUserAsync(user).ConfigureAwait(false);
             if (!success)
                 return Results.BadRequest(new { error = localizer["Profile_UpdateFailed"].Value });
 
@@ -312,7 +312,7 @@ internal static class ProfileEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var user = await userRepository.GetUserByIdAsync(userId);
+            var user = await userRepository.GetUserByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
@@ -349,7 +349,7 @@ internal static class ProfileEndpoints
         {
             if (hasPassword && passwordAuthEnabled)
             {
-                var (success, _) = await authService.VerifyPasswordAsync(user.Email, password);
+                var (success, _) = await authService.VerifyPasswordAsync(user.Email, password).ConfigureAwait(false);
                 if (success)
                     return (true, string.Empty);
                 return (false, localizer["Auth_InvalidCredentials"].Value);
@@ -368,7 +368,7 @@ internal static class ProfileEndpoints
         {
             if (hasEmail && emailAuthEnabled)
             {
-                var (success, _) = await authService.VerifyOTPCodeAsync(user.Email, otpCode);
+                var (success, _) = await authService.VerifyOTPCodeAsync(user.Email, otpCode).ConfigureAwait(false);
                 if (success)
                     return (true, string.Empty);
                 return (false, localizer["Auth_InvalidOtp"].Value);

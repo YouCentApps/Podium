@@ -70,7 +70,7 @@ var host = builder.Build();
 
 // Bootstrap culture from localStorage BEFORE the app renders
 var js = host.Services.GetRequiredService<Microsoft.JSInterop.IJSRuntime>();
-var languageCode = await js.InvokeAsync<string>("podiumCulture.get", Array.Empty<object>());
+var languageCode = await js.InvokeAsync<string>("podiumCulture.get", []);
 if (!string.IsNullOrWhiteSpace(languageCode))
 {
     var culture = new CultureInfo(languageCode);

@@ -20,7 +20,7 @@ public static class AdminEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var admin = await adminRepo.GetAdminAsync(userId);
+            var admin = await adminRepo.GetAdminAsync(userId).ConfigureAwait(false);
             if (admin == null)
                 return Results.Ok(new { isAdmin = false, canManageAdmins = false });
             
@@ -36,7 +36,7 @@ public static class AdminEndpoints
             [FromServices] ISeasonRepository seasonRepo,
             [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
-            var success = await seasonRepo.SetActiveSeasonAsync(seriesId, seasonId);
+            var success = await seasonRepo.SetActiveSeasonAsync(seriesId, seasonId).ConfigureAwait(false);
 
             if (!success)
                 return Results.BadRequest(new { error = localizer["Admin_SetActiveFailed"].Value });
@@ -50,7 +50,7 @@ public static class AdminEndpoints
         group.MapGet("/diagnostics/duplicate-active-seasons", async (
             [FromServices] ISeasonRepository seasonRepo) =>
         {
-            var duplicates = await seasonRepo.FindSeriesWithMultipleActiveSeasonsAsync();
+            var duplicates = await seasonRepo.FindSeriesWithMultipleActiveSeasonsAsync().ConfigureAwait(false);
             
             if (duplicates.Count == 0)
                 return Results.Ok(new { message = "No duplicate active seasons found.", series = new { } });
@@ -68,7 +68,7 @@ public static class AdminEndpoints
         group.MapGet("/admins", async (
             [FromServices] IAdminRepository adminRepo) =>
         {
-            var admins = await adminRepo.GetAllAdminsAsync();
+            var admins = await adminRepo.GetAllAdminsAsync().ConfigureAwait(false);
             return Results.Ok(admins);
         })
         .RequireAdmin()
@@ -79,7 +79,7 @@ public static class AdminEndpoints
             string userId,
             [FromServices] IAdminRepository adminRepo) =>
         {
-            var admin = await adminRepo.GetAdminAsync(userId);
+            var admin = await adminRepo.GetAdminAsync(userId).ConfigureAwait(false);
             if (admin == null)
                 return Results.NotFound(new { error = "Admin not found" });
             
@@ -96,12 +96,12 @@ public static class AdminEndpoints
             [FromServices] IUserRepository userRepo) =>
         {
             // Verify the user exists
-            var user = await userRepo.GetUserByIdAsync(request.UserId);
+            var user = await userRepo.GetUserByIdAsync(request.UserId).ConfigureAwait(false);
             if (user == null)
                 return Results.BadRequest(new { error = "User not found" });
 
             // Check if already an admin
-            var existingAdmin = await adminRepo.GetAdminAsync(request.UserId);
+            var existingAdmin = await adminRepo.GetAdminAsync(request.UserId).ConfigureAwait(false);
             if (existingAdmin != null)
                 return Results.BadRequest(new { error = "User is already an admin" });
 
@@ -115,7 +115,7 @@ public static class AdminEndpoints
                 CreatedBy = createdBy
             };
 
-            var success = await adminRepo.CreateAdminAsync(admin);
+            var success = await adminRepo.CreateAdminAsync(admin).ConfigureAwait(false);
             if (!success)
                 return Results.StatusCode(500);
 
@@ -131,7 +131,7 @@ public static class AdminEndpoints
             HttpContext httpContext,
             [FromServices] IAdminRepository adminRepo) =>
         {
-            var admin = await adminRepo.GetAdminAsync(userId);
+            var admin = await adminRepo.GetAdminAsync(userId).ConfigureAwait(false);
             if (admin == null)
                 return Results.NotFound(new { error = "Admin not found" });
 
@@ -141,7 +141,7 @@ public static class AdminEndpoints
             admin.LastModifiedDate = DateTime.UtcNow;
             admin.LastModifiedBy = modifiedBy;
 
-            var success = await adminRepo.UpdateAdminAsync(admin);
+            var success = await adminRepo.UpdateAdminAsync(admin).ConfigureAwait(false);
             if (!success)
                 return Results.StatusCode(500);
 
@@ -160,7 +160,7 @@ public static class AdminEndpoints
             if (requestingUserId == userId)
                 return Results.BadRequest(new { error = "Cannot remove yourself as admin" });
 
-            var success = await adminRepo.DeleteAdminAsync(userId);
+            var success = await adminRepo.DeleteAdminAsync(userId).ConfigureAwait(false);
             if (!success)
                 return Results.NotFound(new { error = "Admin not found" });
 
@@ -175,7 +175,7 @@ public static class AdminEndpoints
         group.MapGet("/disciplines", async (
             [FromServices] IDisciplineRepository disciplineRepo) =>
         {
-            var disciplines = await disciplineRepo.GetAllDisciplinesAsync();
+            var disciplines = await disciplineRepo.GetAllDisciplinesAsync().ConfigureAwait(false);
             return Results.Ok(disciplines);
         })
         .RequireAdmin()
@@ -186,7 +186,7 @@ public static class AdminEndpoints
             string disciplineId,
             [FromServices] IDisciplineRepository disciplineRepo) =>
         {
-            var discipline = await disciplineRepo.GetDisciplineByIdAsync(disciplineId);
+            var discipline = await disciplineRepo.GetDisciplineByIdAsync(disciplineId).ConfigureAwait(false);
             if (discipline == null)
                 return Results.NotFound(new { error = "Discipline not found" });
             
@@ -207,7 +207,7 @@ public static class AdminEndpoints
                 IsActive = request.IsActive
             };
 
-            var created = await disciplineRepo.CreateDisciplineAsync(discipline);
+            var created = await disciplineRepo.CreateDisciplineAsync(discipline).ConfigureAwait(false);
             if (created == null)
                 return Results.StatusCode(500);
 
@@ -222,7 +222,7 @@ public static class AdminEndpoints
             [FromBody] UpdateDisciplineRequest request,
             [FromServices] IDisciplineRepository disciplineRepo) =>
         {
-            var existing = await disciplineRepo.GetDisciplineByIdAsync(disciplineId);
+            var existing = await disciplineRepo.GetDisciplineByIdAsync(disciplineId).ConfigureAwait(false);
             if (existing == null)
                 return Results.NotFound(new { error = "Discipline not found" });
 
@@ -230,7 +230,7 @@ public static class AdminEndpoints
             existing.DisplayName = request.DisplayName;
             existing.IsActive = request.IsActive;
 
-            var updated = await disciplineRepo.UpdateDisciplineAsync(existing);
+            var updated = await disciplineRepo.UpdateDisciplineAsync(existing).ConfigureAwait(false);
             if (updated == null)
                 return Results.StatusCode(500);
 
@@ -245,7 +245,7 @@ public static class AdminEndpoints
             [FromServices] IDisciplineRepository disciplineRepo) =>
         {
             // Check for dependencies first
-            var seriesCount = await disciplineRepo.GetSeriesCountByDisciplineAsync(disciplineId);
+            var seriesCount = await disciplineRepo.GetSeriesCountByDisciplineAsync(disciplineId).ConfigureAwait(false);
             if (seriesCount > 0)
             {
                 return Results.BadRequest(new 
@@ -257,7 +257,7 @@ public static class AdminEndpoints
                 });
             }
 
-            var success = await disciplineRepo.DeleteDisciplineAsync(disciplineId);
+            var success = await disciplineRepo.DeleteDisciplineAsync(disciplineId).ConfigureAwait(false);
             if (!success)
                 return Results.NotFound(new { error = "Discipline not found" });
 
@@ -273,7 +273,7 @@ public static class AdminEndpoints
             string disciplineId,
             [FromServices] ISeriesRepository seriesRepo) =>
         {
-            var series = await seriesRepo.GetSeriesByDisciplineAsync(disciplineId);
+            var series = await seriesRepo.GetSeriesByDisciplineAsync(disciplineId).ConfigureAwait(false);
             return Results.Ok(series);
         })
         .RequireAdmin()
@@ -285,7 +285,7 @@ public static class AdminEndpoints
             string disciplineId,
             [FromServices] ISeriesRepository seriesRepo) =>
         {
-            var series = await seriesRepo.GetSeriesByIdAsync(disciplineId, seriesId);
+            var series = await seriesRepo.GetSeriesByIdAsync(disciplineId, seriesId).ConfigureAwait(false);
             if (series == null)
                 return Results.NotFound(new { error = "Series not found" });
             
@@ -301,7 +301,7 @@ public static class AdminEndpoints
             [FromServices] IDisciplineRepository disciplineRepo) =>
         {
             // Verify discipline exists
-            var discipline = await disciplineRepo.GetDisciplineByIdAsync(request.DisciplineId);
+            var discipline = await disciplineRepo.GetDisciplineByIdAsync(request.DisciplineId).ConfigureAwait(false);
             if (discipline == null)
                 return Results.BadRequest(new { error = "Discipline not found" });
 
@@ -316,7 +316,7 @@ public static class AdminEndpoints
                 IsActive = request.IsActive
             };
 
-            var created = await seriesRepo.CreateSeriesAsync(series);
+            var created = await seriesRepo.CreateSeriesAsync(series).ConfigureAwait(false);
             if (created == null)
                 return Results.StatusCode(500);
 
@@ -334,12 +334,12 @@ public static class AdminEndpoints
             [FromServices] IDisciplineRepository disciplineRepo) =>
         {
             // Get existing series using CURRENT disciplineId (before any changes)
-            var existing = await seriesRepo.GetSeriesByIdAsync(currentDisciplineId, seriesId);
+            var existing = await seriesRepo.GetSeriesByIdAsync(currentDisciplineId, seriesId).ConfigureAwait(false);
             if (existing == null)
                 return Results.NotFound(new { error = "Series not found" });
 
             // Verify NEW discipline exists (in case it's being changed)
-            var discipline = await disciplineRepo.GetDisciplineByIdAsync(request.DisciplineId);
+            var discipline = await disciplineRepo.GetDisciplineByIdAsync(request.DisciplineId).ConfigureAwait(false);
             if (discipline == null)
                 return Results.BadRequest(new { error = "Target discipline not found" });
 
@@ -352,7 +352,7 @@ public static class AdminEndpoints
             existing.IsActive = request.IsActive;
 
             // Pass the old discipline ID if it changed
-            var updated = await seriesRepo.UpdateSeriesAsync(existing, currentDisciplineId);
+            var updated = await seriesRepo.UpdateSeriesAsync(existing, currentDisciplineId).ConfigureAwait(false);
             if (updated == null)
                 return Results.StatusCode(500);
 
@@ -369,7 +369,7 @@ public static class AdminEndpoints
             [FromServices] ISeasonRepository seasonRepo) =>
         {
             // Check for dependencies first
-            var seasonCount = await seasonRepo.GetSeasonCountBySeriesAsync(seriesId);
+            var seasonCount = await seasonRepo.GetSeasonCountBySeriesAsync(seriesId).ConfigureAwait(false);
             if (seasonCount > 0)
             {
                 return Results.BadRequest(new 
@@ -381,7 +381,7 @@ public static class AdminEndpoints
                 });
             }
 
-            var success = await seriesRepo.DeleteSeriesAsync(disciplineId, seriesId);
+            var success = await seriesRepo.DeleteSeriesAsync(disciplineId, seriesId).ConfigureAwait(false);
             if (!success)
                 return Results.NotFound(new { error = "Series not found" });
 
@@ -397,7 +397,7 @@ public static class AdminEndpoints
             string seriesId,
             [FromServices] ISeasonRepository seasonRepo) =>
         {
-            var seasons = await seasonRepo.GetSeasonsBySeriesAsync(seriesId);
+            var seasons = await seasonRepo.GetSeasonsBySeriesAsync(seriesId).ConfigureAwait(false);
             return Results.Ok(seasons);
         })
         .RequireAdmin()
@@ -409,7 +409,7 @@ public static class AdminEndpoints
             [FromQuery] string seriesId,
             [FromServices] ISeasonRepository seasonRepo) =>
         {
-            var season = await seasonRepo.GetSeasonByIdAsync(seriesId, seasonId);
+            var season = await seasonRepo.GetSeasonByIdAsync(seriesId, seasonId).ConfigureAwait(false);
             if (season == null)
                 return Results.NotFound(new { error = "Season not found" });
             
@@ -423,7 +423,7 @@ public static class AdminEndpoints
             string seasonId,
             [FromServices] ISeasonRepository seasonRepo) =>
         {
-            var dependencies = await seasonRepo.GetSeasonDependenciesAsync(seasonId);
+            var dependencies = await seasonRepo.GetSeasonDependenciesAsync(seasonId).ConfigureAwait(false);
             return Results.Ok(dependencies);
         })
         .RequireAdmin()
@@ -436,7 +436,7 @@ public static class AdminEndpoints
             [FromServices] ISeriesRepository seriesRepo) =>
         {
             // Verify series exists
-            var series = await seriesRepo.GetSeriesByIdOnlyAsync(request.SeriesId);
+            var series = await seriesRepo.GetSeriesByIdOnlyAsync(request.SeriesId).ConfigureAwait(false);
             if (series == null)
                 return Results.BadRequest(new { error = "Series not found" });
 
@@ -463,7 +463,7 @@ public static class AdminEndpoints
                 BestResultsNumber = request.BestResultsNumber
             };
 
-            var created = await seasonRepo.CreateSeasonAsync(season);
+            var created = await seasonRepo.CreateSeasonAsync(season).ConfigureAwait(false);
             if (created == null)
                 return Results.StatusCode(500);
 
@@ -481,12 +481,12 @@ public static class AdminEndpoints
             [FromServices] ISeriesRepository seriesRepo) =>
         {
             // Get existing season using CURRENT seriesId
-            var existing = await seasonRepo.GetSeasonByIdAsync(currentSeriesId, seasonId);
+            var existing = await seasonRepo.GetSeasonByIdAsync(currentSeriesId, seasonId).ConfigureAwait(false);
             if (existing == null)
                 return Results.NotFound(new { error = "Season not found" });
 
             // Verify NEW series exists (in case it's being changed)
-            var series = await seriesRepo.GetSeriesByIdOnlyAsync(request.SeriesId);
+            var series = await seriesRepo.GetSeriesByIdOnlyAsync(request.SeriesId).ConfigureAwait(false);
             if (series == null)
                 return Results.BadRequest(new { error = "Target series not found" });
 
@@ -524,7 +524,7 @@ public static class AdminEndpoints
             existing.EndDate = request.EndDate;
             existing.BestResultsNumber = request.BestResultsNumber;
 
-            var updated = await seasonRepo.UpdateSeasonAsync(existing, currentSeriesId);
+            var updated = await seasonRepo.UpdateSeasonAsync(existing, currentSeriesId).ConfigureAwait(false);
             if (updated == null)
                 return Results.StatusCode(500);
 
@@ -540,7 +540,7 @@ public static class AdminEndpoints
             [FromServices] ISeasonRepository seasonRepo) =>
         {
             // Check for dependencies first
-            var dependencies = await seasonRepo.GetSeasonDependenciesAsync(seasonId);
+            var dependencies = await seasonRepo.GetSeasonDependenciesAsync(seasonId).ConfigureAwait(false);
             if (dependencies.HasDependencies)
             {
                 var reasons = new List<string>();
@@ -558,7 +558,7 @@ public static class AdminEndpoints
                 });
             }
 
-            var success = await seasonRepo.DeleteSeasonAsync(seriesId, seasonId);
+            var success = await seasonRepo.DeleteSeasonAsync(seriesId, seasonId).ConfigureAwait(false);
             if (!success)
                 return Results.NotFound(new { error = "Season not found" });
 
@@ -573,7 +573,7 @@ public static class AdminEndpoints
         group.MapGet("/competitors", async (
             [FromServices] ICompetitorRepository competitorRepo) =>
         {
-            var competitors = await competitorRepo.GetAllCompetitorsAsync();
+            var competitors = await competitorRepo.GetAllCompetitorsAsync().ConfigureAwait(false);
             return Results.Ok(competitors);
         })
         .RequireAdmin()
@@ -584,7 +584,7 @@ public static class AdminEndpoints
             string type,
             [FromServices] ICompetitorRepository competitorRepo) =>
         {
-            var competitors = await competitorRepo.GetCompetitorsByTypeAsync(type);
+            var competitors = await competitorRepo.GetCompetitorsByTypeAsync(type).ConfigureAwait(false);
             return Results.Ok(competitors);
         })
         .RequireAdmin()
@@ -595,7 +595,7 @@ public static class AdminEndpoints
             string competitorId,
             [FromServices] ICompetitorRepository competitorRepo) =>
         {
-            var competitor = await competitorRepo.GetCompetitorByIdOnlyAsync(competitorId);
+            var competitor = await competitorRepo.GetCompetitorByIdOnlyAsync(competitorId).ConfigureAwait(false);
             if (competitor == null)
                 return Results.NotFound(new { error = "Competitor not found" });
             
@@ -609,7 +609,7 @@ public static class AdminEndpoints
             string competitorId,
             [FromServices] ICompetitorRepository competitorRepo) =>
         {
-            var dependencies = await competitorRepo.GetCompetitorDependenciesAsync(competitorId);
+            var dependencies = await competitorRepo.GetCompetitorDependenciesAsync(competitorId).ConfigureAwait(false);
             return Results.Ok(dependencies);
         })
         .RequireAdmin()
@@ -620,7 +620,7 @@ public static class AdminEndpoints
             string competitorId,
             [FromServices] ICompetitorRepository competitorRepo) =>
         {
-            var seasonIds = await competitorRepo.GetCompetitorSeasonIdsAsync(competitorId);
+            var seasonIds = await competitorRepo.GetCompetitorSeasonIdsAsync(competitorId).ConfigureAwait(false);
             return Results.Ok(seasonIds);
         })
         .RequireAdmin()
@@ -645,7 +645,7 @@ public static class AdminEndpoints
                 IsActive = request.IsActive
             };
 
-            var created = await competitorRepo.CreateCompetitorAsync(competitor);
+            var created = await competitorRepo.CreateCompetitorAsync(competitor).ConfigureAwait(false);
             if (created == null)
                 return Results.StatusCode(500);
 
@@ -661,7 +661,7 @@ public static class AdminEndpoints
             [FromServices] ICompetitorRepository competitorRepo) =>
         {
             // Get existing competitor
-            var existing = await competitorRepo.GetCompetitorByIdOnlyAsync(competitorId);
+            var existing = await competitorRepo.GetCompetitorByIdOnlyAsync(competitorId).ConfigureAwait(false);
             if (existing == null)
                 return Results.NotFound(new { error = "Competitor not found" });
 
@@ -676,7 +676,7 @@ public static class AdminEndpoints
             existing.Type = request.Type;
             existing.IsActive = request.IsActive;
 
-            var updated = await competitorRepo.UpdateCompetitorAsync(existing);
+            var updated = await competitorRepo.UpdateCompetitorAsync(existing).ConfigureAwait(false);
             if (updated == null)
                 return Results.StatusCode(500);
 
@@ -692,7 +692,7 @@ public static class AdminEndpoints
             [FromServices] ICompetitorRepository competitorRepo) =>
         {
             // Check for dependencies first
-            var dependencies = await competitorRepo.GetCompetitorDependenciesAsync(competitorId);
+            var dependencies = await competitorRepo.GetCompetitorDependenciesAsync(competitorId).ConfigureAwait(false);
             if (dependencies.HasDependencies)
             {
                 var reasons = new List<string>();
@@ -710,7 +710,7 @@ public static class AdminEndpoints
                 });
             }
 
-            var success = await competitorRepo.DeleteCompetitorAsync(type, competitorId);
+            var success = await competitorRepo.DeleteCompetitorAsync(type, competitorId).ConfigureAwait(false);
             if (!success)
                 return Results.NotFound(new { error = "Competitor not found" });
 
@@ -727,16 +727,16 @@ public static class AdminEndpoints
             [FromServices] ISeasonRepository seasonRepo) =>
         {
             // Verify season exists (use cross-partition query)
-            var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId);
+            var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId).ConfigureAwait(false);
             if (season == null)
                 return Results.BadRequest(new { error = "Season not found" });
 
             // Verify competitor exists
-            var competitor = await competitorRepo.GetCompetitorByIdOnlyAsync(competitorId);
+            var competitor = await competitorRepo.GetCompetitorByIdOnlyAsync(competitorId).ConfigureAwait(false);
             if (competitor == null)
                 return Results.BadRequest(new { error = "Competitor not found" });
 
-            var success = await competitorRepo.AddCompetitorToSeasonAsync(seasonId, competitorId, competitor.Name);
+            var success = await competitorRepo.AddCompetitorToSeasonAsync(seasonId, competitorId, competitor.Name).ConfigureAwait(false);
             if (!success)
                 return Results.StatusCode(500);
 
@@ -751,7 +751,7 @@ public static class AdminEndpoints
             string competitorId,
             [FromServices] ICompetitorRepository competitorRepo) =>
         {
-            var success = await competitorRepo.RemoveCompetitorFromSeasonAsync(seasonId, competitorId);
+            var success = await competitorRepo.RemoveCompetitorFromSeasonAsync(seasonId, competitorId).ConfigureAwait(false);
             if (!success)
                 return Results.NotFound(new { error = "Assignment not found" });
 
@@ -765,7 +765,7 @@ public static class AdminEndpoints
             string seasonId,
             [FromServices] ICompetitorRepository competitorRepo) =>
         {
-            var competitors = await competitorRepo.GetCompetitorsBySeasonAsync(seasonId);
+            var competitors = await competitorRepo.GetCompetitorsBySeasonAsync(seasonId).ConfigureAwait(false);
             return Results.Ok(competitors);
         })
         .RequireAdmin()
@@ -777,7 +777,7 @@ public static class AdminEndpoints
         group.MapGet("/events", async (
             [FromServices] IEventRepository eventRepo) =>
         {
-            var events = await eventRepo.GetAllEventsAsync();
+            var events = await eventRepo.GetAllEventsAsync().ConfigureAwait(false);
             return Results.Ok(events);
         })
         .RequireAdmin()
@@ -788,7 +788,7 @@ public static class AdminEndpoints
             string seasonId,
             [FromServices] IEventRepository eventRepo) =>
         {
-            var events = await eventRepo.GetEventsBySeasonAsync(seasonId);
+            var events = await eventRepo.GetEventsBySeasonAsync(seasonId).ConfigureAwait(false);
             return Results.Ok(events);
         })
         .RequireAdmin()
@@ -799,7 +799,7 @@ public static class AdminEndpoints
             string eventId,
             [FromServices] IEventRepository eventRepo) =>
         {
-            var evt = await eventRepo.GetEventByIdOnlyAsync(eventId);
+            var evt = await eventRepo.GetEventByIdOnlyAsync(eventId).ConfigureAwait(false);
             if (evt == null)
                 return Results.NotFound(new { error = "Event not found" });
             
@@ -813,7 +813,7 @@ public static class AdminEndpoints
             string eventId,
             [FromServices] IEventRepository eventRepo) =>
         {
-            var dependencies = await eventRepo.GetEventDependenciesAsync(eventId);
+            var dependencies = await eventRepo.GetEventDependenciesAsync(eventId).ConfigureAwait(false);
             return Results.Ok(dependencies);
         })
         .RequireAdmin()
@@ -824,7 +824,7 @@ public static class AdminEndpoints
             string seasonId,
             [FromServices] IEventRepository eventRepo) =>
         {
-            var nextNumber = await eventRepo.GetNextEventNumberAsync(seasonId);
+            var nextNumber = await eventRepo.GetNextEventNumberAsync(seasonId).ConfigureAwait(false);
             return Results.Ok(new { nextNumber });
         })
         .RequireAdmin()
@@ -837,7 +837,7 @@ public static class AdminEndpoints
             [FromServices] ISeasonRepository seasonRepo) =>
         {
             // Verify season exists
-            var season = await seasonRepo.GetSeasonByIdOnlyAsync(request.SeasonId);
+            var season = await seasonRepo.GetSeasonByIdOnlyAsync(request.SeasonId).ConfigureAwait(false);
             if (season == null)
                 return Results.BadRequest(new { error = "Season not found" });
 
@@ -870,7 +870,7 @@ public static class AdminEndpoints
                 IsActive = request.IsActive
             };
 
-            var created = await eventRepo.CreateEventAsync(evt);
+            var created = await eventRepo.CreateEventAsync(evt).ConfigureAwait(false);
             if (created == null)
                 return Results.StatusCode(500);
 
@@ -887,12 +887,12 @@ public static class AdminEndpoints
             [FromServices] ISeasonRepository seasonRepo) =>
         {
             // Get existing event
-            var existing = await eventRepo.GetEventByIdOnlyAsync(eventId);
+            var existing = await eventRepo.GetEventByIdOnlyAsync(eventId).ConfigureAwait(false);
             if (existing == null)
                 return Results.NotFound(new { error = "Event not found" });
 
             // Verify season exists (in case it's being changed)
-            var season = await seasonRepo.GetSeasonByIdOnlyAsync(existing.SeasonId);
+            var season = await seasonRepo.GetSeasonByIdOnlyAsync(existing.SeasonId).ConfigureAwait(false);
             if (season == null)
                 return Results.BadRequest(new { error = "Season not found" });
 
@@ -921,7 +921,7 @@ public static class AdminEndpoints
             existing.Status = request.Status;
             existing.IsActive = request.IsActive;
 
-            var updated = await eventRepo.UpdateEventAsync(existing);
+            var updated = await eventRepo.UpdateEventAsync(existing).ConfigureAwait(false);
             if (updated == null)
                 return Results.StatusCode(500);
 
@@ -937,7 +937,7 @@ public static class AdminEndpoints
             [FromServices] IEventRepository eventRepo) =>
         {
             // Check for dependencies first
-            var dependencies = await eventRepo.GetEventDependenciesAsync(eventId);
+            var dependencies = await eventRepo.GetEventDependenciesAsync(eventId).ConfigureAwait(false);
             if (dependencies.HasDependencies)
             {
                 var reasons = new List<string>();
@@ -955,7 +955,7 @@ public static class AdminEndpoints
                 });
             }
 
-            var success = await eventRepo.DeleteEventAsync(seasonId, eventId);
+            var success = await eventRepo.DeleteEventAsync(seasonId, eventId).ConfigureAwait(false);
             if (!success)
                 return Results.NotFound(new { error = "Event not found" });
 
@@ -971,7 +971,7 @@ public static class AdminEndpoints
             string eventId,
             [FromServices] IEventRepository eventRepo) =>
         {
-            var result = await eventRepo.GetEventResultAsync(eventId);
+            var result = await eventRepo.GetEventResultAsync(eventId).ConfigureAwait(false);
             // Return 200 with null if no result exists (event hasn't happened yet)
             // This is NOT an error - it's a normal state for future events
             return Results.Ok(result);
@@ -988,7 +988,7 @@ public static class AdminEndpoints
             [FromServices] IScoringService scoringService) =>
         {
             // Verify event exists
-            var evt = await eventRepo.GetEventByIdOnlyAsync(eventId);
+            var evt = await eventRepo.GetEventByIdOnlyAsync(eventId).ConfigureAwait(false);
             if (evt == null)
                 return Results.BadRequest(new { error = "Event not found" });
 
@@ -999,15 +999,15 @@ public static class AdminEndpoints
             }
 
             // Verify all three competitors exist
-            var first = await competitorRepo.GetCompetitorByIdOnlyAsync(request.FirstPlaceId);
+            var first = await competitorRepo.GetCompetitorByIdOnlyAsync(request.FirstPlaceId).ConfigureAwait(false);
             if (first == null)
                 return Results.BadRequest(new { error = "First place competitor not found" });
 
-            var second = await competitorRepo.GetCompetitorByIdOnlyAsync(request.SecondPlaceId);
+            var second = await competitorRepo.GetCompetitorByIdOnlyAsync(request.SecondPlaceId).ConfigureAwait(false);
             if (second == null)
                 return Results.BadRequest(new { error = "Second place competitor not found" });
 
-            var third = await competitorRepo.GetCompetitorByIdOnlyAsync(request.ThirdPlaceId);
+            var third = await competitorRepo.GetCompetitorByIdOnlyAsync(request.ThirdPlaceId).ConfigureAwait(false);
             if (third == null)
                 return Results.BadRequest(new { error = "Third place competitor not found" });
 
@@ -1030,13 +1030,13 @@ public static class AdminEndpoints
                 ThirdPlaceName = request.ThirdPlaceName
             };
 
-            var created = await eventRepo.CreateOrUpdateEventResultAsync(eventId, result);
+            var created = await eventRepo.CreateOrUpdateEventResultAsync(eventId, result).ConfigureAwait(false);
             if (created == null)
                 return Results.StatusCode(500);
 
             // Automatically recalculate points for all predictions for this event
             // Get the event's seasonId from the evt object we already have
-            var recalculationSuccess = await scoringService.RecalculateEventPredictionsAsync(eventId, evt.SeasonId);
+            var recalculationSuccess = await scoringService.RecalculateEventPredictionsAsync(eventId, evt.SeasonId).ConfigureAwait(false);
 
             return Results.Ok(new 
             { 
@@ -1055,7 +1055,7 @@ public static class AdminEndpoints
             string eventId,
             [FromServices] IEventRepository eventRepo) =>
         {
-            var success = await eventRepo.DeleteEventResultAsync(eventId);
+            var success = await eventRepo.DeleteEventResultAsync(eventId).ConfigureAwait(false);
             if (!success)
                 return Results.NotFound(new { error = "Result not found" });
 
@@ -1073,12 +1073,12 @@ public static class AdminEndpoints
             [FromBody] UpdatePointsRequest request,
             [FromServices] IPredictionRepository predictionRepo) =>
         {
-            var prediction = await predictionRepo.GetPredictionAsync(eventId, userId);
+            var prediction = await predictionRepo.GetPredictionAsync(eventId, userId).ConfigureAwait(false);
             if (prediction == null)
                 return Results.NotFound(new { error = "Prediction not found" });
 
             prediction.PointsEarned = request.Points;
-            var updated = await predictionRepo.UpdatePredictionAsync(prediction);
+            var updated = await predictionRepo.UpdatePredictionAsync(prediction).ConfigureAwait(false);
             
             if (updated == null)
                 return Results.StatusCode(500);
@@ -1094,7 +1094,7 @@ public static class AdminEndpoints
         group.MapGet("/users", async (
             [FromServices] IUserRepository userRepo) =>
         {
-            var users = await userRepo.GetAllUsersAsync();
+            var users = await userRepo.GetAllUsersAsync().ConfigureAwait(false);
             // Don't send password hash/salt to frontend
             var safeUsers = users.Select(u => new 
             {
@@ -1119,7 +1119,7 @@ public static class AdminEndpoints
             if (string.IsNullOrWhiteSpace(q))
                 return Results.Ok(new List<object>());
 
-            var users = await userRepo.SearchUsersAsync(q);
+            var users = await userRepo.SearchUsersAsync(q).ConfigureAwait(false);
             // Don't send password hash/salt to frontend
             var safeUsers = users.Select(u => new 
             {
@@ -1138,7 +1138,7 @@ public static class AdminEndpoints
             string userId,
             [FromServices] IUserRepository userRepo) =>
         {
-            var user = await userRepo.GetUserByIdAsync(userId);
+            var user = await userRepo.GetUserByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
                 return Results.NotFound(new { error = "User not found" });
             
@@ -1163,7 +1163,7 @@ public static class AdminEndpoints
             string userId,
             [FromServices] IUserRepository userRepo) =>
         {
-            var dependencies = await userRepo.GetUserDependenciesAsync(userId);
+            var dependencies = await userRepo.GetUserDependenciesAsync(userId).ConfigureAwait(false);
             return Results.Ok(dependencies);
         })
         .RequireAdmin()
@@ -1175,7 +1175,7 @@ public static class AdminEndpoints
             [FromBody] UpdateUserRequest request,
             [FromServices] IUserRepository userRepo) =>
         {
-            var user = await userRepo.GetUserByIdAsync(userId);
+            var user = await userRepo.GetUserByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
                 return Results.NotFound(new { error = "User not found" });
 
@@ -1184,7 +1184,7 @@ public static class AdminEndpoints
             user.Email = request.Email;
             user.IsActive = request.IsActive;
 
-            var success = await userRepo.UpdateUserAsync(user);
+            var success = await userRepo.UpdateUserAsync(user).ConfigureAwait(false);
             if (!success)
                 return Results.StatusCode(500);
 
@@ -1198,12 +1198,12 @@ public static class AdminEndpoints
             string userId,
             [FromServices] IUserRepository userRepo) =>
         {
-            var user = await userRepo.GetUserByIdAsync(userId);
+            var user = await userRepo.GetUserByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
                 return Results.NotFound(new { error = "User not found" });
 
             // Check for dependencies
-            var dependencies = await userRepo.GetUserDependenciesAsync(userId);
+            var dependencies = await userRepo.GetUserDependenciesAsync(userId).ConfigureAwait(false);
             if (dependencies.HasDependencies)
             {
                 var reasons = new List<string>();
@@ -1221,7 +1221,7 @@ public static class AdminEndpoints
                 });
             }
 
-            var success = await userRepo.DeleteUserAsync(userId);
+            var success = await userRepo.DeleteUserAsync(userId).ConfigureAwait(false);
             if (!success)
                 return Results.StatusCode(500);
 
@@ -1237,7 +1237,7 @@ public static class AdminEndpoints
             string seasonId,
             [FromServices] IScoringRulesRepository scoringRulesRepo) =>
         {
-            var scoringRules = await scoringRulesRepo.GetScoringRulesBySeasonAsync(seasonId);
+            var scoringRules = await scoringRulesRepo.GetScoringRulesBySeasonAsync(seasonId).ConfigureAwait(false);
             if (scoringRules == null)
             {
                 // Return default values if not configured
@@ -1265,7 +1265,7 @@ public static class AdminEndpoints
             [FromServices] ISeasonRepository seasonRepo) =>
         {
             // Verify season exists
-            var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId);
+            var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId).ConfigureAwait(false);
             if (season == null)
                 return Results.BadRequest(new { error = "Season not found" });
 
@@ -1289,7 +1289,7 @@ public static class AdminEndpoints
                 TwoOffPoints = request.TwoOffPoints
             };
 
-            var created = await scoringRulesRepo.CreateOrUpdateScoringRulesAsync(scoringRules);
+            var created = await scoringRulesRepo.CreateOrUpdateScoringRulesAsync(scoringRules).ConfigureAwait(false);
             if (created == null)
                 return Results.StatusCode(500);
 
@@ -1307,7 +1307,7 @@ public static class AdminEndpoints
             string seasonId,
             [FromServices] IScoringRulesRepository scoringRulesRepo) =>
         {
-            var success = await scoringRulesRepo.DeleteScoringRulesAsync(seasonId);
+            var success = await scoringRulesRepo.DeleteScoringRulesAsync(seasonId).ConfigureAwait(false);
             if (!success)
                 return Results.NotFound(new { error = "Scoring rules not found" });
 
@@ -1325,11 +1325,11 @@ public static class AdminEndpoints
             [FromServices] ISeasonRepository seasonRepo) =>
         {
             // Verify season exists
-            var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId);
+            var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId).ConfigureAwait(false);
             if (season == null)
                 return Results.BadRequest(new { error = "Season not found" });
 
-            var jobId = await recalculationService.StartRecalculationAsync(seasonId);
+            var jobId = await recalculationService.StartRecalculationAsync(seasonId).ConfigureAwait(false);
             return Results.Ok(new 
             { 
                 message = "Statistics recalculation started",
@@ -1344,7 +1344,7 @@ public static class AdminEndpoints
             string jobId,
             [FromServices] IStatisticsRecalculationService recalculationService) =>
         {
-            var job = await recalculationService.GetJobStatusAsync(jobId);
+            var job = await recalculationService.GetJobStatusAsync(jobId).ConfigureAwait(false);
             
             // Return 200 OK with status field instead of 404 to avoid console pollution
             return Results.Ok(new 
@@ -1367,7 +1367,7 @@ public static class AdminEndpoints
                 return Results.BadRequest(new { error = "Invalid timestamp" });
             }
 
-            var updatedCount = await leaderboardRepo.CountUpdatedAfterAsync(seasonId, timestamp);
+            var updatedCount = await leaderboardRepo.CountUpdatedAfterAsync(seasonId, timestamp).ConfigureAwait(false);
             return Results.Ok(new 
             { 
                 updatedCount = updatedCount,

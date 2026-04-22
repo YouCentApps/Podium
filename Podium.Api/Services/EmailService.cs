@@ -8,27 +8,16 @@ public interface IEmailService
     Task SendVerificationEmailAsync(string toEmail, string verificationCode);
 }
 
-public class EmailService : IEmailService
+public class EmailService(string smtpServer, int smtpPort, string smtpUsername, string smtpPassword,
+    string senderEmail, string senderName, IStringLocalizer<ApiMessages> localizer) : IEmailService
 {
-    private readonly string _smtpServer;
-    private readonly int _smtpPort;
-    private readonly string _smtpUsername;
-    private readonly string _smtpPassword;
-    private readonly string _senderEmail;
-    private readonly string _senderName;
-    private readonly IStringLocalizer<ApiMessages> _localizer;
-
-    public EmailService(string smtpServer, int smtpPort, string smtpUsername, string smtpPassword,
-        string senderEmail, string senderName, IStringLocalizer<ApiMessages> localizer)
-    {
-        _smtpServer = smtpServer;
-        _smtpPort = smtpPort;
-        _smtpUsername = smtpUsername;
-        _smtpPassword = smtpPassword;
-        _senderEmail = senderEmail;
-        _senderName = senderName;
-        _localizer = localizer;
-    }
+    private readonly string _smtpServer = smtpServer;
+    private readonly int _smtpPort = smtpPort;
+    private readonly string _smtpUsername = smtpUsername;
+    private readonly string _smtpPassword = smtpPassword;
+    private readonly string _senderEmail = senderEmail;
+    private readonly string _senderName = senderName;
+    private readonly IStringLocalizer<ApiMessages> _localizer = localizer;
 
     public async Task SendVerificationEmailAsync(string toEmail, string verificationCode)
     {
@@ -92,7 +81,7 @@ public class EmailService : IEmailService
 
             message.To.Add(toEmail);
 
-            await client.SendMailAsync(message);
+            await client.SendMailAsync(message).ConfigureAwait(false);
         }
         catch (Exception ex)
         {

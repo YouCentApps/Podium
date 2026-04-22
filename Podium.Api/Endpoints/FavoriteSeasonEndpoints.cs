@@ -16,7 +16,7 @@ public static class FavoriteSeasonEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var favorites = await favoriteRepo.GetUserFavoriteSeasonsAsync(userId);
+            var favorites = await favoriteRepo.GetUserFavoriteSeasonsAsync(userId).ConfigureAwait(false);
             return Results.Ok(favorites);
         })
         .RequireAuth()
@@ -35,15 +35,15 @@ public static class FavoriteSeasonEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var count = await favoriteRepo.GetUserFavoriteCountAsync(userId);
+            var count = await favoriteRepo.GetUserFavoriteCountAsync(userId).ConfigureAwait(false);
             if (count >= 5)
                 return Results.BadRequest(new { error = localizer["Favorites_LimitReached"].Value });
 
-            var isFavorite = await favoriteRepo.IsFavoriteAsync(userId, seasonId);
+            var isFavorite = await favoriteRepo.IsFavoriteAsync(userId, seasonId).ConfigureAwait(false);
             if (isFavorite)
                 return Results.BadRequest(new { error = localizer["Favorites_AlreadyFavorited"].Value });
 
-            var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId);
+            var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId).ConfigureAwait(false);
             if (season == null)
                 return Results.NotFound(new { error = localizer["Favorites_NotFound"].Value });
 
@@ -52,7 +52,7 @@ public static class FavoriteSeasonEndpoints
                 seasonId,
                 request.SeasonName,
                 request.SeriesName,
-                request.Year);
+                request.Year).ConfigureAwait(false);
 
             if (!success)
                 return Results.BadRequest(new { error = localizer["Favorites_AddFailed"].Value });
@@ -73,7 +73,7 @@ public static class FavoriteSeasonEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var success = await favoriteRepo.RemoveFavoriteSeasonAsync(userId, seasonId);
+            var success = await favoriteRepo.RemoveFavoriteSeasonAsync(userId, seasonId).ConfigureAwait(false);
             if (!success)
                 return Results.BadRequest(new { error = localizer["Favorites_RemoveFailed"].Value });
 
@@ -92,7 +92,7 @@ public static class FavoriteSeasonEndpoints
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
-            var isFavorite = await favoriteRepo.IsFavoriteAsync(userId, seasonId);
+            var isFavorite = await favoriteRepo.IsFavoriteAsync(userId, seasonId).ConfigureAwait(false);
             return Results.Ok(new { isFavorite });
         })
         .RequireAuth()
