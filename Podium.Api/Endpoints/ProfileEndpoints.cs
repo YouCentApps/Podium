@@ -53,9 +53,9 @@ internal static class ProfileEndpoints
             if (user == null)
                 return Results.NotFound(new { error = localizer["Profile_NotFound"].Value });
 
-            var verified = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService, localizer).ConfigureAwait(false);
-            if (!verified.Success)
-                return Results.BadRequest(new { error = verified.Error });
+            var (Success, Error) = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService, localizer).ConfigureAwait(false);
+            if (!Success)
+                return Results.BadRequest(new { error = Error });
 
             var (usernameValid, _) = InputValidator.ValidateUsername(request.NewUsername);
             if (!usernameValid)
@@ -114,9 +114,9 @@ internal static class ProfileEndpoints
                 });
             }
 
-            var verified = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService, localizer).ConfigureAwait(false);
-            if (!verified.Success)
-                return Results.BadRequest(new { error = verified.Error });
+            var (Success, Error) = await VerifyIdentityAsync(user, request.Password, request.OtpCode, authService, localizer).ConfigureAwait(false);
+            if (!Success)
+                return Results.BadRequest(new { error = Error });
 
             user.PreferredAuthMethod = request.NewAuthMethod;
             var success = await userRepository.UpdateUserAsync(user).ConfigureAwait(false);
@@ -154,8 +154,8 @@ internal static class ProfileEndpoints
                 if (string.IsNullOrEmpty(request.OldPassword))
                     return Results.BadRequest(new { error = localizer["Profile_OldPasswordRequired"].Value });
 
-                var verified = await VerifyIdentityAsync(user, request.OldPassword, null, authService, localizer).ConfigureAwait(false);
-                if (!verified.Success)
+                var (Success, Error) = await VerifyIdentityAsync(user, request.OldPassword, null, authService, localizer).ConfigureAwait(false);
+                if (!Success)
                     return Results.BadRequest(new { error = localizer["Profile_OldPasswordIncorrect"].Value });
             }
             else
@@ -163,9 +163,9 @@ internal static class ProfileEndpoints
                 if (string.IsNullOrEmpty(request.OtpCode))
                     return Results.BadRequest(new { error = localizer["Profile_OtpRequired"].Value });
 
-                var verified = await VerifyIdentityAsync(user, null, request.OtpCode, authService, localizer).ConfigureAwait(false);
-                if (!verified.Success)
-                    return Results.BadRequest(new { error = verified.Error });
+                var (Success, Error) = await VerifyIdentityAsync(user, null, request.OtpCode, authService, localizer).ConfigureAwait(false);
+                if (!Success)
+                    return Results.BadRequest(new { error = Error });
             }
 
             var (hash, salt) = AuthenticationService.HashPassword(request.NewPassword);
@@ -395,13 +395,13 @@ internal static class ProfileEndpoints
 }
 
 // Request DTOs
-public record UpdateUsernameRequest(string NewUsername, string? Password, string? OtpCode);
-public record UpdateAuthMethodRequest(string NewAuthMethod, string? Password, string? OtpCode);
-public record UpdatePasswordRequest(string? OldPassword, string? OtpCode, string NewPassword);
-public record SendEmailUpdateOtpRequest(string NewEmail);
-public record ConfirmEmailUpdateRequest(string NewEmail, string OtpCode);
-public record UpdateLanguageRequest(string LanguageCode);
-public record UserProfileResponse(
+internal record UpdateUsernameRequest(string NewUsername, string? Password, string? OtpCode);
+internal record UpdateAuthMethodRequest(string NewAuthMethod, string? Password, string? OtpCode);
+internal record UpdatePasswordRequest(string? OldPassword, string? OtpCode, string NewPassword);
+internal record SendEmailUpdateOtpRequest(string NewEmail);
+internal record ConfirmEmailUpdateRequest(string NewEmail, string OtpCode);
+internal record UpdateLanguageRequest(string LanguageCode);
+internal record UserProfileResponse(
     string UserId,
     string Email,
     string Username,

@@ -3,7 +3,7 @@ using Podium.Shared.Services.Api;
 
 namespace Podium.Api.Endpoints;
 
-public static class AdminEndpoints
+internal static class AdminEndpoints
 {
     private static readonly string[] ValidEventStatuses = ["Upcoming", "InProgress", "Completed"];
 
@@ -252,7 +252,7 @@ public static class AdminEndpoints
                 { 
                     error = "Cannot delete discipline with existing series",
                     message = $"This discipline has {seriesCount} series associated with it. Please delete or reassign those series first.",
-                    seriesCount = seriesCount,
+                    seriesCount,
                     canDelete = false
                 });
             }
@@ -376,7 +376,7 @@ public static class AdminEndpoints
                 { 
                     error = "Cannot delete series with existing seasons",
                     message = $"This series has {seasonCount} season(s) associated with it. Please delete those seasons first.",
-                    seasonCount = seasonCount,
+                    seasonCount,
                     canDelete = false
                 });
             }
@@ -553,7 +553,7 @@ public static class AdminEndpoints
                 { 
                     error = "Cannot delete season with existing data",
                     message = $"This season has {string.Join(" and ", reasons)}. Please delete those first.",
-                    dependencies = dependencies,
+                    dependencies,
                     canDelete = false
                 });
             }
@@ -705,7 +705,7 @@ public static class AdminEndpoints
                 { 
                     error = "Cannot delete competitor with existing data",
                     message = $"This competitor is assigned to {string.Join(" and ", reasons)}. Please remove those assignments first.",
-                    dependencies = dependencies,
+                    dependencies,
                     canDelete = false
                 });
             }
@@ -950,7 +950,7 @@ public static class AdminEndpoints
                 { 
                     error = "Cannot delete event with existing data",
                     message = $"This event has {string.Join(" and ", reasons)}. Please delete those first.",
-                    dependencies = dependencies,
+                    dependencies,
                     canDelete = false
                 });
             }
@@ -1216,7 +1216,7 @@ public static class AdminEndpoints
                 { 
                     error = "Cannot delete user with existing data",
                     message = $"This user has {string.Join(" and ", reasons)}. Please deactivate the user instead of deleting.",
-                    dependencies = dependencies,
+                    dependencies,
                     canDelete = false
                 });
             }
@@ -1242,8 +1242,8 @@ public static class AdminEndpoints
             {
                 // Return default values if not configured
                 return Results.Ok(new 
-                { 
-                    seasonId = seasonId,
+                {
+                    seasonId,
                     exactMatchPoints = 25,
                     oneOffPoints = 18,
                     twoOffPoints = 15,
@@ -1333,7 +1333,7 @@ public static class AdminEndpoints
             return Results.Ok(new 
             { 
                 message = "Statistics recalculation started",
-                jobId = jobId
+                jobId
             });
         })
         .RequireAdmin()
@@ -1350,7 +1350,7 @@ public static class AdminEndpoints
             return Results.Ok(new 
             { 
                 found = job != null,
-                job = job
+                job
             });
         })
         .RequireAdmin()
@@ -1370,7 +1370,7 @@ public static class AdminEndpoints
             var updatedCount = await leaderboardRepo.CountUpdatedAfterAsync(seasonId, timestamp).ConfigureAwait(false);
             return Results.Ok(new 
             { 
-                updatedCount = updatedCount,
+                updatedCount,
                 hasUpdates = updatedCount > 0
             });
         })
@@ -1380,9 +1380,9 @@ public static class AdminEndpoints
 }
 
 // Request DTOs
-public record CreateAdminRequest(string UserId, bool IsActive, bool CanManageAdmins);
-public record UpdateAdminRequest(bool IsActive, bool CanManageAdmins);
-public record CreateDisciplineRequest(string Name, string DisplayName, bool IsActive);
-public record UpdateDisciplineRequest(string Name, string DisplayName, bool IsActive);
-public record UpdateUserRequest(string Username, string Email, bool IsActive);
-public record CreateOrUpdateScoringRulesRequest(int ExactMatchPoints, int OneOffPoints, int TwoOffPoints);
+internal record CreateAdminRequest(string UserId, bool IsActive, bool CanManageAdmins);
+internal record UpdateAdminRequest(bool IsActive, bool CanManageAdmins);
+internal record CreateDisciplineRequest(string Name, string DisplayName, bool IsActive);
+internal record UpdateDisciplineRequest(string Name, string DisplayName, bool IsActive);
+internal record UpdateUserRequest(string Username, string Email, bool IsActive);
+internal record CreateOrUpdateScoringRulesRequest(int ExactMatchPoints, int OneOffPoints, int TwoOffPoints);

@@ -1,6 +1,6 @@
 namespace Podium.Api.Endpoints;
 
-public static class PredictionEndpoints
+internal static class PredictionEndpoints
 {
     public static void MapPredictionEndpoints(this WebApplication app)
     {
@@ -391,7 +391,7 @@ public static class PredictionEndpoints
 }
 
 // Request DTOs
-public record SubmitPredictionRequest(
+internal record SubmitPredictionRequest(
     string EventId,
     string SeasonId,
     string UserId,

@@ -1,6 +1,6 @@
 namespace Podium.Api.Endpoints;
 
-public static class FavoriteSeasonEndpoints
+internal static class FavoriteSeasonEndpoints
 {
     public static void MapFavoriteSeasonEndpoints(this WebApplication app)
     {
@@ -100,7 +100,7 @@ public static class FavoriteSeasonEndpoints
     }
 }
 
-public record AddFavoriteSeasonRequest(
+internal record AddFavoriteSeasonRequest(
     string SeasonName,
     string SeriesName,
     int Year

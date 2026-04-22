@@ -3,12 +3,12 @@ using System.Net.Mail;
 
 namespace Podium.Api.Services;
 
-public interface IEmailService
+internal interface IEmailService
 {
     Task SendVerificationEmailAsync(string toEmail, string verificationCode);
 }
 
-public class EmailService(string smtpServer, int smtpPort, string smtpUsername, string smtpPassword,
+internal class EmailService(string smtpServer, int smtpPort, string smtpUsername, string smtpPassword,
     string senderEmail, string senderName, IStringLocalizer<ApiMessages> localizer) : IEmailService
 {
     private readonly string _smtpServer = smtpServer;

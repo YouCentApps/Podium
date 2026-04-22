@@ -1,6 +1,6 @@
 namespace Podium.Api.Endpoints;
 
-public static class SportEndpoints
+internal static class SportEndpoints
 {
     public static void MapSportEndpoints(this WebApplication app)
     {
@@ -115,20 +115,17 @@ public static class SportEndpoints
             [FromServices] IScoringRulesRepository scoringRulesRepo) =>
         {
             var scoringRules = await scoringRulesRepo.GetScoringRulesBySeasonAsync(seasonId).ConfigureAwait(false);
-            
-            if (scoringRules == null)
+
+            // Return default scoring rules if not configured
+            scoringRules ??= new ScoringRules
             {
-                // Return default scoring rules if not configured
-                scoringRules = new Podium.Shared.Models.ScoringRules
-                {
-                    SeasonId = seasonId,
-                    ExactMatchPoints = 25,
-                    OneOffPoints = 18,
-                    TwoOffPoints = 15,
-                    CreatedDate = DateTime.UtcNow
-                };
-            }
-            
+                SeasonId = seasonId,
+                ExactMatchPoints = 25,
+                OneOffPoints = 18,
+                TwoOffPoints = 15,
+                CreatedDate = DateTime.UtcNow
+            };
+
             return Results.Ok(scoringRules);
         })
         .RequireAuth()

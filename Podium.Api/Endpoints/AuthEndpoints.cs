@@ -1,6 +1,6 @@
 namespace Podium.Api.Endpoints;
 
-public static class AuthEndpoints
+internal static class AuthEndpoints
 {
     public static void MapAuthEndpoints(this WebApplication app)
     {
@@ -141,10 +141,10 @@ public static class AuthEndpoints
 }
 
 // Request DTOs
-public record RegisterRequest(string Email, string Username, string Password, string PreferredAuthMethod, string? LanguageCode);
-public record VerifyRegistrationRequest(string TempUserId, string OtpCode);
-public record SendOtpRequest(string EmailOrUsername);
-public record VerifyOtpRequest(string Email, string OtpCode);
-public record SignInRequest(string EmailOrUsername, string Password);
-public record ValidateSessionRequest(string SessionId);
-public record SignOutRequest(string SessionId);
+internal record RegisterRequest(string Email, string Username, string Password, string PreferredAuthMethod, string? LanguageCode);
+internal record VerifyRegistrationRequest(string TempUserId, string OtpCode);
+internal record SendOtpRequest(string EmailOrUsername);
+internal record VerifyOtpRequest(string Email, string OtpCode);
+internal record SignInRequest(string EmailOrUsername, string Password);
+internal record ValidateSessionRequest(string SessionId);
+internal record SignOutRequest(string SessionId);

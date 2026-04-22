@@ -1,6 +1,6 @@
 namespace Podium.Api.Middleware;
 
-public static class AuthorizationExtensions
+internal static class AuthorizationExtensions
 {
     /// <summary>
     /// Validates session from X-Session-Id header and adds userId to request items
@@ -134,7 +134,7 @@ public static class AuthorizationExtensions
 /// <summary>
 /// Route handler filter extensions for authentication and authorization
 /// </summary>
-public static class EndpointAuthorizationExtensions
+internal static class EndpointAuthorizationExtensions
 {
     /// <summary>
     /// Requires authenticated session. Adds filter that validates X-Session-Id header.
