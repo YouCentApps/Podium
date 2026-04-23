@@ -17,16 +17,11 @@ public interface IEventRepository
     Task<int> GetNextEventNumberAsync(string seasonId);
 }
 
-public class EventRepository : IEventRepository
+public class EventRepository(ITableClientFactory tableClientFactory) : IEventRepository
 {
-    private readonly ITableClientFactory _tableClientFactory;
+    private readonly ITableClientFactory _tableClientFactory = tableClientFactory;
     private const string EventsTableName = "PodiumEvents";
     private const string ResultsTableName = "PodiumEventResults";
-
-    public EventRepository(ITableClientFactory tableClientFactory)
-    {
-        _tableClientFactory = tableClientFactory;
-    }
 
     public async Task<List<Event>> GetEventsBySeasonAsync(string seasonId)
     {
@@ -36,7 +31,7 @@ public class EventRepository : IEventRepository
         try
         {
             var filter = $"PartitionKey eq '{seasonId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 events.Add(MapToEvent(entity));
             }
@@ -46,7 +41,7 @@ public class EventRepository : IEventRepository
             return events;
         }
 
-        return events.OrderBy(e => e.EventNumber).ToList();
+        return [.. events.OrderBy(e => e.EventNumber)];
     }
 
     public async Task<Event?> GetEventByIdAsync(string seasonId, string eventId)
@@ -55,7 +50,7 @@ public class EventRepository : IEventRepository
 
         try
         {
-            var response = await tableClient.GetEntityAsync<TableEntity>(seasonId, eventId);
+            var response = await tableClient.GetEntityAsync<TableEntity>(seasonId, eventId).ConfigureAwait(false);
             return MapToEvent(response.Value);
         }
         catch (RequestFailedException)
@@ -73,7 +68,7 @@ public class EventRepository : IEventRepository
         try
         {
             var filter = $"PartitionKey eq '{seasonId}' and Status eq 'Upcoming' and IsActive eq true";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 var evt = MapToEvent(entity);
                 if (evt.EventDate > now)
@@ -87,7 +82,7 @@ public class EventRepository : IEventRepository
             return events;
         }
 
-        return events.OrderBy(e => e.EventDate).ToList();
+        return [.. events.OrderBy(e => e.EventDate)];
     }
 
     public async Task<EventResult?> GetEventResultAsync(string eventId)
@@ -96,7 +91,7 @@ public class EventRepository : IEventRepository
 
         try
         {
-            var response = await tableClient.GetEntityAsync<TableEntity>(eventId, "Result");
+            var response = await tableClient.GetEntityAsync<TableEntity>(eventId, "Result").ConfigureAwait(false);
             return MapToEventResult(response.Value);
         }
         catch (RequestFailedException)
@@ -126,7 +121,7 @@ public class EventRepository : IEventRepository
                 ["UpdatedDate"] = DateTime.SpecifyKind(result.UpdatedDate, DateTimeKind.Utc)
             };
 
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return result;
         }
         catch (RequestFailedException)
@@ -141,7 +136,7 @@ public class EventRepository : IEventRepository
 
         try
         {
-            await tableClient.DeleteEntityAsync(eventId, "Result");
+            await tableClient.DeleteEntityAsync(eventId, "Result").ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -189,7 +184,7 @@ public class EventRepository : IEventRepository
 
         try
         {
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>())
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>().ConfigureAwait(false))
             {
                 events.Add(MapToEvent(entity));
             }
@@ -199,7 +194,7 @@ public class EventRepository : IEventRepository
             return events;
         }
 
-        return events.OrderByDescending(e => e.EventDate).ToList();
+        return [.. events.OrderByDescending(e => e.EventDate)];
     }
 
     public async Task<Event?> GetEventByIdOnlyAsync(string eventId)
@@ -209,7 +204,7 @@ public class EventRepository : IEventRepository
         try
         {
             var filter = $"RowKey eq '{eventId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 return MapToEvent(entity);
             }
@@ -244,7 +239,7 @@ public class EventRepository : IEventRepository
                 ["CreatedDate"] = DateTime.SpecifyKind(evt.CreatedDate, DateTimeKind.Utc)
             };
 
-            await tableClient.AddEntityAsync(entity);
+            await tableClient.AddEntityAsync(entity).ConfigureAwait(false);
             return evt;
         }
         catch (RequestFailedException)
@@ -272,7 +267,7 @@ public class EventRepository : IEventRepository
                 ["CreatedDate"] = DateTime.SpecifyKind(evt.CreatedDate, DateTimeKind.Utc)
             };
 
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return evt;
         }
         catch (RequestFailedException)
@@ -287,7 +282,7 @@ public class EventRepository : IEventRepository
 
         try
         {
-            await tableClient.DeleteEntityAsync(seasonId, eventId);
+            await tableClient.DeleteEntityAsync(seasonId, eventId).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -305,7 +300,7 @@ public class EventRepository : IEventRepository
             // Check for predictions
             var predictionsTableClient = _tableClientFactory.GetTableClient("PodiumPredictions");
             var predictionsFilter = $"PartitionKey eq '{eventId}'";
-            await foreach (var _ in predictionsTableClient.QueryAsync<TableEntity>(filter: predictionsFilter))
+            await foreach (var _ in predictionsTableClient.QueryAsync<TableEntity>(filter: predictionsFilter).ConfigureAwait(false))
             {
                 dependencies.PredictionCount++;
             }
@@ -314,7 +309,7 @@ public class EventRepository : IEventRepository
             var resultsTableClient = _tableClientFactory.GetTableClient(ResultsTableName);
             try
             {
-                var response = await resultsTableClient.GetEntityAsync<TableEntity>(eventId, "Result");
+                var response = await resultsTableClient.GetEntityAsync<TableEntity>(eventId, "Result").ConfigureAwait(false);
                 dependencies.HasResult = response.Value != null;
             }
             catch (RequestFailedException)
@@ -332,7 +327,7 @@ public class EventRepository : IEventRepository
 
     public async Task<int> GetNextEventNumberAsync(string seasonId)
     {
-        var events = await GetEventsBySeasonAsync(seasonId);
+        var events = await GetEventsBySeasonAsync(seasonId).ConfigureAwait(false);
         if (events.Count == 0)
         {
             return 1;

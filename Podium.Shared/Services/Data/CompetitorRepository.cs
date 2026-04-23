@@ -16,16 +16,11 @@ public interface ICompetitorRepository
     Task<CompetitorDependencies> GetCompetitorDependenciesAsync(string competitorId);
 }
 
-public class CompetitorRepository : ICompetitorRepository
+public class CompetitorRepository(ITableClientFactory tableClientFactory) : ICompetitorRepository
 {
-    private readonly ITableClientFactory _tableClientFactory;
+    private readonly ITableClientFactory _tableClientFactory = tableClientFactory;
     private const string CompetitorsTableName = "PodiumCompetitors";
     private const string SeasonCompetitorsTableName = "PodiumSeasonCompetitors";
-
-    public CompetitorRepository(ITableClientFactory tableClientFactory)
-    {
-        _tableClientFactory = tableClientFactory;
-    }
 
     public async Task<List<Competitor>> GetAllCompetitorsAsync()
     {
@@ -35,7 +30,7 @@ public class CompetitorRepository : ICompetitorRepository
         try
         {
             // Query all competitors (both Individual and Team)
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>())
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>().ConfigureAwait(false))
             {
                 competitors.Add(MapToCompetitor(entity));
             }
@@ -45,7 +40,7 @@ public class CompetitorRepository : ICompetitorRepository
             return competitors;
         }
 
-        return competitors.OrderBy(c => c.Name).ToList();
+        return [.. competitors.OrderBy(c => c.Name)];
     }
 
     public async Task<List<Competitor>> GetCompetitorsByTypeAsync(string type)
@@ -56,7 +51,7 @@ public class CompetitorRepository : ICompetitorRepository
         try
         {
             var filter = $"PartitionKey eq '{type}' and IsActive eq true";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 competitors.Add(MapToCompetitor(entity));
             }
@@ -66,7 +61,7 @@ public class CompetitorRepository : ICompetitorRepository
             return competitors;
         }
 
-        return competitors.OrderBy(c => c.Name).ToList();
+        return [.. competitors.OrderBy(c => c.Name)];
     }
 
     public async Task<List<SeasonCompetitor>> GetCompetitorsBySeasonAsync(string seasonId)
@@ -77,7 +72,7 @@ public class CompetitorRepository : ICompetitorRepository
         try
         {
             var filter = $"PartitionKey eq '{seasonId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 seasonCompetitors.Add(MapToSeasonCompetitor(entity));
             }
@@ -87,7 +82,7 @@ public class CompetitorRepository : ICompetitorRepository
             return seasonCompetitors;
         }
 
-        return seasonCompetitors.OrderBy(sc => sc.CompetitorName).ToList();
+        return [.. seasonCompetitors.OrderBy(sc => sc.CompetitorName)];
     }
 
     public async Task<Competitor?> GetCompetitorByIdAsync(string type, string competitorId)
@@ -96,7 +91,7 @@ public class CompetitorRepository : ICompetitorRepository
 
         try
         {
-            var response = await tableClient.GetEntityAsync<TableEntity>(type, competitorId);
+            var response = await tableClient.GetEntityAsync<TableEntity>(type, competitorId).ConfigureAwait(false);
             return MapToCompetitor(response.Value);
         }
         catch (RequestFailedException)
@@ -137,7 +132,7 @@ public class CompetitorRepository : ICompetitorRepository
         {
             // Query across all partitions to find the competitor by RowKey
             var filter = $"RowKey eq '{competitorId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 return MapToCompetitor(entity);
             }
@@ -169,7 +164,7 @@ public class CompetitorRepository : ICompetitorRepository
                 ["CreatedDate"] = DateTime.SpecifyKind(competitor.CreatedDate, DateTimeKind.Utc)
             };
 
-            await tableClient.AddEntityAsync(entity);
+            await tableClient.AddEntityAsync(entity).ConfigureAwait(false);
             return competitor;
         }
         catch (RequestFailedException)
@@ -194,7 +189,7 @@ public class CompetitorRepository : ICompetitorRepository
                 ["CreatedDate"] = DateTime.SpecifyKind(competitor.CreatedDate, DateTimeKind.Utc)
             };
 
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return competitor;
         }
         catch (RequestFailedException)
@@ -209,7 +204,7 @@ public class CompetitorRepository : ICompetitorRepository
 
         try
         {
-            await tableClient.DeleteEntityAsync(type, competitorId);
+            await tableClient.DeleteEntityAsync(type, competitorId).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -232,7 +227,7 @@ public class CompetitorRepository : ICompetitorRepository
                 ["JoinDate"] = DateTime.UtcNow
             };
 
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -247,7 +242,7 @@ public class CompetitorRepository : ICompetitorRepository
 
         try
         {
-            await tableClient.DeleteEntityAsync(seasonId, competitorId);
+            await tableClient.DeleteEntityAsync(seasonId, competitorId).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -265,7 +260,7 @@ public class CompetitorRepository : ICompetitorRepository
         {
             // Query across all partitions where RowKey (competitorId) matches
             var filter = $"RowKey eq '{competitorId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 seasonIds.Add(entity.PartitionKey); // PartitionKey is the seasonId
             }
@@ -287,7 +282,7 @@ public class CompetitorRepository : ICompetitorRepository
             // Count season assignments
             var seasonTableClient = _tableClientFactory.GetTableClient(SeasonCompetitorsTableName);
             var seasonFilter = $"RowKey eq '{competitorId}'";
-            await foreach (var _ in seasonTableClient.QueryAsync<TableEntity>(filter: seasonFilter))
+            await foreach (var _ in seasonTableClient.QueryAsync<TableEntity>(filter: seasonFilter).ConfigureAwait(false))
             {
                 dependencies.SeasonCount++;
             }
@@ -298,15 +293,15 @@ public class CompetitorRepository : ICompetitorRepository
             var secondPlaceFilter = $"SecondPlaceId eq '{competitorId}'";
             var thirdPlaceFilter = $"ThirdPlaceId eq '{competitorId}'";
 
-            await foreach (var _ in resultsTableClient.QueryAsync<TableEntity>(filter: firstPlaceFilter))
+            await foreach (var _ in resultsTableClient.QueryAsync<TableEntity>(filter: firstPlaceFilter).ConfigureAwait(false))
             {
                 dependencies.ResultCount++;
             }
-            await foreach (var _ in resultsTableClient.QueryAsync<TableEntity>(filter: secondPlaceFilter))
+            await foreach (var _ in resultsTableClient.QueryAsync<TableEntity>(filter: secondPlaceFilter).ConfigureAwait(false))
             {
                 dependencies.ResultCount++;
             }
-            await foreach (var _ in resultsTableClient.QueryAsync<TableEntity>(filter: thirdPlaceFilter))
+            await foreach (var _ in resultsTableClient.QueryAsync<TableEntity>(filter: thirdPlaceFilter).ConfigureAwait(false))
             {
                 dependencies.ResultCount++;
             }

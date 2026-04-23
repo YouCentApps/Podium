@@ -42,7 +42,7 @@ public class RegistrationService : IRegistrationService
         }
 
         // Check if username already exists
-        var existingUserByUsername = await _userRepository.GetUserByUsernameAsync(username);
+        var existingUserByUsername = await _userRepository.GetUserByUsernameAsync(username).ConfigureAwait(false);
         if (existingUserByUsername != null)
         {
             return (false, string.Empty, _localizer["Reg_UsernameTaken"]);
@@ -60,7 +60,7 @@ public class RegistrationService : IRegistrationService
             }
 
             // Check if email already exists
-            var existingUserByEmail = await _userRepository.GetUserByEmailAsync(email);
+            var existingUserByEmail = await _userRepository.GetUserByEmailAsync(email).ConfigureAwait(false);
             if (existingUserByEmail != null)
             {
                 return (false, string.Empty, _localizer["Reg_EmailTaken"]);
@@ -102,7 +102,7 @@ public class RegistrationService : IRegistrationService
 
             try
             {
-                await pendingRegClient.AddEntityAsync(pendingEntity);
+                await pendingRegClient.AddEntityAsync(pendingEntity).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -125,7 +125,7 @@ public class RegistrationService : IRegistrationService
 
             try
             {
-                await otpClient.AddEntityAsync(otpEntity);
+                await otpClient.AddEntityAsync(otpEntity).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -154,7 +154,7 @@ public class RegistrationService : IRegistrationService
         else
         {
             // No email provided (password-only without email) - register directly
-            return await RegisterUserAsync(email, username, password, preferredAuthMethod, languageCode);
+            return await RegisterUserAsync(email, username, password, preferredAuthMethod, languageCode).ConfigureAwait(false);
         }
     }
 
@@ -172,7 +172,7 @@ public class RegistrationService : IRegistrationService
             var filter = $"PartitionKey eq 'OTP' and UserId eq '{safeTempUserId}' and IsUsed eq false and ExpiryTime gt datetime'{cutoffTime:yyyy-MM-ddTHH:mm:ss.fffffffZ}' and IsRegistration eq true";
             
             TableEntity? validOtp = null;
-            await foreach (var entity in otpClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in otpClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 if (entity.GetString("Code") == otpCode)
                 {
@@ -188,10 +188,10 @@ public class RegistrationService : IRegistrationService
 
             // Mark OTP as used
             validOtp["IsUsed"] = true;
-            await otpClient.UpdateEntityAsync(validOtp, Azure.ETag.All, TableUpdateMode.Merge);
+            await otpClient.UpdateEntityAsync(validOtp, Azure.ETag.All, TableUpdateMode.Merge).ConfigureAwait(false);
 
             // Get pending registration
-            var pendingResponse = await pendingRegClient.GetEntityAsync<TableEntity>("PendingReg", tempUserId);
+            var pendingResponse = await pendingRegClient.GetEntityAsync<TableEntity>("PendingReg", tempUserId).ConfigureAwait(false);
             var pending = pendingResponse.Value;
 
             // Check if not expired
@@ -217,14 +217,14 @@ public class RegistrationService : IRegistrationService
                 CreatedDate = DateTime.UtcNow
             };
 
-            var success = await _userRepository.CreateUserAsync(user);
+            var success = await _userRepository.CreateUserAsync(user).ConfigureAwait(false);
             if (!success)
             {
                 return (false, string.Empty, _localizer["Reg_Failed"]);
             }
 
             // Delete pending registration
-            await pendingRegClient.DeleteEntityAsync("PendingReg", tempUserId);
+            await pendingRegClient.DeleteEntityAsync("PendingReg", tempUserId).ConfigureAwait(false);
 
             return (true, userId, string.Empty);
         }
@@ -254,7 +254,7 @@ public class RegistrationService : IRegistrationService
         }
 
         // Check if username already exists
-        var existingUserByUsername = await _userRepository.GetUserByUsernameAsync(username);
+        var existingUserByUsername = await _userRepository.GetUserByUsernameAsync(username).ConfigureAwait(false);
         if (existingUserByUsername != null)
         {
             return (false, string.Empty, _localizer["Reg_UsernameTaken"]);
@@ -271,7 +271,7 @@ public class RegistrationService : IRegistrationService
             }
 
             // Check if email already exists
-            var existingUserByEmail = await _userRepository.GetUserByEmailAsync(email);
+            var existingUserByEmail = await _userRepository.GetUserByEmailAsync(email).ConfigureAwait(false);
             if (existingUserByEmail != null)
             {
                 return (false, string.Empty, _localizer["Reg_EmailTaken"]);
@@ -287,7 +287,7 @@ public class RegistrationService : IRegistrationService
             }
 
             // Check if email already exists
-            var existingUserByEmail = await _userRepository.GetUserByEmailAsync(email);
+            var existingUserByEmail = await _userRepository.GetUserByEmailAsync(email).ConfigureAwait(false);
             if (existingUserByEmail != null)
             {
                 return (false, string.Empty, _localizer["Reg_EmailTaken"]);
@@ -324,7 +324,7 @@ public class RegistrationService : IRegistrationService
             CreatedDate = DateTime.UtcNow
         };
 
-        var success = await _userRepository.CreateUserAsync(user);
+        var success = await _userRepository.CreateUserAsync(user).ConfigureAwait(false);
         if (!success)
         {
             return (false, string.Empty, _localizer["Reg_Failed"]);
@@ -338,7 +338,7 @@ public class RegistrationService : IRegistrationService
         if (string.IsNullOrWhiteSpace(email))
             return true;
             
-        var user = await _userRepository.GetUserByEmailAsync(email);
+        var user = await _userRepository.GetUserByEmailAsync(email).ConfigureAwait(false);
         return user == null;
     }
 
@@ -347,7 +347,7 @@ public class RegistrationService : IRegistrationService
         if (string.IsNullOrWhiteSpace(username))
             return false;
             
-        var user = await _userRepository.GetUserByUsernameAsync(username);
+        var user = await _userRepository.GetUserByUsernameAsync(username).ConfigureAwait(false);
         return user == null;
     }
 }

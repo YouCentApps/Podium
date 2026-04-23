@@ -16,15 +16,10 @@ public interface IUserRepository
     Task<UserDependencies> GetUserDependenciesAsync(string userId);
 }
 
-public class UserRepository : IUserRepository
+public class UserRepository(ITableClientFactory tableClientFactory) : IUserRepository
 {
-    private readonly ITableClientFactory _tableClientFactory;
+    private readonly ITableClientFactory _tableClientFactory = tableClientFactory;
     private const string TableName = "PodiumUsers";
-
-    public UserRepository(ITableClientFactory tableClientFactory)
-    {
-        _tableClientFactory = tableClientFactory;
-    }
 
     public async Task<User?> GetUserByEmailAsync(string email)
     {
@@ -37,7 +32,7 @@ public class UserRepository : IUserRepository
             // Escape single quotes to prevent OData injection
             var safeEmail = normalizedEmail.Replace("'", "''");
             var filter = $"Email eq '{safeEmail}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 return MapToUser(entity);
             }
@@ -61,7 +56,7 @@ public class UserRepository : IUserRepository
             // Escape single quotes to prevent OData injection
             var safeUsername = normalizedUsername.Replace("'", "''");
             var filter = $"NormalizedUsername eq '{safeUsername}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 return MapToUser(entity);
             }
@@ -84,10 +79,10 @@ public class UserRepository : IUserRepository
             if (userId.Length < 6)
                 return null;
 
-            var partitionKey = userId.Substring(0, 6);
-            var rowKey = userId.Substring(6);
+            var partitionKey = userId[..6];
+            var rowKey = userId[6..];
 
-            var response = await tableClient.GetEntityAsync<TableEntity>(partitionKey, rowKey);
+            var response = await tableClient.GetEntityAsync<TableEntity>(partitionKey, rowKey).ConfigureAwait(false);
             return MapToUser(response.Value);
         }
         catch (RequestFailedException)
@@ -106,8 +101,8 @@ public class UserRepository : IUserRepository
             if (user.UserId.Length < 6)
                 return false;
 
-            var partitionKey = user.UserId.Substring(0, 6);
-            var rowKey = user.UserId.Substring(6);
+            var partitionKey = user.UserId[..6];
+            var rowKey = user.UserId[6..];
 
             var entity = new TableEntity(partitionKey, rowKey)
             {
@@ -126,7 +121,7 @@ public class UserRepository : IUserRepository
                 ["LanguageCode"] = user.LanguageCode
             };
 
-            await tableClient.AddEntityAsync(entity);
+            await tableClient.AddEntityAsync(entity).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -144,14 +139,14 @@ public class UserRepository : IUserRepository
             if (userId.Length < 6)
                 return false;
 
-            var partitionKey = userId.Substring(0, 6);
-            var rowKey = userId.Substring(6);
+            var partitionKey = userId[..6];
+            var rowKey = userId[6..];
 
-            var response = await tableClient.GetEntityAsync<TableEntity>(partitionKey, rowKey);
+            var response = await tableClient.GetEntityAsync<TableEntity>(partitionKey, rowKey).ConfigureAwait(false);
             var entity = response.Value;
             entity["LastLoginDate"] = DateTime.UtcNow;
 
-            await tableClient.UpdateEntityAsync(entity, ETag.All, TableUpdateMode.Merge);
+            await tableClient.UpdateEntityAsync(entity, ETag.All, TableUpdateMode.Merge).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -167,7 +162,7 @@ public class UserRepository : IUserRepository
 
         try
         {
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>())
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>().ConfigureAwait(false))
             {
                 users.Add(MapToUser(entity));
             }
@@ -177,7 +172,7 @@ public class UserRepository : IUserRepository
             return users;
         }
 
-        return users.OrderBy(u => u.Username).ToList();
+        return [.. users.OrderBy(u => u.Username)];
     }
 
     public async Task<List<User>> SearchUsersAsync(string searchTerm)
@@ -193,7 +188,7 @@ public class UserRepository : IUserRepository
             var normalizedSearch = searchTerm.ToLowerInvariant();
             
             // Get all users and filter in memory (Azure Tables has limited query capabilities)
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>())
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>().ConfigureAwait(false))
             {
                 var user = MapToUser(entity);
                 if (user.Username.ToLowerInvariant().Contains(normalizedSearch) ||
@@ -208,7 +203,7 @@ public class UserRepository : IUserRepository
             return users;
         }
 
-        return users.OrderBy(u => u.Username).ToList();
+        return [.. users.OrderBy(u => u.Username)];
     }
 
     public async Task<bool> UpdateUserAsync(User user)
@@ -220,8 +215,8 @@ public class UserRepository : IUserRepository
             if (user.UserId.Length < 6)
                 return false;
 
-            var partitionKey = user.UserId.Substring(0, 6);
-            var rowKey = user.UserId.Substring(6);
+            var partitionKey = user.UserId[..6];
+            var rowKey = user.UserId[6..];
 
             var entity = new TableEntity(partitionKey, rowKey)
             {
@@ -240,7 +235,7 @@ public class UserRepository : IUserRepository
                 ["LanguageCode"] = user.LanguageCode
             };
 
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -258,10 +253,10 @@ public class UserRepository : IUserRepository
             if (userId.Length < 6)
                 return false;
 
-            var partitionKey = userId.Substring(0, 6);
-            var rowKey = userId.Substring(6);
+            var partitionKey = userId[..6];
+            var rowKey = userId[6..];
 
-            await tableClient.DeleteEntityAsync(partitionKey, rowKey);
+            await tableClient.DeleteEntityAsync(partitionKey, rowKey).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -280,7 +275,7 @@ public class UserRepository : IUserRepository
             // Check predictions
             var predictionsClient = _tableClientFactory.GetTableClient("PodiumPredictions");
             var predictionFilter = $"UserId eq '{userId}'";
-            await foreach (var _ in predictionsClient.QueryAsync<TableEntity>(filter: predictionFilter))
+            await foreach (var _ in predictionsClient.QueryAsync<TableEntity>(filter: predictionFilter).ConfigureAwait(false))
             {
                 dependencies.PredictionCount++;
             }
@@ -289,7 +284,7 @@ public class UserRepository : IUserRepository
             var adminsClient = _tableClientFactory.GetTableClient("PodiumAdmins");
             try
             {
-                var adminResponse = await adminsClient.GetEntityAsync<TableEntity>("Admin", userId);
+                var adminResponse = await adminsClient.GetEntityAsync<TableEntity>("Admin", userId).ConfigureAwait(false);
                 dependencies.IsAdmin = true;
             }
             catch (RequestFailedException)

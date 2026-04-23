@@ -70,7 +70,7 @@ var host = builder.Build();
 
 // Bootstrap culture from localStorage BEFORE the app renders
 var js = host.Services.GetRequiredService<Microsoft.JSInterop.IJSRuntime>();
-var languageCode = await js.InvokeAsync<string>("podiumCulture.get", []);
+var languageCode = await js.InvokeAsync<string>("podiumCulture.get", []).ConfigureAwait(true);
 if (!string.IsNullOrWhiteSpace(languageCode))
 {
     var culture = new CultureInfo(languageCode);
@@ -80,10 +80,9 @@ if (!string.IsNullOrWhiteSpace(languageCode))
 
 // Initialize language state (also sets CurrentLanguageCode in service)
 var languageState = host.Services.GetRequiredService<LanguageStateService>();
-await languageState.InitializeAsync();
+await languageState.InitializeAsync().ConfigureAwait(true);
 
 // Initialize auth state (restore session from storage)
 var authState = host.Services.GetRequiredService<AuthStateService>();
-await authState.InitializeAsync();
-
-await host.RunAsync();
+await authState.InitializeAsync().ConfigureAwait(true);
+await host.RunAsync().ConfigureAwait(true);

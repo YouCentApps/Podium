@@ -1,4 +1,7 @@
+using Azure;
+using Azure.Data.Tables;
 using Microsoft.Extensions.Localization;
+using Podium.Shared.Models;
 using Podium.Shared.Services.Data;
 using Podium.Shared.Utilities;
 using System.Globalization;
@@ -20,29 +23,21 @@ public interface IAuthenticationService
     Task<(bool Success, string ErrorMessage)> VerifyOTPCodeAsync(string email, string otpCode);
 }
 
-public class AuthenticationService : IAuthenticationService
+public class AuthenticationService(ITableClientFactory tableClientFactory, IUserRepository userRepository, Action<string, string>? sendEmailCallback = null, IStringLocalizer<ApiMessages>? localizer = null) : IAuthenticationService
 {
-    private readonly ITableClientFactory _tableClientFactory;
-    private readonly IUserRepository _userRepository;
-    private readonly Action<string, string>? _sendEmailCallback;
-    private readonly IStringLocalizer<ApiMessages> _localizer;
+    private readonly ITableClientFactory _tableClientFactory = tableClientFactory;
+    private readonly IUserRepository _userRepository = userRepository;
+    private readonly Action<string, string>? _sendEmailCallback = sendEmailCallback;
+    private readonly IStringLocalizer<ApiMessages> _localizer = localizer ?? new NullStringLocalizer<ApiMessages>();
     private const string UsersTable = "PodiumUsers";
     private const string SessionsTable = "PodiumAuthSessions";
     private const string OTPTable = "PodiumOTPCodes";
-
-    public AuthenticationService(ITableClientFactory tableClientFactory, IUserRepository userRepository, Action<string, string>? sendEmailCallback = null, IStringLocalizer<ApiMessages>? localizer = null)
-    {
-        _tableClientFactory = tableClientFactory;
-        _userRepository = userRepository;
-        _sendEmailCallback = sendEmailCallback;
-        _localizer = localizer ?? new NullStringLocalizer<ApiMessages>();
-    }
 
     public async Task<(bool Success, string ActualEmail, string ErrorMessage)> SendOTPAsync(string emailOrUsername)
     {
         ArgumentNullException.ThrowIfNull(emailOrUsername);
         // Try to find user by email or username
-        User? user = null;
+        User? user;
 
         try
         {
@@ -50,12 +45,12 @@ public class AuthenticationService : IAuthenticationService
             if (emailOrUsername.Contains('@', StringComparison.Ordinal))
             {
                 // It's likely an email
-                user = await _userRepository.GetUserByEmailAsync(emailOrUsername);
-            }
+                user = await _userRepository.GetUserByEmailAsync(emailOrUsername).ConfigureAwait(false);
+        }
             else
             {
                 // It's likely a username - look up by username to get email
-                user = await _userRepository.GetUserByUsernameAsync(emailOrUsername);
+                user = await _userRepository.GetUserByUsernameAsync(emailOrUsername).ConfigureAwait(false);
             }
         }
         catch (RequestFailedException)
@@ -97,7 +92,7 @@ public class AuthenticationService : IAuthenticationService
 
         try
         {
-            await otpClient.AddEntityAsync(otpEntity);
+            await otpClient.AddEntityAsync(otpEntity).ConfigureAwait(false);
         }
         catch (RequestFailedException)
         {
@@ -151,7 +146,7 @@ public class AuthenticationService : IAuthenticationService
 
         try
         {
-            await otpClient.AddEntityAsync(otpEntity);
+            await otpClient.AddEntityAsync(otpEntity).ConfigureAwait(false);
         }
         catch (RequestFailedException)
         {
@@ -197,7 +192,7 @@ public class AuthenticationService : IAuthenticationService
             var filter = $"PartitionKey eq 'OTP' and Email eq '{safeEmail}' and IsUsed eq false and ExpiryTime gt datetime'{cutoffTime:yyyy-MM-ddTHH:mm:ss.fffffffZ}'";
 
             TableEntity? validOtp = null;
-            await foreach (var entity in otpClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in otpClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 if (entity.GetString("Code") == otpCode)
                 {
@@ -213,15 +208,15 @@ public class AuthenticationService : IAuthenticationService
 
             // Mark OTP as used
             validOtp["IsUsed"] = true;
-            await otpClient.UpdateEntityAsync(validOtp, ETag.All, TableUpdateMode.Merge);
+            await otpClient.UpdateEntityAsync(validOtp, ETag.All, TableUpdateMode.Merge).ConfigureAwait(false);
 
             var userId = validOtp.GetString("UserId") ?? string.Empty;
 
             // Get user details
             var userClient = _tableClientFactory.GetTableClient(UsersTable);
-            var partitionKey = userId.Substring(0, 6);
-            var rowKey = userId.Substring(6);
-            var userResponse = await userClient.GetEntityAsync<TableEntity>(partitionKey, rowKey);
+            var partitionKey = userId[..6];
+            var rowKey = userId[6..];
+            var userResponse = await userClient.GetEntityAsync<TableEntity>(partitionKey, rowKey).ConfigureAwait(false);
             var user = MapToUser(userResponse.Value);
 
             // Check if user allows email OTP authentication
@@ -231,10 +226,10 @@ public class AuthenticationService : IAuthenticationService
             }
 
             // Create session with normalized email
-            var sessionId = await CreateSessionAsync(user.UserId, normalizedEmail, user.Username);
+            var sessionId = await CreateSessionAsync(user.UserId, normalizedEmail, user.Username).ConfigureAwait(false);
 
             // Update last login timestamp
-            await _userRepository.UpdateLastLoginAsync(user.UserId);
+            await _userRepository.UpdateLastLoginAsync(user.UserId).ConfigureAwait(false);
 
             return (true, user.UserId, user.Username, sessionId, user.LanguageCode, string.Empty);
         }
@@ -248,20 +243,19 @@ public class AuthenticationService : IAuthenticationService
     public async Task<(bool Success, string UserId, string Username, string SessionId, string LanguageCode, string ErrorMessage)> SignInWithPasswordAsync(string emailOrUsername, string password)
     {
         ArgumentNullException.ThrowIfNull(emailOrUsername);
-        User? user = null;
-
+        User? user;
         try
         {
             // Try to determine if input is email or username
             if (emailOrUsername.Contains('@', StringComparison.Ordinal))
             {
                 // It's likely an email
-                user = await _userRepository.GetUserByEmailAsync(emailOrUsername);
+                user = await _userRepository.GetUserByEmailAsync(emailOrUsername).ConfigureAwait(false);
             }
             else
             {
                 // It's likely a username
-                user = await _userRepository.GetUserByUsernameAsync(emailOrUsername);
+                user = await _userRepository.GetUserByUsernameAsync(emailOrUsername).ConfigureAwait(false);
             }
         }
         catch (RequestFailedException)
@@ -287,10 +281,10 @@ public class AuthenticationService : IAuthenticationService
         }
 
         // Create session
-        var sessionId = await CreateSessionAsync(user.UserId, user.Email, user.Username);
+        var sessionId = await CreateSessionAsync(user.UserId, user.Email, user.Username).ConfigureAwait(false);
 
         // Update last login timestamp
-        await _userRepository.UpdateLastLoginAsync(user.UserId);
+        await _userRepository.UpdateLastLoginAsync(user.UserId).ConfigureAwait(false);
 
         return (true, user.UserId, user.Username, sessionId, user.LanguageCode, string.Empty);
     }
@@ -301,7 +295,7 @@ public class AuthenticationService : IAuthenticationService
 
         try
         {
-            var response = await sessionClient.GetEntityAsync<TableEntity>("Session", sessionId);
+            var response = await sessionClient.GetEntityAsync<TableEntity>("Session", sessionId).ConfigureAwait(false);
             var session = response.Value;
 
             var isActive = session.GetBoolean("IsActive") ?? false;
@@ -314,7 +308,7 @@ public class AuthenticationService : IAuthenticationService
                 var languageCode = "en";
                 if (!string.IsNullOrEmpty(userId))
                 {
-                    var user = await _userRepository.GetUserByIdAsync(userId);
+                    var user = await _userRepository.GetUserByIdAsync(userId).ConfigureAwait(false);
                     if (user != null)
                         languageCode = user.LanguageCode;
                 }
@@ -341,10 +335,10 @@ public class AuthenticationService : IAuthenticationService
 
         try
         {
-            var response = await sessionClient.GetEntityAsync<TableEntity>("Session", sessionId);
+            var response = await sessionClient.GetEntityAsync<TableEntity>("Session", sessionId).ConfigureAwait(false);
             var session = response.Value;
             session["IsActive"] = false;
-            await sessionClient.UpdateEntityAsync(session, ETag.All, TableUpdateMode.Merge);
+            await sessionClient.UpdateEntityAsync(session, ETag.All, TableUpdateMode.Merge).ConfigureAwait(false);
         }
         catch (RequestFailedException)
         {
@@ -367,7 +361,7 @@ public class AuthenticationService : IAuthenticationService
             ["IsActive"] = true
         };
 
-        await sessionClient.AddEntityAsync(sessionEntity);
+        await sessionClient.AddEntityAsync(sessionEntity).ConfigureAwait(false);
         return sessionId;
     }
 
@@ -423,12 +417,12 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<(bool Success, string ErrorMessage)> VerifyPasswordAsync(string email, string password)
     {
-        User? user = null;
+        User? user;
 
         try
         {
             // Get user by email
-            user = await _userRepository.GetUserByEmailAsync(email);
+            user = await _userRepository.GetUserByEmailAsync(email).ConfigureAwait(false);
         }
         catch (RequestFailedException)
         {
@@ -471,7 +465,7 @@ public class AuthenticationService : IAuthenticationService
             var filter = $"PartitionKey eq 'OTP' and Email eq '{normalizedEmail}' and IsUsed eq false and ExpiryTime gt datetime'{cutoffTime:yyyy-MM-ddTHH:mm:ss.fffffffZ}'";
             
             TableEntity? validOtp = null;
-            await foreach (var entity in otpClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in otpClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 if (entity.GetString("Code") == otpCode)
                 {
@@ -487,15 +481,15 @@ public class AuthenticationService : IAuthenticationService
 
             // Mark OTP as used
             validOtp["IsUsed"] = true;
-            await otpClient.UpdateEntityAsync(validOtp, ETag.All, TableUpdateMode.Merge);
+            await otpClient.UpdateEntityAsync(validOtp, ETag.All, TableUpdateMode.Merge).ConfigureAwait(false);
 
             var userId = validOtp.GetString("UserId") ?? string.Empty;
-            
+
             // Get user details to verify preferred auth method
             var userClient = _tableClientFactory.GetTableClient(UsersTable);
-            var partitionKey = userId.Substring(0, 6);
-            var rowKey = userId.Substring(6);
-            var userResponse = await userClient.GetEntityAsync<TableEntity>(partitionKey, rowKey);
+            var partitionKey = userId[..6];
+            var rowKey = userId[6..];
+            var userResponse = await userClient.GetEntityAsync<TableEntity>(partitionKey, rowKey).ConfigureAwait(false);
             var user = MapToUser(userResponse.Value);
 
             // Check if user allows email OTP authentication

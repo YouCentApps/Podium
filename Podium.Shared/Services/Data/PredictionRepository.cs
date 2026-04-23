@@ -26,7 +26,7 @@ public class PredictionRepository : IPredictionRepository
 
         try
         {
-            var response = await tableClient.GetEntityAsync<TableEntity>(eventId, userId);
+            var response = await tableClient.GetEntityAsync<TableEntity>(eventId, userId).ConfigureAwait(false);
             return MapToPrediction(response.Value);
         }
         catch (RequestFailedException)
@@ -43,7 +43,7 @@ public class PredictionRepository : IPredictionRepository
         try
         {
             var filter = $"PartitionKey eq '{eventId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 predictions.Add(MapToPrediction(entity));
             }
@@ -67,7 +67,7 @@ public class PredictionRepository : IPredictionRepository
             {
                 try
                 {
-                    var response = await tableClient.GetEntityAsync<TableEntity>(eventId, userId);
+                    var response = await tableClient.GetEntityAsync<TableEntity>(eventId, userId).ConfigureAwait(false);
                     predictions.Add(MapToPrediction(response.Value));
                 }
                 catch (RequestFailedException)
@@ -95,7 +95,7 @@ public class PredictionRepository : IPredictionRepository
             foreach (var eventId in eventIds)
             {
                 var filter = $"PartitionKey eq '{eventId}'";
-                await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+                await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
                 {
                     predictions.Add(MapToPrediction(entity));
                 }
@@ -130,7 +130,7 @@ public class PredictionRepository : IPredictionRepository
                 ["UpdatedDate"] = DateTime.SpecifyKind(prediction.UpdatedDate, DateTimeKind.Utc)
             };
 
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -165,7 +165,7 @@ public class PredictionRepository : IPredictionRepository
             };
 
             // IMPORTANT: Use Merge instead of Replace to preserve all fields
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return prediction;
         }
         catch (RequestFailedException)

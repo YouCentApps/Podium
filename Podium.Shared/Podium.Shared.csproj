@@ -1,16 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <RazorLangVersion>Latest</RazorLangVersion>
-    <!-- CA2007: Library used only in apps without SynchronizationContext (Blazor WASM, ASP.NET Core) -->
     <!-- CA1716: 'Shared' namespace segment is the project name, not a VB keyword in context -->
     <!-- CA1003: Events use Action/Func intentionally for Blazor state management -->
     <!-- CA2227/CA1002: Collection properties are intentional API design -->
     <!-- CA1849: VerifyPassword is a pure crypto computation, not a blocking IO call -->
     <!-- CA1031: Service clients intentionally catch broad exceptions for resilience -->
     <!-- CA1062: Parameters validated by callers in internal usage -->
-    <!-- CA1308: Username/email normalization requires lowercase -->
-    <NoWarn>$(NoWarn);CA2007;CA1716;CA1003;CA2227;CA1002;CA1849;CA1031;CA1062;CA1308;CA2234</NoWarn>
+    <NoWarn>$(NoWarn);CA1716;CA1003;CA2227;CA1002;CA1849;CA1031;CA1062;CA2234</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

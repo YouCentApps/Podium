@@ -8,33 +8,22 @@ public interface IStatisticsRecalculationService
     Task<StatisticsRecalculationJob?> GetJobStatusAsync(string jobId);
 }
 
-public class StatisticsRecalculationService : IStatisticsRecalculationService
+public class StatisticsRecalculationService(
+    IStatisticsJobRepository jobRepository,
+    IPredictionRepository predictionRepository,
+    ILeaderboardRepository leaderboardRepository,
+    IEventRepository eventRepository,
+    IUserRepository userRepository,
+    IScoringRulesRepository scoringRulesRepository,
+    ISeasonRepository seasonRepository) : IStatisticsRecalculationService
 {
-    private readonly IStatisticsJobRepository _jobRepository;
-    private readonly IPredictionRepository _predictionRepository;
-    private readonly ILeaderboardRepository _leaderboardRepository;
-    private readonly IEventRepository _eventRepository;
-    private readonly IUserRepository _userRepository;
-    private readonly IScoringRulesRepository _scoringRulesRepository;
-    private readonly ISeasonRepository _seasonRepository;
-
-    public StatisticsRecalculationService(
-        IStatisticsJobRepository jobRepository,
-        IPredictionRepository predictionRepository,
-        ILeaderboardRepository leaderboardRepository,
-        IEventRepository eventRepository,
-        IUserRepository userRepository,
-        IScoringRulesRepository scoringRulesRepository,
-        ISeasonRepository seasonRepository)
-    {
-        _jobRepository = jobRepository;
-        _predictionRepository = predictionRepository;
-        _leaderboardRepository = leaderboardRepository;
-        _eventRepository = eventRepository;
-        _userRepository = userRepository;
-        _scoringRulesRepository = scoringRulesRepository;
-        _seasonRepository = seasonRepository;
-    }
+    private readonly IStatisticsJobRepository _jobRepository = jobRepository;
+    private readonly IPredictionRepository _predictionRepository = predictionRepository;
+    private readonly ILeaderboardRepository _leaderboardRepository = leaderboardRepository;
+    private readonly IEventRepository _eventRepository = eventRepository;
+    private readonly IUserRepository _userRepository = userRepository;
+    private readonly IScoringRulesRepository _scoringRulesRepository = scoringRulesRepository;
+    private readonly ISeasonRepository _seasonRepository = seasonRepository;
 
     public async Task<string> StartRecalculationAsync(string seasonId)
     {
@@ -50,17 +39,17 @@ public class StatisticsRecalculationService : IStatisticsRecalculationService
             StartedAt = DateTime.UtcNow
         };
 
-        await _jobRepository.SaveJobAsync(job);
+        await _jobRepository.SaveJobAsync(job).ConfigureAwait(false);
 
         // Start background processing (fire and forget)
-        _ = Task.Run(async () => await ProcessRecalculationAsync(jobId, seasonId));
+        _ = Task.Run(async () => await ProcessRecalculationAsync(jobId, seasonId).ConfigureAwait(false));
 
         return jobId;
     }
 
     public async Task<StatisticsRecalculationJob?> GetJobStatusAsync(string jobId)
     {
-        return await _jobRepository.GetJobAsync(jobId);
+        return await _jobRepository.GetJobAsync(jobId).ConfigureAwait(false);
     }
 
     private async Task ProcessRecalculationAsync(string jobId, string seasonId)
@@ -68,32 +57,32 @@ public class StatisticsRecalculationService : IStatisticsRecalculationService
         try
         {
             // Get the season to access BestResultsNumber
-            var season = await _seasonRepository.GetSeasonByIdOnlyAsync(seasonId);
+            var season = await _seasonRepository.GetSeasonByIdOnlyAsync(seasonId).ConfigureAwait(false);
             int? bestResultsNumber = season?.BestResultsNumber;
 
             // Get all events for the season
-            var events = await _eventRepository.GetEventsBySeasonAsync(seasonId);
+            var events = await _eventRepository.GetEventsBySeasonAsync(seasonId).ConfigureAwait(false);
             var eventIds = events.Select(e => e.Id).ToList();
 
             // Get all predictions for the season (only those with calculated points)
-            var allPredictions = await _predictionRepository.GetAllPredictionsForSeasonAsync(seasonId, eventIds);
+            var allPredictions = await _predictionRepository.GetAllPredictionsForSeasonAsync(seasonId, eventIds).ConfigureAwait(false);
             var predictionsWithPoints = allPredictions.Where(p => p.PointsEarned.HasValue).ToList();
 
             // Group by user
             var predictionsByUser = predictionsWithPoints.GroupBy(p => p.UserId).ToList();
 
             // Get scoring rules for calculating match types
-            var scoringRules = await _scoringRulesRepository.GetScoringRulesBySeasonAsync(seasonId);
+            var scoringRules = await _scoringRulesRepository.GetScoringRulesBySeasonAsync(seasonId).ConfigureAwait(false);
             int exactMatchPoints = scoringRules?.ExactMatchPoints ?? 25;
             int oneOffPoints = scoringRules?.OneOffPoints ?? 18;
             int twoOffPoints = scoringRules?.TwoOffPoints ?? 15;
 
             // Update job with total users count
-            var job = await _jobRepository.GetJobAsync(jobId);
+            var job = await _jobRepository.GetJobAsync(jobId).ConfigureAwait(false);
             if (job != null)
             {
                 job.TotalUsers = predictionsByUser.Count;
-                await _jobRepository.UpdateJobAsync(job);
+                await _jobRepository.UpdateJobAsync(job).ConfigureAwait(false);
             }
 
             // Process each user
@@ -104,7 +93,7 @@ public class StatisticsRecalculationService : IStatisticsRecalculationService
                 var userPredictions = userGroup.ToList();
 
                 // Get user info
-                var user = await _userRepository.GetUserByIdAsync(userId);
+                var user = await _userRepository.GetUserByIdAsync(userId).ConfigureAwait(false);
                 if (user == null) continue;
 
                 // Calculate statistics
@@ -124,18 +113,18 @@ public class StatisticsRecalculationService : IStatisticsRecalculationService
 
                     // Get the event result to calculate match types per driver
                     var eventId = prediction.EventId;
-                    var eventResult = await _eventRepository.GetEventResultAsync(eventId);
+                    var eventResult = await _eventRepository.GetEventResultAsync(eventId).ConfigureAwait(false);
                     
                     if (eventResult != null)
                     {
                         // Count matches per driver position
-                        var matches = CalculateMatchesPerDriver(
+                        var (ExactMatches, OneOffMatches, TwoOffMatches) = CalculateMatchesPerDriver(
                             prediction.FirstPlaceName, prediction.SecondPlaceName, prediction.ThirdPlaceName,
                             eventResult.FirstPlaceName, eventResult.SecondPlaceName, eventResult.ThirdPlaceName);
                         
-                        exactMatches += matches.ExactMatches;
-                        oneOffMatches += matches.OneOffMatches;
-                        twoOffMatches += matches.TwoOffMatches;
+                        exactMatches += ExactMatches;
+                        oneOffMatches += OneOffMatches;
+                        twoOffMatches += TwoOffMatches;
                     }
                 }
 
@@ -166,37 +155,37 @@ public class StatisticsRecalculationService : IStatisticsRecalculationService
                     LastUpdated = DateTime.UtcNow
                 };
 
-                await _leaderboardRepository.UpsertUserStatisticsAsync(userStats);
+                await _leaderboardRepository.UpsertUserStatisticsAsync(userStats).ConfigureAwait(false);
 
                 // Update progress
                 processedCount++;
-                job = await _jobRepository.GetJobAsync(jobId);
+                job = await _jobRepository.GetJobAsync(jobId).ConfigureAwait(false);
                 if (job != null)
                 {
                     job.ProcessedUsers = processedCount;
-                    await _jobRepository.UpdateJobAsync(job);
+                    await _jobRepository.UpdateJobAsync(job).ConfigureAwait(false);
                 }
             }
 
             // Mark job as completed
-            job = await _jobRepository.GetJobAsync(jobId);
+            job = await _jobRepository.GetJobAsync(jobId).ConfigureAwait(false);
             if (job != null)
             {
                 job.Status = "Completed";
                 job.CompletedAt = DateTime.UtcNow;
-                await _jobRepository.UpdateJobAsync(job);
+                await _jobRepository.UpdateJobAsync(job).ConfigureAwait(false);
             }
         }
         catch (Exception ex)
         {
             // Mark job as failed
-            var job = await _jobRepository.GetJobAsync(jobId);
+            var job = await _jobRepository.GetJobAsync(jobId).ConfigureAwait(false);
             if (job != null)
             {
                 job.Status = "Failed";
                 job.CompletedAt = DateTime.UtcNow;
                 job.ErrorMessage = ex.Message;
-                await _jobRepository.UpdateJobAsync(job);
+                await _jobRepository.UpdateJobAsync(job).ConfigureAwait(false);
             }
         }
     }

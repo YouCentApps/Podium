@@ -2,8 +2,6 @@
 
   <PropertyGroup>
 	<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
-	<!-- CA2007: Blazor WASM has no SynchronizationContext; CA1515: app types -->
-	<NoWarn>$(NoWarn);CA2007;CA1515</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

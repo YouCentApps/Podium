@@ -15,15 +15,10 @@ public interface ISeasonRepository
     Task<SeasonDependencies> GetSeasonDependenciesAsync(string seasonId);
 }
 
-public class SeasonRepository : ISeasonRepository
+public class SeasonRepository(ITableClientFactory tableClientFactory) : ISeasonRepository
 {
-    private readonly ITableClientFactory _tableClientFactory;
+    private readonly ITableClientFactory _tableClientFactory = tableClientFactory;
     private const string TableName = "PodiumSeasons";
-
-    public SeasonRepository(ITableClientFactory tableClientFactory)
-    {
-        _tableClientFactory = tableClientFactory;
-    }
 
     public async Task<List<Season>> GetSeasonsBySeriesAsync(string seriesId)
     {
@@ -33,7 +28,7 @@ public class SeasonRepository : ISeasonRepository
         try
         {
             var filter = $"PartitionKey eq '{seriesId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 seasons.Add(MapToSeason(entity));
             }
@@ -43,7 +38,7 @@ public class SeasonRepository : ISeasonRepository
             return seasons;
         }
 
-        return seasons.OrderByDescending(s => s.Year).ToList();
+        return [.. seasons.OrderByDescending(s => s.Year)];
     }
 
     public async Task<Season?> GetSeasonByIdAsync(string seriesId, string seasonId)
@@ -52,7 +47,7 @@ public class SeasonRepository : ISeasonRepository
 
         try
         {
-            var response = await tableClient.GetEntityAsync<TableEntity>(seriesId, seasonId);
+            var response = await tableClient.GetEntityAsync<TableEntity>(seriesId, seasonId).ConfigureAwait(false);
             return MapToSeason(response.Value);
         }
         catch (RequestFailedException)
@@ -69,7 +64,7 @@ public class SeasonRepository : ISeasonRepository
         {
             // Query across all partitions to find the season by RowKey
             var filter = $"RowKey eq '{seasonId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 return MapToSeason(entity);
             }
@@ -89,7 +84,7 @@ public class SeasonRepository : ISeasonRepository
         try
         {
             var filter = $"PartitionKey eq '{seriesId}' and IsActive eq true";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 return MapToSeason(entity);
             }
@@ -110,16 +105,16 @@ public class SeasonRepository : ISeasonRepository
         {
             // First, deactivate all seasons in this series
             var filter = $"PartitionKey eq '{seriesId}' and IsActive eq true";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 entity["IsActive"] = false;
-                await tableClient.UpdateEntityAsync(entity, entity.ETag, TableUpdateMode.Merge);
+                await tableClient.UpdateEntityAsync(entity, entity.ETag, TableUpdateMode.Merge).ConfigureAwait(false);
             }
 
             // Then, activate the specified season
-            var targetEntity = await tableClient.GetEntityAsync<TableEntity>(seriesId, seasonId);
+            var targetEntity = await tableClient.GetEntityAsync<TableEntity>(seriesId, seasonId).ConfigureAwait(false);
             targetEntity.Value["IsActive"] = true;
-            await tableClient.UpdateEntityAsync(targetEntity.Value, targetEntity.Value.ETag, TableUpdateMode.Merge);
+            await tableClient.UpdateEntityAsync(targetEntity.Value, targetEntity.Value.ETag, TableUpdateMode.Merge).ConfigureAwait(false);
 
             return true;
         }
@@ -139,7 +134,7 @@ public class SeasonRepository : ISeasonRepository
             var filter = "IsActive eq true";
             var activeSeasons = new List<Season>();
 
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 activeSeasons.Add(MapToSeason(entity));
             }
@@ -199,7 +194,7 @@ public class SeasonRepository : ISeasonRepository
         try
         {
             var filter = $"PartitionKey eq '{seriesId}'";
-            await foreach (var _ in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var _ in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 count++;
             }
@@ -222,7 +217,7 @@ public class SeasonRepository : ISeasonRepository
             season.CreatedDate = DateTime.UtcNow;
 
             var entity = MapToTableEntity(season);
-            await tableClient.AddEntityAsync(entity);
+            await tableClient.AddEntityAsync(entity).ConfigureAwait(false);
             return season;
         }
         catch (RequestFailedException)
@@ -243,12 +238,12 @@ public class SeasonRepository : ISeasonRepository
             if (seriesChanged)
             {
                 // Delete from old partition
-                await tableClient.DeleteEntityAsync(oldSeriesId, season.Id);
+                await tableClient.DeleteEntityAsync(oldSeriesId, season.Id).ConfigureAwait(false);
             }
 
             // Create/Update in the (new or same) partition
             var entity = MapToTableEntity(season);
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return season;
         }
         catch (RequestFailedException)
@@ -263,7 +258,7 @@ public class SeasonRepository : ISeasonRepository
 
         try
         {
-            await tableClient.DeleteEntityAsync(seriesId, seasonId);
+            await tableClient.DeleteEntityAsync(seriesId, seasonId).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -281,7 +276,7 @@ public class SeasonRepository : ISeasonRepository
             // Count events
             var eventsTableClient = _tableClientFactory.GetTableClient("PodiumEvents");
             var eventFilter = $"PartitionKey eq '{seasonId}'";
-            await foreach (var _ in eventsTableClient.QueryAsync<TableEntity>(filter: eventFilter))
+            await foreach (var _ in eventsTableClient.QueryAsync<TableEntity>(filter: eventFilter).ConfigureAwait(false))
             {
                 dependencies.EventCount++;
             }
@@ -289,7 +284,7 @@ public class SeasonRepository : ISeasonRepository
             // Count competitors
             var competitorsTableClient = _tableClientFactory.GetTableClient("PodiumSeasonCompetitors");
             var competitorFilter = $"PartitionKey eq '{seasonId}'";
-            await foreach (var _ in competitorsTableClient.QueryAsync<TableEntity>(filter: competitorFilter))
+            await foreach (var _ in competitorsTableClient.QueryAsync<TableEntity>(filter: competitorFilter).ConfigureAwait(false))
             {
                 dependencies.CompetitorCount++;
             }
