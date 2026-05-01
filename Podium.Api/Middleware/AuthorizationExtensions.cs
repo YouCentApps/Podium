@@ -1,9 +1,6 @@
-using Podium.Shared.Services.Auth;
-using Podium.Shared.Services.Data;
-
 namespace Podium.Api.Middleware;
 
-public static class AuthorizationExtensions
+internal static class AuthorizationExtensions
 {
     /// <summary>
     /// Validates session from X-Session-Id header and adds userId to request items
@@ -12,6 +9,8 @@ public static class AuthorizationExtensions
         HttpContext context,
         IAuthenticationService authService)
     {
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(authService);
         if (!context.Request.Headers.TryGetValue("X-Session-Id", out var sessionId) || 
             string.IsNullOrEmpty(sessionId))
         {
@@ -19,7 +18,7 @@ public static class AuthorizationExtensions
         }
 
         var (success, userId, username, validSessionId, _, _) = 
-            await authService.ValidateSessionAsync(sessionId!);
+            await authService.ValidateSessionAsync(sessionId!).ConfigureAwait(false);
 
         if (!success || string.IsNullOrEmpty(userId))
         {
@@ -42,8 +41,10 @@ public static class AuthorizationExtensions
         IAuthenticationService authService,
         IAdminRepository adminRepo)
     {
-        // First validate session
-        var sessionResult = await ValidateSession(context, authService);
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(authService);
+        ArgumentNullException.ThrowIfNull(adminRepo);
+        var sessionResult = await ValidateSession(context, authService).ConfigureAwait(false);
         if (sessionResult != null)
         {
             return sessionResult; // Unauthorized
@@ -56,7 +57,7 @@ public static class AuthorizationExtensions
         }
 
         // Check if user is an active admin
-        var isActiveAdmin = await adminRepo.IsActiveAdminAsync(userId);
+        var isActiveAdmin = await adminRepo.IsActiveAdminAsync(userId).ConfigureAwait(false);
         if (!isActiveAdmin)
         {
             return Results.Json(
@@ -75,8 +76,10 @@ public static class AuthorizationExtensions
         IAuthenticationService authService,
         IAdminRepository adminRepo)
     {
-        // First validate admin session
-        var adminResult = await ValidateAdminSession(context, authService, adminRepo);
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(authService);
+        ArgumentNullException.ThrowIfNull(adminRepo);
+        var adminResult = await ValidateAdminSession(context, authService, adminRepo).ConfigureAwait(false);
         if (adminResult != null)
         {
             return adminResult;
@@ -89,7 +92,7 @@ public static class AuthorizationExtensions
         }
 
         // Check if user can manage admins
-        var canManageAdmins = await adminRepo.CanManageAdminsAsync(userId);
+        var canManageAdmins = await adminRepo.CanManageAdminsAsync(userId).ConfigureAwait(false);
         if (!canManageAdmins)
         {
             return Results.Json(
@@ -105,6 +108,7 @@ public static class AuthorizationExtensions
     /// </summary>
     public static string? GetUserId(this HttpContext context)
     {
+        ArgumentNullException.ThrowIfNull(context);
         return context.Items["UserId"] as string;
     }
 
@@ -113,6 +117,7 @@ public static class AuthorizationExtensions
     /// </summary>
     public static string? GetUsername(this HttpContext context)
     {
+        ArgumentNullException.ThrowIfNull(context);
         return context.Items["Username"] as string;
     }
 
@@ -121,6 +126,7 @@ public static class AuthorizationExtensions
     /// </summary>
     public static string? GetSessionId(this HttpContext context)
     {
+        ArgumentNullException.ThrowIfNull(context);
         return context.Items["SessionId"] as string;
     }
 }
@@ -128,7 +134,7 @@ public static class AuthorizationExtensions
 /// <summary>
 /// Route handler filter extensions for authentication and authorization
 /// </summary>
-public static class EndpointAuthorizationExtensions
+internal static class EndpointAuthorizationExtensions
 {
     /// <summary>
     /// Requires authenticated session. Adds filter that validates X-Session-Id header.
@@ -140,13 +146,13 @@ public static class EndpointAuthorizationExtensions
             var httpContext = context.HttpContext;
             var authService = httpContext.RequestServices.GetRequiredService<IAuthenticationService>();
             
-            var result = await AuthorizationExtensions.ValidateSession(httpContext, authService);
+            var result = await AuthorizationExtensions.ValidateSession(httpContext, authService).ConfigureAwait(false);
             if (result != null)
             {
                 return result; // Unauthorized
             }
 
-            return await next(context);
+            return await next(context).ConfigureAwait(false);
         });
     }
 
@@ -161,13 +167,13 @@ public static class EndpointAuthorizationExtensions
             var authService = httpContext.RequestServices.GetRequiredService<IAuthenticationService>();
             var adminRepo = httpContext.RequestServices.GetRequiredService<IAdminRepository>();
             
-            var result = await AuthorizationExtensions.ValidateAdminSession(httpContext, authService, adminRepo);
+            var result = await AuthorizationExtensions.ValidateAdminSession(httpContext, authService, adminRepo).ConfigureAwait(false);
             if (result != null)
             {
                 return result; // Unauthorized or Forbidden
             }
 
-            return await next(context);
+            return await next(context).ConfigureAwait(false);
         });
     }
 
@@ -182,13 +188,13 @@ public static class EndpointAuthorizationExtensions
             var authService = httpContext.RequestServices.GetRequiredService<IAuthenticationService>();
             var adminRepo = httpContext.RequestServices.GetRequiredService<IAdminRepository>();
             
-            var result = await AuthorizationExtensions.ValidateAdminManagementPermission(httpContext, authService, adminRepo);
+            var result = await AuthorizationExtensions.ValidateAdminManagementPermission(httpContext, authService, adminRepo).ConfigureAwait(false);
             if (result != null)
             {
                 return result; // Unauthorized or Forbidden
             }
 
-            return await next(context);
+            return await next(context).ConfigureAwait(false);
         });
     }
 }

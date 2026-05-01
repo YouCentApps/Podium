@@ -34,7 +34,7 @@ public class AdminStateService
         }
         else
         {
-            await RefreshAdminStatusAsync();
+            await RefreshAdminStatusAsync().ConfigureAwait(false);
         }
     }
 
@@ -42,7 +42,7 @@ public class AdminStateService
     {
         if (_authState.IsAuthenticated && _authState.UserId != null)
         {
-            await RefreshAdminStatusAsync();
+            await RefreshAdminStatusAsync().ConfigureAwait(false);
         }
         _isInitialized = true;
     }
@@ -57,7 +57,7 @@ public class AdminStateService
 
         try
         {
-            var response = await _apiClient.GetMyAdminStatusAsync();
+            var response = await _apiClient.GetMyAdminStatusAsync().ConfigureAwait(false);
             if (response.Success && response.Data != null)
             {
                 _isAdmin = response.Data.IsAdmin;

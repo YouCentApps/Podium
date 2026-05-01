@@ -1,7 +1,3 @@
-using Azure;
-using Azure.Data.Tables;
-using Podium.Shared.Models;
-
 namespace Podium.Shared.Services.Data;
 
 public interface IScoringRulesRepository
@@ -28,7 +24,7 @@ public class ScoringRulesRepository : IScoringRulesRepository
 
         try
         {
-            var response = await tableClient.GetEntityAsync<TableEntity>(seasonId, RowKeyValue);
+            var response = await tableClient.GetEntityAsync<TableEntity>(seasonId, RowKeyValue).ConfigureAwait(false);
             return MapToScoringRules(response.Value);
         }
         catch (RequestFailedException)
@@ -45,7 +41,7 @@ public class ScoringRulesRepository : IScoringRulesRepository
         {
             scoringRules.CreatedDate = DateTime.UtcNow;
             var entity = MapToTableEntity(scoringRules);
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return scoringRules;
         }
         catch (RequestFailedException)
@@ -60,7 +56,7 @@ public class ScoringRulesRepository : IScoringRulesRepository
 
         try
         {
-            await tableClient.DeleteEntityAsync(seasonId, RowKeyValue);
+            await tableClient.DeleteEntityAsync(seasonId, RowKeyValue).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)

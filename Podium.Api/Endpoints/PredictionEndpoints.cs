@@ -1,11 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using Podium.Shared.Models;
-using Podium.Shared.Services.Data;
-using Podium.Api.Middleware;
-
 namespace Podium.Api.Endpoints;
 
-public static class PredictionEndpoints
+internal static class PredictionEndpoints
 {
     public static void MapPredictionEndpoints(this WebApplication app)
     {
@@ -25,7 +20,7 @@ public static class PredictionEndpoints
                 return Results.Forbid();
             }
 
-            var prediction = await predictionRepo.GetPredictionAsync(eventId, userId);
+            var prediction = await predictionRepo.GetPredictionAsync(eventId, userId).ConfigureAwait(false);
             // Return 200 with null data if no prediction found (not an error, just no data)
             return Results.Ok(prediction);
         })
@@ -37,7 +32,7 @@ public static class PredictionEndpoints
             string eventId,
             [FromServices] IPredictionRepository predictionRepo) =>
         {
-            var predictions = await predictionRepo.GetPredictionsByEventAsync(eventId);
+            var predictions = await predictionRepo.GetPredictionsByEventAsync(eventId).ConfigureAwait(false);
             return Results.Ok(predictions);
         })
         .RequireAuth()
@@ -59,11 +54,11 @@ public static class PredictionEndpoints
             }
 
             // Get all events in the season
-            var events = await eventRepo.GetEventsBySeasonAsync(seasonId);
+            var events = await eventRepo.GetEventsBySeasonAsync(seasonId).ConfigureAwait(false);
             var eventIds = events.Select(e => e.Id).ToList();
 
             // Get predictions for those events
-            var predictions = await predictionRepo.GetPredictionsByUserAndSeasonAsync(userId, seasonId, eventIds);
+            var predictions = await predictionRepo.GetPredictionsByUserAndSeasonAsync(userId, seasonId, eventIds).ConfigureAwait(false);
             return Results.Ok(predictions);
         })
         .RequireAuth()
@@ -89,26 +84,26 @@ public static class PredictionEndpoints
             var allPredictions = new List<Prediction>();
 
             // Get all active disciplines
-            var disciplines = await disciplineRepo.GetActiveDisciplinesAsync();
+            var disciplines = await disciplineRepo.GetActiveDisciplinesAsync().ConfigureAwait(false);
             
             foreach (var discipline in disciplines)
             {
                 // Get active series for this discipline
-                var seriesList = await seriesRepo.GetActiveSeriesByDisciplineAsync(discipline.Id);
+                var seriesList = await seriesRepo.GetActiveSeriesByDisciplineAsync(discipline.Id).ConfigureAwait(false);
                 
                 foreach (var series in seriesList)
                 {
                     // Get active season for this series
-                    var season = await seasonRepo.GetActiveSeasonBySeriesAsync(series.Id);
+                    var season = await seasonRepo.GetActiveSeasonBySeriesAsync(series.Id).ConfigureAwait(false);
                     
                     if (season != null)
                     {
                         // Get all events in the season
-                        var events = await eventRepo.GetEventsBySeasonAsync(season.Id);
+                        var events = await eventRepo.GetEventsBySeasonAsync(season.Id).ConfigureAwait(false);
                         var eventIds = events.Select(e => e.Id).ToList();
 
                         // Get predictions for those events
-                        var predictions = await predictionRepo.GetPredictionsByUserAndSeasonAsync(userId, season.Id, eventIds);
+                        var predictions = await predictionRepo.GetPredictionsByUserAndSeasonAsync(userId, season.Id, eventIds).ConfigureAwait(false);
                         allPredictions.AddRange(predictions);
                     }
                 }
@@ -146,15 +141,15 @@ public static class PredictionEndpoints
 
             // Get disciplines based on filter
             var disciplines = string.IsNullOrEmpty(disciplineId)
-                ? (includeInactiveSeasons ? await disciplineRepo.GetAllDisciplinesAsync() : await disciplineRepo.GetActiveDisciplinesAsync())
-                : new List<Discipline> { await disciplineRepo.GetDisciplineByIdAsync(disciplineId) }.Where(d => d != null).ToList()!;
+                ? (includeInactiveSeasons ? await disciplineRepo.GetAllDisciplinesAsync().ConfigureAwait(false) : await disciplineRepo.GetActiveDisciplinesAsync().ConfigureAwait(false))
+                : (await disciplineRepo.GetDisciplineByIdAsync(disciplineId).ConfigureAwait(false) is { } d ? [d] : new List<Discipline>());
 
             foreach (var discipline in disciplines)
             {
                 // Get series based on filter
                 var seriesList = string.IsNullOrEmpty(seriesId)
-                    ? (includeInactiveSeasons ? await seriesRepo.GetSeriesByDisciplineAsync(discipline.Id) : await seriesRepo.GetActiveSeriesByDisciplineAsync(discipline.Id))
-                    : new List<Series> { await seriesRepo.GetSeriesByIdOnlyAsync(seriesId) }.Where(s => s != null).ToList()!;
+                    ? (includeInactiveSeasons ? await seriesRepo.GetSeriesByDisciplineAsync(discipline.Id).ConfigureAwait(false) : await seriesRepo.GetActiveSeriesByDisciplineAsync(discipline.Id).ConfigureAwait(false))
+                    : (await seriesRepo.GetSeriesByIdOnlyAsync(seriesId).ConfigureAwait(false) is { } s ? [s] : new List<Series>());
 
                 foreach (var series in seriesList)
                 {
@@ -162,27 +157,27 @@ public static class PredictionEndpoints
                     var seasons = new List<Season>();
                     if (!string.IsNullOrEmpty(seasonId))
                     {
-                        var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId);
+                        var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId).ConfigureAwait(false);
                         if (season != null) seasons.Add(season);
                     }
                     else if (includeInactiveSeasons)
                     {
-                        seasons = await seasonRepo.GetSeasonsBySeriesAsync(series.Id);
+                        seasons = await seasonRepo.GetSeasonsBySeriesAsync(series.Id).ConfigureAwait(false);
                     }
                     else
                     {
-                        var activeSeason = await seasonRepo.GetActiveSeasonBySeriesAsync(series.Id);
+                        var activeSeason = await seasonRepo.GetActiveSeasonBySeriesAsync(series.Id).ConfigureAwait(false);
                         if (activeSeason != null) seasons.Add(activeSeason);
                     }
 
                     foreach (var season in seasons)
                     {
                         // Get all events in the season
-                        var events = await eventRepo.GetEventsBySeasonAsync(season.Id);
+                        var events = await eventRepo.GetEventsBySeasonAsync(season.Id).ConfigureAwait(false);
                         var eventIds = events.Select(e => e.Id).ToList();
 
                         // Get predictions for those events
-                        var predictions = await predictionRepo.GetPredictionsByUserAndSeasonAsync(userId, season.Id, eventIds);
+                        var predictions = await predictionRepo.GetPredictionsByUserAndSeasonAsync(userId, season.Id, eventIds).ConfigureAwait(false);
 
                         // Build PredictionWithDetails for each prediction
                         foreach (var prediction in predictions)
@@ -194,7 +189,7 @@ public static class PredictionEndpoints
                             EventResult? result = null;
                             if (evt.Status == "Completed")
                             {
-                                result = await eventRepo.GetEventResultAsync(evt.Id);
+                                result = await eventRepo.GetEventResultAsync(evt.Id).ConfigureAwait(false);
                             }
 
                             var predictionWithDetails = new PredictionWithDetails
@@ -271,7 +266,7 @@ public static class PredictionEndpoints
             }
 
             // Validate event exists and accepts predictions
-            var eventDetails = await eventRepo.GetEventByIdAsync(request.SeasonId, request.EventId);
+            var eventDetails = await eventRepo.GetEventByIdAsync(request.SeasonId, request.EventId).ConfigureAwait(false);
             if (eventDetails == null)
                 return Results.BadRequest(new { error = "Event not found" });
 
@@ -301,7 +296,7 @@ public static class PredictionEndpoints
                 UpdatedDate = DateTime.UtcNow
             };
 
-            var success = await predictionRepo.SavePredictionAsync(prediction);
+            var success = await predictionRepo.SavePredictionAsync(prediction).ConfigureAwait(false);
             if (!success)
                 return Results.StatusCode(500);
 
@@ -333,26 +328,26 @@ public static class PredictionEndpoints
             string? latestDisciplineId = null;
 
             // Get all active disciplines
-            var disciplines = await disciplineRepo.GetActiveDisciplinesAsync();
+            var disciplines = await disciplineRepo.GetActiveDisciplinesAsync().ConfigureAwait(false);
             
             foreach (var discipline in disciplines)
             {
                 // Get active series for this discipline
-                var seriesList = await seriesRepo.GetActiveSeriesByDisciplineAsync(discipline.Id);
+                var seriesList = await seriesRepo.GetActiveSeriesByDisciplineAsync(discipline.Id).ConfigureAwait(false);
                 
                 foreach (var series in seriesList)
                 {
                     // Get active season for this series
-                    var season = await seasonRepo.GetActiveSeasonBySeriesAsync(series.Id);
+                    var season = await seasonRepo.GetActiveSeasonBySeriesAsync(series.Id).ConfigureAwait(false);
                     
                     if (season != null)
                     {
                         // Get all events in the season
-                        var events = await eventRepo.GetEventsBySeasonAsync(season.Id);
+                        var events = await eventRepo.GetEventsBySeasonAsync(season.Id).ConfigureAwait(false);
                         var eventIds = events.Select(e => e.Id).ToList();
 
                         // Get predictions for those events
-                        var predictions = await predictionRepo.GetPredictionsByUserAndSeasonAsync(userId, season.Id, eventIds);
+                        var predictions = await predictionRepo.GetPredictionsByUserAndSeasonAsync(userId, season.Id, eventIds).ConfigureAwait(false);
                         
                         // Filter only predictions with points
                         var scoredPredictions = predictions
@@ -360,7 +355,7 @@ public static class PredictionEndpoints
                             .OrderByDescending(p => p.UpdatedDate)
                             .ToList();
                         
-                        if (scoredPredictions.Any())
+                        if (scoredPredictions.Count > 0)
                         {
                             var candidate = scoredPredictions.First();
                             
@@ -396,7 +391,7 @@ public static class PredictionEndpoints
 }
 
 // Request DTOs
-public record SubmitPredictionRequest(
+internal record SubmitPredictionRequest(
     string EventId,
     string SeasonId,
     string UserId,

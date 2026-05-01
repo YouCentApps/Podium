@@ -12,7 +12,7 @@ public class NullStringLocalizer<T> : IStringLocalizer<T>
     public LocalizedString this[string name] => new LocalizedString(name, name, resourceNotFound: true);
 
     public LocalizedString this[string name, params object[] arguments]
-        => new LocalizedString(name, string.Format(name, arguments), resourceNotFound: true);
+        => new LocalizedString(name, string.Format(System.Globalization.CultureInfo.InvariantCulture, name, arguments), resourceNotFound: true);
 
     public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
         => Enumerable.Empty<LocalizedString>();

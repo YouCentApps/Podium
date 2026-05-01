@@ -1,10 +1,10 @@
 namespace Podium.Shared.Services.State;
 
-public class AuthStateService
+public class AuthStateService(IStorageService? storageService = null)
 {
     private const string StorageKey = "podium_session";
-    private readonly IStorageService? _storageService;
-    private bool _isHandlingExpiration = false;
+    private readonly IStorageService? _storageService = storageService;
+    private bool _isHandlingExpiration;
     
     private string? _userId;
     private string? _username;
@@ -18,18 +18,13 @@ public class AuthStateService
     public string? Username => _username;
     public string? SessionId => _sessionId;
 
-    public AuthStateService(IStorageService? storageService = null)
-    {
-        _storageService = storageService;
-    }
-
     public async Task InitializeAsync()
     {
         if (_storageService == null)
             return;
 
         // Try to restore session from storage
-        var session = await _storageService.GetItemAsync<SessionData>(StorageKey);
+        var session = await _storageService.GetItemAsync<SessionData>(StorageKey).ConfigureAwait(false);
         if (session != null && session.ExpiryDate > DateTime.UtcNow)
         {
             _userId = session.UserId;
@@ -55,7 +50,7 @@ public class AuthStateService
                 SessionId = sessionId,
                 ExpiryDate = DateTime.UtcNow.AddDays(14)
             };
-            await _storageService.SetItemAsync(StorageKey, session);
+            await _storageService.SetItemAsync(StorageKey, session).ConfigureAwait(false);
         }
 
         NotifyStateChanged();
@@ -70,7 +65,7 @@ public class AuthStateService
         // Remove from storage
         if (_storageService != null)
         {
-            await _storageService.RemoveItemAsync(StorageKey);
+            await _storageService.RemoveItemAsync(StorageKey).ConfigureAwait(false);
         }
 
         NotifyStateChanged();
@@ -87,12 +82,12 @@ public class AuthStateService
         try
         {
             // Clear the auth state first
-            await ClearAuthStateAsync();
+            await ClearAuthStateAsync().ConfigureAwait(false);
 
             // Notify subscribers (e.g., UI components) that session expired
             if (OnSessionExpired != null)
             {
-                await OnSessionExpired.Invoke();
+                await OnSessionExpired.Invoke().ConfigureAwait(false);
             }
         }
         finally

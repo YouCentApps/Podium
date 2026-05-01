@@ -7,6 +7,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'Podium.Api/**'
+      - 'Podium.Shared/**'
   workflow_dispatch:
 
 jobs:

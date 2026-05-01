@@ -1,4 +1,3 @@
-using Podium.Migration.Models;
 using System.Security.Cryptography;
 
 namespace Podium.Migration.Services;
@@ -24,11 +23,12 @@ public class DataTransformer
     /// </summary>
     public string GetOrCreateSeasonId(int year)
     {
-        if (!_seasonIds.ContainsKey(year))
+        if (!_seasonIds.TryGetValue(year, out var id))
         {
-            _seasonIds[year] = Guid.NewGuid().ToString();
+            id = Guid.NewGuid().ToString();
+            _seasonIds[year] = id;
         }
-        return _seasonIds[year];
+        return id;
     }
 
     /// <summary>
@@ -39,11 +39,12 @@ public class DataTransformer
         if (string.IsNullOrWhiteSpace(legacyUserId))
             return string.Empty;
 
-        if (!_userIdMap.ContainsKey(legacyUserId))
+        if (!_userIdMap.TryGetValue(legacyUserId, out var id))
         {
-            _userIdMap[legacyUserId] = Guid.NewGuid().ToString();
+            id = Guid.NewGuid().ToString();
+            _userIdMap[legacyUserId] = id;
         }
-        return _userIdMap[legacyUserId];
+        return id;
     }
 
     /// <summary>
@@ -55,11 +56,12 @@ public class DataTransformer
             return string.Empty;
 
         var normalizedName = driverName.Trim();
-        if (!_driverIdMap.ContainsKey(normalizedName))
+        if (!_driverIdMap.TryGetValue(normalizedName, out var id))
         {
-            _driverIdMap[normalizedName] = Guid.NewGuid().ToString();
+            id = Guid.NewGuid().ToString();
+            _driverIdMap[normalizedName] = id;
         }
-        return _driverIdMap[normalizedName];
+        return id;
     }
 
     /// <summary>
@@ -68,11 +70,12 @@ public class DataTransformer
     public string GetOrCreateEventId(int year, int raceNumber)
     {
         var key = $"{year}_{raceNumber}";
-        if (!_eventIdMap.ContainsKey(key))
+        if (!_eventIdMap.TryGetValue(key, out var id))
         {
-            _eventIdMap[key] = Guid.NewGuid().ToString();
+            id = Guid.NewGuid().ToString();
+            _eventIdMap[key] = id;
         }
-        return _eventIdMap[key];
+        return id;
     }
 
     /// <summary>
@@ -90,15 +93,12 @@ public class DataTransformer
     /// <summary>
     /// Get all driver names for debugging
     /// </summary>
-    public IEnumerable<string> GetAllDriverNames()
-    {
-        return _driverIdMap.Keys;
-    }
+    public IEnumerable<string> AllDriverNames => _driverIdMap.Keys;
 
     /// <summary>
     /// Generate short name from full name
     /// </summary>
-    public string GenerateShortName(string fullName)
+    public static string GenerateShortName(string fullName)
     {
         if (string.IsNullOrWhiteSpace(fullName))
             return string.Empty;
@@ -114,7 +114,7 @@ public class DataTransformer
     /// <summary>
     /// Calculate points based on scoring rules
     /// </summary>
-    public int? CalculatePoints(
+    public static int? CalculatePoints(
         string predictedP1, string predictedP2, string predictedP3,
         string actualP1, string actualP2, string actualP3,
         int exactMatchPoints = 25, int oneOffPoints = 18, int twoOffPoints = 15)
@@ -170,7 +170,7 @@ public class DataTransformer
     /// <summary>
     /// Determine event status based on date
     /// </summary>
-    public string DetermineEventStatus(DateTime? eventDate)
+    public static string DetermineEventStatus(DateTime? eventDate)
     {
         if (eventDate == null)
             return "Completed"; // Default for legacy data
@@ -187,7 +187,7 @@ public class DataTransformer
     /// <summary>
     /// Hash password (not used for legacy users, but included for completeness)
     /// </summary>
-    public (string hash, string salt) HashPassword(string password)
+    public static (string hash, string salt) HashPassword(string password)
     {
         var saltBytes = new byte[32];
         using (var rng = RandomNumberGenerator.Create())
@@ -207,6 +207,7 @@ public class DataTransformer
     /// </summary>
     public void PrintMappingSummary()
     {
+#pragma warning disable CA1303
         Console.WriteLine("\n--- Data Mapping Summary ---");
         Console.WriteLine($"Discipline ID (Single-Seater Racing): {_disciplineId}");
         Console.WriteLine($"Series ID (Formula 1): {_seriesId}");
@@ -218,5 +219,6 @@ public class DataTransformer
         Console.WriteLine($"Users mapped: {_userIdMap.Count}");
         Console.WriteLine($"Drivers mapped: {_driverIdMap.Count}");
         Console.WriteLine($"Events mapped: {_eventIdMap.Count}");
+#pragma warning restore CA1303
     }
 }

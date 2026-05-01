@@ -1,7 +1,3 @@
-using Azure;
-using Azure.Data.Tables;
-using Podium.Shared.Models;
-
 namespace Podium.Shared.Services.Data;
 
 public interface ILeaderboardRepository
@@ -31,7 +27,7 @@ public class LeaderboardRepository : ILeaderboardRepository
         try
         {
             var filter = $"PartitionKey eq '{seasonId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 leaderboard.Add(MapToUserStatistics(entity));
             }
@@ -53,7 +49,7 @@ public class LeaderboardRepository : ILeaderboardRepository
 
         try
         {
-            var response = await tableClient.GetEntityAsync<TableEntity>(seasonId, userId);
+            var response = await tableClient.GetEntityAsync<TableEntity>(seasonId, userId).ConfigureAwait(false);
             return MapToUserStatistics(response.Value);
         }
         catch (RequestFailedException)
@@ -82,7 +78,7 @@ public class LeaderboardRepository : ILeaderboardRepository
                 ["LastUpdated"] = DateTime.SpecifyKind(userStatistics.LastUpdated, DateTimeKind.Utc)
             };
 
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -99,7 +95,7 @@ public class LeaderboardRepository : ILeaderboardRepository
         try
         {
             var filter = $"PartitionKey eq '{seasonId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter, select: new[] { "RowKey" }))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter, select: ["RowKey"]).ConfigureAwait(false))
             {
                 userIds.Add(entity.RowKey);
             }
@@ -120,7 +116,7 @@ public class LeaderboardRepository : ILeaderboardRepository
         try
         {
             var filter = $"PartitionKey eq '{seasonId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 var lastUpdated = entity.GetDateTimeOffset("LastUpdated")?.UtcDateTime;
                 if (lastUpdated.HasValue && lastUpdated.Value > timestamp)

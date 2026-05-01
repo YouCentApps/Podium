@@ -57,7 +57,7 @@ public static class InputValidator
             return (false, "Password cannot exceed 100 characters.");
         }
 
-        if (password.Contains(' '))
+        if (password.Contains(' ', StringComparison.Ordinal))
         {
             return (false, "Password cannot contain spaces.");
         }

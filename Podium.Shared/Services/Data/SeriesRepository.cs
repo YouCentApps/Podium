@@ -1,7 +1,3 @@
-using Azure;
-using Azure.Data.Tables;
-using Podium.Shared.Models;
-
 namespace Podium.Shared.Services.Data;
 
 public interface ISeriesRepository
@@ -33,7 +29,7 @@ public class SeriesRepository : ISeriesRepository
         try
         {
             var filter = $"PartitionKey eq '{disciplineId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 series.Add(MapToSeries(entity));
             }
@@ -52,7 +48,7 @@ public class SeriesRepository : ISeriesRepository
 
         try
         {
-            var response = await tableClient.GetEntityAsync<TableEntity>(disciplineId, seriesId);
+            var response = await tableClient.GetEntityAsync<TableEntity>(disciplineId, seriesId).ConfigureAwait(false);
             return MapToSeries(response.Value);
         }
         catch (RequestFailedException)
@@ -69,7 +65,7 @@ public class SeriesRepository : ISeriesRepository
         {
             // Query across all partitions to find the series by RowKey
             var filter = $"RowKey eq '{seriesId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 return MapToSeries(entity);
             }
@@ -90,7 +86,7 @@ public class SeriesRepository : ISeriesRepository
         try
         {
             var filter = $"PartitionKey eq '{disciplineId}' and IsActive eq true";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 series.Add(MapToSeries(entity));
             }
@@ -140,7 +136,7 @@ public class SeriesRepository : ISeriesRepository
                 ["CreatedDate"] = DateTime.SpecifyKind(series.CreatedDate, DateTimeKind.Utc)
             };
 
-            await tableClient.AddEntityAsync(entity);
+            await tableClient.AddEntityAsync(entity).ConfigureAwait(false);
             return series;
         }
         catch (RequestFailedException)
@@ -164,7 +160,7 @@ public class SeriesRepository : ISeriesRepository
             if (disciplineChanged)
             {
                 // Delete from old partition
-                await tableClient.DeleteEntityAsync(oldDisciplineId, series.Id);
+                await tableClient.DeleteEntityAsync(oldDisciplineId, series.Id).ConfigureAwait(false);
             }
 
             // Create/Update in the (new or same) partition
@@ -180,7 +176,7 @@ public class SeriesRepository : ISeriesRepository
                 ["CreatedDate"] = DateTime.SpecifyKind(series.CreatedDate, DateTimeKind.Utc)
             };
 
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return series;
         }
         catch (RequestFailedException)
@@ -195,7 +191,7 @@ public class SeriesRepository : ISeriesRepository
 
         try
         {
-            await tableClient.DeleteEntityAsync(disciplineId, seriesId);
+            await tableClient.DeleteEntityAsync(disciplineId, seriesId).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)

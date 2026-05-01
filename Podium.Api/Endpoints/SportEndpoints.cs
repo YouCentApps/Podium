@@ -1,10 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using Podium.Shared.Services.Data;
-using Podium.Api.Middleware;
-
 namespace Podium.Api.Endpoints;
 
-public static class SportEndpoints
+internal static class SportEndpoints
 {
     public static void MapSportEndpoints(this WebApplication app)
     {
@@ -13,7 +9,7 @@ public static class SportEndpoints
         // Get all active disciplines
         group.MapGet("/disciplines", async ([FromServices] IDisciplineRepository disciplineRepo) =>
         {
-            var disciplines = await disciplineRepo.GetActiveDisciplinesAsync();
+            var disciplines = await disciplineRepo.GetActiveDisciplinesAsync().ConfigureAwait(false);
             return Results.Ok(disciplines);
         })
         .RequireAuth()
@@ -24,7 +20,7 @@ public static class SportEndpoints
             string disciplineId,
             [FromServices] ISeriesRepository seriesRepo) =>
         {
-            var series = await seriesRepo.GetActiveSeriesByDisciplineAsync(disciplineId);
+            var series = await seriesRepo.GetActiveSeriesByDisciplineAsync(disciplineId).ConfigureAwait(false);
             return Results.Ok(series);
         })
         .RequireAuth()
@@ -35,7 +31,7 @@ public static class SportEndpoints
             string seriesId,
             [FromServices] ISeasonRepository seasonRepo) =>
         {
-            var seasons = await seasonRepo.GetSeasonsBySeriesAsync(seriesId);
+            var seasons = await seasonRepo.GetSeasonsBySeriesAsync(seriesId).ConfigureAwait(false);
             return Results.Ok(seasons);
         })
         .RequireAuth()
@@ -46,7 +42,7 @@ public static class SportEndpoints
             string seriesId,
             [FromServices] ISeasonRepository seasonRepo) =>
         {
-            var season = await seasonRepo.GetActiveSeasonBySeriesAsync(seriesId);
+            var season = await seasonRepo.GetActiveSeasonBySeriesAsync(seriesId).ConfigureAwait(false);
             // Return 200 with null data if no active season (not an error, just no active season)
             return Results.Ok(season);
         })
@@ -58,7 +54,7 @@ public static class SportEndpoints
             string seasonId,
             [FromServices] IEventRepository eventRepo) =>
         {
-            var events = await eventRepo.GetEventsBySeasonAsync(seasonId);
+            var events = await eventRepo.GetEventsBySeasonAsync(seasonId).ConfigureAwait(false);
             return Results.Ok(events);
         })
         .RequireAuth()
@@ -69,7 +65,7 @@ public static class SportEndpoints
             string seasonId,
             [FromServices] IEventRepository eventRepo) =>
         {
-            var events = await eventRepo.GetUpcomingEventsBySeasonAsync(seasonId);
+            var events = await eventRepo.GetUpcomingEventsBySeasonAsync(seasonId).ConfigureAwait(false);
             return Results.Ok(events);
         })
         .RequireAuth()
@@ -80,7 +76,7 @@ public static class SportEndpoints
             string seasonId,
             [FromServices] ICompetitorRepository competitorRepo) =>
         {
-            var competitors = await competitorRepo.GetCompetitorsBySeasonAsync(seasonId);
+            var competitors = await competitorRepo.GetCompetitorsBySeasonAsync(seasonId).ConfigureAwait(false);
             return Results.Ok(competitors);
         })
         .RequireAuth()
@@ -92,7 +88,7 @@ public static class SportEndpoints
             string seasonId,
             [FromServices] IEventRepository eventRepo) =>
         {
-            var eventDetails = await eventRepo.GetEventByIdAsync(seasonId, eventId);
+            var eventDetails = await eventRepo.GetEventByIdAsync(seasonId, eventId).ConfigureAwait(false);
             if (eventDetails == null)
                 return Results.NotFound(new { error = "Event not found" });
             
@@ -106,7 +102,7 @@ public static class SportEndpoints
             string eventId,
             [FromServices] IEventRepository eventRepo) =>
         {
-            var result = await eventRepo.GetEventResultAsync(eventId);
+            var result = await eventRepo.GetEventResultAsync(eventId).ConfigureAwait(false);
             // Return 200 with null data if no result available yet (not an error, just pending)
             return Results.Ok(result);
         })
@@ -118,21 +114,18 @@ public static class SportEndpoints
             string seasonId,
             [FromServices] IScoringRulesRepository scoringRulesRepo) =>
         {
-            var scoringRules = await scoringRulesRepo.GetScoringRulesBySeasonAsync(seasonId);
-            
-            if (scoringRules == null)
+            var scoringRules = await scoringRulesRepo.GetScoringRulesBySeasonAsync(seasonId).ConfigureAwait(false);
+
+            // Return default scoring rules if not configured
+            scoringRules ??= new ScoringRules
             {
-                // Return default scoring rules if not configured
-                scoringRules = new Podium.Shared.Models.ScoringRules
-                {
-                    SeasonId = seasonId,
-                    ExactMatchPoints = 25,
-                    OneOffPoints = 18,
-                    TwoOffPoints = 15,
-                    CreatedDate = DateTime.UtcNow
-                };
-            }
-            
+                SeasonId = seasonId,
+                ExactMatchPoints = 25,
+                OneOffPoints = 18,
+                TwoOffPoints = 15,
+                CreatedDate = DateTime.UtcNow
+            };
+
             return Results.Ok(scoringRules);
         })
         .RequireAuth()

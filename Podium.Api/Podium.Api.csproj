@@ -1,21 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>podium-api-secrets</UserSecretsId>
+    
+
+    <!-- CA1303: Dev tool console/log strings don't need localization -->
+    <!-- CA1812: Internal record types instantiated via JSON model binding -->
+    <!-- CA1852: Records are sealed by default in C# -->
+    <NoWarn>$(NoWarn);CA1303;CA1812;CA1852</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="appsettings.Development(template).json" />
+    <Content Remove="appsettings.Development(placeholder).json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="appsettings.Development%28template%29.json" />
+    <None Include="appsettings.Development%28placeholder%29.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Data.Tables" Version="12.11.0" />
+    <PackageReference Include="Azure.Data.Tables" />
   </ItemGroup>
 
   <ItemGroup>

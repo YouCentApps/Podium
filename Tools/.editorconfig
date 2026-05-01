@@ -1,0 +1,30 @@
+# Analyzer severity overrides for CLI tools
+[*.cs]
+
+# CA1515: Application types don't need to be public
+dotnet_diagnostic.CA1515.severity = none
+
+# CA1031: CLI tools intentionally catch broad exceptions at top level
+dotnet_diagnostic.CA1031.severity = none
+
+# CA1303: CLI/dev tool console strings don't need localization
+dotnet_diagnostic.CA1303.severity = none
+
+# CA1822: Already applied static where needed
+dotnet_diagnostic.CA1822.severity = none
+
+# CA2227/CA1002: Collection properties are intentional design
+dotnet_diagnostic.CA2227.severity = none
+dotnet_diagnostic.CA1002.severity = none
+
+# CA1054: String URI params match existing API conventions
+dotnet_diagnostic.CA1054.severity = none
+
+# CA1062: Tool code; params validated by callers
+dotnet_diagnostic.CA1062.severity = none
+
+# CA1860: Already fixed where applicable
+dotnet_diagnostic.CA1860.severity = none
+
+# CA1852: Tool types don't need to be sealed
+dotnet_diagnostic.CA1852.severity = none

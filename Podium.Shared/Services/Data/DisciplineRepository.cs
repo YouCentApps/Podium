@@ -1,7 +1,3 @@
-using Azure;
-using Azure.Data.Tables;
-using Podium.Shared.Models;
-
 namespace Podium.Shared.Services.Data;
 
 public interface IDisciplineRepository
@@ -32,7 +28,7 @@ public class DisciplineRepository : IDisciplineRepository
 
         try
         {
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: "PartitionKey eq 'Discipline'"))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: "PartitionKey eq 'Discipline'").ConfigureAwait(false))
             {
                 disciplines.Add(MapToDiscipline(entity));
             }
@@ -52,7 +48,7 @@ public class DisciplineRepository : IDisciplineRepository
 
         try
         {
-            var response = await tableClient.GetEntityAsync<TableEntity>("Discipline", disciplineId);
+            var response = await tableClient.GetEntityAsync<TableEntity>("Discipline", disciplineId).ConfigureAwait(false);
             return MapToDiscipline(response.Value);
         }
         catch (RequestFailedException)
@@ -69,7 +65,7 @@ public class DisciplineRepository : IDisciplineRepository
         try
         {
             var filter = "PartitionKey eq 'Discipline' and IsActive eq true";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 disciplines.Add(MapToDiscipline(entity));
             }
@@ -111,7 +107,7 @@ public class DisciplineRepository : IDisciplineRepository
                 ["CreatedDate"] = DateTime.SpecifyKind(discipline.CreatedDate, DateTimeKind.Utc)
             };
 
-            await tableClient.AddEntityAsync(entity);
+            await tableClient.AddEntityAsync(entity).ConfigureAwait(false);
             return discipline;
         }
         catch (RequestFailedException)
@@ -134,7 +130,7 @@ public class DisciplineRepository : IDisciplineRepository
                 ["CreatedDate"] = DateTime.SpecifyKind(discipline.CreatedDate, DateTimeKind.Utc)
             };
 
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return discipline;
         }
         catch (RequestFailedException)
@@ -149,7 +145,7 @@ public class DisciplineRepository : IDisciplineRepository
 
         try
         {
-            await tableClient.DeleteEntityAsync("Discipline", disciplineId);
+            await tableClient.DeleteEntityAsync("Discipline", disciplineId).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -166,7 +162,7 @@ public class DisciplineRepository : IDisciplineRepository
         try
         {
             var filter = $"PartitionKey eq '{disciplineId}'";
-            await foreach (var _ in seriesTableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var _ in seriesTableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 count++;
             }

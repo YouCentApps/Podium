@@ -1,12 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
-using Podium.Shared;
-using Podium.Shared.Services.Auth;
-using Podium.Shared.Services.Data;
-
 namespace Podium.Api.Endpoints;
 
-public static class AuthEndpoints
+internal static class AuthEndpoints
 {
     public static void MapAuthEndpoints(this WebApplication app)
     {
@@ -23,7 +17,7 @@ public static class AuthEndpoints
                 request.Username,
                 request.Password,
                 request.PreferredAuthMethod,
-                request.LanguageCode ?? "en");
+                request.LanguageCode ?? "en").ConfigureAwait(false);
 
             if (!success)
                 return Results.BadRequest(new { error = errorMessage });
@@ -40,7 +34,7 @@ public static class AuthEndpoints
         {
             var (success, userId, errorMessage) = await registrationService.VerifyAndCompleteRegistrationAsync(
                 request.TempUserId,
-                request.OtpCode);
+                request.OtpCode).ConfigureAwait(false);
 
             if (!success)
                 return Results.BadRequest(new { error = errorMessage });
@@ -60,7 +54,7 @@ public static class AuthEndpoints
                 request.Username,
                 request.Password,
                 request.PreferredAuthMethod,
-                request.LanguageCode ?? "en");
+                request.LanguageCode ?? "en").ConfigureAwait(false);
 
             if (!success)
                 return Results.BadRequest(new { error = errorMessage });
@@ -75,7 +69,7 @@ public static class AuthEndpoints
             [FromServices] IAuthenticationService authService,
             [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
-            var (success, actualEmail, errorMessage) = await authService.SendOTPAsync(request.EmailOrUsername);
+            var (success, actualEmail, errorMessage) = await authService.SendOTPAsync(request.EmailOrUsername).ConfigureAwait(false);
 
             if (!success)
                 return Results.BadRequest(new { error = errorMessage });
@@ -91,7 +85,7 @@ public static class AuthEndpoints
         {
             var (success, userId, username, sessionId, languageCode, errorMessage) = await authService.VerifyOTPAsync(
                 request.Email,
-                request.OtpCode);
+                request.OtpCode).ConfigureAwait(false);
 
             if (!success)
                 return Results.BadRequest(new { error = errorMessage });
@@ -107,7 +101,7 @@ public static class AuthEndpoints
         {
             var (success, userId, username, sessionId, languageCode, errorMessage) = await authService.SignInWithPasswordAsync(
                 request.EmailOrUsername,
-                request.Password);
+                request.Password).ConfigureAwait(false);
 
             if (!success)
                 return Results.BadRequest(new { error = errorMessage });
@@ -122,7 +116,7 @@ public static class AuthEndpoints
             [FromServices] IAuthenticationService authService) =>
         {
             var (success, userId, username, sessionId, languageCode, errorMessage) = 
-                await authService.ValidateSessionAsync(request.SessionId);
+                await authService.ValidateSessionAsync(request.SessionId).ConfigureAwait(false);
 
             if (!success)
             {
@@ -139,7 +133,7 @@ public static class AuthEndpoints
             [FromServices] IAuthenticationService authService,
             [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
-            await authService.SignOutAsync(request.SessionId);
+            await authService.SignOutAsync(request.SessionId).ConfigureAwait(false);
             return Results.Ok(new { message = localizer["Auth_SignOutSuccess"].Value });
         })
         .WithName("SignOut");
@@ -147,10 +141,10 @@ public static class AuthEndpoints
 }
 
 // Request DTOs
-public record RegisterRequest(string Email, string Username, string Password, string PreferredAuthMethod, string? LanguageCode);
-public record VerifyRegistrationRequest(string TempUserId, string OtpCode);
-public record SendOtpRequest(string EmailOrUsername);
-public record VerifyOtpRequest(string Email, string OtpCode);
-public record SignInRequest(string EmailOrUsername, string Password);
-public record ValidateSessionRequest(string SessionId);
-public record SignOutRequest(string SessionId);
+internal record RegisterRequest(string Email, string Username, string Password, string PreferredAuthMethod, string? LanguageCode);
+internal record VerifyRegistrationRequest(string TempUserId, string OtpCode);
+internal record SendOtpRequest(string EmailOrUsername);
+internal record VerifyOtpRequest(string Email, string OtpCode);
+internal record SignInRequest(string EmailOrUsername, string Password);
+internal record ValidateSessionRequest(string SessionId);
+internal record SignOutRequest(string SessionId);

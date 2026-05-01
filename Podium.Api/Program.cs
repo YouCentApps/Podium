@@ -1,12 +1,6 @@
-using Podium.Shared.Services.Data;
-using Podium.Shared.Services.Auth;
 using Podium.Shared.Services.Business;
-using Podium.Shared.Models;
 using Podium.Api.Endpoints;
 using Podium.Api.Services;
-using Microsoft.Extensions.Localization;
-using Podium.Shared;
-using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 

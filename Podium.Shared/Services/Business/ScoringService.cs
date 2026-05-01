@@ -1,4 +1,3 @@
-using Podium.Shared.Models;
 using Podium.Shared.Services.Data;
 
 namespace Podium.Shared.Services.Business;
@@ -13,21 +12,14 @@ public interface IScoringService
     Task<bool> RecalculateEventPredictionsAsync(string eventId, string seasonId);
 }
 
-public class ScoringService : IScoringService
+public class ScoringService(
+    IScoringRulesRepository scoringRulesRepo,
+    IPredictionRepository predictionRepo,
+    IEventRepository eventRepo) : IScoringService
 {
-    private readonly IScoringRulesRepository _scoringRulesRepo;
-    private readonly IPredictionRepository _predictionRepo;
-    private readonly IEventRepository _eventRepo;
-
-    public ScoringService(
-        IScoringRulesRepository scoringRulesRepo,
-        IPredictionRepository predictionRepo,
-        IEventRepository eventRepo)
-    {
-        _scoringRulesRepo = scoringRulesRepo;
-        _predictionRepo = predictionRepo;
-        _eventRepo = eventRepo;
-    }
+    private readonly IScoringRulesRepository _scoringRulesRepo = scoringRulesRepo;
+    private readonly IPredictionRepository _predictionRepo = predictionRepo;
+    private readonly IEventRepository _eventRepo = eventRepo;
 
     public async Task<int> CalculatePointsAsync(
         string seasonId,
@@ -35,7 +27,7 @@ public class ScoringService : IScoringService
         string actualP1, string actualP2, string actualP3)
     {
         // Get scoring rules for the season
-        var scoringRules = await _scoringRulesRepo.GetScoringRulesBySeasonAsync(seasonId);
+        var scoringRules = await _scoringRulesRepo.GetScoringRulesBySeasonAsync(seasonId).ConfigureAwait(false);
         
         // Use default values if scoring rules don't exist (backward compatibility)
         int exactMatchPoints = scoringRules?.ExactMatchPoints ?? 25;
@@ -89,7 +81,7 @@ public class ScoringService : IScoringService
         try
         {
             // Get event result
-            var result = await _eventRepo.GetEventResultAsync(eventId);
+            var result = await _eventRepo.GetEventResultAsync(eventId).ConfigureAwait(false);
             if (result == null)
             {
                 // No result yet, nothing to calculate
@@ -97,7 +89,7 @@ public class ScoringService : IScoringService
             }
 
             // Get all predictions for this event
-            var predictions = await _predictionRepo.GetPredictionsByEventAsync(eventId);
+            var predictions = await _predictionRepo.GetPredictionsByEventAsync(eventId).ConfigureAwait(false);
             
             // Recalculate points for each prediction
             foreach (var prediction in predictions)
@@ -110,10 +102,10 @@ public class ScoringService : IScoringService
                     result.FirstPlaceName,
                     result.SecondPlaceName,
                     result.ThirdPlaceName
-                );
+                ).ConfigureAwait(false);
 
                 prediction.PointsEarned = points;
-                await _predictionRepo.UpdatePredictionAsync(prediction);
+                await _predictionRepo.UpdatePredictionAsync(prediction).ConfigureAwait(false);
             }
 
             return true;

@@ -1,11 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using Podium.Shared.Services.Data;
-using Podium.Api.Middleware;
-using Podium.Shared.Models;
-
 namespace Podium.Api.Endpoints;
 
-public static class LeaderboardEndpoints
+internal static class LeaderboardEndpoints
 {
     public static void MapLeaderboardEndpoints(this WebApplication app)
     {
@@ -16,7 +11,7 @@ public static class LeaderboardEndpoints
             string seasonId,
             [FromServices] ILeaderboardRepository leaderboardRepo) =>
         {
-            var leaderboard = await leaderboardRepo.GetLeaderboardBySeasonAsync(seasonId);
+            var leaderboard = await leaderboardRepo.GetLeaderboardBySeasonAsync(seasonId).ConfigureAwait(false);
             return Results.Ok(leaderboard);
         })
         .RequireAuth()
@@ -28,7 +23,7 @@ public static class LeaderboardEndpoints
             string userId,
             [FromServices] ILeaderboardRepository leaderboardRepo) =>
         {
-            var stats = await leaderboardRepo.GetUserStatisticsAsync(seasonId, userId);
+            var stats = await leaderboardRepo.GetUserStatisticsAsync(seasonId, userId).ConfigureAwait(false);
             if (stats == null)
             {
                 // Return empty stats if user hasn't made predictions yet
@@ -58,7 +53,7 @@ public static class LeaderboardEndpoints
             [FromServices] IUserRepository userRepo) =>
         {
             // Get all events for the season
-            var events = await eventRepo.GetEventsBySeasonAsync(seasonId);
+            var events = await eventRepo.GetEventsBySeasonAsync(seasonId).ConfigureAwait(false);
             
             // Find the last completed event (has result and date is past)
             var completedEvents = new List<Event>();
@@ -66,28 +61,28 @@ public static class LeaderboardEndpoints
             
             foreach (var evt in events.Where(e => e.EventDate <= now).OrderByDescending(e => e.EventDate))
             {
-                var result = await eventRepo.GetEventResultAsync(evt.Id);
+                var result = await eventRepo.GetEventResultAsync(evt.Id).ConfigureAwait(false);
                 if (result != null)
                 {
                     completedEvents.Add(evt);
                 }
             }
             
-            if (!completedEvents.Any())
+            if (completedEvents.Count == 0)
             {
                 return Results.Ok(null); // No completed events yet
             }
-            
+
             var lastEvent = completedEvents.First();
-            var eventResult = await eventRepo.GetEventResultAsync(lastEvent.Id);
-            
+            var eventResult = await eventRepo.GetEventResultAsync(lastEvent.Id).ConfigureAwait(false);
+
             if (eventResult == null)
             {
                 return Results.Ok(null);
             }
             
             // Get all predictions for this event
-            var predictions = await predictionRepo.GetPredictionsByEventAsync(lastEvent.Id);
+            var predictions = await predictionRepo.GetPredictionsByEventAsync(lastEvent.Id).ConfigureAwait(false);
             
             // Filter only predictions with points (scored predictions)
             var scoredPredictions = predictions.Where(p => p.PointsEarned.HasValue && p.PointsEarned.Value > 0).ToList();
@@ -97,7 +92,7 @@ public static class LeaderboardEndpoints
             
             foreach (var prediction in scoredPredictions)
             {
-                var user = await userRepo.GetUserByIdAsync(prediction.UserId);
+                var user = await userRepo.GetUserByIdAsync(prediction.UserId).ConfigureAwait(false);
                 if (user != null)
                 {
                     userPredictions.Add(new UserEventPrediction
@@ -159,7 +154,7 @@ public static class LeaderboardEndpoints
             }
             
             // Get all events for the season
-            var events = await eventRepo.GetEventsBySeasonAsync(seasonId);
+            var events = await eventRepo.GetEventsBySeasonAsync(seasonId).ConfigureAwait(false);
             
             // Find the last completed event
             var completedEvents = new List<Event>();
@@ -167,25 +162,23 @@ public static class LeaderboardEndpoints
             
             foreach (var evt in events.Where(e => e.EventDate <= now).OrderByDescending(e => e.EventDate))
             {
-                var result = await eventRepo.GetEventResultAsync(evt.Id);
+                var result = await eventRepo.GetEventResultAsync(evt.Id).ConfigureAwait(false);
                 if (result != null)
                 {
                     completedEvents.Add(evt);
                 }
             }
             
-            if (!completedEvents.Any())
+            if (completedEvents.Count == 0)
             {
                 return Results.Ok(new List<UserEventPrediction>());
             }
-            
+
             var lastEvent = completedEvents.First();
-            
-            // Get all predictions for this event
-            var predictions = await predictionRepo.GetPredictionsByEventAsync(lastEvent.Id);
+            var predictions = await predictionRepo.GetPredictionsByEventAsync(lastEvent.Id).ConfigureAwait(false);
             
             // Search users by query
-            var searchResults = await userRepo.SearchUsersAsync(query);
+            var searchResults = await userRepo.SearchUsersAsync(query).ConfigureAwait(false);
             var userIds = searchResults.Select(u => u.UserId).ToHashSet();
             
             // Filter predictions for matching users

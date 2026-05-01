@@ -1,4 +1,3 @@
-using Microsoft.JSInterop;
 using System.Globalization;
 
 namespace Podium.Shared.Services.State;
@@ -23,7 +22,7 @@ public class LanguageStateService
         if (_storageService == null)
             return;
 
-        var stored = await _storageService.GetItemAsync<string>(StorageKey);
+        var stored = await _storageService.GetItemAsync<string>(StorageKey).ConfigureAwait(false);
         if (!string.IsNullOrEmpty(stored))
             CurrentLanguageCode = stored;
     }
@@ -38,7 +37,7 @@ public class LanguageStateService
         CurrentLanguageCode = languageCode;
 
         if (_storageService != null)
-            await _storageService.SetItemAsync(StorageKey, languageCode);
+            await _storageService.SetItemAsync(StorageKey, languageCode).ConfigureAwait(false);
 
         // On MAUI there is no page reload, so apply the culture directly
         if (!OperatingSystem.IsBrowser())

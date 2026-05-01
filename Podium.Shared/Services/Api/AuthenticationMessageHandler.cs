@@ -7,22 +7,16 @@ namespace Podium.Shared.Services.Api;
 /// HTTP message handler that automatically injects the X-Session-Id and Accept-Language
 /// headers from state services into all API requests, and handles session expiration.
 /// </summary>
-public class AuthenticationMessageHandler : DelegatingHandler
+public class AuthenticationMessageHandler(AuthStateService authStateService, LanguageStateService languageStateService) : DelegatingHandler
 {
-    private readonly AuthStateService _authStateService;
-    private readonly LanguageStateService _languageStateService;
-
-    public AuthenticationMessageHandler(AuthStateService authStateService, LanguageStateService languageStateService)
-    {
-        _authStateService = authStateService;
-        _languageStateService = languageStateService;
-    }
+    private readonly AuthStateService _authStateService = authStateService;
+    private readonly LanguageStateService _languageStateService = languageStateService;
 
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
-        var isAuthEndpoint = request.RequestUri?.PathAndQuery.Contains("/api/auth/") ?? false;
+        var isAuthEndpoint = request.RequestUri?.PathAndQuery.Contains("/api/auth/", StringComparison.Ordinal) ?? false;
 
         if (!isAuthEndpoint && !string.IsNullOrEmpty(_authStateService.SessionId))
         {
@@ -33,11 +27,11 @@ public class AuthenticationMessageHandler : DelegatingHandler
         request.Headers.AcceptLanguage.Clear();
         request.Headers.AcceptLanguage.ParseAdd(_languageStateService.CurrentLanguageCode);
 
-        var response = await base.SendAsync(request, cancellationToken);
+        var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
         if (response.StatusCode == HttpStatusCode.Unauthorized && !isAuthEndpoint)
         {
-            await _authStateService.HandleSessionExpiredAsync();
+            await _authStateService.HandleSessionExpiredAsync().ConfigureAwait(false);
         }
 
         return response;

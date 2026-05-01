@@ -1,7 +1,3 @@
-using Azure;
-using Azure.Data.Tables;
-using Podium.Shared.Models;
-
 namespace Podium.Shared.Services.Data;
 
 public interface IStatisticsJobRepository
@@ -11,15 +7,10 @@ public interface IStatisticsJobRepository
     Task<bool> UpdateJobAsync(StatisticsRecalculationJob job);
 }
 
-public class StatisticsJobRepository : IStatisticsJobRepository
+public class StatisticsJobRepository(ITableClientFactory tableClientFactory) : IStatisticsJobRepository
 {
-    private readonly ITableClientFactory _tableClientFactory;
+    private readonly ITableClientFactory _tableClientFactory = tableClientFactory;
     private const string TableName = "PodiumStatisticsJobs";
-
-    public StatisticsJobRepository(ITableClientFactory tableClientFactory)
-    {
-        _tableClientFactory = tableClientFactory;
-    }
 
     public async Task<StatisticsRecalculationJob?> GetJobAsync(string jobId)
     {
@@ -27,7 +18,7 @@ public class StatisticsJobRepository : IStatisticsJobRepository
 
         try
         {
-            var response = await tableClient.GetEntityAsync<TableEntity>("Job", jobId);
+            var response = await tableClient.GetEntityAsync<TableEntity>("Job", jobId).ConfigureAwait(false);
             return MapToJob(response.Value);
         }
         catch (RequestFailedException)
@@ -43,7 +34,7 @@ public class StatisticsJobRepository : IStatisticsJobRepository
         try
         {
             var entity = CreateEntity(job);
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -59,7 +50,7 @@ public class StatisticsJobRepository : IStatisticsJobRepository
         try
         {
             var entity = CreateEntity(job);
-            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge);
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Merge).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)

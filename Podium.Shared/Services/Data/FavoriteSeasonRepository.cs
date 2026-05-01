@@ -1,7 +1,3 @@
-using Azure;
-using Azure.Data.Tables;
-using Podium.Shared.Models;
-
 namespace Podium.Shared.Services.Data;
 
 public interface IFavoriteSeasonRepository
@@ -31,7 +27,7 @@ public class FavoriteSeasonRepository : IFavoriteSeasonRepository
         try
         {
             var filter = $"PartitionKey eq '{userId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
             {
                 favorites.Add(MapToFavoriteSeason(entity));
             }
@@ -61,7 +57,7 @@ public class FavoriteSeasonRepository : IFavoriteSeasonRepository
                 { "AddedDate", DateTime.UtcNow }
             };
 
-            await tableClient.UpsertEntityAsync(entity);
+            await tableClient.UpsertEntityAsync(entity).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -76,7 +72,7 @@ public class FavoriteSeasonRepository : IFavoriteSeasonRepository
 
         try
         {
-            await tableClient.DeleteEntityAsync(userId, seasonId);
+            await tableClient.DeleteEntityAsync(userId, seasonId).ConfigureAwait(false);
             return true;
         }
         catch (RequestFailedException)
@@ -93,7 +89,7 @@ public class FavoriteSeasonRepository : IFavoriteSeasonRepository
         try
         {
             var filter = $"PartitionKey eq '{userId}'";
-            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter, select: new[] { "PartitionKey" }))
+            await foreach (var entity in tableClient.QueryAsync<TableEntity>(filter: filter, select: new[] { "PartitionKey" }).ConfigureAwait(false))
             {
                 count++;
             }
@@ -112,7 +108,7 @@ public class FavoriteSeasonRepository : IFavoriteSeasonRepository
 
         try
         {
-            var response = await tableClient.GetEntityAsync<TableEntity>(userId, seasonId);
+            var response = await tableClient.GetEntityAsync<TableEntity>(userId, seasonId).ConfigureAwait(false);
             return response.Value != null;
         }
         catch (RequestFailedException)
