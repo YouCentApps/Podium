@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Disciplines_Title" xml:space="preserve"><value>Оберіть дисципліну</value></data>
+  <data name="Disciplines_None" xml:space="preserve"><value>Наразі дисципліни недоступні. Перевірте пізніше!</value></data>
+  <data name="Disciplines_ViewSeries" xml:space="preserve"><value>Переглянути серії →</value></data>
+  <data name="Disciplines_SignInToPredict" xml:space="preserve"><value>Будь ласка, увійдіть, щоб робити прогнози.</value></data>
+  <data name="SeriesSelection_Title" xml:space="preserve"><value>Оберіть серію</value></data>
+  <data name="SeriesSelection_None" xml:space="preserve"><value>Серії для цієї дисципліни ще недоступні.</value></data>
+  <data name="SeriesSelection_Breadcrumb" xml:space="preserve"><value>Дисципліни</value></data>
+  <data name="SeriesSelection_ViewEvents" xml:space="preserve"><value>Переглянути події →</value></data>
+  <data name="SeasonEvents_Title" xml:space="preserve"><value>Оберіть подію</value></data>
+  <data name="SeasonEvents_Breadcrumb" xml:space="preserve"><value>Головна</value></data>
+  <data name="SeasonEvents_None" xml:space="preserve"><value>Найближчих подій немає. Перевірте пізніше!</value></data>
+  <data name="SeasonEvents_OpenPredictions" xml:space="preserve"><value>Відкрито для прогнозів</value></data>
+  <data name="SeasonEvents_Closed" xml:space="preserve"><value>Закрито</value></data>
+  <data name="Predict_Title" xml:space="preserve"><value>Прогнозуй Подіум</value></data>
+  <data name="Predict_FirstPlace" xml:space="preserve"><value>Перше місце</value></data>
+  <data name="Predict_SecondPlace" xml:space="preserve"><value>Друге місце</value></data>
+  <data name="Predict_ThirdPlace" xml:space="preserve"><value>Третє місце</value></data>
+  <data name="Predict_YourPrediction" xml:space="preserve"><value>Ваш прогноз</value></data>
+  <data name="Predict_Btn_Submit" xml:space="preserve"><value>Надіслати прогноз</value></data>
+  <data name="Predict_Btn_Update" xml:space="preserve"><value>Оновити прогноз</value></data>
+  <data name="Predict_Btn_Submitting" xml:space="preserve"><value>Надсилання...</value></data>
+  <data name="Predict_SignIn" xml:space="preserve"><value>Будь ласка, увійдіть, щоб робити прогнози.</value></data>
+  <data name="Predict_SelectAll" xml:space="preserve"><value>Будь ласка, оберіть усі три позиції для надсилання.</value></data>
+  <data name="Predict_Closed" xml:space="preserve"><value>Ця подія закрита для прогнозів.</value></data>
+  <data name="Predict_PreviousPrediction" xml:space="preserve"><value>Ваш попередній прогноз:</value></data>
+  <data name="Predict_1st" xml:space="preserve"><value>1-е:</value></data>
+  <data name="Predict_2nd" xml:space="preserve"><value>2-е:</value></data>
+  <data name="Predict_3rd" xml:space="preserve"><value>3-є:</value></data>
+  <data name="MyPredictions_Title" xml:space="preserve"><value>Мої прогнози</value></data>
+  <data name="MyPredictions_SignIn" xml:space="preserve"><value>Будь ласка, увійдіть, щоб переглянути ваші прогнози.</value></data>
+  <data name="MyPredictions_None" xml:space="preserve"><value>Ви ще не зробили жодного прогнозу.</value></data>
+  <data name="MyPredictions_FirstPrediction" xml:space="preserve"><value>Зробіть перший прогноз</value></data>
+  <data name="MyPredictions_Loading" xml:space="preserve"><value>Завантаження ваших прогнозів...</value></data>
+  <data name="MyPredictions_FilterDiscipline" xml:space="preserve"><value>Дисципліна:</value></data>
+  <data name="MyPredictions_FilterSeries" xml:space="preserve"><value>Серія:</value></data>
+  <data name="MyPredictions_FilterSeason" xml:space="preserve"><value>Сезон:</value></data>
+  <data name="MyPredictions_AllDisciplines" xml:space="preserve"><value>Усі дисципліни</value></data>
+  <data name="MyPredictions_AllSeries" xml:space="preserve"><value>Усі серії</value></data>
+  <data name="MyPredictions_AllSeasons" xml:space="preserve"><value>Усі сезони</value></data>
+  <data name="MyPredictions_IncludeInactive" xml:space="preserve"><value>Включити неактивні сезони</value></data>
+  <data name="Predict_Submitted" xml:space="preserve"><value>Прогноз успішно надіслано!</value></data>
+  <data name="Predict_SubmitFailed" xml:space="preserve"><value>Не вдалося надіслати прогноз. Будь ласка, спробуйте ще раз.</value></data>
+  <data name="Events_Breadcrumb_Series" xml:space="preserve"><value>Серії</value></data>
+  <data name="Events_Breadcrumb_Events" xml:space="preserve"><value>Події</value></data>
+  <data name="Events_NoActiveSeason" xml:space="preserve"><value>Активний сезон для цієї серії не знайдено.</value></data>
+  <data name="Events_LoadFailed" xml:space="preserve"><value>Не вдалося завантажити події.</value></data>
+  <data name="Predict_EventNotFound" xml:space="preserve"><value>Подію не знайдено.</value></data>
+  <data name="Predict_CompetitorsLoadFailed" xml:space="preserve"><value>Не вдалося завантажити учасників.</value></data>
+  <data name="MyPredictions_Inactive" xml:space="preserve"><value>Неактивний</value></data>
+  <data name="MyPredictions_Location" xml:space="preserve"><value>Місце:</value></data>
+  <data name="MyPredictions_Date" xml:space="preserve"><value>Дата:</value></data>
+  <data name="MyPredictions_Pts" xml:space="preserve"><value>очок</value></data>
+  <data name="MyPredictions_Pending" xml:space="preserve"><value>Очікує</value></data>
+  <data name="MyPredictions_YourPrediction" xml:space="preserve"><value>Ваш прогноз</value></data>
+  <data name="MyPredictions_ActualResults" xml:space="preserve"><value>Фактичні результати</value></data>
+  <data name="MyPredictions_Submitted" xml:space="preserve"><value>Надіслано:</value></data>
+  <data name="MyPredictions_NoMatchingPredictions" xml:space="preserve"><value>Прогнозів за поточними фільтрами не знайдено. Спробуйте увімкнути «Включити неактивні сезони», щоб побачити минулі прогнози.</value></data>
+</root>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <!-- Authentication -->
+  <data name="Auth_UserNotFound" xml:space="preserve"><value>Користувача не знайдено. Будь ласка, спочатку зареєструйтесь.</value></data>
+  <data name="Auth_EmailCodeDisabled" xml:space="preserve"><value>Вхід за кодом на пошту не ввімкнено для цього облікового запису. Будь ласка, використовуйте пароль для входу.</value></data>
+  <data name="Auth_NoEmail" xml:space="preserve"><value>З цим обліковим записом не пов'язано жодної електронної адреси. Будь ласка, використовуйте пароль для входу.</value></data>
+  <data name="Auth_FailedToGenerateCode" xml:space="preserve"><value>Не вдалося згенерувати код. Будь ласка, спробуйте ще раз.</value></data>
+  <data name="Auth_InvalidOtp" xml:space="preserve"><value>Недійсний або прострочений код підтвердження.</value></data>
+  <data name="Auth_InvalidCredentials" xml:space="preserve"><value>Невірний email/ім'я користувача або пароль.</value></data>
+  <data name="Auth_PasswordNotEnabled" xml:space="preserve"><value>Вхід за паролем не ввімкнено для цього облікового запису.</value></data>
+  <data name="Auth_SessionExpired" xml:space="preserve"><value>Сесія закінчилася або недійсна. Будь ласка, увійдіть знову.</value></data>
+  <data name="Auth_DbError" xml:space="preserve"><value>Сталася помилка бази даних. Будь ласка, спробуйте ще раз.</value></data>
+  <data name="Auth_OtpSent" xml:space="preserve"><value>OTP надіслано на пошту</value></data>
+  <data name="Auth_RegistrationSuccess" xml:space="preserve"><value>Реєстрація успішна</value></data>
+  <data name="Auth_VerificationSent" xml:space="preserve"><value>Код підтвердження надіслано на вашу пошту</value></data>
+  <data name="Auth_SignOutSuccess" xml:space="preserve"><value>Вихід успішний</value></data>
+  <!-- Registration -->
+  <data name="Reg_UsernameTaken" xml:space="preserve"><value>Ім'я користувача вже зайнято. Будь ласка, оберіть інше ім'я.</value></data>
+  <data name="Reg_EmailTaken" xml:space="preserve"><value>Email вже зареєстровано.</value></data>
+  <data name="Reg_VerificationFailed" xml:space="preserve"><value>Недійсний або прострочений код підтвердження.</value></data>
+  <data name="Reg_Expired" xml:space="preserve"><value>Сесія реєстрації закінчилася. Будь ласка, почніть реєстрацію знову.</value></data>
+  <data name="Reg_Failed" xml:space="preserve"><value>Реєстрація не вдалася. Будь ласка, спробуйте ще раз.</value></data>
+  <data name="Reg_PendingFailed" xml:space="preserve"><value>Не вдалося створити реєстрацію. Будь ласка, спробуйте ще раз.</value></data>
+  <data name="Reg_CodeFailed" xml:space="preserve"><value>Не вдалося згенерувати код підтвердження. Будь ласка, спробуйте ще раз.</value></data>
+  <!-- Validation -->
+  <data name="Val_UsernameInvalid" xml:space="preserve"><value>Недійсне ім'я користувача. Має містити 3-50 символів: лише латинські літери, цифри та пробіли.</value></data>
+  <data name="Val_PasswordInvalid" xml:space="preserve"><value>Недійсний пароль. Має містити 6-100 символів, без пробілів, лише латинські літери/цифри/спеціальні символи.</value></data>
+  <data name="Val_EmailInvalid" xml:space="preserve"><value>Недійсна електронна адреса. Будь ласка, введіть дійсний email.</value></data>
+  <!-- Profile -->
+  <data name="Profile_NotFound" xml:space="preserve"><value>Користувача не знайдено</value></data>
+  <data name="Profile_UsernameUpdated" xml:space="preserve"><value>Ім'я користувача успішно оновлено</value></data>
+  <data name="Profile_UsernameTaken" xml:space="preserve"><value>Ім'я користувача вже зайнято</value></data>
+  <data name="Profile_UpdateFailed" xml:space="preserve"><value>Не вдалося оновити. Будь ласка, спробуйте ще раз.</value></data>
+  <data name="Profile_InvalidAuthMethod" xml:space="preserve"><value>Недійсний метод автентифікації</value></data>
+  <data name="Profile_AuthMethodUpdated" xml:space="preserve"><value>Метод автентифікації успішно оновлено</value></data>
+  <data name="Profile_PasswordUpdated" xml:space="preserve"><value>Пароль успішно оновлено</value></data>
+  <data name="Profile_EmailUpdated" xml:space="preserve"><value>Email успішно оновлено</value></data>
+  <data name="Profile_VerificationSent" xml:space="preserve"><value>Код підтвердження надіслано на вашу нову пошту</value></data>
+  <data name="Profile_VerificationFailed" xml:space="preserve"><value>Перевірка не вдалася. Будь ласка, спробуйте ще раз.</value></data>
+  <data name="Profile_LanguageUpdated" xml:space="preserve"><value>Мову успішно оновлено</value></data>
+  <data name="Profile_IdentityVerificationFailed" xml:space="preserve"><value>Перевірка особи не вдалася. Будь ласка, перевірте свої облікові дані.</value></data>
+  <data name="Profile_PasswordSetupSent" xml:space="preserve"><value>Код налаштування пароля надіслано на вашу пошту</value></data>
+  <data name="Profile_PasswordsDoNotMatch" xml:space="preserve"><value>Паролі не збігаються</value></data>
+  <data name="Profile_PasswordRequired" xml:space="preserve"><value>Новий пароль обов'язковий</value></data>
+  <data name="Profile_NeedPasswordFirst" xml:space="preserve"><value>Спочатку необхідно встановити пароль перед увімкненням входу за паролем</value></data>
+  <data name="Profile_NeedEmailFirst" xml:space="preserve"><value>Спочатку необхідно встановити email перед увімкненням входу за кодом на пошту</value></data>
+  <data name="Profile_OldPasswordRequired" xml:space="preserve"><value>Поточний пароль обов'язковий</value></data>
+  <data name="Profile_OldPasswordIncorrect" xml:space="preserve"><value>Поточний пароль невірний</value></data>
+  <data name="Profile_OtpRequired" xml:space="preserve"><value>Для налаштування пароля необхідний код підтвердження</value></data>
+  <data name="Profile_NoEmailForSetup" xml:space="preserve"><value>Електронна адреса не встановлена. Будь ласка, спочатку додайте email.</value></data>
+  <data name="Profile_PasswordAuthDisabled" xml:space="preserve"><value>Вхід за паролем не ввімкнено для вашого облікового запису. Будь ласка, використовуйте код підтвердження, надісланий на вашу пошту.</value></data>
+  <data name="Profile_NoPasswordSet" xml:space="preserve"><value>Для вашого облікового запису не встановлено пароль. Будь ласка, використовуйте код підтвердження, надісланий на вашу пошту.</value></data>
+  <data name="Profile_EmailAuthDisabled" xml:space="preserve"><value>Вхід за кодом на пошту не ввімкнено для вашого облікового запису. Будь ласка, використовуйте ваш пароль.</value></data>
+  <data name="Profile_NoEmailSet" xml:space="preserve"><value>Для вашого облікового запису не встановлено email. Будь ласка, використовуйте ваш пароль.</value></data>
+  <data name="Profile_ProvidePasswordOrCode" xml:space="preserve"><value>Будь ласка, надайте ваш пароль або код підтвердження</value></data>
+  <data name="Profile_ProvidePassword" xml:space="preserve"><value>Будь ласка, надайте ваш пароль</value></data>
+  <data name="Profile_ProvideCode" xml:space="preserve"><value>Будь ласка, надайте код підтвердження</value></data>
+  <data name="Profile_InvalidLanguage" xml:space="preserve"><value>Недійсний код мови. Підтримуються: en, fr, ru</value></data>
+  <!-- Favorites -->
+  <data name="Favorites_LimitReached" xml:space="preserve"><value>Можна мати лише до 5 улюблених сезонів</value></data>
+  <data name="Favorites_AlreadyFavorited" xml:space="preserve"><value>Сезон вже є в обраному</value></data>
+  <data name="Favorites_NotFound" xml:space="preserve"><value>Сезон не знайдено</value></data>
+  <data name="Favorites_AddFailed" xml:space="preserve"><value>Не вдалося додати улюблений сезон</value></data>
+  <data name="Favorites_Added" xml:space="preserve"><value>Сезон додано до обраного</value></data>
+  <data name="Favorites_RemoveFailed" xml:space="preserve"><value>Не вдалося видалити улюблений сезон</value></data>
+  <data name="Favorites_Removed" xml:space="preserve"><value>Сезон видалено з обраного</value></data>
+  <!-- Admin -->
+  <data name="Admin_SetActiveFailed" xml:space="preserve"><value>Не вдалося встановити активний сезон. Можливо, сезон не існує.</value></data>
+  <data name="Admin_SetActiveSuccess" xml:space="preserve"><value>Сезон успішно активовано. Інші сезони в цій серії деактивовано.</value></data>
+  <data name="Admin_Unauthorized" xml:space="preserve"><value>Необхідні права адміністратора</value></data>
+  <!-- Sport / General -->
+  <data name="General_NotFound" xml:space="preserve"><value>Не знайдено</value></data>
+  <data name="General_Failed" xml:space="preserve"><value>Операція не вдалася. Будь ласка, спробуйте ще раз.</value></data>
+  <data name="General_Success" xml:space="preserve"><value>Операція успішно завершена</value></data>
+  <!-- Email templates -->
+  <data name="Email_Subject" xml:space="preserve"><value>Ваш код підтвердження для YouCent Podium</value></data>
+  <data name="Email_Header" xml:space="preserve"><value>YouCent Podium</value></data>
+  <data name="Email_Title" xml:space="preserve"><value>Ваш код підтвердження</value></data>
+  <data name="Email_Body" xml:space="preserve"><value>Використовуйте цей код для входу до свого облікового запису Podium:</value></data>
+  <data name="Email_Expiry" xml:space="preserve"><value>Термін дії цього коду закінчується через 10 хвилин.</value></data>
+  <data name="Email_Ignore" xml:space="preserve"><value>Якщо ви не запитували цей код, просто проігноруйте цей лист.</value></data>
+  <data name="Email_Automated" xml:space="preserve"><value>Це автоматичне повідомлення, будь ласка, не відповідайте на нього.</value></data>
+  <data name="Email_Copyright" xml:space="preserve"><value>Усі права захищені.</value></data>
+</root>
