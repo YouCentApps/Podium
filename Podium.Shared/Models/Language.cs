@@ -17,10 +17,11 @@ public static class SupportedLanguages
     [
         new() { Code = "en", Name = "English", IsActive = true },
         new() { Code = "fr", Name = "Français", IsActive = true },
+        new() { Code = "es", Name = "Español", IsActive = true },
+        new() { Code = "de", Name = "Deutsch", IsActive = true },
+        new() { Code = "uk", Name = "Українська", IsActive = true },
         new() { Code = "ru", Name = "Русский", IsActive = true },
         new() { Code = "it", Name = "Italiano", IsActive = true },
-        new() { Code = "de", Name = "Deutsch", IsActive = true },
-        new() { Code = "es", Name = "Español", IsActive = true },
-        new() { Code = "nb", Name = "Norsk", IsActive = true },
+        new() { Code = "nb", Name = "Norsk", IsActive = true }
     ];
 }
