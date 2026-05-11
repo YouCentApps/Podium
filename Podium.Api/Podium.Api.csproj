@@ -3,11 +3,9 @@
   <PropertyGroup>
     <UserSecretsId>podium-api-secrets</UserSecretsId>
     
-
-    <!-- CA1303: Dev tool console/log strings don't need localization -->
     <!-- CA1812: Internal record types instantiated via JSON model binding -->
     <!-- CA1852: Records are sealed by default in C# -->
-    <NoWarn>$(NoWarn);CA1303;CA1812;CA1852</NoWarn>
+    <NoWarn>$(NoWarn);CA1812;CA1852</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
