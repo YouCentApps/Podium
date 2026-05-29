@@ -134,4 +134,12 @@
   <data name="UpdatePassword_Btn_SettingUp" xml:space="preserve"><value>Setter opp...</value></data>
   <data name="UpdatePassword_Btn_SetPassword" xml:space="preserve"><value>Sett passord</value></data>
   <data name="UpdatePassword_Btn_SendNewCode" xml:space="preserve"><value>Send en ny kode</value></data>
+  <data name="UpdatePassword_Error_SendCodeFailed" xml:space="preserve"><value>Kunne ikke sende bekreftelseskoden.</value></data>
+  <data name="UpdatePassword_Error_EnterCurrent" xml:space="preserve"><value>Vennligst skriv inn ditt nåværende passord.</value></data>
+  <data name="UpdatePassword_Error_EnterCode" xml:space="preserve"><value>Vennligst skriv inn bekreftelseskoden.</value></data>
+  <data name="UpdatePassword_Error_MinLength" xml:space="preserve"><value>Passord må være minst 6 tegn.</value></data>
+  <data name="UpdatePassword_Error_PasswordsMismatch" xml:space="preserve"><value>Passordene stemmer ikke overens.</value></data>
+  <data name="UpdatePassword_Success_Updated" xml:space="preserve"><value>Passord oppdatert!</value></data>
+  <data name="UpdatePassword_Success_Setup" xml:space="preserve"><value>Passord satt opp!</value></data>
+  <data name="UpdatePassword_Error_UpdateFailed" xml:space="preserve"><value>Kunne ikke oppdatere passordet.</value></data>
 </root>

@@ -134,4 +134,12 @@
   <data name="UpdatePassword_Btn_SettingUp" xml:space="preserve"><value>Configurando...</value></data>
   <data name="UpdatePassword_Btn_SetPassword" xml:space="preserve"><value>Establecer contraseña</value></data>
   <data name="UpdatePassword_Btn_SendNewCode" xml:space="preserve"><value>Enviar un nuevo código</value></data>
+  <data name="UpdatePassword_Error_SendCodeFailed" xml:space="preserve"><value>Error al enviar el código de verificación.</value></data>
+  <data name="UpdatePassword_Error_EnterCurrent" xml:space="preserve"><value>Por favor, introduce tu contraseña actual.</value></data>
+  <data name="UpdatePassword_Error_EnterCode" xml:space="preserve"><value>Por favor, introduce el código de verificación.</value></data>
+  <data name="UpdatePassword_Error_MinLength" xml:space="preserve"><value>La contraseña debe tener al menos 6 caracteres.</value></data>
+  <data name="UpdatePassword_Error_PasswordsMismatch" xml:space="preserve"><value>Las contraseñas no coinciden.</value></data>
+  <data name="UpdatePassword_Success_Updated" xml:space="preserve"><value>¡Contraseña actualizada correctamente!</value></data>
+  <data name="UpdatePassword_Success_Setup" xml:space="preserve"><value>¡Contraseña configurada correctamente!</value></data>
+  <data name="UpdatePassword_Error_UpdateFailed" xml:space="preserve"><value>Error al actualizar la contraseña.</value></data>
 </root>

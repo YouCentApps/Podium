@@ -134,4 +134,12 @@
   <data name="UpdatePassword_Btn_SettingUp" xml:space="preserve"><value>Настройка...</value></data>
   <data name="UpdatePassword_Btn_SetPassword" xml:space="preserve"><value>Установить пароль</value></data>
   <data name="UpdatePassword_Btn_SendNewCode" xml:space="preserve"><value>Отправить новый код</value></data>
+  <data name="UpdatePassword_Error_SendCodeFailed" xml:space="preserve"><value>Не удалось отправить код подтверждения.</value></data>
+  <data name="UpdatePassword_Error_EnterCurrent" xml:space="preserve"><value>Пожалуйста, введите ваш текущий пароль.</value></data>
+  <data name="UpdatePassword_Error_EnterCode" xml:space="preserve"><value>Пожалуйста, введите код подтверждения.</value></data>
+  <data name="UpdatePassword_Error_MinLength" xml:space="preserve"><value>Пароль должен содержать не менее 6 символов.</value></data>
+  <data name="UpdatePassword_Error_PasswordsMismatch" xml:space="preserve"><value>Пароли не совпадают.</value></data>
+  <data name="UpdatePassword_Success_Updated" xml:space="preserve"><value>Пароль успешно обновлён!</value></data>
+  <data name="UpdatePassword_Success_Setup" xml:space="preserve"><value>Пароль успешно установлен!</value></data>
+  <data name="UpdatePassword_Error_UpdateFailed" xml:space="preserve"><value>Не удалось обновить пароль.</value></data>
 </root>
