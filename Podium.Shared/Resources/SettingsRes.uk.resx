@@ -83,6 +83,12 @@
   <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Введіть 6-значний код</value></data>
   <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Підтвердити &amp; Змінити метод</value></data>
   <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Надіслати новий код</value></data>
+	<data name="SignInSettings_Success_CodeSent" xml:space="preserve"><value>Код підтвердження надіслано на вашу електронну пошту.</value></data>
+  <data name="SignInSettings_Error_SendCodeFailed" xml:space="preserve"><value>Не вдалося надіслати код підтвердження.</value></data>
+  <data name="SignInSettings_Error_EnterPassword" xml:space="preserve"><value>Будь ласка, введіть свій пароль.</value></data>
+  <data name="SignInSettings_Error_EnterCode" xml:space="preserve"><value>Будь ласка, введіть код підтвердження.</value></data>
+  <data name="SignInSettings_Success_Updated" xml:space="preserve"><value>Метод входу успішно оновлено!</value></data>
+  <data name="SignInSettings_Error_UpdateFailed" xml:space="preserve"><value>Не вдалося оновити метод входу.</value></data>
   <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Введіть вашу нову електронну адресу. Ми надішлемо код підтвердження для перевірки доступу.</value></data>
   <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>Нова електронна адреса</value></data>
   <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>your@email.com</value></data>

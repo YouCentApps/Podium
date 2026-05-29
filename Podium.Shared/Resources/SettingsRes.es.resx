@@ -83,6 +83,12 @@
   <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Introduce código de 6 dígitos</value></data>
   <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Verificar &amp; Cambiar método</value></data>
   <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Enviar un nuevo código</value></data>
+	<data name="SignInSettings_Success_CodeSent" xml:space="preserve"><value>Código de verificación enviado a tu email.</value></data>
+  <data name="SignInSettings_Error_SendCodeFailed" xml:space="preserve"><value>Error al enviar el código de verificación.</value></data>
+  <data name="SignInSettings_Error_EnterPassword" xml:space="preserve"><value>Por favor, introduce tu contraseña.</value></data>
+  <data name="SignInSettings_Error_EnterCode" xml:space="preserve"><value>Por favor, introduce el código de verificación.</value></data>
+  <data name="SignInSettings_Success_Updated" xml:space="preserve"><value>¡Método de inicio de sesión actualizado correctamente!</value></data>
+  <data name="SignInSettings_Error_UpdateFailed" xml:space="preserve"><value>Error al actualizar el método de inicio de sesión.</value></data>
   <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Introduce tu nueva dirección de email. Enviaremos un código de verificación para confirmar el acceso.</value></data>
   <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>Nueva dirección de email</value></data>
   <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>tu@email.com</value></data>

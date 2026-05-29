@@ -83,6 +83,12 @@
   <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Inserisci codice a 6 cifre</value></data>
   <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Verifica &amp; Cambia metodo</value></data>
   <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Invia un nuovo codice</value></data>
+	<data name="SignInSettings_Success_CodeSent" xml:space="preserve"><value>Codice di verifica inviato alla tua email.</value></data>
+  <data name="SignInSettings_Error_SendCodeFailed" xml:space="preserve"><value>Impossibile inviare il codice di verifica.</value></data>
+  <data name="SignInSettings_Error_EnterPassword" xml:space="preserve"><value>Per favore inserisci la tua password.</value></data>
+  <data name="SignInSettings_Error_EnterCode" xml:space="preserve"><value>Per favore inserisci il codice di verifica.</value></data>
+  <data name="SignInSettings_Success_Updated" xml:space="preserve"><value>Metodo di accesso aggiornato con successo!</value></data>
+  <data name="SignInSettings_Error_UpdateFailed" xml:space="preserve"><value>Impossibile aggiornare il metodo di accesso.</value></data>
   <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Inserisci il tuo nuovo indirizzo email. Invieremo un codice di verifica per confermare l'accesso.</value></data>
   <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>Nuovo indirizzo email</value></data>
   <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>tua@email.com</value></data>

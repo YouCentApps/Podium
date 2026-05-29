@@ -83,6 +83,12 @@
   <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Enter 6-digit code</value></data>
   <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Verify &amp; Change Method</value></data>
   <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Send a new code</value></data>
+	<data name="SignInSettings_Success_CodeSent" xml:space="preserve"><value>Verification code sent to your email.</value></data>
+  <data name="SignInSettings_Error_SendCodeFailed" xml:space="preserve"><value>Failed to send verification code.</value></data>
+  <data name="SignInSettings_Error_EnterPassword" xml:space="preserve"><value>Please enter your password.</value></data>
+  <data name="SignInSettings_Error_EnterCode" xml:space="preserve"><value>Please enter the verification code.</value></data>
+  <data name="SignInSettings_Success_Updated" xml:space="preserve"><value>Sign-in method updated successfully!</value></data>
+  <data name="SignInSettings_Error_UpdateFailed" xml:space="preserve"><value>Failed to update sign-in method.</value></data>
   <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Enter your new email address. We'll send a verification code to confirm you have access to it.</value></data>
   <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>New Email Address</value></data>
   <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>your@email.com</value></data>

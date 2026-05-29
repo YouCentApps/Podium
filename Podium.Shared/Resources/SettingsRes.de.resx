@@ -83,6 +83,12 @@
   <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>6-stelligen Code eingeben</value></data>
   <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Bestätigen &amp; Methode ändern</value></data>
   <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Neuen Code senden</value></data>
+	<data name="SignInSettings_Success_CodeSent" xml:space="preserve"><value>Bestätigungscode an deine E-Mail gesendet.</value></data>
+  <data name="SignInSettings_Error_SendCodeFailed" xml:space="preserve"><value>Fehler beim Senden des Bestätigungscodes.</value></data>
+  <data name="SignInSettings_Error_EnterPassword" xml:space="preserve"><value>Bitte gib dein Passwort ein.</value></data>
+  <data name="SignInSettings_Error_EnterCode" xml:space="preserve"><value>Bitte gib den Bestätigungscode ein.</value></data>
+  <data name="SignInSettings_Success_Updated" xml:space="preserve"><value>Anmeldemethode erfolgreich aktualisiert!</value></data>
+  <data name="SignInSettings_Error_UpdateFailed" xml:space="preserve"><value>Fehler beim Aktualisieren der Anmeldemethode.</value></data>
   <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Gib deine neue E-Mail-Adresse ein. Wir senden einen Bestätigungscode, um den Zugang zu bestätigen.</value></data>
   <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>Neue E-Mail-Adresse</value></data>
   <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>deine@email.com</value></data>

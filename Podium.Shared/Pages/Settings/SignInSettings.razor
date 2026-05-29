@@ -7,7 +7,7 @@
 @inject IStringLocalizer<SettingsRes> L
 @inject IStringLocalizer<Common> LC
 
-<PageTitle>Sign-in Method - Podium</PageTitle>
+<PageTitle>@L["SignInSettings_Title"] - Podium</PageTitle>
 
 <div class="settings-form-container">
 <a href="/settings" class="back-link">&lsaquo; @LC["Btn_BackToSettings"]</a>
@@ -197,7 +197,7 @@
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to load profile";
+                errorMessage = response.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)
@@ -254,11 +254,11 @@
             if (response.Success)
             {
                 otpSent = true;
-                successMessage = "Verification code sent to your email.";
+                successMessage = L["SignInSettings_Success_CodeSent"];
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to send verification code.";
+                errorMessage = response.Error ?? L["SignInSettings_Error_SendCodeFailed"];
             }
         }
         catch (Exception ex)
@@ -278,7 +278,7 @@
 
         if (string.IsNullOrWhiteSpace(password))
         {
-            errorMessage = "Please enter your password.";
+            errorMessage = L["SignInSettings_Error_EnterPassword"];
             return;
         }
 
@@ -292,7 +292,7 @@
 
         if (string.IsNullOrWhiteSpace(otpCode))
         {
-            errorMessage = "Please enter the verification code.";
+            errorMessage = L["SignInSettings_Error_EnterCode"];
             return;
         }
 
@@ -308,7 +308,7 @@
             var response = await ApiClient.UpdateAuthMethodAsync(request);
             if (response.Success)
             {
-                successMessage = "Sign-in method updated successfully!";
+                successMessage = L["SignInSettings_Success_Updated"];
                 confirmStep = false;
                 otpSent = false;
                 password = "";
@@ -317,7 +317,7 @@
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to update sign-in method.";
+                errorMessage = response.Error ?? L["SignInSettings_Error_UpdateFailed"];
             }
         }
         catch (Exception ex)

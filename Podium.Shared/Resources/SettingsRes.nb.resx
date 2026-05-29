@@ -83,6 +83,12 @@
   <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Skriv inn 6-sifret kode</value></data>
   <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Bekreft &amp; Endre metode</value></data>
   <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Send en ny kode</value></data>
+	<data name="SignInSettings_Success_CodeSent" xml:space="preserve"><value>Bekreftelseskode sendt til e-posten din.</value></data>
+  <data name="SignInSettings_Error_SendCodeFailed" xml:space="preserve"><value>Kunne ikke sende bekreftelseskoden.</value></data>
+  <data name="SignInSettings_Error_EnterPassword" xml:space="preserve"><value>Vennligst skriv inn passordet ditt.</value></data>
+  <data name="SignInSettings_Error_EnterCode" xml:space="preserve"><value>Vennligst skriv inn bekreftelseskoden.</value></data>
+  <data name="SignInSettings_Success_Updated" xml:space="preserve"><value>Innloggingsmetode oppdatert!</value></data>
+  <data name="SignInSettings_Error_UpdateFailed" xml:space="preserve"><value>Kunne ikke oppdatere innloggingsmetoden.</value></data>
   <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Skriv inn din nye e-postadresse. Vi sender en bekreftelseskode for å bekrefte at du har tilgang til den.</value></data>
   <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>Ny e-postadresse</value></data>
   <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>din@epost.com</value></data>
