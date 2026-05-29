@@ -100,6 +100,12 @@
   <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Перевірка...</value></data>
   <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Підтвердити &amp; Оновити email</value></data>
   <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Використати інший email</value></data>
+	<data name="UpdateEmail_Error_InvalidEmail" xml:space="preserve"><value>Будь ласка, введіть дійсну електронну адресу.</value></data>
+  <data name="UpdateEmail_Success_CodeSent" xml:space="preserve"><value>Код підтвердження надіслано! Перевірте поштову скриньку вашого нового email.</value></data>
+  <data name="UpdateEmail_Error_SendCodeFailed" xml:space="preserve"><value>Не вдалося надіслати код підтвердження.</value></data>
+  <data name="UpdateEmail_Error_EnterCode" xml:space="preserve"><value>Будь ласка, введіть код підтвердження.</value></data>
+  <data name="UpdateEmail_Success_Updated" xml:space="preserve"><value>Email успішно оновлено!</value></data>
+  <data name="UpdateEmail_Error_UpdateFailed" xml:space="preserve"><value>Не вдалося оновити email.</value></data>
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Введіть нове відображуване ім'я</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Введіть ваш пароль</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Введіть 6-значний код</value></data>

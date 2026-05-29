@@ -100,6 +100,12 @@
   <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Verificando...</value></data>
   <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Verificar &amp; Actualizar email</value></data>
   <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Usar otro email</value></data>
+	<data name="UpdateEmail_Error_InvalidEmail" xml:space="preserve"><value>Por favor, introduce una dirección de email válida.</value></data>
+  <data name="UpdateEmail_Success_CodeSent" xml:space="preserve"><value>¡Código de verificación enviado! Revisa la bandeja de entrada de tu nuevo email.</value></data>
+  <data name="UpdateEmail_Error_SendCodeFailed" xml:space="preserve"><value>Error al enviar el código de verificación.</value></data>
+  <data name="UpdateEmail_Error_EnterCode" xml:space="preserve"><value>Por favor, introduce el código de verificación.</value></data>
+  <data name="UpdateEmail_Success_Updated" xml:space="preserve"><value>¡Email actualizado correctamente!</value></data>
+  <data name="UpdateEmail_Error_UpdateFailed" xml:space="preserve"><value>Error al actualizar el email.</value></data>
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Introduce el nuevo nombre visible</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Introduce tu contraseña</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Introduce código de 6 dígitos</value></data>

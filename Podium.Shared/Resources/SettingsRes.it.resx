@@ -100,6 +100,12 @@
   <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Verifica in corso...</value></data>
   <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Verifica &amp; Aggiorna email</value></data>
   <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Usa un'email diversa</value></data>
+	<data name="UpdateEmail_Error_InvalidEmail" xml:space="preserve"><value>Per favore inserisci un indirizzo email valido.</value></data>
+  <data name="UpdateEmail_Success_CodeSent" xml:space="preserve"><value>Codice di verifica inviato! Controlla la casella di posta del tuo nuovo indirizzo email.</value></data>
+  <data name="UpdateEmail_Error_SendCodeFailed" xml:space="preserve"><value>Errore durante l'invio del codice di verifica.</value></data>
+  <data name="UpdateEmail_Error_EnterCode" xml:space="preserve"><value>Per favore inserisci il codice di verifica.</value></data>
+  <data name="UpdateEmail_Success_Updated" xml:space="preserve"><value>Indirizzo email aggiornato con successo!</value></data>
+  <data name="UpdateEmail_Error_UpdateFailed" xml:space="preserve"><value>Impossibile aggiornare l'indirizzo email.</value></data>
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Inserisci il nuovo nome visualizzato</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Inserisci la tua password</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Inserisci codice a 6 cifre</value></data>

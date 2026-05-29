@@ -100,6 +100,12 @@
   <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Bekrefter...</value></data>
   <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Bekreft &amp; Oppdater e-post</value></data>
   <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Bruk en annen e-post</value></data>
+	<data name="UpdateEmail_Error_InvalidEmail" xml:space="preserve"><value>Vennligst oppgi en gyldig e-postadresse.</value></data>
+  <data name="UpdateEmail_Success_CodeSent" xml:space="preserve"><value>Bekreftelseskode sendt! Sjekk innboksen til din nye e-post.</value></data>
+  <data name="UpdateEmail_Error_SendCodeFailed" xml:space="preserve"><value>Kunne ikke sende bekreftelseskoden.</value></data>
+  <data name="UpdateEmail_Error_EnterCode" xml:space="preserve"><value>Vennligst skriv inn bekreftelseskoden.</value></data>
+  <data name="UpdateEmail_Success_Updated" xml:space="preserve"><value>E-post oppdatert!</value></data>
+  <data name="UpdateEmail_Error_UpdateFailed" xml:space="preserve"><value>Kunne ikke oppdatere e-posten.</value></data>
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Skriv inn nytt visningsnavn</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Skriv inn passordet ditt</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Skriv inn 6-sifret kode</value></data>

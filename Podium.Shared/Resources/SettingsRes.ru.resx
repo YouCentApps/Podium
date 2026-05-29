@@ -100,6 +100,12 @@
   <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Проверка...</value></data>
   <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Подтвердить и обновить email</value></data>
   <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Использовать другой email</value></data>
+	<data name="UpdateEmail_Error_InvalidEmail" xml:space="preserve"><value>Пожалуйста, введите корректный адрес электронной почты.</value></data>
+  <data name="UpdateEmail_Success_CodeSent" xml:space="preserve"><value>Код подтверждения отправлен! Проверьте папку входящие на новом адресе.</value></data>
+  <data name="UpdateEmail_Error_SendCodeFailed" xml:space="preserve"><value>Не удалось отправить код подтверждения.</value></data>
+  <data name="UpdateEmail_Error_EnterCode" xml:space="preserve"><value>Пожалуйста, введите код подтверждения.</value></data>
+  <data name="UpdateEmail_Success_Updated" xml:space="preserve"><value>Электронная почта успешно обновлена!</value></data>
+  <data name="UpdateEmail_Error_UpdateFailed" xml:space="preserve"><value>Не удалось обновить электронную почту.</value></data>
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Введите новое отображаемое имя</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Введите ваш пароль</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Введите 6-значный код</value></data>
