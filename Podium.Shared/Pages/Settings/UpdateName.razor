@@ -7,7 +7,7 @@
 @inject IStringLocalizer<SettingsRes> L
 @inject IStringLocalizer<Common> LC
 
-<PageTitle>Update Display Name - Podium</PageTitle>
+<PageTitle>@L["UpdateName_Title"] - Podium</PageTitle>
 
 <div class="settings-form-container">
 <a href="/settings" class="back-link">&lsaquo; @LC["Btn_BackToSettings"]</a>
@@ -132,7 +132,7 @@
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to load profile";
+                errorMessage = response.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)
@@ -152,13 +152,13 @@
 
         if (string.IsNullOrWhiteSpace(newUsername) || newUsername.Length < 3)
         {
-            errorMessage = "Display name must be at least 3 characters.";
+            errorMessage = L["UpdateName_Error_MinLength"];
             return;
         }
 
         if (string.IsNullOrWhiteSpace(password))
         {
-            errorMessage = "Please enter your password.";
+            errorMessage = L["UpdateName_Error_EnterPassword"];
             return;
         }
 
@@ -176,11 +176,11 @@
             if (response.Success)
             {
                 otpSent = true;
-                successMessage = "Verification code sent to your email.";
+                successMessage = L["UpdateName_Success_CodeSent"];
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to send verification code.";
+                errorMessage = response.Error ?? L["UpdateName_Error_SendCodeFailed"];
             }
         }
         catch (Exception ex)
@@ -200,13 +200,13 @@
 
         if (string.IsNullOrWhiteSpace(newUsername) || newUsername.Length < 3)
         {
-            errorMessage = "Display name must be at least 3 characters.";
+            errorMessage = L["UpdateName_Error_MinLength"];
             return;
         }
 
         if (string.IsNullOrWhiteSpace(otpCode))
         {
-            errorMessage = "Please enter the verification code.";
+            errorMessage = L["UpdateName_Error_EnterCode"];
             return;
         }
 
@@ -222,7 +222,7 @@
             var response = await ApiClient.UpdateUsernameAsync(request);
             if (response.Success)
             {
-                successMessage = "Display name updated successfully!";
+                successMessage = L["UpdateName_Success_Updated"];
                 // Reload profile to show updated name
                 await LoadProfile();
                 // Update the auth state with new username
@@ -230,7 +230,7 @@
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to update display name.";
+                errorMessage = response.Error ?? L["UpdateName_Error_UpdateFailed"];
             }
         }
         catch (Exception ex)

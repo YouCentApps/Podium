@@ -97,6 +97,13 @@
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Neuen Anzeigenamen eingeben</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Passwort eingeben</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>6-stelligen Code eingeben</value></data>
+	<data name="UpdateName_Error_MinLength" xml:space="preserve"><value>Der Anzeigename muss mindestens 3 Zeichen lang sein.</value></data>
+  <data name="UpdateName_Error_EnterPassword" xml:space="preserve"><value>Bitte gib dein Passwort ein.</value></data>
+  <data name="UpdateName_Success_CodeSent" xml:space="preserve"><value>Bestätigungscode an deine E-Mail gesendet.</value></data>
+  <data name="UpdateName_Error_SendCodeFailed" xml:space="preserve"><value>Fehler beim Senden des Bestätigungscodes.</value></data>
+  <data name="UpdateName_Error_EnterCode" xml:space="preserve"><value>Bitte gib den Bestätigungscode ein.</value></data>
+  <data name="UpdateName_Success_Updated" xml:space="preserve"><value>Anzeigename erfolgreich aktualisiert!</value></data>
+  <data name="UpdateName_Error_UpdateFailed" xml:space="preserve"><value>Fehler beim Aktualisieren des Anzeigenamens.</value></data>
   <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>Passwort-Anmeldung ist für dein Konto nicht aktiviert. Um ein Passwort einzurichten, aktiviere zuerst die Passwort-Anmeldung in deinen Anmeldemethoden-Einstellungen.</value></data>
   <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Aktuelles Passwort</value></data>
   <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Aktuelles Passwort eingeben</value></data>

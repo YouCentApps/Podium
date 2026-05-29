@@ -97,6 +97,13 @@
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Введите новое отображаемое имя</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Введите ваш пароль</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Введите 6-значный код</value></data>
+	<data name="UpdateName_Error_MinLength" xml:space="preserve"><value>Отображаемое имя должно содержать не менее 3 символов.</value></data>
+  <data name="UpdateName_Error_EnterPassword" xml:space="preserve"><value>Пожалуйста, введите ваш пароль.</value></data>
+  <data name="UpdateName_Success_CodeSent" xml:space="preserve"><value>Код подтверждения отправлен на вашу электронную почту.</value></data>
+  <data name="UpdateName_Error_SendCodeFailed" xml:space="preserve"><value>Не удалось отправить код подтверждения.</value></data>
+  <data name="UpdateName_Error_EnterCode" xml:space="preserve"><value>Пожалуйста, введите код подтверждения.</value></data>
+  <data name="UpdateName_Success_Updated" xml:space="preserve"><value>Отображаемое имя успешно обновлено!</value></data>
+  <data name="UpdateName_Error_UpdateFailed" xml:space="preserve"><value>Не удалось обновить отображаемое имя.</value></data>
   <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>Вход по паролю не активирован. Чтобы установить пароль, сначала включите вход по паролю в настройках способа входа.</value></data>
   <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Текущий пароль</value></data>
   <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Введите текущий пароль</value></data>

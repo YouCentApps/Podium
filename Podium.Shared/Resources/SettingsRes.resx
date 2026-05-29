@@ -97,6 +97,13 @@
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Enter new display name</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Enter your password</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Enter 6-digit code</value></data>
+	<data name="UpdateName_Error_MinLength" xml:space="preserve"><value>Display name must be at least 3 characters.</value></data>
+  <data name="UpdateName_Error_EnterPassword" xml:space="preserve"><value>Please enter your password.</value></data>
+  <data name="UpdateName_Success_CodeSent" xml:space="preserve"><value>Verification code sent to your email.</value></data>
+  <data name="UpdateName_Error_SendCodeFailed" xml:space="preserve"><value>Failed to send verification code.</value></data>
+  <data name="UpdateName_Error_EnterCode" xml:space="preserve"><value>Please enter the verification code.</value></data>
+  <data name="UpdateName_Success_Updated" xml:space="preserve"><value>Display name updated successfully!</value></data>
+  <data name="UpdateName_Error_UpdateFailed" xml:space="preserve"><value>Failed to update display name.</value></data>
   <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>Password sign-in is not enabled for your account. To set up a password, first enable password sign-in in your sign-in method settings.</value></data>
   <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Current Password</value></data>
   <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Enter current password</value></data>

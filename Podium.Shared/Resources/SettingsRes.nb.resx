@@ -97,6 +97,13 @@
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Skriv inn nytt visningsnavn</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Skriv inn passordet ditt</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Skriv inn 6-sifret kode</value></data>
+	<data name="UpdateName_Error_MinLength" xml:space="preserve"><value>Visningsnavn må være minst 3 tegn.</value></data>
+  <data name="UpdateName_Error_EnterPassword" xml:space="preserve"><value>Vennligst skriv inn passordet ditt.</value></data>
+  <data name="UpdateName_Success_CodeSent" xml:space="preserve"><value>Bekreftelseskode sendt til e-posten din.</value></data>
+  <data name="UpdateName_Error_SendCodeFailed" xml:space="preserve"><value>Kunne ikke sende bekreftelseskoden.</value></data>
+  <data name="UpdateName_Error_EnterCode" xml:space="preserve"><value>Vennligst skriv inn bekreftelseskoden.</value></data>
+  <data name="UpdateName_Success_Updated" xml:space="preserve"><value>Visningsnavn oppdatert!</value></data>
+  <data name="UpdateName_Error_UpdateFailed" xml:space="preserve"><value>Kunne ikke oppdatere visningsnavnet.</value></data>
   <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>Passordinnlogging er ikke aktivert for kontoen din. For å sette opp et passord, aktiver først passordinnlogging i innloggingsmetodeinnstillingene.</value></data>
   <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Gjeldende passord</value></data>
   <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Skriv inn gjeldende passord</value></data>

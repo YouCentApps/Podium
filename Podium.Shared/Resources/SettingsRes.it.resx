@@ -97,6 +97,13 @@
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Inserisci il nuovo nome visualizzato</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Inserisci la tua password</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Inserisci codice a 6 cifre</value></data>
+	<data name="UpdateName_Error_MinLength" xml:space="preserve"><value>Il nome visualizzato deve essere di almeno 3 caratteri.</value></data>
+  <data name="UpdateName_Error_EnterPassword" xml:space="preserve"><value>Per favore inserisci la tua password.</value></data>
+  <data name="UpdateName_Success_CodeSent" xml:space="preserve"><value>Codice di verifica inviato alla tua email.</value></data>
+  <data name="UpdateName_Error_SendCodeFailed" xml:space="preserve"><value>Impossibile inviare il codice di verifica.</value></data>
+  <data name="UpdateName_Error_EnterCode" xml:space="preserve"><value>Per favore inserisci il codice di verifica.</value></data>
+  <data name="UpdateName_Success_Updated" xml:space="preserve"><value>Nome visualizzato aggiornato con successo!</value></data>
+  <data name="UpdateName_Error_UpdateFailed" xml:space="preserve"><value>Impossibile aggiornare il nome visualizzato.</value></data>
   <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>L'accesso tramite password non è abilitato per il tuo account. Per configurare una password, abilita prima l'accesso tramite password nelle impostazioni del metodo di accesso.</value></data>
   <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Password attuale</value></data>
   <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Inserisci la password attuale</value></data>
