@@ -42,4 +42,7 @@
   <data name="Home_Feature3_Title" xml:space="preserve"><value>Konkurrer &amp; Vinn</value></data>
   <data name="Home_Feature3_Desc" xml:space="preserve"><value>Tjen poeng og klatre på resultattavlen</value></data>
   <data name="Error_LoadFailed" xml:space="preserve"><value>Kunne ikke laste data. Vennligst prøv igjen.</value></data>
+  <data name="Confirm_Title" xml:space="preserve"><value>Bekreft handling</value></data>
+  <data name="Confirm_Message" xml:space="preserve"><value>Er du sikker?</value></data>
+  <data name="Btn_Confirm" xml:space="preserve"><value>Bekreft</value></data>
 </root>

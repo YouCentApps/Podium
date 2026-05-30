@@ -42,4 +42,7 @@
   <data name="Home_Feature3_Title" xml:space="preserve"><value>Змагайся &amp; Перемагай</value></data>
   <data name="Home_Feature3_Desc" xml:space="preserve"><value>Отримуйте очки та підіймайтесь у таблиці лідерів</value></data>
   <data name="Error_LoadFailed" xml:space="preserve"><value>Не вдалося завантажити дані. Будь ласка, спробуйте ще раз.</value></data>
+  <data name="Confirm_Title" xml:space="preserve"><value>Підтвердити дію</value></data>
+  <data name="Confirm_Message" xml:space="preserve"><value>Ви впевнені?</value></data>
+  <data name="Btn_Confirm" xml:space="preserve"><value>Підтвердити</value></data>
 </root>

@@ -189,6 +189,8 @@
   <data name="Admin_Disciplines_Discipline" xml:space="preserve"><value>Дисципліна</value></data>
   <data name="Admin_Disciplines_Placeholder_Name" xml:space="preserve"><value>напр., Гонки на одномісних болідах</value></data>
   <data name="Admin_Disciplines_Placeholder_DisplayName" xml:space="preserve"><value>напр., Формульні гонки</value></data>
+	<data name="Admin_Disciplines_LoadFailed" xml:space="preserve"><value>Не вдалося завантажити дисципліни.</value></data>
+  <data name="Admin_Required_Name" xml:space="preserve"><value>Потрібна назва.</value></data>
   <data name="Admin_Admins_AddAdmin" xml:space="preserve"><value>Додати адміністратора</value></data>
   <data name="Admin_Admins_Administrator" xml:space="preserve"><value>Адміністратор</value></data>
   <data name="Admin_Admins_SearchUser" xml:space="preserve"><value>Пошук користувача</value></data>

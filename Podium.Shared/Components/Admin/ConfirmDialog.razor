@@ -9,7 +9,7 @@
                 <p>@Message</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+                <button class="btn btn-secondary" @onclick="Cancel">@CancelText</button>
                 <button class="btn btn-danger" @onclick="Confirm">@ConfirmText</button>
             </div>
         </div>
@@ -21,6 +21,7 @@
     [Parameter] public string Title { get; set; } = "Confirm Action";
     [Parameter] public string Message { get; set; } = "Are you sure?";
     [Parameter] public string ConfirmText { get; set; } = "Confirm";
+    [Parameter] public string CancelText { get; set; } = "Cancel";
     [Parameter] public EventCallback OnConfirm { get; set; }
     [Parameter] public EventCallback OnCancel { get; set; }
 
@@ -32,5 +33,33 @@
     private async Task Cancel()
     {
         await OnCancel.InvokeAsync();
+    }
+}
+
+@code {
+    [Inject] private IStringLocalizer<Common>? LC { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        // Provide localized defaults when not supplied by caller
+        if (string.IsNullOrEmpty(ConfirmText))
+        {
+            ConfirmText = LC?["Btn_Confirm"].Value ?? "Confirm";
+        }
+
+        if (string.IsNullOrEmpty(CancelText))
+        {
+            CancelText = LC?["Btn_Cancel"].Value ?? "Cancel";
+        }
+
+        if (string.IsNullOrEmpty(Title))
+        {
+            Title = LC?["Confirm_Title"].Value ?? "Confirm Action";
+        }
+
+        if (string.IsNullOrEmpty(Message))
+        {
+            Message = LC?["Confirm_Message"].Value ?? "Are you sure?";
+        }
     }
 }

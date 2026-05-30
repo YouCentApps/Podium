@@ -47,6 +47,13 @@
   <data name="ManageFavorites_SelectSeries" xml:space="preserve"><value>Выберите серию</value></data>
   <data name="ManageFavorites_SelectSeason" xml:space="preserve"><value>Выберите сезон</value></data>
   <data name="ManageFavorites_MaxReached" xml:space="preserve"><value>Достигнут максимум — 5 любимых сезонов.</value></data>
+	<data name="ManageFavorites_Error_LoadData" xml:space="preserve"><value>Ошибка при загрузке данных: {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeries" xml:space="preserve"><value>Ошибка при загрузке серий: {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeasons" xml:space="preserve"><value>Ошибка при загрузке сезонов: {0}</value></data>
+  <data name="ManageFavorites_Success_Added" xml:space="preserve"><value>{0} добавлен в избранное!</value></data>
+  <data name="ManageFavorites_Error_AddFailed" xml:space="preserve"><value>Не удалось добавить сезон в избранное.</value></data>
+  <data name="ManageFavorites_Success_Removed" xml:space="preserve"><value>Сезон удалён из избранного.</value></data>
+  <data name="ManageFavorites_Error_RemoveFailed" xml:space="preserve"><value>Не удалось удалить сезон из избранного.</value></data>
   <data name="UpdatePassword_Title" xml:space="preserve"><value>Изменить пароль</value></data>
   <data name="UpdateEmail_Title" xml:space="preserve"><value>Изменить email</value></data>
   <data name="SignInSettings_Title" xml:space="preserve"><value>Способ входа</value></data>

@@ -190,6 +190,8 @@
   <data name="Admin_Disciplines_Discipline" xml:space="preserve"><value>Discipline</value></data>
   <data name="Admin_Disciplines_Placeholder_Name" xml:space="preserve"><value>ex. Course monoplace</value></data>
   <data name="Admin_Disciplines_Placeholder_DisplayName" xml:space="preserve"><value>ex. Formule</value></data>
+	<data name="Admin_Disciplines_LoadFailed" xml:space="preserve"><value>Échec du chargement des disciplines.</value></data>
+  <data name="Admin_Required_Name" xml:space="preserve"><value>Le nom est requis.</value></data>
   <data name="Admin_Admins_AddAdmin" xml:space="preserve"><value>Ajouter un administrateur</value></data>
   <data name="Admin_Admins_Administrator" xml:space="preserve"><value>Administrateur</value></data>
   <data name="Admin_Admins_SearchUser" xml:space="preserve"><value>Rechercher un utilisateur</value></data>

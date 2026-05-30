@@ -10,7 +10,7 @@
 @inject IPodiumApiClient ApiClient
 @inject IStringLocalizer<AdminRes> L
 
-<PageTitle>Manage Users - Admin</PageTitle>
+<PageTitle>@L["Admin_Users_Title"] - Admin</PageTitle>
 
 <div class="admin-container">
     <div class="admin-header">
@@ -156,7 +156,7 @@
 
     private string deleteConfirmTitle = "";
     private string deleteConfirmMessage = "";
-    private string deleteConfirmButtonText = "Delete";
+    private string deleteConfirmButtonText = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -164,6 +164,9 @@
         {
             await AdminState.InitializeAsync();
         }
+
+        // Initialize localizable defaults that rely on injected resources
+        deleteConfirmButtonText = L["Admin_Btn_Delete"].Value;
 
         if (!AdminState.IsAdmin)
         {

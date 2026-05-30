@@ -47,6 +47,13 @@
   <data name="ManageFavorites_SelectSeries" xml:space="preserve"><value>Seleziona serie</value></data>
   <data name="ManageFavorites_SelectSeason" xml:space="preserve"><value>Seleziona stagione</value></data>
   <data name="ManageFavorites_MaxReached" xml:space="preserve"><value>Hai raggiunto il massimo di 5 stagioni preferite.</value></data>
+	<data name="ManageFavorites_Error_LoadData" xml:space="preserve"><value>Errore durante il caricamento dei dati: {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeries" xml:space="preserve"><value>Errore durante il caricamento delle serie: {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeasons" xml:space="preserve"><value>Errore durante il caricamento delle stagioni: {0}</value></data>
+  <data name="ManageFavorites_Success_Added" xml:space="preserve"><value>{0} aggiunta ai preferiti!</value></data>
+  <data name="ManageFavorites_Error_AddFailed" xml:space="preserve"><value>Impossibile aggiungere la stagione ai preferiti.</value></data>
+  <data name="ManageFavorites_Success_Removed" xml:space="preserve"><value>Stagione rimossa dai preferiti.</value></data>
+  <data name="ManageFavorites_Error_RemoveFailed" xml:space="preserve"><value>Impossibile rimuovere la stagione dai preferiti.</value></data>
   <data name="UpdatePassword_Title" xml:space="preserve"><value>Aggiorna password</value></data>
   <data name="UpdateEmail_Title" xml:space="preserve"><value>Aggiorna email</value></data>
   <data name="SignInSettings_Title" xml:space="preserve"><value>Metodo di accesso</value></data>

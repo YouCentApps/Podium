@@ -190,6 +190,8 @@
   <data name="Admin_Disciplines_Discipline" xml:space="preserve"><value>Дисциплина</value></data>
   <data name="Admin_Disciplines_Placeholder_Name" xml:space="preserve"><value>напр., Гонки на монопостах</value></data>
   <data name="Admin_Disciplines_Placeholder_DisplayName" xml:space="preserve"><value>напр., Формула</value></data>
+	<data name="Admin_Disciplines_LoadFailed" xml:space="preserve"><value>Ошибка при загрузке дисциплин.</value></data>
+  <data name="Admin_Required_Name" xml:space="preserve"><value>Требуется имя.</value></data>
   <data name="Admin_Admins_AddAdmin" xml:space="preserve"><value>Добавить администратора</value></data>
   <data name="Admin_Admins_Administrator" xml:space="preserve"><value>Администратор</value></data>
   <data name="Admin_Admins_SearchUser" xml:space="preserve"><value>Поиск пользователя</value></data>

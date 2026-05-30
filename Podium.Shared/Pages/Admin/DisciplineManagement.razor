@@ -9,7 +9,7 @@
 @inject IPodiumApiClient ApiClient
 @inject IStringLocalizer<AdminRes> L
 
-<PageTitle>Manage Disciplines - Admin</PageTitle>
+<PageTitle>@L["Admin_Disciplines_Title"] - Admin</PageTitle>
 
 <div class="admin-container">
     <div class="admin-header">
@@ -146,7 +146,7 @@
         }
         else
         {
-            errorMessage = response.Error ?? "Failed to load disciplines";
+            errorMessage = response.Error ?? L["Admin_Disciplines_LoadFailed"];
         }
         
         loading = false;
@@ -183,7 +183,7 @@
     {
         if (string.IsNullOrWhiteSpace(formName))
         {
-            formError = "Name is required";
+            formError = L["Admin_Required_Name"];
             return;
         }
 

@@ -8,7 +8,7 @@
 @inject IStringLocalizer<AdminRes> L
 @inject IStringLocalizer<Common> LC
 
-<PageTitle>Admin Dashboard - Podium</PageTitle>
+<PageTitle>@L["Admin_Dashboard_Title"] - Podium</PageTitle>
 
 @if (!AuthState.IsAuthenticated)
 {
@@ -119,8 +119,8 @@ else
     {
         var response = await ApiClient.FindDuplicateActiveSeasonsAsync();
         diagnosticMessage = response.Success 
-            ? response.Data?.Message ?? "Check completed successfully" 
-            : $"Error: {response.Error}";
+            ? response.Data?.Message ?? L["Admin_SaveSuccess"].Value 
+            : string.Format(L["Admin_Error"].Value + ": {0}", response.Error);
         StateHasChanged();
     }
 

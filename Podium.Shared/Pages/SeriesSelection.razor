@@ -6,7 +6,7 @@
 @inject IStringLocalizer<Predictions> L
 @inject IStringLocalizer<Common> LC
 
-<PageTitle>Select Series - Podium</PageTitle>
+<PageTitle>@L["SeriesSelection_Title"] - Podium</PageTitle>
 
 <div class="page-container">
     <nav class="breadcrumb">
@@ -71,10 +71,10 @@
             {
                 seriesList = response.Data;
             }
-            else
-            {
-                errorMessage = response.Error ?? "Failed to load series.";
-            }
+                else
+                {
+                    errorMessage = response.Error ?? L["SeriesSelection_LoadFailed"];
+                }
         }
         catch (Exception ex)
         {

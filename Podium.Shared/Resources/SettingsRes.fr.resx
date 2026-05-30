@@ -47,6 +47,13 @@
   <data name="ManageFavorites_SelectSeries" xml:space="preserve"><value>Sélectionner une série</value></data>
   <data name="ManageFavorites_SelectSeason" xml:space="preserve"><value>Sélectionner une saison</value></data>
   <data name="ManageFavorites_MaxReached" xml:space="preserve"><value>Vous avez atteint le maximum de 5 saisons favorites.</value></data>
+	<data name="ManageFavorites_Error_LoadData" xml:space="preserve"><value>Erreur lors du chargement des données : {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeries" xml:space="preserve"><value>Erreur lors du chargement des séries : {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeasons" xml:space="preserve"><value>Erreur lors du chargement des saisons : {0}</value></data>
+  <data name="ManageFavorites_Success_Added" xml:space="preserve"><value>{0} ajouté aux favoris !</value></data>
+  <data name="ManageFavorites_Error_AddFailed" xml:space="preserve"><value>Échec de l'ajout de la saison aux favoris.</value></data>
+  <data name="ManageFavorites_Success_Removed" xml:space="preserve"><value>Saison supprimée des favoris.</value></data>
+  <data name="ManageFavorites_Error_RemoveFailed" xml:space="preserve"><value>Échec de la suppression de la saison des favoris.</value></data>
   <data name="UpdatePassword_Title" xml:space="preserve"><value>Modifier le mot de passe</value></data>
   <data name="UpdateEmail_Title" xml:space="preserve"><value>Modifier l'email</value></data>
   <data name="SignInSettings_Title" xml:space="preserve"><value>Méthode de connexion</value></data>

@@ -189,6 +189,8 @@
   <data name="Admin_Disciplines_Discipline" xml:space="preserve"><value>Disziplin</value></data>
   <data name="Admin_Disciplines_Placeholder_Name" xml:space="preserve"><value>z.B. Formelrennen</value></data>
   <data name="Admin_Disciplines_Placeholder_DisplayName" xml:space="preserve"><value>z.B. Formula Racing</value></data>
+	<data name="Admin_Disciplines_LoadFailed" xml:space="preserve"><value>Fehler beim Laden der Disziplinen.</value></data>
+  <data name="Admin_Required_Name" xml:space="preserve"><value>Name ist erforderlich.</value></data>
   <data name="Admin_Admins_AddAdmin" xml:space="preserve"><value>Administrator hinzufügen</value></data>
   <data name="Admin_Admins_Administrator" xml:space="preserve"><value>Administrator</value></data>
   <data name="Admin_Admins_SearchUser" xml:space="preserve"><value>Benutzer suchen</value></data>
