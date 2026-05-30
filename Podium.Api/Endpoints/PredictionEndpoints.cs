@@ -6,6 +6,8 @@ internal static class PredictionEndpoints
     {
         var group = app.MapGroup("/api/predictions").WithTags("Predictions");
 
+        var localizer = app.Services.GetRequiredService<IStringLocalizer<ApiMessages>>();
+
         // Get user's prediction for an event
         group.MapGet("/{eventId}/user/{userId}", async (
             string eventId,
@@ -268,17 +270,17 @@ internal static class PredictionEndpoints
             // Validate event exists and accepts predictions
             var eventDetails = await eventRepo.GetEventByIdAsync(request.SeasonId, request.EventId).ConfigureAwait(false);
             if (eventDetails == null)
-                return Results.BadRequest(new { error = "Event not found" });
+                return Results.BadRequest(new { error = localizer["Entity_NotFound", "Event"].Value });
 
             if (!eventDetails.CanAcceptPredictions)
-                return Results.BadRequest(new { error = "Event no longer accepts predictions" });
+                return Results.BadRequest(new { error = localizer["Prediction_EventClosed"].Value });
 
             // Validate all three competitors are different
             if (request.FirstPlaceId == request.SecondPlaceId || 
                 request.FirstPlaceId == request.ThirdPlaceId || 
                 request.SecondPlaceId == request.ThirdPlaceId)
             {
-                return Results.BadRequest(new { error = "All three competitors must be different" });
+                return Results.BadRequest(new { error = localizer["Val_PodiumUnique"].Value });
             }
 
             var prediction = new Prediction
@@ -300,7 +302,7 @@ internal static class PredictionEndpoints
             if (!success)
                 return Results.StatusCode(500);
 
-            return Results.Ok(new { message = "Prediction saved successfully", prediction });
+            return Results.Ok(new { message = localizer["Prediction_SavedSuccess"].Value, prediction });
         })
         .RequireAuth()
         .WithName("SubmitPrediction");

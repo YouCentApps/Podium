@@ -77,4 +77,22 @@
   <data name="Email_Ignore" xml:space="preserve"><value>Если вы не запрашивали этот код, просто проигнорируйте это письмо.</value></data>
   <data name="Email_Automated" xml:space="preserve"><value>Это автоматическое сообщение, пожалуйста, не отвечайте на него.</value></data>
   <data name="Email_Copyright" xml:space="preserve"><value>Все права защищены.</value></data>
+  <data name="Admin_NoDuplicateActiveSeasons" xml:space="preserve"><value>Дубликатов активных сезонов не найдено.</value></data>
+  <data name="Admin_FoundDuplicateActiveSeasons" xml:space="preserve"><value>Найдено {0} серий с несколькими активными сезонами.</value></data>
+	<data name="Val_StartBeforeEnd" xml:space="preserve"><value>Дата начала должна быть раньше даты окончания</value></data>
+  <data name="Val_YearMismatch" xml:space="preserve"><value>Год должен соответствовать году даты начала</value></data>
+  <data name="Val_InvalidEventStatus" xml:space="preserve"><value>Статус должен быть 'Upcoming', 'InProgress' или 'Completed'</value></data>
+  <data name="Val_EventDateOutOfRange" xml:space="preserve"><value>Дата события должна быть в диапазоне дат сезона</value></data>
+  <data name="Val_EventResultsRequireCompleted" xml:space="preserve"><value>Результаты можно вводить только для завершенных событий. Установите статус 'Completed'.</value></data>
+  <data name="Val_PodiumUnique" xml:space="preserve"><value>Все три призовых места должны принадлежать разным участникам</value></data>
+  <data name="EventResult_Saved_Recalculated" xml:space="preserve"><value>Результат сохранен и все очки прогнозов успешно пересчитаны</value></data>
+  <data name="EventResult_Saved_PartialRecalc" xml:space="preserve"><value>Результат сохранен, но некоторые прогнозы могли не быть пересчитаны</value></data>
+	<data name="Prediction_EventClosed" xml:space="preserve"><value>Событие больше не принимает прогнозы</value></data>
+  <data name="Prediction_SavedSuccess" xml:space="preserve"><value>Прогноз успешно сохранен</value></data>
+  <data name="Entity_NotFound" xml:space="preserve"><value>{0} не найден</value></data>
+  <data name="Entity_AlreadyExists" xml:space="preserve"><value>{0} уже существует</value></data>
+  <data name="Entity_CreatedSuccess" xml:space="preserve"><value>{0} успешно создан</value></data>
+  <data name="Entity_UpdatedSuccess" xml:space="preserve"><value>{0} успешно обновлён</value></data>
+  <data name="Entity_DeletedSuccess" xml:space="preserve"><value>{0} успешно удалён</value></data>
+  <data name="Admin_CannotRemoveSelf" xml:space="preserve"><value>Нельзя удалить самого себя как администратора</value></data>
 </root>

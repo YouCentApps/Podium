@@ -215,4 +215,16 @@
   <data name="Admin_Seasons_RecalcFailed" xml:space="preserve"><value>❌ Перерахунок не вдався: {0}</value></data>
   <data name="Admin_Seasons_RecalcFailedStart" xml:space="preserve"><value>Не вдалося розпочати перерахунок</value></data>
   <data name="Admin_Seasons_RecalcAlreadyRunning" xml:space="preserve"><value>Інший перерахунок вже виконується</value></data>
+  <data name="Admin_Error_LoadUsers" xml:space="preserve"><value>Не вдалося завантажити користувачів. Будь ласка, спробуйте ще раз.</value></data>
+  <data name="Admin_Required_Username" xml:space="preserve"><value>Ім'я користувача обов'язкове.</value></data>
+  <data name="Admin_Required_Email" xml:space="preserve"><value>Електронна пошта обов'язкова.</value></data>
+  <data name="Admin_Error_UpdateUser" xml:space="preserve"><value>Не вдалося оновити користувача. Будь ласка, спробуйте ще раз.</value></data>
+  <data name="Admin_UserDelete_Reason_Predictions" xml:space="preserve"><value>{0} передбачення(ь)</value></data>
+  <data name="Admin_UserDelete_Reason_AdminPrivileges" xml:space="preserve"><value>адміністративні права</value></data>
+  <data name="Admin_UserDelete_CannotDelete_Title" xml:space="preserve"><value>Не можна видалити користувача</value></data>
+  <data name="Admin_UserDelete_CannotDelete_Message" xml:space="preserve"><value>Користувач '{0}' має наявні дані: {1}.\n\nЩоб зберегти цілісність даних, деактивуйте цього користувача замість видалення.</value></data>
+  <data name="Admin_Btn_DeactivateInstead" xml:space="preserve"><value>Деактивувати замість цього</value></data>
+  <data name="Admin_UserDelete_Title" xml:space="preserve"><value>Видалити користувача</value></data>
+  <data name="Admin_UserDelete_Message" xml:space="preserve"><value>Ви впевнені, що хочете назавжди видалити користувача '{0}'?\n\nЦю дію неможливо скасувати.</value></data>
+  <data name="Admin_UserDelete_ConfirmSimple" xml:space="preserve"><value>Ви впевнені, що хочете видалити користувача '{0}'?</value></data>
 </root>

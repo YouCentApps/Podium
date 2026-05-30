@@ -66,6 +66,24 @@
   <data name="Admin_SetActiveFailed" xml:space="preserve"><value>Échec de l'activation de la saison. Elle n'existe peut-être pas.</value></data>
   <data name="Admin_SetActiveSuccess" xml:space="preserve"><value>Saison activée avec succès. Les autres saisons de cette série ont été désactivées.</value></data>
   <data name="Admin_Unauthorized" xml:space="preserve"><value>Accès administrateur requis</value></data>
+	<data name="Admin_NoDuplicateActiveSeasons" xml:space="preserve"><value>Aucune saison active en double trouvée.</value></data>
+  <data name="Admin_FoundDuplicateActiveSeasons" xml:space="preserve"><value>{0} séries avec plusieurs saisons actives trouvées.</value></data>
+	<data name="Val_StartBeforeEnd" xml:space="preserve"><value>La date de début doit être antérieure à la date de fin</value></data>
+  <data name="Val_YearMismatch" xml:space="preserve"><value>L'année doit correspondre à l'année de la date de début</value></data>
+  <data name="Val_InvalidEventStatus" xml:space="preserve"><value>Le statut doit être 'Upcoming', 'InProgress' ou 'Completed'</value></data>
+  <data name="Val_EventDateOutOfRange" xml:space="preserve"><value>La date de l'événement doit être dans la plage de la saison</value></data>
+  <data name="Val_EventResultsRequireCompleted" xml:space="preserve"><value>Les résultats ne peuvent être saisis que pour des événements terminés. Changez le statut en 'Completed'.</value></data>
+  <data name="Val_PodiumUnique" xml:space="preserve"><value>Les trois places du podium doivent être des concurrents différents</value></data>
+  <data name="EventResult_Saved_Recalculated" xml:space="preserve"><value>Résultat enregistré et tous les points de prédiction recalculés avec succès</value></data>
+  <data name="EventResult_Saved_PartialRecalc" xml:space="preserve"><value>Résultat enregistré, mais certaines prédictions n'ont peut-être pas été recalculées</value></data>
+	<data name="Prediction_EventClosed" xml:space="preserve"><value>L'événement n'accepte plus de prédictions</value></data>
+  <data name="Prediction_SavedSuccess" xml:space="preserve"><value>Prédiction enregistrée avec succès</value></data>
+  <data name="Entity_NotFound" xml:space="preserve"><value>{0} introuvable</value></data>
+  <data name="Entity_AlreadyExists" xml:space="preserve"><value>{0} existe déjà</value></data>
+  <data name="Entity_CreatedSuccess" xml:space="preserve"><value>{0} créé avec succès</value></data>
+  <data name="Entity_UpdatedSuccess" xml:space="preserve"><value>{0} mis à jour avec succès</value></data>
+  <data name="Entity_DeletedSuccess" xml:space="preserve"><value>{0} supprimé avec succès</value></data>
+  <data name="Admin_CannotRemoveSelf" xml:space="preserve"><value>Vous ne pouvez pas vous supprimer en tant qu'administrateur</value></data>
   <data name="General_NotFound" xml:space="preserve"><value>Introuvable</value></data>
   <data name="General_Failed" xml:space="preserve"><value>Opération échouée. Veuillez réessayer.</value></data>
   <data name="General_Success" xml:space="preserve"><value>Opération réussie</value></data>

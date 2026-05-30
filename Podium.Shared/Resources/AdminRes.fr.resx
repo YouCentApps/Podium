@@ -216,4 +216,16 @@
   <data name="Admin_Seasons_RecalcFailed" xml:space="preserve"><value>❌ Échec du recalcul : {0}</value></data>
   <data name="Admin_Seasons_RecalcFailedStart" xml:space="preserve"><value>Échec du lancement du recalcul</value></data>
   <data name="Admin_Seasons_RecalcAlreadyRunning" xml:space="preserve"><value>Un autre recalcul est déjà en cours</value></data>
+  <data name="Admin_Error_LoadUsers" xml:space="preserve"><value>Échec du chargement des utilisateurs. Veuillez réessayer.</value></data>
+  <data name="Admin_Required_Username" xml:space="preserve"><value>Le nom d'utilisateur est requis.</value></data>
+  <data name="Admin_Required_Email" xml:space="preserve"><value>L'e-mail est requis.</value></data>
+  <data name="Admin_Error_UpdateUser" xml:space="preserve"><value>Échec de la mise à jour de l'utilisateur. Veuillez réessayer.</value></data>
+  <data name="Admin_UserDelete_Reason_Predictions" xml:space="preserve"><value>{0} prédiction(s)</value></data>
+  <data name="Admin_UserDelete_Reason_AdminPrivileges" xml:space="preserve"><value>privilèges d'administration</value></data>
+  <data name="Admin_UserDelete_CannotDelete_Title" xml:space="preserve"><value>Impossible de supprimer l'utilisateur</value></data>
+  <data name="Admin_UserDelete_CannotDelete_Message" xml:space="preserve"><value>L'utilisateur '{0}' possède des données existantes : {1}.\n\nPour préserver l'intégrité des données, veuillez désactiver cet utilisateur au lieu de le supprimer.</value></data>
+  <data name="Admin_Btn_DeactivateInstead" xml:space="preserve"><value>Désactiver à la place</value></data>
+  <data name="Admin_UserDelete_Title" xml:space="preserve"><value>Supprimer l'utilisateur</value></data>
+  <data name="Admin_UserDelete_Message" xml:space="preserve"><value>Êtes-vous sûr de vouloir supprimer définitivement l'utilisateur '{0}' ?\n\nCette action est irréversible.</value></data>
+  <data name="Admin_UserDelete_ConfirmSimple" xml:space="preserve"><value>Êtes-vous sûr de vouloir supprimer l'utilisateur '{0}' ?</value></data>
 </root>

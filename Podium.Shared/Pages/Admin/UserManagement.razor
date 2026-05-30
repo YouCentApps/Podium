@@ -255,13 +255,13 @@
 
         if (string.IsNullOrWhiteSpace(formUsername))
         {
-            formError = "Username is required";
+            formError = L["Admin_Required_Username"].Value;
             return;
         }
 
         if (string.IsNullOrWhiteSpace(formEmail))
         {
-            formError = "Email is required";
+            formError = L["Admin_Required_Email"].Value;
             return;
         }
 
@@ -278,7 +278,7 @@
         }
         else
         {
-            formError = response.Error ?? "Failed to update user";
+            formError = response.Error ?? L["Admin_Error_UpdateUser"].Value;
         }
 
         saving = false;
@@ -298,31 +298,29 @@
             {
                 // User has dependencies - show warning
                 var reasons = new List<string>();
-                if (userDependencies.PredictionCount > 0)
-                    reasons.Add($"{userDependencies.PredictionCount} prediction(s)");
+            if (userDependencies.PredictionCount > 0)
+                    reasons.Add(string.Format(L["Admin_UserDelete_Reason_Predictions"].Value, userDependencies.PredictionCount));
                 if (userDependencies.IsAdmin)
-                    reasons.Add("admin privileges");
+                    reasons.Add(L["Admin_UserDelete_Reason_AdminPrivileges"].Value);
 
-                deleteConfirmTitle = "Cannot Delete User";
-                deleteConfirmMessage = $"User '{user.Username}' has existing data: {string.Join(", ", reasons)}.\n\n" +
-                                      "To preserve data integrity, please deactivate this user instead of deleting.";
-                deleteConfirmButtonText = "Deactivate Instead";
+                deleteConfirmTitle = L["Admin_UserDelete_CannotDelete_Title"].Value;
+                deleteConfirmMessage = string.Format(L["Admin_UserDelete_CannotDelete_Message"].Value, user.Username, string.Join(", ", reasons));
+                deleteConfirmButtonText = L["Admin_Btn_DeactivateInstead"].Value;
             }
             else
             {
                 // User can be deleted
-                deleteConfirmTitle = "Delete User";
-                deleteConfirmMessage = $"Are you sure you want to permanently delete user '{user.Username}'?\n\n" +
-                                      "This action cannot be undone.";
-                deleteConfirmButtonText = "Delete";
+                deleteConfirmTitle = L["Admin_UserDelete_Title"].Value;
+                deleteConfirmMessage = string.Format(L["Admin_UserDelete_Message"].Value, user.Username);
+                deleteConfirmButtonText = L["Admin_Btn_Delete"].Value;
             }
         }
         else
         {
             // Couldn't check dependencies - show general warning
-            deleteConfirmTitle = "Delete User";
-            deleteConfirmMessage = $"Are you sure you want to delete user '{user.Username}'?";
-            deleteConfirmButtonText = "Delete";
+            deleteConfirmTitle = L["Admin_UserDelete_Title"].Value;
+            deleteConfirmMessage = string.Format(L["Admin_UserDelete_ConfirmSimple"].Value, user.Username);
+            deleteConfirmButtonText = L["Admin_Btn_Delete"].Value;
         }
 
         showDeleteConfirm = true;
