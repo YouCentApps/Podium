@@ -47,6 +47,13 @@
   <data name="ManageFavorites_SelectSeries" xml:space="preserve"><value>Выберите серию</value></data>
   <data name="ManageFavorites_SelectSeason" xml:space="preserve"><value>Выберите сезон</value></data>
   <data name="ManageFavorites_MaxReached" xml:space="preserve"><value>Достигнут максимум — 5 любимых сезонов.</value></data>
+	<data name="ManageFavorites_Error_LoadData" xml:space="preserve"><value>Ошибка при загрузке данных: {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeries" xml:space="preserve"><value>Ошибка при загрузке серий: {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeasons" xml:space="preserve"><value>Ошибка при загрузке сезонов: {0}</value></data>
+  <data name="ManageFavorites_Success_Added" xml:space="preserve"><value>{0} добавлен в избранное!</value></data>
+  <data name="ManageFavorites_Error_AddFailed" xml:space="preserve"><value>Не удалось добавить сезон в избранное.</value></data>
+  <data name="ManageFavorites_Success_Removed" xml:space="preserve"><value>Сезон удалён из избранного.</value></data>
+  <data name="ManageFavorites_Error_RemoveFailed" xml:space="preserve"><value>Не удалось удалить сезон из избранного.</value></data>
   <data name="UpdatePassword_Title" xml:space="preserve"><value>Изменить пароль</value></data>
   <data name="UpdateEmail_Title" xml:space="preserve"><value>Изменить email</value></data>
   <data name="SignInSettings_Title" xml:space="preserve"><value>Способ входа</value></data>
@@ -83,6 +90,12 @@
   <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Введите 6-значный код</value></data>
   <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Подтвердить и изменить способ</value></data>
   <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Отправить новый код</value></data>
+	<data name="SignInSettings_Success_CodeSent" xml:space="preserve"><value>Код подтверждения отправлен на вашу электронную почту.</value></data>
+  <data name="SignInSettings_Error_SendCodeFailed" xml:space="preserve"><value>Не удалось отправить код подтверждения.</value></data>
+  <data name="SignInSettings_Error_EnterPassword" xml:space="preserve"><value>Пожалуйста, введите ваш пароль.</value></data>
+  <data name="SignInSettings_Error_EnterCode" xml:space="preserve"><value>Пожалуйста, введите код подтверждения.</value></data>
+  <data name="SignInSettings_Success_Updated" xml:space="preserve"><value>Способ входа успешно обновлён!</value></data>
+  <data name="SignInSettings_Error_UpdateFailed" xml:space="preserve"><value>Не удалось обновить способ входа.</value></data>
   <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Введите новый адрес электронной почты. Мы отправим код подтверждения для проверки доступа.</value></data>
   <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>Новый адрес email</value></data>
   <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>ваш@email.com</value></data>
@@ -94,9 +107,22 @@
   <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Проверка...</value></data>
   <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Подтвердить и обновить email</value></data>
   <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Использовать другой email</value></data>
+	<data name="UpdateEmail_Error_InvalidEmail" xml:space="preserve"><value>Пожалуйста, введите корректный адрес электронной почты.</value></data>
+  <data name="UpdateEmail_Success_CodeSent" xml:space="preserve"><value>Код подтверждения отправлен! Проверьте папку входящие на новом адресе.</value></data>
+  <data name="UpdateEmail_Error_SendCodeFailed" xml:space="preserve"><value>Не удалось отправить код подтверждения.</value></data>
+  <data name="UpdateEmail_Error_EnterCode" xml:space="preserve"><value>Пожалуйста, введите код подтверждения.</value></data>
+  <data name="UpdateEmail_Success_Updated" xml:space="preserve"><value>Электронная почта успешно обновлена!</value></data>
+  <data name="UpdateEmail_Error_UpdateFailed" xml:space="preserve"><value>Не удалось обновить электронную почту.</value></data>
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Введите новое отображаемое имя</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Введите ваш пароль</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Введите 6-значный код</value></data>
+	<data name="UpdateName_Error_MinLength" xml:space="preserve"><value>Отображаемое имя должно содержать не менее 3 символов.</value></data>
+  <data name="UpdateName_Error_EnterPassword" xml:space="preserve"><value>Пожалуйста, введите ваш пароль.</value></data>
+  <data name="UpdateName_Success_CodeSent" xml:space="preserve"><value>Код подтверждения отправлен на вашу электронную почту.</value></data>
+  <data name="UpdateName_Error_SendCodeFailed" xml:space="preserve"><value>Не удалось отправить код подтверждения.</value></data>
+  <data name="UpdateName_Error_EnterCode" xml:space="preserve"><value>Пожалуйста, введите код подтверждения.</value></data>
+  <data name="UpdateName_Success_Updated" xml:space="preserve"><value>Отображаемое имя успешно обновлено!</value></data>
+  <data name="UpdateName_Error_UpdateFailed" xml:space="preserve"><value>Не удалось обновить отображаемое имя.</value></data>
   <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>Вход по паролю не активирован. Чтобы установить пароль, сначала включите вход по паролю в настройках способа входа.</value></data>
   <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Текущий пароль</value></data>
   <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Введите текущий пароль</value></data>
@@ -115,4 +141,12 @@
   <data name="UpdatePassword_Btn_SettingUp" xml:space="preserve"><value>Настройка...</value></data>
   <data name="UpdatePassword_Btn_SetPassword" xml:space="preserve"><value>Установить пароль</value></data>
   <data name="UpdatePassword_Btn_SendNewCode" xml:space="preserve"><value>Отправить новый код</value></data>
+  <data name="UpdatePassword_Error_SendCodeFailed" xml:space="preserve"><value>Не удалось отправить код подтверждения.</value></data>
+  <data name="UpdatePassword_Error_EnterCurrent" xml:space="preserve"><value>Пожалуйста, введите ваш текущий пароль.</value></data>
+  <data name="UpdatePassword_Error_EnterCode" xml:space="preserve"><value>Пожалуйста, введите код подтверждения.</value></data>
+  <data name="UpdatePassword_Error_MinLength" xml:space="preserve"><value>Пароль должен содержать не менее 6 символов.</value></data>
+  <data name="UpdatePassword_Error_PasswordsMismatch" xml:space="preserve"><value>Пароли не совпадают.</value></data>
+  <data name="UpdatePassword_Success_Updated" xml:space="preserve"><value>Пароль успешно обновлён!</value></data>
+  <data name="UpdatePassword_Success_Setup" xml:space="preserve"><value>Пароль успешно установлен!</value></data>
+  <data name="UpdatePassword_Error_UpdateFailed" xml:space="preserve"><value>Не удалось обновить пароль.</value></data>
 </root>

@@ -7,7 +7,7 @@
 @inject IStringLocalizer<SettingsRes> L
 @inject IStringLocalizer<Common> LC
 
-<PageTitle>Update Email - Podium</PageTitle>
+<PageTitle>@L["UpdateEmail_Title"] - Podium</PageTitle>
 
 <div class="settings-form-container">
 <a href="/settings" class="back-link">&lsaquo; @LC["Btn_BackToSettings"]</a>
@@ -109,7 +109,7 @@
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to load profile";
+                errorMessage = response.Error ?? LC["Error_LoadFailed"];
             }
         }
         catch (Exception ex)
@@ -129,7 +129,7 @@
 
         if (string.IsNullOrWhiteSpace(newEmail) || !newEmail.Contains("@"))
         {
-            errorMessage = "Please enter a valid email address.";
+            errorMessage = L["UpdateEmail_Error_InvalidEmail"];
             return;
         }
 
@@ -140,11 +140,11 @@
             if (response.Success)
             {
                 otpSent = true;
-                successMessage = "Verification code sent! Check your new email inbox.";
+                successMessage = L["UpdateEmail_Success_CodeSent"];
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to send verification code.";
+                errorMessage = response.Error ?? L["UpdateEmail_Error_SendCodeFailed"];
             }
         }
         catch (Exception ex)
@@ -164,7 +164,7 @@
 
         if (string.IsNullOrWhiteSpace(otpCode))
         {
-            errorMessage = "Please enter the verification code.";
+            errorMessage = L["UpdateEmail_Error_EnterCode"];
             return;
         }
 
@@ -175,7 +175,7 @@
             var response = await ApiClient.ConfirmEmailUpdateAsync(request);
             if (response.Success)
             {
-                successMessage = "Email updated successfully!";
+                successMessage = L["UpdateEmail_Success_Updated"];
                 otpSent = false;
                 newEmail = "";
                 otpCode = "";
@@ -184,7 +184,7 @@
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to update email.";
+                errorMessage = response.Error ?? L["UpdateEmail_Error_UpdateFailed"];
             }
         }
         catch (Exception ex)

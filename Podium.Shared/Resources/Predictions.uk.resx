@@ -10,6 +10,7 @@
   <data name="Disciplines_SignInToPredict" xml:space="preserve"><value>Будь ласка, увійдіть, щоб робити прогнози.</value></data>
   <data name="SeriesSelection_Title" xml:space="preserve"><value>Оберіть серію</value></data>
   <data name="SeriesSelection_None" xml:space="preserve"><value>Серії для цієї дисципліни ще недоступні.</value></data>
+	<data name="SeriesSelection_LoadFailed" xml:space="preserve"><value>Не вдалося завантажити серії.</value></data>
   <data name="SeriesSelection_Breadcrumb" xml:space="preserve"><value>Дисципліни</value></data>
   <data name="SeriesSelection_ViewEvents" xml:space="preserve"><value>Переглянути події →</value></data>
   <data name="SeasonEvents_Title" xml:space="preserve"><value>Оберіть подію</value></data>

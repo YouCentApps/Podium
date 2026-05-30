@@ -10,7 +10,7 @@
 @inject IStringLocalizer<SettingsRes> L
 @inject IStringLocalizer<Common> LC
 
-<PageTitle>Manage Favorite Seasons - Podium</PageTitle>
+<PageTitle>@L["ManageFavorites_Title"] - Podium</PageTitle>
 
 <div class="settings-container">
     <div class="settings-header">
@@ -188,7 +188,7 @@
         }
         catch (Exception ex)
         {
-            errorMessage = $"Error loading data: {ex.Message}";
+            errorMessage = string.Format(L["ManageFavorites_Error_LoadData"].Value, ex.Message);
         }
         finally
         {
@@ -216,7 +216,7 @@
             }
             catch (Exception ex)
             {
-                errorMessage = $"Error loading series: {ex.Message}";
+                errorMessage = string.Format(L["ManageFavorites_Error_LoadSeries"].Value, ex.Message);
             }
         }
     }
@@ -244,7 +244,7 @@
             }
             catch (Exception ex)
             {
-                errorMessage = $"Error loading seasons: {ex.Message}";
+                errorMessage = string.Format(L["ManageFavorites_Error_LoadSeasons"].Value, ex.Message);
             }
             finally
             {
@@ -276,9 +276,9 @@
                 
             if (response.Success)
             {
-                successMessage = $"{season.Name} added to favorites!";
+                successMessage = string.Format(L["ManageFavorites_Success_Added"].Value, season.Name);
                 await LoadData();
-                
+
                 // Scroll to top to show the added favorite
                 try
                 {
@@ -291,7 +291,7 @@
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to add favorite season.";
+                errorMessage = response.Error ?? L["ManageFavorites_Error_AddFailed"];
             }
         }
         catch (Exception ex)
@@ -318,12 +318,12 @@
             var response = await ApiClient.RemoveFavoriteSeasonAsync(seasonId);
             if (response.Success)
             {
-                successMessage = "Season removed from favorites.";
+                successMessage = L["ManageFavorites_Success_Removed"];
                 await LoadData();
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to remove favorite season.";
+                errorMessage = response.Error ?? L["ManageFavorites_Error_RemoveFailed"];
             }
         }
         catch (Exception ex)

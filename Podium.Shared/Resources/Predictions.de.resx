@@ -10,6 +10,7 @@
   <data name="Disciplines_SignInToPredict" xml:space="preserve"><value>Bitte melde dich an, um Vorhersagen zu machen.</value></data>
   <data name="SeriesSelection_Title" xml:space="preserve"><value>Serie wählen</value></data>
   <data name="SeriesSelection_None" xml:space="preserve"><value>Keine Serien für diese Disziplin verfügbar.</value></data>
+	<data name="SeriesSelection_LoadFailed" xml:space="preserve"><value>Fehler beim Laden der Serien.</value></data>
   <data name="SeriesSelection_Breadcrumb" xml:space="preserve"><value>Disziplinen</value></data>
   <data name="SeriesSelection_ViewEvents" xml:space="preserve"><value>Events ansehen →</value></data>
   <data name="SeasonEvents_Title" xml:space="preserve"><value>Event wählen</value></data>

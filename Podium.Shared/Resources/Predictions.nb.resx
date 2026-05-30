@@ -10,6 +10,7 @@
   <data name="Disciplines_SignInToPredict" xml:space="preserve"><value>Vennligst logg inn for å lage spådommer.</value></data>
   <data name="SeriesSelection_Title" xml:space="preserve"><value>Velg en serie</value></data>
   <data name="SeriesSelection_None" xml:space="preserve"><value>Ingen serier tilgjengelig for denne disiplinen ennå.</value></data>
+	<data name="SeriesSelection_LoadFailed" xml:space="preserve"><value>Kunne ikke laste inn serier.</value></data>
   <data name="SeriesSelection_Breadcrumb" xml:space="preserve"><value>Disipliner</value></data>
   <data name="SeriesSelection_ViewEvents" xml:space="preserve"><value>Se arrangementer →</value></data>
   <data name="SeasonEvents_Title" xml:space="preserve"><value>Velg et arrangement</value></data>

@@ -66,11 +66,11 @@ if (!string.IsNullOrEmpty(smtpServer) && !string.IsNullOrEmpty(smtpUsername) && 
         var localizer = sp.GetRequiredService<IStringLocalizer<ApiMessages>>();
         return new EmailService(smtpServer, smtpPort, smtpUsername, smtpPassword, senderEmail ?? smtpUsername, senderName, localizer);
     });
-    Console.WriteLine("✅ Email service configured");
+    //Console.WriteLine("✅ Email service configured");
 }
 else
 {
-    Console.WriteLine("⚠️ Email service not configured - OTP codes will be logged to console only");
+    //Console.WriteLine("⚠️ Email service not configured - OTP codes will be logged to console only");
 }
 
 // Register repositories

@@ -47,6 +47,13 @@
   <data name="ManageFavorites_SelectSeries" xml:space="preserve"><value>Seleziona serie</value></data>
   <data name="ManageFavorites_SelectSeason" xml:space="preserve"><value>Seleziona stagione</value></data>
   <data name="ManageFavorites_MaxReached" xml:space="preserve"><value>Hai raggiunto il massimo di 5 stagioni preferite.</value></data>
+	<data name="ManageFavorites_Error_LoadData" xml:space="preserve"><value>Errore durante il caricamento dei dati: {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeries" xml:space="preserve"><value>Errore durante il caricamento delle serie: {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeasons" xml:space="preserve"><value>Errore durante il caricamento delle stagioni: {0}</value></data>
+  <data name="ManageFavorites_Success_Added" xml:space="preserve"><value>{0} aggiunta ai preferiti!</value></data>
+  <data name="ManageFavorites_Error_AddFailed" xml:space="preserve"><value>Impossibile aggiungere la stagione ai preferiti.</value></data>
+  <data name="ManageFavorites_Success_Removed" xml:space="preserve"><value>Stagione rimossa dai preferiti.</value></data>
+  <data name="ManageFavorites_Error_RemoveFailed" xml:space="preserve"><value>Impossibile rimuovere la stagione dai preferiti.</value></data>
   <data name="UpdatePassword_Title" xml:space="preserve"><value>Aggiorna password</value></data>
   <data name="UpdateEmail_Title" xml:space="preserve"><value>Aggiorna email</value></data>
   <data name="SignInSettings_Title" xml:space="preserve"><value>Metodo di accesso</value></data>
@@ -83,6 +90,12 @@
   <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Inserisci codice a 6 cifre</value></data>
   <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Verifica &amp; Cambia metodo</value></data>
   <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Invia un nuovo codice</value></data>
+	<data name="SignInSettings_Success_CodeSent" xml:space="preserve"><value>Codice di verifica inviato alla tua email.</value></data>
+  <data name="SignInSettings_Error_SendCodeFailed" xml:space="preserve"><value>Impossibile inviare il codice di verifica.</value></data>
+  <data name="SignInSettings_Error_EnterPassword" xml:space="preserve"><value>Per favore inserisci la tua password.</value></data>
+  <data name="SignInSettings_Error_EnterCode" xml:space="preserve"><value>Per favore inserisci il codice di verifica.</value></data>
+  <data name="SignInSettings_Success_Updated" xml:space="preserve"><value>Metodo di accesso aggiornato con successo!</value></data>
+  <data name="SignInSettings_Error_UpdateFailed" xml:space="preserve"><value>Impossibile aggiornare il metodo di accesso.</value></data>
   <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Inserisci il tuo nuovo indirizzo email. Invieremo un codice di verifica per confermare l'accesso.</value></data>
   <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>Nuovo indirizzo email</value></data>
   <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>tua@email.com</value></data>
@@ -94,9 +107,22 @@
   <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Verifica in corso...</value></data>
   <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Verifica &amp; Aggiorna email</value></data>
   <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Usa un'email diversa</value></data>
+	<data name="UpdateEmail_Error_InvalidEmail" xml:space="preserve"><value>Per favore inserisci un indirizzo email valido.</value></data>
+  <data name="UpdateEmail_Success_CodeSent" xml:space="preserve"><value>Codice di verifica inviato! Controlla la casella di posta del tuo nuovo indirizzo email.</value></data>
+  <data name="UpdateEmail_Error_SendCodeFailed" xml:space="preserve"><value>Errore durante l'invio del codice di verifica.</value></data>
+  <data name="UpdateEmail_Error_EnterCode" xml:space="preserve"><value>Per favore inserisci il codice di verifica.</value></data>
+  <data name="UpdateEmail_Success_Updated" xml:space="preserve"><value>Indirizzo email aggiornato con successo!</value></data>
+  <data name="UpdateEmail_Error_UpdateFailed" xml:space="preserve"><value>Impossibile aggiornare l'indirizzo email.</value></data>
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Inserisci il nuovo nome visualizzato</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Inserisci la tua password</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Inserisci codice a 6 cifre</value></data>
+	<data name="UpdateName_Error_MinLength" xml:space="preserve"><value>Il nome visualizzato deve essere di almeno 3 caratteri.</value></data>
+  <data name="UpdateName_Error_EnterPassword" xml:space="preserve"><value>Per favore inserisci la tua password.</value></data>
+  <data name="UpdateName_Success_CodeSent" xml:space="preserve"><value>Codice di verifica inviato alla tua email.</value></data>
+  <data name="UpdateName_Error_SendCodeFailed" xml:space="preserve"><value>Impossibile inviare il codice di verifica.</value></data>
+  <data name="UpdateName_Error_EnterCode" xml:space="preserve"><value>Per favore inserisci il codice di verifica.</value></data>
+  <data name="UpdateName_Success_Updated" xml:space="preserve"><value>Nome visualizzato aggiornato con successo!</value></data>
+  <data name="UpdateName_Error_UpdateFailed" xml:space="preserve"><value>Impossibile aggiornare il nome visualizzato.</value></data>
   <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>L'accesso tramite password non è abilitato per il tuo account. Per configurare una password, abilita prima l'accesso tramite password nelle impostazioni del metodo di accesso.</value></data>
   <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Password attuale</value></data>
   <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Inserisci la password attuale</value></data>
@@ -115,4 +141,12 @@
   <data name="UpdatePassword_Btn_SettingUp" xml:space="preserve"><value>Configurazione...</value></data>
   <data name="UpdatePassword_Btn_SetPassword" xml:space="preserve"><value>Imposta password</value></data>
   <data name="UpdatePassword_Btn_SendNewCode" xml:space="preserve"><value>Invia un nuovo codice</value></data>
+  <data name="UpdatePassword_Error_SendCodeFailed" xml:space="preserve"><value>Errore durante l'invio del codice di verifica.</value></data>
+  <data name="UpdatePassword_Error_EnterCurrent" xml:space="preserve"><value>Per favore inserisci la tua password attuale.</value></data>
+  <data name="UpdatePassword_Error_EnterCode" xml:space="preserve"><value>Per favore inserisci il codice di verifica.</value></data>
+  <data name="UpdatePassword_Error_MinLength" xml:space="preserve"><value>La password deve essere di almeno 6 caratteri.</value></data>
+  <data name="UpdatePassword_Error_PasswordsMismatch" xml:space="preserve"><value>Le password non corrispondono.</value></data>
+  <data name="UpdatePassword_Success_Updated" xml:space="preserve"><value>Password aggiornata correttamente!</value></data>
+  <data name="UpdatePassword_Success_Setup" xml:space="preserve"><value>Password impostata correttamente!</value></data>
+  <data name="UpdatePassword_Error_UpdateFailed" xml:space="preserve"><value>Impossibile aggiornare la password.</value></data>
 </root>

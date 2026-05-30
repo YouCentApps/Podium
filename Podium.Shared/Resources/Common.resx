@@ -42,4 +42,7 @@
   <data name="Home_Feature3_Title" xml:space="preserve"><value>Compete &amp; Win</value></data>
   <data name="Home_Feature3_Desc" xml:space="preserve"><value>Earn points and climb the leaderboard</value></data>
   <data name="Error_LoadFailed" xml:space="preserve"><value>Failed to load data. Please try again.</value></data>
+  <data name="Confirm_Title" xml:space="preserve"><value>Confirm Action</value></data>
+  <data name="Confirm_Message" xml:space="preserve"><value>Are you sure?</value></data>
+  <data name="Btn_Confirm" xml:space="preserve"><value>Confirm</value></data>
 </root>

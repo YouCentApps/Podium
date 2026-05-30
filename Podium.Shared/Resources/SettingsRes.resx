@@ -47,6 +47,13 @@
   <data name="ManageFavorites_SelectSeries" xml:space="preserve"><value>Select Series</value></data>
   <data name="ManageFavorites_SelectSeason" xml:space="preserve"><value>Select Season</value></data>
   <data name="ManageFavorites_MaxReached" xml:space="preserve"><value>You've reached the maximum of 5 favorite seasons.</value></data>
+	<data name="ManageFavorites_Error_LoadData" xml:space="preserve"><value>Error loading data: {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeries" xml:space="preserve"><value>Error loading series: {0}</value></data>
+  <data name="ManageFavorites_Error_LoadSeasons" xml:space="preserve"><value>Error loading seasons: {0}</value></data>
+  <data name="ManageFavorites_Success_Added" xml:space="preserve"><value>{0} added to favorites!</value></data>
+  <data name="ManageFavorites_Error_AddFailed" xml:space="preserve"><value>Failed to add favorite season.</value></data>
+  <data name="ManageFavorites_Success_Removed" xml:space="preserve"><value>Season removed from favorites.</value></data>
+  <data name="ManageFavorites_Error_RemoveFailed" xml:space="preserve"><value>Failed to remove favorite season.</value></data>
   <data name="UpdatePassword_Title" xml:space="preserve"><value>Update Password</value></data>
   <data name="UpdateEmail_Title" xml:space="preserve"><value>Update Email</value></data>
   <data name="SignInSettings_Title" xml:space="preserve"><value>Sign-in Method</value></data>
@@ -83,6 +90,12 @@
   <data name="SignInSettings_Placeholder_Code" xml:space="preserve"><value>Enter 6-digit code</value></data>
   <data name="SignInSettings_Btn_VerifyChange" xml:space="preserve"><value>Verify &amp; Change Method</value></data>
   <data name="SignInSettings_Btn_SendNewCode" xml:space="preserve"><value>Send a new code</value></data>
+	<data name="SignInSettings_Success_CodeSent" xml:space="preserve"><value>Verification code sent to your email.</value></data>
+  <data name="SignInSettings_Error_SendCodeFailed" xml:space="preserve"><value>Failed to send verification code.</value></data>
+  <data name="SignInSettings_Error_EnterPassword" xml:space="preserve"><value>Please enter your password.</value></data>
+  <data name="SignInSettings_Error_EnterCode" xml:space="preserve"><value>Please enter the verification code.</value></data>
+  <data name="SignInSettings_Success_Updated" xml:space="preserve"><value>Sign-in method updated successfully!</value></data>
+  <data name="SignInSettings_Error_UpdateFailed" xml:space="preserve"><value>Failed to update sign-in method.</value></data>
   <data name="UpdateEmail_EnterNewEmail" xml:space="preserve"><value>Enter your new email address. We'll send a verification code to confirm you have access to it.</value></data>
   <data name="UpdateEmail_Label_NewEmail" xml:space="preserve"><value>New Email Address</value></data>
   <data name="UpdateEmail_Placeholder_Email" xml:space="preserve"><value>your@email.com</value></data>
@@ -94,9 +107,22 @@
   <data name="UpdateEmail_Btn_Verifying" xml:space="preserve"><value>Verifying...</value></data>
   <data name="UpdateEmail_Btn_VerifyUpdate" xml:space="preserve"><value>Verify &amp; Update Email</value></data>
   <data name="UpdateEmail_Btn_DifferentEmail" xml:space="preserve"><value>Use a different email</value></data>
+	<data name="UpdateEmail_Error_InvalidEmail" xml:space="preserve"><value>Please enter a valid email address.</value></data>
+  <data name="UpdateEmail_Success_CodeSent" xml:space="preserve"><value>Verification code sent! Check your new email inbox.</value></data>
+  <data name="UpdateEmail_Error_SendCodeFailed" xml:space="preserve"><value>Failed to send verification code.</value></data>
+  <data name="UpdateEmail_Error_EnterCode" xml:space="preserve"><value>Please enter the verification code.</value></data>
+  <data name="UpdateEmail_Success_Updated" xml:space="preserve"><value>Email updated successfully!</value></data>
+  <data name="UpdateEmail_Error_UpdateFailed" xml:space="preserve"><value>Failed to update email.</value></data>
   <data name="UpdateName_Placeholder" xml:space="preserve"><value>Enter new display name</value></data>
   <data name="UpdateName_Placeholder_Password" xml:space="preserve"><value>Enter your password</value></data>
   <data name="UpdateName_Placeholder_Code" xml:space="preserve"><value>Enter 6-digit code</value></data>
+	<data name="UpdateName_Error_MinLength" xml:space="preserve"><value>Display name must be at least 3 characters.</value></data>
+  <data name="UpdateName_Error_EnterPassword" xml:space="preserve"><value>Please enter your password.</value></data>
+  <data name="UpdateName_Success_CodeSent" xml:space="preserve"><value>Verification code sent to your email.</value></data>
+  <data name="UpdateName_Error_SendCodeFailed" xml:space="preserve"><value>Failed to send verification code.</value></data>
+  <data name="UpdateName_Error_EnterCode" xml:space="preserve"><value>Please enter the verification code.</value></data>
+  <data name="UpdateName_Success_Updated" xml:space="preserve"><value>Display name updated successfully!</value></data>
+  <data name="UpdateName_Error_UpdateFailed" xml:space="preserve"><value>Failed to update display name.</value></data>
   <data name="UpdatePassword_NotEnabled" xml:space="preserve"><value>Password sign-in is not enabled for your account. To set up a password, first enable password sign-in in your sign-in method settings.</value></data>
   <data name="UpdatePassword_Label_Current" xml:space="preserve"><value>Current Password</value></data>
   <data name="UpdatePassword_Placeholder_Current" xml:space="preserve"><value>Enter current password</value></data>
@@ -115,4 +141,12 @@
   <data name="UpdatePassword_Btn_SettingUp" xml:space="preserve"><value>Setting up...</value></data>
   <data name="UpdatePassword_Btn_SetPassword" xml:space="preserve"><value>Set Password</value></data>
   <data name="UpdatePassword_Btn_SendNewCode" xml:space="preserve"><value>Send a new code</value></data>
+  <data name="UpdatePassword_Error_SendCodeFailed" xml:space="preserve"><value>Failed to send verification code.</value></data>
+  <data name="UpdatePassword_Error_EnterCurrent" xml:space="preserve"><value>Please enter your current password.</value></data>
+  <data name="UpdatePassword_Error_EnterCode" xml:space="preserve"><value>Please enter the verification code.</value></data>
+  <data name="UpdatePassword_Error_MinLength" xml:space="preserve"><value>Password must be at least 6 characters.</value></data>
+  <data name="UpdatePassword_Error_PasswordsMismatch" xml:space="preserve"><value>Passwords do not match.</value></data>
+  <data name="UpdatePassword_Success_Updated" xml:space="preserve"><value>Password updated successfully!</value></data>
+  <data name="UpdatePassword_Success_Setup" xml:space="preserve"><value>Password set up successfully!</value></data>
+  <data name="UpdatePassword_Error_UpdateFailed" xml:space="preserve"><value>Failed to update password.</value></data>
 </root>
