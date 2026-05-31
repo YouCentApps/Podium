@@ -2,6 +2,7 @@
 @inject AuthStateService AuthState
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<ApiMessages> L
 
 <link href="_content/Podium.Shared/app.css" rel="stylesheet" />
 <Routes />
@@ -21,7 +22,7 @@
         try
         {
             // Show user-friendly alert
-            await JSRuntime.InvokeVoidAsync("alert", "Your session has expired. Please sign in again to continue.");
+            await JSRuntime.InvokeVoidAsync("alert", L["Auth_SessionExpired"].Value);
             
             // Navigate to sign-in page
             Navigation.NavigateTo("/signin", true);

@@ -242,16 +242,16 @@
 </div>
 
 <ConfirmDialog IsVisible="showDeleteConfirm"
-               Title="Delete Season"
+               Title="@L["Admin_Seasons_DeleteTitle"]"
                Message="@deleteConfirmMessage"
-               ConfirmText="Delete"
+               ConfirmText="@L["Admin_Btn_Delete"]"
                OnConfirm="DeleteSeason"
                OnCancel="CancelDelete" />
 
 <ConfirmDialog IsVisible="showSetActiveConfirm"
-               Title="Set Active Season"
+               Title="@L["Admin_Seasons_SetActiveTitle"]"
                Message="@setActiveConfirmMessage"
-               ConfirmText="Set Active"
+               ConfirmText="@L["Admin_Seasons_SetActive"]"
                OnConfirm="ConfirmSetActive"
                OnCancel="CancelSetActive" />
 
@@ -326,7 +326,7 @@
         }
         else
         {
-            errorMessage = "Failed to load disciplines";
+            errorMessage = L["Admin_Seasons_Error_LoadDisciplines"].Value;
             loading = false;
             return;
         }
@@ -491,31 +491,31 @@
     {
         if (string.IsNullOrWhiteSpace(formSeriesId))
         {
-            formError = "Please select a series";
+            formError = L["Admin_Seasons_Validation_SelectSeries"].Value;
             return;
         }
 
         if (formYear < 2000 || formYear > 2100)
         {
-            formError = "Year must be between 2000 and 2100";
+            formError = L["Admin_Seasons_Validation_YearRange"].Value;
             return;
         }
 
         if (string.IsNullOrWhiteSpace(formName))
         {
-            formError = "Name is required";
+            formError = L["Admin_Seasons_Validation_NameRequired"].Value;
             return;
         }
 
         if (formEndDate.HasValue && formStartDate >= formEndDate.Value)
         {
-            formError = "Start date must be before end date";
+            formError = L["Admin_Seasons_Validation_StartBeforeEnd"].Value;
             return;
         }
 
         if (formStartDate.Year != formYear)
         {
-            formError = "Year must match the start date year";
+            formError = L["Admin_Seasons_Validation_YearMatchStart"].Value;
             return;
         }
 
@@ -543,7 +543,7 @@
             }
             else
             {
-                formError = response.Error ?? "Failed to create season";
+                formError = response.Error ?? L["Admin_Seasons_CreateFailed"].Value;
             }
         }
         else
@@ -565,19 +565,19 @@
                 // IMPORTANT: Capture these values BEFORE calling CancelForm() which nullifies editingSeason
                 bool seriesChanged = originalSeriesId != formSeriesId;
                 bool wasActive = editingSeason.IsActive;
-                
+
                 await LoadData();
                 CancelForm();
-                
+
                 // Check if series changed and season was active - show info message
                 if (seriesChanged && wasActive && !formIsActive)
                 {
-                    successMessage = "ℹ️ Season moved successfully but was deactivated to prevent duplicate active seasons. You can manually activate it using the 'Set Active' button.";
+                    successMessage = L["Admin_Seasons_SeriesMovedInfo"].Value;
                 }
             }
             else
             {
-                formError = response.Error ?? "Failed to update season";
+                formError = response.Error ?? L["Admin_Seasons_UpdateFailed"].Value;
             }
         }
 
@@ -594,12 +594,12 @@
             var reasons = new List<string>();
             if (deps.EventCount > 0) reasons.Add($"{deps.EventCount} event(s)");
             if (deps.CompetitorCount > 0) reasons.Add($"{deps.CompetitorCount} competitor(s)");
-            
-            deleteConfirmMessage = $"Cannot delete '{season.Name}' because it has {string.Join(" and ", reasons)}. Please delete those first.";
+
+            deleteConfirmMessage = L["Admin_Seasons_Delete_DepsMessage", season.Name, string.Join(" and ", reasons)].Value;
         }
         else
         {
-            deleteConfirmMessage = $"Are you sure you want to delete '{season.Name}'? This action cannot be undone.";
+            deleteConfirmMessage = L["Admin_Seasons_Delete_Confirm", season.Name].Value;
         }
         
         showDeleteConfirm = true;
@@ -623,7 +623,7 @@
         if (deps.HasDependencies)
         {
             showDeleteConfirm = false;
-            errorMessage = $"Cannot delete season because it has dependencies. Please delete those first.";
+            errorMessage = L["Admin_Seasons_Delete_Error_Dependencies"].Value;
             seasonToDelete = null;
             return;
         }
@@ -638,7 +638,7 @@
         }
         else
         {
-            errorMessage = response.Error ?? "Failed to delete season";
+            errorMessage = response.Error ?? L["Admin_Seasons_DeleteFailed"].Value;
         }
         
         seasonToDelete = null;
@@ -647,7 +647,7 @@
     private void SetActiveSeason(Season season)
     {
         seasonToSetActive = season;
-        setActiveConfirmMessage = $"Set '{season.Name}' as the active season for {GetSeriesName(season.SeriesId)}? This will deactivate any other active seasons.";
+        setActiveConfirmMessage = L["Admin_Seasons_SetActive_Confirm", season.Name, GetSeriesName(season.SeriesId)].Value;
         showSetActiveConfirm = true;
     }
 
@@ -671,7 +671,7 @@
         }
         else
         {
-            errorMessage = response.Error ?? "Failed to set active season";
+            errorMessage = response.Error ?? L["Admin_Seasons_SetActiveFailed"].Value;
         }
         
         seasonToSetActive = null;
@@ -785,7 +785,7 @@
                     // Check if completed or failed
                     if (job.Status == "Completed")
                     {
-                        successMessage = string.Format(L["Admin_Seasons_RecalcCompleted"].Value, job.ProcessedUsers);
+                        successMessage = L["Admin_Seasons_RecalcCompleted", job.ProcessedUsers].Value;
                         errorMessage = "";
                         recalculatingSeasonId = null;
                         currentJobId = null;
@@ -796,7 +796,7 @@
                     }
                     else if (job.Status == "Failed")
                     {
-                        errorMessage = string.Format(L["Admin_Seasons_RecalcFailed"].Value, job.ErrorMessage ?? "Unknown error");
+                        errorMessage = L["Admin_Seasons_RecalcFailed", job.ErrorMessage ?? "Unknown error"].Value;
                         successMessage = "";
                         recalculatingSeasonId = null;
                         currentJobId = null;

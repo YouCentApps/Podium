@@ -30,6 +30,16 @@
   <data name="Val_UsernameInvalid" xml:space="preserve"><value>Недійсне ім'я користувача. Має містити 3-50 символів: лише латинські літери, цифри та пробіли.</value></data>
   <data name="Val_PasswordInvalid" xml:space="preserve"><value>Недійсний пароль. Має містити 6-100 символів, без пробілів, лише латинські літери/цифри/спеціальні символи.</value></data>
   <data name="Val_EmailInvalid" xml:space="preserve"><value>Недійсна електронна адреса. Будь ласка, введіть дійсний email.</value></data>
+	<data name="Val_EmailRequired" xml:space="preserve"><value>Електронна пошта є обов'язковою.</value></data>
+  <data name="Val_UsernameRequired" xml:space="preserve"><value>Потрібне ім'я користувача.</value></data>
+  <data name="Val_UsernameTooShort" xml:space="preserve"><value>Ім'я користувача повинно містити щонайменше 3 символи.</value></data>
+  <data name="Val_UsernameTooLong" xml:space="preserve"><value>Ім'я користувача не може перевищувати 50 символів.</value></data>
+  <data name="Val_UsernameChars" xml:space="preserve"><value>Ім'я користувача може містити лише латинські літери, цифри та пробіли.</value></data>
+  <data name="Val_PasswordRequired" xml:space="preserve"><value>Потрібен пароль.</value></data>
+  <data name="Val_PasswordTooShort" xml:space="preserve"><value>Пароль повинен містити щонайменше 6 символів.</value></data>
+  <data name="Val_PasswordTooLong" xml:space="preserve"><value>Пароль не може перевищувати 100 символів.</value></data>
+  <data name="Val_PasswordNoSpaces" xml:space="preserve"><value>Пароль не може містити пробіли.</value></data>
+  <data name="Val_PasswordChars" xml:space="preserve"><value>Пароль може містити лише латинські літери, цифри та поширені спеціальні символи.</value></data>
   <!-- Profile -->
   <data name="Profile_NotFound" xml:space="preserve"><value>Користувача не знайдено</value></data>
   <data name="Profile_UsernameUpdated" xml:space="preserve"><value>Ім'я користувача успішно оновлено</value></data>
@@ -103,4 +113,6 @@
   <data name="Entity_UpdatedSuccess" xml:space="preserve"><value>{0} успішно оновлено</value></data>
   <data name="Entity_DeletedSuccess" xml:space="preserve"><value>{0} успішно видалено</value></data>
   <data name="Admin_CannotRemoveSelf" xml:space="preserve"><value>Ви не можете видалити себе як адміністратора</value></data>
+  <data name="Auth_Forbidden" xml:space="preserve"><value>Ви не маєте дозволу на доступ до цього ресурсу.</value></data>
+  <data name="General_GenericError" xml:space="preserve"><value>Сталася помилка. Будь ласка, спробуйте ще раз.</value></data>
 </root>

@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Localization;
 
 namespace Podium.Shared.Utilities;
 
@@ -13,75 +14,81 @@ public static class InputValidator
     // Email validation: basic email format
     private static readonly Regex EmailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled);
 
-    public static (bool IsValid, string? ErrorMessage) ValidateUsername(string username)
+    public static (bool IsValid, string? ErrorMessage) ValidateUsername(string username, IStringLocalizer<ApiMessages>? localizer = null)
     {
+        var loc = localizer ?? new NullStringLocalizer<ApiMessages>();
+
         if (string.IsNullOrWhiteSpace(username))
         {
-            return (false, "Username is required.");
+            return (false, loc["Val_UsernameRequired"].Value);
         }
 
         var trimmed = username.Trim();
-        
+
         if (trimmed.Length < 3)
         {
-            return (false, "Username must be at least 3 characters.");
+            return (false, loc["Val_UsernameTooShort"].Value);
         }
 
         if (trimmed.Length > 50)
         {
-            return (false, "Username cannot exceed 50 characters.");
+            return (false, loc["Val_UsernameTooLong"].Value);
         }
 
         if (!UsernameRegex.IsMatch(trimmed))
         {
-            return (false, "Username can only contain Latin letters, numbers, and spaces.");
+            return (false, loc["Val_UsernameChars"].Value);
         }
 
         return (true, null);
     }
 
-    public static (bool IsValid, string? ErrorMessage) ValidatePassword(string password)
+    public static (bool IsValid, string? ErrorMessage) ValidatePassword(string password, IStringLocalizer<ApiMessages>? localizer = null)
     {
+        var loc = localizer ?? new NullStringLocalizer<ApiMessages>();
+
         if (string.IsNullOrWhiteSpace(password))
         {
-            return (false, "Password is required.");
+            return (false, loc["Val_PasswordRequired"].Value);
         }
 
         if (password.Length < 6)
         {
-            return (false, "Password must be at least 6 characters.");
+            return (false, loc["Val_PasswordTooShort"].Value);
         }
 
         if (password.Length > 100)
         {
-            return (false, "Password cannot exceed 100 characters.");
+            return (false, loc["Val_PasswordTooLong"].Value);
         }
 
         if (password.Contains(' ', StringComparison.Ordinal))
         {
-            return (false, "Password cannot contain spaces.");
+            return (false, loc["Val_PasswordNoSpaces"].Value);
         }
 
         if (!PasswordRegex.IsMatch(password))
         {
-            return (false, "Password can only contain Latin letters, numbers, and common special characters.");
+            return (false, loc["Val_PasswordChars"].Value);
         }
 
         return (true, null);
     }
 
-    public static (bool IsValid, string? ErrorMessage) ValidateEmail(string email)
+    public static (bool IsValid, string? ErrorMessage) ValidateEmail(string email, IStringLocalizer<ApiMessages>? localizer = null)
     {
+        var loc = localizer ?? new NullStringLocalizer<ApiMessages>();
+
         if (string.IsNullOrWhiteSpace(email))
         {
-            return (false, "Email is required.");
+            return (false, loc["Val_EmailRequired"].Value);
         }
 
         var trimmed = email.Trim();
 
         if (!EmailRegex.IsMatch(trimmed))
         {
-            return (false, "Please enter a valid email address.");
+            return (false, loc["Val_EmailInvalid"].Value);
         }
 
         return (true, null);

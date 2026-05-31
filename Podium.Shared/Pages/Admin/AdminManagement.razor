@@ -51,7 +51,7 @@
                                     <div class="search-result-item" @onclick="() => SelectUser(user)">
                                         <strong>@user.Username</strong> (@user.Email)
                                         <span class="badge @(user.IsActive ? "badge-success" : "badge-inactive")">
-                                            @(user.IsActive ? "Active" : "Inactive")
+                                            @(user.IsActive ? L["Admin_Status_Active"].Value : L["Admin_Status_Inactive"].Value)
                                         </span>
                                     </div>
                                 }
@@ -142,7 +142,7 @@
                             <td>
                                 @if (admin.CreatedBy == "System")
                                 {
-                                    <span>System</span>
+                                    <span>@L["Admin_System"]</span>
                                 }
                                 else
                                 {
@@ -167,9 +167,9 @@
 </div>
 
 <ConfirmDialog IsVisible="showDeleteConfirm"
-               Title="Remove Administrator"
-               Message="@($"Are you sure you want to remove admin privileges for {GetUsername(adminToDelete?.UserId ?? "")}?")"
-               ConfirmText="Remove"
+               Title="@L["Admin_Admins_RemoveTitle"]"
+               Message="@L["Admin_Admins_RemoveMessage", GetUsername(adminToDelete?.UserId ?? "")]"
+               ConfirmText="@L["Admin_Admins_RemoveConfirm"]"
                OnConfirm="DeleteAdmin"
                OnCancel="CancelDelete" />
 
@@ -220,7 +220,7 @@
         }
         else
         {
-            errorMessage = response.Error ?? "Failed to load administrators";
+            errorMessage = response.Error ?? L["Admin_Admins_LoadFailed"].Value;
         }
         
         loading = false;
@@ -261,13 +261,13 @@
 
     private string GetEmail(string userId)
     {
-        return userCache.TryGetValue(userId, out var user) ? user.Email : "Loading...";
+        return userCache.TryGetValue(userId, out var user) ? user.Email : L["Admin_Loading"].Value;
     }
 
     private string GetCreatedByUsername(string userId)
     {
         if (string.IsNullOrEmpty(userId) || userId == "System")
-            return "System";
+            return L["Admin_System"].Value;
         return userCache.TryGetValue(userId, out var user) ? user.Username : userId;
     }
 
@@ -347,7 +347,7 @@
     {
         if (editingAdmin == null && selectedUser == null)
         {
-            formError = "Please select a user";
+            formError = L["Admin_Admins_SelectUser"].Value;
             return;
         }
 
@@ -365,10 +365,10 @@
                 await LoadUserDetails();
                 CancelForm();
             }
-            else
-            {
-                formError = response.Error ?? "Failed to create administrator";
-            }
+                else
+                {
+                    formError = response.Error ?? L["Admin_Admins_CreateFailed"].Value;
+                }
         }
         else if (editingAdmin != null)
         {
@@ -380,10 +380,10 @@
                 await LoadAdmins();
                 CancelForm();
             }
-            else
-            {
-                formError = response.Error ?? "Failed to update administrator";
-            }
+                else
+                {
+                    formError = response.Error ?? L["Admin_Admins_UpdateFailed"].Value;
+                }
         }
 
         saving = false;
@@ -415,7 +415,7 @@
         }
         else
         {
-            errorMessage = response.Error ?? "Failed to remove administrator";
+            errorMessage = response.Error ?? L["Admin_Admins_RemoveFailed"].Value;
         }
         
         adminToDelete = null;

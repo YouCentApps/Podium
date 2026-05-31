@@ -30,6 +30,16 @@
   <data name="Val_UsernameInvalid" xml:space="preserve"><value>Ugyldig brukernavn. Må være 3-50 tegn: bare latinske bokstaver, tall og mellomrom.</value></data>
   <data name="Val_PasswordInvalid" xml:space="preserve"><value>Ugyldig passord. Må være 6-100 tegn, ingen mellomrom, bare latinske bokstaver/tall/spesialtegn.</value></data>
   <data name="Val_EmailInvalid" xml:space="preserve"><value>Ugyldig e-postadresse. Vennligst skriv inn en gyldig e-post.</value></data>
+	<data name="Val_EmailRequired" xml:space="preserve"><value>E-post er påkrevd.</value></data>
+  <data name="Val_UsernameRequired" xml:space="preserve"><value>Brukernavn er påkrevd.</value></data>
+  <data name="Val_UsernameTooShort" xml:space="preserve"><value>Brukernavnet må være minst 3 tegn.</value></data>
+  <data name="Val_UsernameTooLong" xml:space="preserve"><value>Brukernavnet kan ikke overstige 50 tegn.</value></data>
+  <data name="Val_UsernameChars" xml:space="preserve"><value>Brukernavnet kan bare inneholde latinske bokstaver, tall og mellomrom.</value></data>
+  <data name="Val_PasswordRequired" xml:space="preserve"><value>Passord er påkrevd.</value></data>
+  <data name="Val_PasswordTooShort" xml:space="preserve"><value>Passordet må være minst 6 tegn.</value></data>
+  <data name="Val_PasswordTooLong" xml:space="preserve"><value>Passordet kan ikke overstige 100 tegn.</value></data>
+  <data name="Val_PasswordNoSpaces" xml:space="preserve"><value>Passordet kan ikke inneholde mellomrom.</value></data>
+  <data name="Val_PasswordChars" xml:space="preserve"><value>Passordet kan bare inneholde latinske bokstaver, tall og vanlige spesialtegn.</value></data>
   <!-- Profil -->
   <data name="Profile_NotFound" xml:space="preserve"><value>Bruker ikke funnet</value></data>
   <data name="Profile_UsernameUpdated" xml:space="preserve"><value>Brukernavn oppdatert</value></data>
@@ -103,4 +113,6 @@
   <data name="Email_Ignore" xml:space="preserve"><value>Hvis du ikke ba om denne koden, kan du trygt ignorere denne e-posten.</value></data>
   <data name="Email_Automated" xml:space="preserve"><value>Dette er en automatisk melding, vennligst ikke svar.</value></data>
   <data name="Email_Copyright" xml:space="preserve"><value>Alle rettigheter forbeholdt.</value></data>
+  <data name="Auth_Forbidden" xml:space="preserve"><value>Du har ikke tillatelse til å få tilgang til denne ressursen.</value></data>
+  <data name="General_GenericError" xml:space="preserve"><value>En feil oppstod. Vennligst prøv igjen.</value></data>
 </root>

@@ -27,7 +27,7 @@
         {
             <div class="alert alert-success" style="display: flex; justify-content: space-between; align-items: center;">
                 <span>&#10004; @successMessage</span>
-                <button class="btn btn-sm btn-secondary" @onclick="ClearSuccess">Clear &times;</button>
+                <button class="btn btn-sm btn-secondary" @onclick="ClearSuccess">@L["Admin_Btn_Clear"].Value</button>
             </div>
         }
 
@@ -35,7 +35,7 @@
         {
             <div class="alert alert-error" style="display: flex; justify-content: space-between; align-items: center;">
                 <span>@errorMessage</span>
-                <button class="btn btn-sm btn-secondary" @onclick="ClearError">Clear &times;</button>
+                <button class="btn btn-sm btn-secondary" @onclick="ClearError">@L["Admin_Btn_Clear"].Value</button>
             </div>
         }
 
@@ -109,7 +109,7 @@
                                 }
                                 else
                                 {
-                                    <small style="color: var(--text-light);">-</small>
+                                        <small style="color: var(--text-light);">-</small>
                                 }
                             </td>
                             <td>
@@ -149,7 +149,7 @@
                     &laquo; @L["Admin_Pagination_Previous"]
                 </button>
                 <span style="margin: 0 1rem;">
-                    Page @currentPage of @totalPages (@filteredEvents.Count total)
+                    @L["Admin_Pagination_Info", currentPage, totalPages, filteredEvents.Count].Value
                 </span>
                 <button class="btn btn-secondary" @onclick="NextPage" disabled="@(currentPage == totalPages)">
                     @L["Admin_Pagination_Next"] &raquo;
@@ -556,19 +556,19 @@
 
         if (string.IsNullOrWhiteSpace(formFirstPlaceId))
         {
-            formError = "First place is required";
+            formError = L["Admin_Results_Validation_FirstRequired"].Value;
             return;
         }
 
         if (string.IsNullOrWhiteSpace(formSecondPlaceId))
         {
-            formError = "Second place is required";
+            formError = L["Admin_Results_Validation_SecondRequired"].Value;
             return;
         }
 
         if (string.IsNullOrWhiteSpace(formThirdPlaceId))
         {
-            formError = "Third place is required";
+            formError = L["Admin_Results_Validation_ThirdRequired"].Value;
             return;
         }
 
@@ -576,10 +576,7 @@
         if (isEditingResult)
         {
             // Show warning about recalculation
-            recalculateWarningMessage = $"You are about to change the result for '{selectedEvent.DisplayName}'.\n\n" +
-                "This will RECALCULATE all user points for this event based on the new result. " +
-                "Any previously calculated points will be overwritten.\n\n" +
-                "Do you want to proceed?";
+            recalculateWarningMessage = L["Admin_Results_RecalcMessage", selectedEvent.DisplayName].Value;
             showRecalculateWarning = true;
             return; // Wait for confirmation
         }
@@ -779,7 +776,7 @@
     private void ConfirmDelete(Event evt)
     {
         eventToDeleteResult = evt;
-        deleteConfirmMessage = $"Are you sure you want to delete the result for '{evt.DisplayName}'? This action cannot be undone.";
+        deleteConfirmMessage = L["Admin_Results_Confirm_Delete", evt.DisplayName].Value;
         showDeleteConfirm = true;
     }
 
@@ -800,14 +797,14 @@
         
         if (response.Success)
         {
-            successMessage = $"Result for '{name}' deleted successfully!";
+            successMessage = L["Admin_Results_DeleteSuccess", name].Value;
             await LoadResults();
             FilterEvents();
             await ScrollToTop();
         }
         else
         {
-            errorMessage = response.Error ?? $"Failed to delete result for '{name}'";
+            errorMessage = response.Error ?? L["Admin_Results_DeleteFailed", name].Value;
             await ScrollToTop();
         }
         

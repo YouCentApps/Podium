@@ -27,7 +27,7 @@
         {
             <div class="alert alert-error">
                 @errorMessage
-                <button class="btn btn-sm btn-secondary" @onclick="ClearError" style="margin-left: 10px;">Clear &times;</button>
+                <button class="btn btn-sm btn-secondary" @onclick="ClearError" style="margin-left: 10px;">@L["Admin_Btn_Clear"].Value</button>
             </div>
         }
         @if (showForm)
@@ -97,9 +97,9 @@
 </div>
 
 <ConfirmDialog IsVisible="showDeleteConfirm"
-               Title="Delete Discipline"
-               Message="@($"Are you sure you want to delete '{disciplineToDelete?.Name}'? This action cannot be undone.")"
-               ConfirmText="Delete"
+               Title="@L["Admin_Disciplines_DeleteTitle"].Value"
+               Message="@L["Admin_Disciplines_DeleteMessage", disciplineToDelete?.Name ?? ""].Value"
+               ConfirmText="@L["Admin_Disciplines_DeleteConfirm"].Value"
                OnConfirm="DeleteDiscipline"
                OnCancel="CancelDelete" />
 
@@ -146,7 +146,7 @@
         }
         else
         {
-            errorMessage = response.Error ?? L["Admin_Disciplines_LoadFailed"];
+            errorMessage = response.Error ?? L["Admin_Disciplines_LoadFailed"].Value;
         }
         
         loading = false;
@@ -203,7 +203,7 @@
             }
             else
             {
-                formError = response.Error ?? "Failed to create discipline";
+                formError = response.Error ?? L["Admin_Disciplines_CreateFailed"].Value;
             }
         }
         else
@@ -219,7 +219,7 @@
             }
             else
             {
-                formError = response.Error ?? "Failed to update discipline";
+                formError = response.Error ?? L["Admin_Disciplines_UpdateFailed"].Value;
             }
         }
 
@@ -257,7 +257,7 @@
         }
         else
         {
-            errorMessage = response.Error ?? "Failed to delete discipline";
+            errorMessage = response.Error ?? L["Admin_Disciplines_DeleteFailed"].Value;
         }
         
         disciplineToDelete = null;

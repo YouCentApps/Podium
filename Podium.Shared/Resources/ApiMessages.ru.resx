@@ -27,6 +27,16 @@
   <data name="Val_UsernameInvalid" xml:space="preserve"><value>Недопустимое имя пользователя. Должно быть 3-50 символов: только латинские буквы, цифры и пробелы.</value></data>
   <data name="Val_PasswordInvalid" xml:space="preserve"><value>Недопустимый пароль. Должен быть 6-100 символов, без пробелов, только латиница/цифры/спецсимволы.</value></data>
   <data name="Val_EmailInvalid" xml:space="preserve"><value>Недопустимый адрес email. Введите действительный email.</value></data>
+	<data name="Val_EmailRequired" xml:space="preserve"><value>Электронная почта обязательна.</value></data>
+  <data name="Val_UsernameRequired" xml:space="preserve"><value>Требуется имя пользователя.</value></data>
+  <data name="Val_UsernameTooShort" xml:space="preserve"><value>Имя пользователя должно быть не менее 3 символов.</value></data>
+  <data name="Val_UsernameTooLong" xml:space="preserve"><value>Имя пользователя не может превышать 50 символов.</value></data>
+  <data name="Val_UsernameChars" xml:space="preserve"><value>Имя пользователя может содержать только латинские буквы, цифры и пробелы.</value></data>
+  <data name="Val_PasswordRequired" xml:space="preserve"><value>Требуется пароль.</value></data>
+  <data name="Val_PasswordTooShort" xml:space="preserve"><value>Пароль должен содержать не менее 6 символов.</value></data>
+  <data name="Val_PasswordTooLong" xml:space="preserve"><value>Пароль не может превышать 100 символов.</value></data>
+  <data name="Val_PasswordNoSpaces" xml:space="preserve"><value>Пароль не может содержать пробелы.</value></data>
+  <data name="Val_PasswordChars" xml:space="preserve"><value>Пароль может содержать только латинские буквы, цифры и распространённые специальные символы.</value></data>
   <data name="Profile_NotFound" xml:space="preserve"><value>Пользователь не найден</value></data>
   <data name="Profile_UsernameUpdated" xml:space="preserve"><value>Имя пользователя успешно обновлено</value></data>
   <data name="Profile_UsernameTaken" xml:space="preserve"><value>Имя пользователя уже занято</value></data>
@@ -95,4 +105,6 @@
   <data name="Entity_UpdatedSuccess" xml:space="preserve"><value>{0} успешно обновлён</value></data>
   <data name="Entity_DeletedSuccess" xml:space="preserve"><value>{0} успешно удалён</value></data>
   <data name="Admin_CannotRemoveSelf" xml:space="preserve"><value>Нельзя удалить самого себя как администратора</value></data>
+  <data name="Auth_Forbidden" xml:space="preserve"><value>У вас нет прав доступа к этому ресурсу.</value></data>
+  <data name="General_GenericError" xml:space="preserve"><value>Произошла ошибка. Пожалуйста, попробуйте снова.</value></data>
 </root>

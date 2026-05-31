@@ -1,5 +1,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
+using Microsoft.Extensions.Localization;
+using Podium.Shared.Utilities;
 
 namespace Podium.Shared.Services.Api;
 
@@ -143,9 +145,10 @@ public interface IPodiumApiClient
     Task<ApiResponse<CheckFavoriteResponse>> CheckFavoriteSeasonAsync(string seasonId);
 }
 
-public class PodiumApiClient(HttpClient httpClient) : IPodiumApiClient
+public class PodiumApiClient(HttpClient httpClient, IStringLocalizer<ApiMessages>? localizer = null) : IPodiumApiClient
 {
     private readonly HttpClient _httpClient = httpClient;
+    private readonly IStringLocalizer<ApiMessages> _localizer = localizer ?? new NullStringLocalizer<ApiMessages>();
 
     // Authentication
     public async Task<ApiResponse<RegisterVerificationResponse>> SendRegistrationVerificationAsync(string email, string username, string password, string preferredAuthMethod, string languageCode)
@@ -756,19 +759,19 @@ public class PodiumApiClient(HttpClient httpClient) : IPodiumApiClient
         }
     }
 
-    private static async Task<string> ParseErrorResponseAsync(HttpResponseMessage response)
+    private async Task<string> ParseErrorResponseAsync(HttpResponseMessage response)
     {
         try
         {
             // Handle specific status codes with user-friendly messages
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
-                return "Your session has expired. Please sign in again.";
+                return _localizer["Auth_SessionExpired"];
             }
 
             if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
             {
-                return "You don't have permission to access this resource.";
+                return _localizer["Auth_Forbidden"];
             }
 
             var errorContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -786,7 +789,7 @@ public class PodiumApiClient(HttpClient httpClient) : IPodiumApiClient
         catch
         {
             // If parsing fails, return a generic error message
-            return "An error occurred. Please try again.";
+            return _localizer["General_GenericError"];
         }
     }
 }
