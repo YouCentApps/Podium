@@ -1,5 +1,7 @@
 using Podium.Shared.Services.Business;
 using Podium.Shared.Services.Api;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Podium.Api.Endpoints;
 
@@ -10,6 +12,9 @@ internal static class AdminEndpoints
     public static void MapAdminEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/api/admin").WithTags("Admin");
+
+        // Resolve the API messages localizer once and capture for use in endpoint handlers
+        var localizer = app.Services.GetRequiredService<IStringLocalizer<ApiMessages>>();
 
         // Get current user's admin status (no admin permission required - just authentication)
         group.MapGet("/me", async (
@@ -48,16 +53,17 @@ internal static class AdminEndpoints
 
         // Diagnostic: Find series with multiple active seasons
         group.MapGet("/diagnostics/duplicate-active-seasons", async (
-            [FromServices] ISeasonRepository seasonRepo) =>
+            [FromServices] ISeasonRepository seasonRepo,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var duplicates = await seasonRepo.FindSeriesWithMultipleActiveSeasonsAsync().ConfigureAwait(false);
-            
+
             if (duplicates.Count == 0)
-                return Results.Ok(new { message = "No duplicate active seasons found.", series = new { } });
-            
+                return Results.Ok(new { message = localizer["Admin_NoDuplicateActiveSeasons"].Value, series = new { } });
+
             return Results.Ok(new 
             { 
-                message = $"Found {duplicates.Count} series with multiple active seasons.",
+                message = localizer["Admin_FoundDuplicateActiveSeasons", duplicates.Count].Value,
                 series = duplicates 
             });
         })
@@ -77,12 +83,13 @@ internal static class AdminEndpoints
         // Get specific admin
         group.MapGet("/admins/{userId}", async (
             string userId,
-            [FromServices] IAdminRepository adminRepo) =>
+            [FromServices] IAdminRepository adminRepo,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var admin = await adminRepo.GetAdminAsync(userId).ConfigureAwait(false);
             if (admin == null)
-                return Results.NotFound(new { error = "Admin not found" });
-            
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Admin"].Value });
+
             return Results.Ok(admin);
         })
         .RequireAdmin()
@@ -93,17 +100,18 @@ internal static class AdminEndpoints
             [FromBody] CreateAdminRequest request,
             HttpContext httpContext,
             [FromServices] IAdminRepository adminRepo,
-            [FromServices] IUserRepository userRepo) =>
+            [FromServices] IUserRepository userRepo,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             // Verify the user exists
             var user = await userRepo.GetUserByIdAsync(request.UserId).ConfigureAwait(false);
             if (user == null)
-                return Results.BadRequest(new { error = "User not found" });
+                return Results.BadRequest(new { error = localizer["Entity_NotFound", "User"].Value });
 
             // Check if already an admin
             var existingAdmin = await adminRepo.GetAdminAsync(request.UserId).ConfigureAwait(false);
             if (existingAdmin != null)
-                return Results.BadRequest(new { error = "User is already an admin" });
+                return Results.BadRequest(new { error = localizer["Entity_AlreadyExists", "Admin"].Value });
 
             var createdBy = httpContext.GetUserId() ?? "System";
             var admin = new Admin
@@ -119,7 +127,7 @@ internal static class AdminEndpoints
             if (!success)
                 return Results.StatusCode(500);
 
-            return Results.Ok(new { message = "Admin created successfully", admin });
+            return Results.Ok(new { message = localizer["Entity_CreatedSuccess", "Admin"].Value, admin });
         })
         .RequireAdminManagement()
         .WithName("CreateAdmin");
@@ -129,11 +137,12 @@ internal static class AdminEndpoints
             string userId,
             [FromBody] UpdateAdminRequest request,
             HttpContext httpContext,
-            [FromServices] IAdminRepository adminRepo) =>
+            [FromServices] IAdminRepository adminRepo,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var admin = await adminRepo.GetAdminAsync(userId).ConfigureAwait(false);
             if (admin == null)
-                return Results.NotFound(new { error = "Admin not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Admin"].Value });
 
             var modifiedBy = httpContext.GetUserId() ?? "System";
             admin.IsActive = request.IsActive;
@@ -145,7 +154,7 @@ internal static class AdminEndpoints
             if (!success)
                 return Results.StatusCode(500);
 
-            return Results.Ok(new { message = "Admin updated successfully", admin });
+            return Results.Ok(new { message = localizer["Entity_UpdatedSuccess", "Admin"].Value, admin });
         })
         .RequireAdminManagement()
         .WithName("UpdateAdmin");
@@ -154,17 +163,18 @@ internal static class AdminEndpoints
         group.MapDelete("/admins/{userId}", async (
             string userId,
             HttpContext httpContext,
-            [FromServices] IAdminRepository adminRepo) =>
+            [FromServices] IAdminRepository adminRepo,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var requestingUserId = httpContext.GetUserId();
             if (requestingUserId == userId)
-                return Results.BadRequest(new { error = "Cannot remove yourself as admin" });
+                return Results.BadRequest(new { error = localizer["Admin_CannotRemoveSelf"].Value });
 
             var success = await adminRepo.DeleteAdminAsync(userId).ConfigureAwait(false);
             if (!success)
-                return Results.NotFound(new { error = "Admin not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Admin"].Value });
 
-            return Results.Ok(new { message = "Admin removed successfully" });
+            return Results.Ok(new { message = localizer["Entity_DeletedSuccess", "Admin"].Value });
         })
         .RequireAdminManagement()
         .WithName("RemoveAdmin");
@@ -184,11 +194,12 @@ internal static class AdminEndpoints
         // Get specific discipline (admin)
         group.MapGet("/disciplines/{disciplineId}", async (
             string disciplineId,
-            [FromServices] IDisciplineRepository disciplineRepo) =>
+            [FromServices] IDisciplineRepository disciplineRepo,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             var discipline = await disciplineRepo.GetDisciplineByIdAsync(disciplineId).ConfigureAwait(false);
             if (discipline == null)
-                return Results.NotFound(new { error = "Discipline not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Discipline"].Value });
             
             return Results.Ok(discipline);
         })
@@ -224,7 +235,7 @@ internal static class AdminEndpoints
         {
             var existing = await disciplineRepo.GetDisciplineByIdAsync(disciplineId).ConfigureAwait(false);
             if (existing == null)
-                return Results.NotFound(new { error = "Discipline not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Discipline"].Value });
 
             existing.Name = request.Name;
             existing.DisplayName = request.DisplayName;
@@ -250,7 +261,7 @@ internal static class AdminEndpoints
             {
                 return Results.BadRequest(new 
                 { 
-                    error = "Cannot delete discipline with existing series",
+                    error = localizer["General_Failed"].Value,
                     message = $"This discipline has {seriesCount} series associated with it. Please delete or reassign those series first.",
                     seriesCount,
                     canDelete = false
@@ -259,9 +270,9 @@ internal static class AdminEndpoints
 
             var success = await disciplineRepo.DeleteDisciplineAsync(disciplineId).ConfigureAwait(false);
             if (!success)
-                return Results.NotFound(new { error = "Discipline not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Discipline"].Value });
 
-            return Results.Ok(new { message = "Discipline deleted successfully" });
+            return Results.Ok(new { message = localizer["Entity_DeletedSuccess", "Discipline"].Value });
         })
         .RequireAdmin()
         .WithName("DeleteDiscipline");
@@ -287,7 +298,7 @@ internal static class AdminEndpoints
         {
             var series = await seriesRepo.GetSeriesByIdAsync(disciplineId, seriesId).ConfigureAwait(false);
             if (series == null)
-                return Results.NotFound(new { error = "Series not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Series"].Value });
             
             return Results.Ok(series);
         })
@@ -298,12 +309,13 @@ internal static class AdminEndpoints
         group.MapPost("/series", async (
             [FromBody] CreateSeriesRequest request,
             [FromServices] ISeriesRepository seriesRepo,
-            [FromServices] IDisciplineRepository disciplineRepo) =>
+            [FromServices] IDisciplineRepository disciplineRepo,
+            [FromServices] IStringLocalizer<ApiMessages> localizer) =>
         {
             // Verify discipline exists
             var discipline = await disciplineRepo.GetDisciplineByIdAsync(request.DisciplineId).ConfigureAwait(false);
             if (discipline == null)
-                return Results.BadRequest(new { error = "Discipline not found" });
+                return Results.BadRequest(new { error = localizer["Entity_NotFound", "Discipline"].Value });
 
             var series = new Series
             {
@@ -374,7 +386,7 @@ internal static class AdminEndpoints
             {
                 return Results.BadRequest(new 
                 { 
-                    error = "Cannot delete series with existing seasons",
+                    error = localizer["General_Failed"].Value,
                     message = $"This series has {seasonCount} season(s) associated with it. Please delete those seasons first.",
                     seasonCount,
                     canDelete = false
@@ -383,9 +395,9 @@ internal static class AdminEndpoints
 
             var success = await seriesRepo.DeleteSeriesAsync(disciplineId, seriesId).ConfigureAwait(false);
             if (!success)
-                return Results.NotFound(new { error = "Series not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Series"].Value });
 
-            return Results.Ok(new { message = "Series deleted successfully" });
+            return Results.Ok(new { message = localizer["Entity_DeletedSuccess", "Series"].Value });
         })
         .RequireAdmin()
         .WithName("DeleteSeries");
@@ -411,7 +423,7 @@ internal static class AdminEndpoints
         {
             var season = await seasonRepo.GetSeasonByIdAsync(seriesId, seasonId).ConfigureAwait(false);
             if (season == null)
-                return Results.NotFound(new { error = "Season not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Season"].Value });
             
             return Results.Ok(season);
         })
@@ -438,18 +450,18 @@ internal static class AdminEndpoints
             // Verify series exists
             var series = await seriesRepo.GetSeriesByIdOnlyAsync(request.SeriesId).ConfigureAwait(false);
             if (series == null)
-                return Results.BadRequest(new { error = "Series not found" });
+                return Results.BadRequest(new { error = localizer["Entity_NotFound", "Series"].Value });
 
             // Validate dates
             if (request.EndDate.HasValue && request.StartDate >= request.EndDate.Value)
             {
-                return Results.BadRequest(new { error = "Start date must be before end date" });
+                return Results.BadRequest(new { error = localizer["Val_StartBeforeEnd"].Value });
             }
 
             // Validate year matches date range
             if (request.StartDate.Year != request.Year)
             {
-                return Results.BadRequest(new { error = "Year must match the start date year" });
+                return Results.BadRequest(new { error = localizer["Val_YearMismatch"].Value });
             }
 
             var season = new Season
@@ -483,23 +495,23 @@ internal static class AdminEndpoints
             // Get existing season using CURRENT seriesId
             var existing = await seasonRepo.GetSeasonByIdAsync(currentSeriesId, seasonId).ConfigureAwait(false);
             if (existing == null)
-                return Results.NotFound(new { error = "Season not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Season"].Value });
 
             // Verify NEW series exists (in case it's being changed)
             var series = await seriesRepo.GetSeriesByIdOnlyAsync(request.SeriesId).ConfigureAwait(false);
             if (series == null)
-                return Results.BadRequest(new { error = "Target series not found" });
+                return Results.BadRequest(new { error = localizer["Entity_NotFound", "Series"].Value });
 
             // Validate dates
             if (request.EndDate.HasValue && request.StartDate >= request.EndDate.Value)
             {
-                return Results.BadRequest(new { error = "Start date must be before end date" });
+                return Results.BadRequest(new { error = localizer["Val_StartBeforeEnd"].Value });
             }
 
             // Validate year matches date range
             if (request.StartDate.Year != request.Year)
             {
-                return Results.BadRequest(new { error = "Year must match the start date year" });
+                return Results.BadRequest(new { error = localizer["Val_YearMismatch"].Value });
             }
 
             // IMPORTANT: If moving to a different series AND the season is active,
@@ -551,7 +563,7 @@ internal static class AdminEndpoints
 
                 return Results.BadRequest(new 
                 { 
-                    error = "Cannot delete season with existing data",
+                    error = localizer["General_Failed"].Value,
                     message = $"This season has {string.Join(" and ", reasons)}. Please delete those first.",
                     dependencies,
                     canDelete = false
@@ -560,9 +572,9 @@ internal static class AdminEndpoints
 
             var success = await seasonRepo.DeleteSeasonAsync(seriesId, seasonId).ConfigureAwait(false);
             if (!success)
-                return Results.NotFound(new { error = "Season not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Season"].Value });
 
-            return Results.Ok(new { message = "Season deleted successfully" });
+            return Results.Ok(new { message = localizer["Entity_DeletedSuccess", "Season"].Value });
         })
         .RequireAdmin()
         .WithName("DeleteSeason");
@@ -597,7 +609,7 @@ internal static class AdminEndpoints
         {
             var competitor = await competitorRepo.GetCompetitorByIdOnlyAsync(competitorId).ConfigureAwait(false);
             if (competitor == null)
-                return Results.NotFound(new { error = "Competitor not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Competitor"].Value });
             
             return Results.Ok(competitor);
         })
@@ -703,7 +715,7 @@ internal static class AdminEndpoints
 
                 return Results.BadRequest(new 
                 { 
-                    error = "Cannot delete competitor with existing data",
+                    error = localizer["General_Failed"].Value,
                     message = $"This competitor is assigned to {string.Join(" and ", reasons)}. Please remove those assignments first.",
                     dependencies,
                     canDelete = false
@@ -712,9 +724,9 @@ internal static class AdminEndpoints
 
             var success = await competitorRepo.DeleteCompetitorAsync(type, competitorId).ConfigureAwait(false);
             if (!success)
-                return Results.NotFound(new { error = "Competitor not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Competitor"].Value });
 
-            return Results.Ok(new { message = "Competitor deleted successfully" });
+            return Results.Ok(new { message = localizer["Entity_DeletedSuccess", "Competitor"].Value });
         })
         .RequireAdmin()
         .WithName("DeleteCompetitor");
@@ -729,7 +741,7 @@ internal static class AdminEndpoints
             // Verify season exists (use cross-partition query)
             var season = await seasonRepo.GetSeasonByIdOnlyAsync(seasonId).ConfigureAwait(false);
             if (season == null)
-                return Results.BadRequest(new { error = "Season not found" });
+                return Results.BadRequest(new { error = localizer["Entity_NotFound", "Season"].Value });
 
             // Verify competitor exists
             var competitor = await competitorRepo.GetCompetitorByIdOnlyAsync(competitorId).ConfigureAwait(false);
@@ -844,18 +856,18 @@ internal static class AdminEndpoints
             // Validate status
             if (!ValidEventStatuses.Contains(request.Status))
             {
-                return Results.BadRequest(new { error = "Status must be 'Upcoming', 'InProgress', or 'Completed'" });
+                return Results.BadRequest(new { error = localizer["Val_InvalidEventStatus"].Value });
             }
 
             // Validate event date within season range
             if (request.EventDate < season.StartDate)
             {
-                return Results.BadRequest(new { error = "Event date must be within season date range" });
+                return Results.BadRequest(new { error = localizer["Val_EventDateOutOfRange"].Value });
             }
 
             if (season.EndDate.HasValue && request.EventDate > season.EndDate.Value)
             {
-                return Results.BadRequest(new { error = "Event date must be within season date range" });
+                return Results.BadRequest(new { error = localizer["Val_EventDateOutOfRange"].Value });
             }
 
             var evt = new Event
@@ -889,28 +901,28 @@ internal static class AdminEndpoints
             // Get existing event
             var existing = await eventRepo.GetEventByIdOnlyAsync(eventId).ConfigureAwait(false);
             if (existing == null)
-                return Results.NotFound(new { error = "Event not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Event"].Value });
 
             // Verify season exists (in case it's being changed)
             var season = await seasonRepo.GetSeasonByIdOnlyAsync(existing.SeasonId).ConfigureAwait(false);
             if (season == null)
-                return Results.BadRequest(new { error = "Season not found" });
+                return Results.BadRequest(new { error = localizer["Entity_NotFound", "Season"].Value });
 
             // Validate status
             if (!ValidEventStatuses.Contains(request.Status))
             {
-                return Results.BadRequest(new { error = "Status must be 'Upcoming', 'InProgress', or 'Completed'" });
+                return Results.BadRequest(new { error = localizer["Val_InvalidEventStatus"].Value });
             }
 
             // Validate event date within season range
             if (request.EventDate < season.StartDate)
             {
-                return Results.BadRequest(new { error = "Event date must be within season date range" });
+                return Results.BadRequest(new { error = localizer["Val_EventDateOutOfRange"].Value });
             }
 
             if (season.EndDate.HasValue && request.EventDate > season.EndDate.Value)
             {
-                return Results.BadRequest(new { error = "Event date must be within season date range" });
+                return Results.BadRequest(new { error = localizer["Val_EventDateOutOfRange"].Value });
             }
 
             existing.Name = request.Name;
@@ -948,7 +960,7 @@ internal static class AdminEndpoints
 
                 return Results.BadRequest(new 
                 { 
-                    error = "Cannot delete event with existing data",
+                    error = localizer["General_Failed"].Value,
                     message = $"This event has {string.Join(" and ", reasons)}. Please delete those first.",
                     dependencies,
                     canDelete = false
@@ -957,9 +969,9 @@ internal static class AdminEndpoints
 
             var success = await eventRepo.DeleteEventAsync(seasonId, eventId).ConfigureAwait(false);
             if (!success)
-                return Results.NotFound(new { error = "Event not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Event"].Value });
 
-            return Results.Ok(new { message = "Event deleted successfully" });
+            return Results.Ok(new { message = localizer["Entity_DeletedSuccess", "Event"].Value });
         })
         .RequireAdmin()
         .WithName("DeleteEvent");
@@ -990,33 +1002,33 @@ internal static class AdminEndpoints
             // Verify event exists
             var evt = await eventRepo.GetEventByIdOnlyAsync(eventId).ConfigureAwait(false);
             if (evt == null)
-                return Results.BadRequest(new { error = "Event not found" });
+                return Results.BadRequest(new { error = localizer["Entity_NotFound", "Event"].Value });
 
             // Validate event status - should be Completed
             if (evt.Status != "Completed")
             {
-                return Results.BadRequest(new { error = "Results can only be entered for completed events. Change event status to 'Completed' first." });
+                return Results.BadRequest(new { error = localizer["Val_EventResultsRequireCompleted"].Value });
             }
 
             // Verify all three competitors exist
             var first = await competitorRepo.GetCompetitorByIdOnlyAsync(request.FirstPlaceId).ConfigureAwait(false);
             if (first == null)
-                return Results.BadRequest(new { error = "First place competitor not found" });
+                return Results.BadRequest(new { error = localizer["Entity_NotFound", "FirstPlaceCompetitor"].Value });
 
             var second = await competitorRepo.GetCompetitorByIdOnlyAsync(request.SecondPlaceId).ConfigureAwait(false);
             if (second == null)
-                return Results.BadRequest(new { error = "Second place competitor not found" });
+                return Results.BadRequest(new { error = localizer["Entity_NotFound", "SecondPlaceCompetitor"].Value });
 
             var third = await competitorRepo.GetCompetitorByIdOnlyAsync(request.ThirdPlaceId).ConfigureAwait(false);
             if (third == null)
-                return Results.BadRequest(new { error = "Third place competitor not found" });
+                return Results.BadRequest(new { error = localizer["Entity_NotFound", "ThirdPlaceCompetitor"].Value });
 
             // Ensure all three competitors are different
             if (request.FirstPlaceId == request.SecondPlaceId || 
                 request.FirstPlaceId == request.ThirdPlaceId || 
                 request.SecondPlaceId == request.ThirdPlaceId)
             {
-                return Results.BadRequest(new { error = "All three podium positions must be different competitors" });
+                return Results.BadRequest(new { error = localizer["Val_PodiumUnique"].Value });
             }
 
             var result = new EventResult
@@ -1043,8 +1055,8 @@ internal static class AdminEndpoints
                 result = created,
                 pointsRecalculated = recalculationSuccess,
                 message = recalculationSuccess 
-                    ? "Event result saved and all prediction points recalculated successfully" 
-                    : "Event result saved, but some predictions may not have been recalculated"
+                    ? localizer["EventResult_Saved_Recalculated"].Value 
+                    : localizer["EventResult_Saved_PartialRecalc"].Value
             });
         })
         .RequireAdmin()

@@ -215,4 +215,20 @@
   <data name="Admin_Seasons_RecalcFailed" xml:space="preserve"><value>❌ Ricalcolo fallito: {0}</value></data>
   <data name="Admin_Seasons_RecalcFailedStart" xml:space="preserve"><value>Impossibile avviare il ricalcolo</value></data>
   <data name="Admin_Seasons_RecalcAlreadyRunning" xml:space="preserve"><value>Un altro ricalcolo è già in corso</value></data>
+  <data name="Admin_Error_LoadUsers" xml:space="preserve"><value>Caricamento utenti non riuscito. Per favore riprova.</value></data>
+  <data name="Admin_Required_Username" xml:space="preserve"><value>Il nome utente è obbligatorio.</value></data>
+  <data name="Admin_Required_Email" xml:space="preserve"><value>La e-mail è obbligatoria.</value></data>
+  <data name="Admin_Error_UpdateUser" xml:space="preserve"><value>Aggiornamento utente non riuscito. Per favore riprova.</value></data>
+  <data name="Admin_UserDelete_Reason_Predictions" xml:space="preserve"><value>{0} previsione/i</value></data>
+  <data name="Admin_UserDelete_Reason_AdminPrivileges" xml:space="preserve"><value>privilegi di amministratore</value></data>
+  <data name="Admin_UserDelete_CannotDelete_Title" xml:space="preserve"><value>Impossibile eliminare l'utente</value></data>
+  <data name="Admin_UserDelete_CannotDelete_Message" xml:space="preserve"><value>L'utente '{0}' ha dati esistenti: {1}.
+
+Per preservare l'integrità dei dati, disattiva questo utente invece di eliminarlo.</value></data>
+  <data name="Admin_Btn_DeactivateInstead" xml:space="preserve"><value>Disattiva invece</value></data>
+  <data name="Admin_UserDelete_Title" xml:space="preserve"><value>Elimina utente</value></data>
+  <data name="Admin_UserDelete_Message" xml:space="preserve"><value>Sei sicuro di voler eliminare definitivamente l'utente '{0}'?
+
+Questa azione non può essere annullata.</value></data>
+  <data name="Admin_UserDelete_ConfirmSimple" xml:space="preserve"><value>Sei sicuro di voler eliminare l'utente '{0}'?</value></data>
 </root>

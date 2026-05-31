@@ -215,4 +215,20 @@
   <data name="Admin_Seasons_RecalcFailed" xml:space="preserve"><value>❌ Recálculo fallido: {0}</value></data>
   <data name="Admin_Seasons_RecalcFailedStart" xml:space="preserve"><value>No se pudo iniciar el recálculo</value></data>
   <data name="Admin_Seasons_RecalcAlreadyRunning" xml:space="preserve"><value>Ya hay otro recálculo en curso</value></data>
+  <data name="Admin_Error_LoadUsers" xml:space="preserve"><value>Error al cargar usuarios. Por favor, inténtalo de nuevo.</value></data>
+  <data name="Admin_Required_Username" xml:space="preserve"><value>Se requiere nombre de usuario.</value></data>
+  <data name="Admin_Required_Email" xml:space="preserve"><value>Se requiere correo electrónico.</value></data>
+  <data name="Admin_Error_UpdateUser" xml:space="preserve"><value>Error al actualizar el usuario. Por favor, inténtalo de nuevo.</value></data>
+  <data name="Admin_UserDelete_Reason_Predictions" xml:space="preserve"><value>{0} predicción(es)</value></data>
+  <data name="Admin_UserDelete_Reason_AdminPrivileges" xml:space="preserve"><value>privilegios de administrador</value></data>
+  <data name="Admin_UserDelete_CannotDelete_Title" xml:space="preserve"><value>No se puede eliminar al usuario</value></data>
+  <data name="Admin_UserDelete_CannotDelete_Message" xml:space="preserve"><value>El usuario '{0}' tiene datos existentes: {1}.
+
+Para preservar la integridad de los datos, desactiva este usuario en lugar de eliminarlo.</value></data>
+  <data name="Admin_Btn_DeactivateInstead" xml:space="preserve"><value>Desactivar en su lugar</value></data>
+  <data name="Admin_UserDelete_Title" xml:space="preserve"><value>Eliminar usuario</value></data>
+  <data name="Admin_UserDelete_Message" xml:space="preserve"><value>¿Estás seguro de que deseas eliminar permanentemente al usuario '{0}'?
+
+Esta acción no se puede deshacer.</value></data>
+  <data name="Admin_UserDelete_ConfirmSimple" xml:space="preserve"><value>¿Estás seguro de que deseas eliminar al usuario '{0}'?</value></data>
 </root>

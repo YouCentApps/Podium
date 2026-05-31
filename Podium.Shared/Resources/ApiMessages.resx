@@ -72,10 +72,28 @@
   <data name="Admin_SetActiveFailed" xml:space="preserve"><value>Failed to set active season. Season may not exist.</value></data>
   <data name="Admin_SetActiveSuccess" xml:space="preserve"><value>Season activated successfully. Other seasons in this series have been deactivated.</value></data>
   <data name="Admin_Unauthorized" xml:space="preserve"><value>Admin access required</value></data>
+	<data name="Admin_NoDuplicateActiveSeasons" xml:space="preserve"><value>No duplicate active seasons found.</value></data>
+  <data name="Admin_FoundDuplicateActiveSeasons" xml:space="preserve"><value>Found {0} series with multiple active seasons.</value></data>
+  <data name="Entity_NotFound" xml:space="preserve"><value>{0} not found</value></data>
+  <data name="Entity_AlreadyExists" xml:space="preserve"><value>{0} already exists</value></data>
+  <data name="Entity_CreatedSuccess" xml:space="preserve"><value>{0} created successfully</value></data>
+  <data name="Entity_UpdatedSuccess" xml:space="preserve"><value>{0} updated successfully</value></data>
+  <data name="Entity_DeletedSuccess" xml:space="preserve"><value>{0} deleted successfully</value></data>
+  <data name="Admin_CannotRemoveSelf" xml:space="preserve"><value>Cannot remove yourself as admin</value></data>
   <!-- Sport / General -->
   <data name="General_NotFound" xml:space="preserve"><value>Not found</value></data>
   <data name="General_Failed" xml:space="preserve"><value>Operation failed. Please try again.</value></data>
   <data name="General_Success" xml:space="preserve"><value>Operation completed successfully</value></data>
+	<data name="Val_StartBeforeEnd" xml:space="preserve"><value>Start date must be before end date</value></data>
+  <data name="Val_YearMismatch" xml:space="preserve"><value>Year must match the start date year</value></data>
+  <data name="Val_InvalidEventStatus" xml:space="preserve"><value>Status must be 'Upcoming', 'InProgress', or 'Completed'</value></data>
+  <data name="Val_EventDateOutOfRange" xml:space="preserve"><value>Event date must be within season date range</value></data>
+  <data name="Val_EventResultsRequireCompleted" xml:space="preserve"><value>Results can only be entered for completed events. Change event status to 'Completed' first.</value></data>
+  <data name="Val_PodiumUnique" xml:space="preserve"><value>All three podium positions must be different competitors</value></data>
+  <data name="EventResult_Saved_Recalculated" xml:space="preserve"><value>Event result saved and all prediction points recalculated successfully</value></data>
+  <data name="EventResult_Saved_PartialRecalc" xml:space="preserve"><value>Event result saved, but some predictions may not have been recalculated</value></data>
+	<data name="Prediction_EventClosed" xml:space="preserve"><value>Event no longer accepts predictions</value></data>
+  <data name="Prediction_SavedSuccess" xml:space="preserve"><value>Prediction saved successfully</value></data>
   <!-- Email templates -->
   <data name="Email_Subject" xml:space="preserve"><value>Your Verification Code for YouCent Podium</value></data>
   <data name="Email_Header" xml:space="preserve"><value>YouCent Podium</value></data>

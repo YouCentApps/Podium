@@ -72,6 +72,24 @@
   <data name="Admin_SetActiveFailed" xml:space="preserve"><value>Kunne ikke sette aktiv sesong. Sesongen finnes kanskje ikke.</value></data>
   <data name="Admin_SetActiveSuccess" xml:space="preserve"><value>Sesong aktivert. Andre sesonger i denne serien er deaktivert.</value></data>
   <data name="Admin_Unauthorized" xml:space="preserve"><value>Administratortilgang påkrevd</value></data>
+	<data name="Admin_NoDuplicateActiveSeasons" xml:space="preserve"><value>Ingen dupliserte aktive sesonger funnet.</value></data>
+  <data name="Admin_FoundDuplicateActiveSeasons" xml:space="preserve"><value>Fant {0} serier med flere aktive sesonger.</value></data>
+	<data name="Val_StartBeforeEnd" xml:space="preserve"><value>Startdato må være før sluttdato</value></data>
+  <data name="Val_YearMismatch" xml:space="preserve"><value>År må samsvare med startdatoens år</value></data>
+  <data name="Val_InvalidEventStatus" xml:space="preserve"><value>Status må være 'Upcoming', 'InProgress' eller 'Completed'</value></data>
+  <data name="Val_EventDateOutOfRange" xml:space="preserve"><value>Arrangementdato må være innenfor sesongens datoområde</value></data>
+  <data name="Val_EventResultsRequireCompleted" xml:space="preserve"><value>Resultater kan kun legges inn for fullførte arrangementer. Endre status til 'Completed'.</value></data>
+  <data name="Val_PodiumUnique" xml:space="preserve"><value>Alle tre pallplasseringer må være forskjellige deltakere</value></data>
+  <data name="EventResult_Saved_Recalculated" xml:space="preserve"><value>Resultat lagret og alle prediksjonspoeng ble beregnet på nytt</value></data>
+  <data name="EventResult_Saved_PartialRecalc" xml:space="preserve"><value>Resultat lagret, men noen prediksjoner kan ha blitt ikke beregnet på nytt</value></data>
+	<data name="Prediction_EventClosed" xml:space="preserve"><value>Arrangementet aksepterer ikke lenger prediksjoner</value></data>
+  <data name="Prediction_SavedSuccess" xml:space="preserve"><value>Prediksjon lagret</value></data>
+  <data name="Entity_NotFound" xml:space="preserve"><value>{0} ikke funnet</value></data>
+  <data name="Entity_AlreadyExists" xml:space="preserve"><value>{0} finnes allerede</value></data>
+  <data name="Entity_CreatedSuccess" xml:space="preserve"><value>{0} opprettet</value></data>
+  <data name="Entity_UpdatedSuccess" xml:space="preserve"><value>{0} oppdatert</value></data>
+  <data name="Entity_DeletedSuccess" xml:space="preserve"><value>{0} slettet</value></data>
+  <data name="Admin_CannotRemoveSelf" xml:space="preserve"><value>Du kan ikke fjerne deg selv som administrator</value></data>
   <!-- Sport / Generelt -->
   <data name="General_NotFound" xml:space="preserve"><value>Ikke funnet</value></data>
   <data name="General_Failed" xml:space="preserve"><value>Operasjonen mislyktes. Vennligst prøv igjen.</value></data>

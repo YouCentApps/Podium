@@ -8,6 +8,7 @@
   <data name="Disciplines_None" xml:space="preserve"><value>Дисциплины пока недоступны. Проверьте позже!</value></data>
   <data name="Disciplines_ViewSeries" xml:space="preserve"><value>Смотреть серии →</value></data>
   <data name="Disciplines_SignInToPredict" xml:space="preserve"><value>Пожалуйста, войдите для прогнозов.</value></data>
+	<data name="Disciplines_Error_LoadFailed" xml:space="preserve"><value>Ошибка при загрузке дисциплин: {0}</value></data>
   <data name="SeriesSelection_Title" xml:space="preserve"><value>Выберите серию</value></data>
   <data name="SeriesSelection_None" xml:space="preserve"><value>Серии для этой дисциплины пока недоступны.</value></data>
 	<data name="SeriesSelection_LoadFailed" xml:space="preserve"><value>Ошибка при загрузке серий.</value></data>

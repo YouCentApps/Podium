@@ -8,6 +8,7 @@
   <data name="Disciplines_None" xml:space="preserve"><value>No hay disciplinas disponibles por el momento. ¡Vuelve más tarde!</value></data>
   <data name="Disciplines_ViewSeries" xml:space="preserve"><value>Ver series →</value></data>
   <data name="Disciplines_SignInToPredict" xml:space="preserve"><value>Inicia sesión para hacer predicciones.</value></data>
+	<data name="Disciplines_Error_LoadFailed" xml:space="preserve"><value>Error al cargar disciplinas: {0}</value></data>
   <data name="SeriesSelection_Title" xml:space="preserve"><value>Elige una serie</value></data>
   <data name="SeriesSelection_None" xml:space="preserve"><value>No hay series disponibles para esta disciplina.</value></data>
 	<data name="SeriesSelection_LoadFailed" xml:space="preserve"><value>Error al cargar las series.</value></data>

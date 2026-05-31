@@ -5,6 +5,7 @@ internal static class SportEndpoints
     public static void MapSportEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/api").WithTags("Disciplines & Competitions");
+        var localizer = app.Services.GetRequiredService<IStringLocalizer<ApiMessages>>();
 
         // Get all active disciplines
         group.MapGet("/disciplines", async ([FromServices] IDisciplineRepository disciplineRepo) =>
@@ -90,7 +91,7 @@ internal static class SportEndpoints
         {
             var eventDetails = await eventRepo.GetEventByIdAsync(seasonId, eventId).ConfigureAwait(false);
             if (eventDetails == null)
-                return Results.NotFound(new { error = "Event not found" });
+                return Results.NotFound(new { error = localizer["Entity_NotFound", "Event"].Value });
             
             return Results.Ok(eventDetails);
         })

@@ -216,4 +216,16 @@
   <data name="Admin_Seasons_RecalcFailed" xml:space="preserve"><value>❌ Ошибка пересчёта: {0}</value></data>
   <data name="Admin_Seasons_RecalcFailedStart" xml:space="preserve"><value>Не удалось запустить пересчёт</value></data>
   <data name="Admin_Seasons_RecalcAlreadyRunning" xml:space="preserve"><value>Другой пересчёт уже выполняется</value></data>
+  <data name="Admin_Error_LoadUsers" xml:space="preserve"><value>Не удалось загрузить пользователей. Пожалуйста, попробуйте ещё раз.</value></data>
+  <data name="Admin_Required_Username" xml:space="preserve"><value>Требуется имя пользователя.</value></data>
+  <data name="Admin_Required_Email" xml:space="preserve"><value>Требуется адрес электронной почты.</value></data>
+  <data name="Admin_Error_UpdateUser" xml:space="preserve"><value>Не удалось обновить пользователя. Пожалуйста, попробуйте ещё раз.</value></data>
+  <data name="Admin_UserDelete_Reason_Predictions" xml:space="preserve"><value>{0} предсказание(й)</value></data>
+  <data name="Admin_UserDelete_Reason_AdminPrivileges" xml:space="preserve"><value>привилегии администратора</value></data>
+  <data name="Admin_UserDelete_CannotDelete_Title" xml:space="preserve"><value>Невозможно удалить пользователя</value></data>
+  <data name="Admin_UserDelete_CannotDelete_Message" xml:space="preserve"><value>У пользователя '{0}' есть существующие данные: {1}.&#xA;&#xA;Чтобы сохранить целостность данных, деактивируйте этого пользователя вместо удаления.</value></data>
+  <data name="Admin_Btn_DeactivateInstead" xml:space="preserve"><value>Деактивировать вместо этого</value></data>
+  <data name="Admin_UserDelete_Title" xml:space="preserve"><value>Удалить пользователя</value></data>
+  <data name="Admin_UserDelete_Message" xml:space="preserve"><value>Вы действительно хотите навсегда удалить пользователя '{0}'?&#xA;&#xA;Это действие нельзя отменить.</value></data>
+  <data name="Admin_UserDelete_ConfirmSimple" xml:space="preserve"><value>Вы уверены, что хотите удалить пользователя '{0}'?</value></data>
 </root>

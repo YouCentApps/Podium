@@ -85,4 +85,22 @@
   <data name="Email_Ignore" xml:space="preserve"><value>Se non hai richiesto questo codice, puoi ignorare questa email.</value></data>
   <data name="Email_Automated" xml:space="preserve"><value>Questo è un messaggio automatico, non rispondere.</value></data>
   <data name="Email_Copyright" xml:space="preserve"><value>Tutti i diritti riservati.</value></data>
+  <data name="Admin_NoDuplicateActiveSeasons" xml:space="preserve"><value>Nessuna stagione attiva duplicata trovata.</value></data>
+  <data name="Admin_FoundDuplicateActiveSeasons" xml:space="preserve"><value>Trovate {0} serie con più stagioni attive.</value></data>
+	<data name="Val_StartBeforeEnd" xml:space="preserve"><value>La data di inizio deve essere precedente alla data di fine</value></data>
+  <data name="Val_YearMismatch" xml:space="preserve"><value>L'anno deve corrispondere all'anno della data di inizio</value></data>
+  <data name="Val_InvalidEventStatus" xml:space="preserve"><value>Lo stato deve essere 'Upcoming', 'InProgress' o 'Completed'</value></data>
+  <data name="Val_EventDateOutOfRange" xml:space="preserve"><value>La data dell'evento deve essere nel intervallo della stagione</value></data>
+  <data name="Val_EventResultsRequireCompleted" xml:space="preserve"><value>I risultati possono essere inseriti solo per eventi completati. Imposta lo stato su 'Completed'.</value></data>
+  <data name="Val_PodiumUnique" xml:space="preserve"><value>Tutte e tre le posizioni del podio devono essere concorrenti diversi</value></data>
+  <data name="EventResult_Saved_Recalculated" xml:space="preserve"><value>Risultato salvato e tutti i punti delle previsioni ricalcolati con successo</value></data>
+  <data name="EventResult_Saved_PartialRecalc" xml:space="preserve"><value>Risultato salvato, ma alcune previsioni potrebbero non essere state ricalcolate</value></data>
+	<data name="Prediction_EventClosed" xml:space="preserve"><value>L'evento non accetta più previsioni</value></data>
+  <data name="Prediction_SavedSuccess" xml:space="preserve"><value>Previsione salvata con successo</value></data>
+  <data name="Entity_NotFound" xml:space="preserve"><value>{0} non trovato</value></data>
+  <data name="Entity_AlreadyExists" xml:space="preserve"><value>{0} esiste già</value></data>
+  <data name="Entity_CreatedSuccess" xml:space="preserve"><value>{0} creato con successo</value></data>
+  <data name="Entity_UpdatedSuccess" xml:space="preserve"><value>{0} aggiornato con successo</value></data>
+  <data name="Entity_DeletedSuccess" xml:space="preserve"><value>{0} eliminato con successo</value></data>
+  <data name="Admin_CannotRemoveSelf" xml:space="preserve"><value>Non puoi rimuovere te stesso come amministratore</value></data>
 </root>
