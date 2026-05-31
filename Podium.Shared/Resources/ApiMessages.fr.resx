@@ -27,6 +27,16 @@
   <data name="Val_UsernameInvalid" xml:space="preserve"><value>Nom d'utilisateur invalide. 3-50 caractères : lettres latines, chiffres et espaces uniquement.</value></data>
   <data name="Val_PasswordInvalid" xml:space="preserve"><value>Mot de passe invalide. 6-100 caractères, sans espaces, lettres/chiffres/caractères spéciaux seulement.</value></data>
   <data name="Val_EmailInvalid" xml:space="preserve"><value>Adresse email invalide. Veuillez entrer un email valide.</value></data>
+	<data name="Val_EmailRequired" xml:space="preserve"><value>Email requis.</value></data>
+  <data name="Val_UsernameRequired" xml:space="preserve"><value>Le nom d'utilisateur est requis.</value></data>
+  <data name="Val_UsernameTooShort" xml:space="preserve"><value>Le nom d'utilisateur doit comporter au moins 3 caractères.</value></data>
+  <data name="Val_UsernameTooLong" xml:space="preserve"><value>Le nom d'utilisateur ne peut pas dépasser 50 caractères.</value></data>
+  <data name="Val_UsernameChars" xml:space="preserve"><value>Le nom d'utilisateur ne peut contenir que des lettres latines, des chiffres et des espaces.</value></data>
+  <data name="Val_PasswordRequired" xml:space="preserve"><value>Le mot de passe est requis.</value></data>
+  <data name="Val_PasswordTooShort" xml:space="preserve"><value>Le mot de passe doit comporter au moins 6 caractères.</value></data>
+  <data name="Val_PasswordTooLong" xml:space="preserve"><value>Le mot de passe ne peut pas dépasser 100 caractères.</value></data>
+  <data name="Val_PasswordNoSpaces" xml:space="preserve"><value>Le mot de passe ne peut pas contenir d'espaces.</value></data>
+  <data name="Val_PasswordChars" xml:space="preserve"><value>Le mot de passe ne peut contenir que des lettres latines, des chiffres et des caractères spéciaux courants.</value></data>
   <data name="Profile_NotFound" xml:space="preserve"><value>Utilisateur introuvable</value></data>
   <data name="Profile_UsernameUpdated" xml:space="preserve"><value>Nom d'utilisateur mis à jour avec succès</value></data>
   <data name="Profile_UsernameTaken" xml:space="preserve"><value>Ce nom d'utilisateur est déjà pris</value></data>
@@ -95,4 +105,6 @@
   <data name="Email_Ignore" xml:space="preserve"><value>Si vous n'avez pas demandé ce code, vous pouvez ignorer cet email.</value></data>
   <data name="Email_Automated" xml:space="preserve"><value>Ceci est un message automatique, veuillez ne pas répondre.</value></data>
   <data name="Email_Copyright" xml:space="preserve"><value>Tous droits réservés.</value></data>
+  <data name="Auth_Forbidden" xml:space="preserve"><value>Vous n'avez pas la permission d'accéder à cette ressource.</value></data>
+  <data name="General_GenericError" xml:space="preserve"><value>Une erreur est survenue. Veuillez réessayer.</value></data>
 </root>

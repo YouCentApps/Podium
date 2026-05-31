@@ -227,4 +227,101 @@
   <data name="Admin_UserDelete_Title" xml:space="preserve"><value>Delete User</value></data>
   <data name="Admin_UserDelete_Message" xml:space="preserve"><value>Are you sure you want to permanently delete user '{0}'?\n\nThis action cannot be undone.</value></data>
   <data name="Admin_UserDelete_ConfirmSimple" xml:space="preserve"><value>Are you sure you want to delete user '{0}'?</value></data>
+  <data name="Admin_System" xml:space="preserve"><value>System</value></data>
+  <data name="Admin_Admins_RemoveTitle" xml:space="preserve"><value>Remove Administrator</value></data>
+  <data name="Admin_Admins_RemoveMessage" xml:space="preserve"><value>Are you sure you want to remove admin privileges for {0}?</value></data>
+  <data name="Admin_Admins_RemoveConfirm" xml:space="preserve"><value>Remove</value></data>
+  <data name="Admin_Admins_SelectUser" xml:space="preserve"><value>Please select a user</value></data>
+  <data name="Admin_Admins_CreateFailed" xml:space="preserve"><value>Failed to create administrator</value></data>
+  <data name="Admin_Admins_UpdateFailed" xml:space="preserve"><value>Failed to update administrator</value></data>
+  <data name="Admin_Admins_RemoveFailed" xml:space="preserve"><value>Failed to remove administrator</value></data>
+  <data name="Admin_Admins_LoadFailed" xml:space="preserve"><value>Failed to load administrators</value></data>
+  <data name="Admin_Btn_Clear" xml:space="preserve"><value>Clear ×</value></data>
+  <data name="Admin_Pagination_Info" xml:space="preserve"><value>Page {0} of {1} ({2} total)</value></data>
+
+  <data name="Admin_Competitors_Validation_NameRequired" xml:space="preserve"><value>Name is required</value></data>
+  <data name="Admin_Competitors_Validation_ShortNameRequired" xml:space="preserve"><value>Short name is required</value></data>
+  <data name="Admin_Competitors_Validation_TypeInvalid" xml:space="preserve"><value>Type must be Individual or Team</value></data>
+
+  <data name="Admin_Competitors_CreateSuccess" xml:space="preserve"><value>Competitor '{0}' created successfully!</value></data>
+  <data name="Admin_Competitors_CreateFailed" xml:space="preserve"><value>Failed to create competitor</value></data>
+  <data name="Admin_Competitors_UpdateSuccess" xml:space="preserve"><value>Competitor '{0}' updated successfully!</value></data>
+  <data name="Admin_Competitors_UpdateFailed" xml:space="preserve"><value>Failed to update competitor</value></data>
+
+  <data name="Admin_Competitors_Warn_AddAssignmentFailed" xml:space="preserve"><value>Warning: Failed to add some season assignments. Error: {0}</value></data>
+  <data name="Admin_Competitors_Warn_RemoveAssignmentFailed" xml:space="preserve"><value>Warning: Failed to remove some season assignments. Error: {0}</value></data>
+
+  <data name="Admin_Competitors_Confirm_Reason_Seasons" xml:space="preserve"><value>{0} season(s)</value></data>
+  <data name="Admin_Competitors_Confirm_Reason_Results" xml:space="preserve"><value>{0} event result(s)</value></data>
+  <data name="Admin_Competitors_Confirm_HasDependencies" xml:space="preserve"><value>Cannot delete '{0}' because it is assigned to {1}. Please remove those assignments first.</value></data>
+  <data name="Admin_Competitors_Confirm_Delete" xml:space="preserve"><value>Are you sure you want to delete '{0}'? This action cannot be undone.</value></data>
+
+  <data name="Admin_Competitors_Error_HasDependencies" xml:space="preserve"><value>Cannot delete '{0}' because it has dependencies.</value></data>
+  <data name="Admin_Competitors_DeleteSuccess" xml:space="preserve"><value>Competitor '{0}' deleted successfully!</value></data>
+  <data name="Admin_Competitors_DeleteFailed" xml:space="preserve"><value>Failed to delete '{0}'</value></data>
+  <data name="Admin_Disciplines_DeleteTitle" xml:space="preserve"><value>Delete Discipline</value></data>
+  <data name="Admin_Disciplines_DeleteMessage" xml:space="preserve"><value>Are you sure you want to delete '{0}'? This action cannot be undone.</value></data>
+  <data name="Admin_Disciplines_DeleteConfirm" xml:space="preserve"><value>Delete</value></data>
+  <data name="Admin_Disciplines_CreateFailed" xml:space="preserve"><value>Failed to create discipline</value></data>
+  <data name="Admin_Disciplines_UpdateFailed" xml:space="preserve"><value>Failed to update discipline</value></data>
+  <data name="Admin_Disciplines_DeleteFailed" xml:space="preserve"><value>Failed to delete discipline</value></data>
+  <data name="Admin_Events_Validation_SelectSeason" xml:space="preserve"><value>Please select a season</value></data>
+  <data name="Admin_Events_Validation_NameRequired" xml:space="preserve"><value>Event name is required</value></data>
+  <data name="Admin_Events_Validation_DisplayNameRequired" xml:space="preserve"><value>Display name is required</value></data>
+  <data name="Admin_Events_Validation_EventNumberMin" xml:space="preserve"><value>Event number must be at least 1</value></data>
+  <data name="Admin_Events_Validation_LocationRequired" xml:space="preserve"><value>Location is required</value></data>
+
+  <data name="Admin_Events_CreateSuccess" xml:space="preserve"><value>Event '{0}' created successfully!</value></data>
+  <data name="Admin_Events_CreateFailed" xml:space="preserve"><value>Failed to create event</value></data>
+  <data name="Admin_Events_UpdateSuccess" xml:space="preserve"><value>Event '{0}' updated successfully!</value></data>
+  <data name="Admin_Events_UpdateFailed" xml:space="preserve"><value>Failed to update event</value></data>
+
+  <data name="Admin_Events_Confirm_Reason_Predictions" xml:space="preserve"><value>{0} prediction(s)</value></data>
+  <data name="Admin_Events_Confirm_Reason_Result" xml:space="preserve"><value>event result</value></data>
+  <data name="Admin_Events_Confirm_HasDependencies" xml:space="preserve"><value>Cannot delete '{0}' because it has {1}. Please delete those first.</value></data>
+  <data name="Admin_Events_Confirm_Delete" xml:space="preserve"><value>Are you sure you want to delete '{0}'? This action cannot be undone.</value></data>
+
+  <data name="Admin_Events_Error_HasDependencies" xml:space="preserve"><value>Cannot delete '{0}' because it has dependencies.</value></data>
+  <data name="Admin_Events_DeleteSuccess" xml:space="preserve"><value>Event '{0}' deleted successfully!</value></data>
+  <data name="Admin_Events_DeleteFailed" xml:space="preserve"><value>Failed to delete '{0}'</value></data>
+	<data name="Admin_Seasons_Title" xml:space="preserve"><value>Seasons</value></data>
+  <data name="Admin_Seasons_AddSeason" xml:space="preserve"><value>Add Season</value></data>
+  <data name="Admin_Seasons_Error_LoadDisciplines" xml:space="preserve"><value>Failed to load disciplines</value></data>
+  <data name="Admin_Seasons_Validation_SelectSeries" xml:space="preserve"><value>Please select a series</value></data>
+  <data name="Admin_Seasons_Validation_YearRange" xml:space="preserve"><value>Year must be between 2000 and 2100</value></data>
+  <data name="Admin_Seasons_Validation_NameRequired" xml:space="preserve"><value>Name is required</value></data>
+  <data name="Admin_Seasons_Validation_StartBeforeEnd" xml:space="preserve"><value>Start date must be before end date</value></data>
+  <data name="Admin_Seasons_Validation_YearMatchStart" xml:space="preserve"><value>Year must match the start date year</value></data>
+  <data name="Admin_Seasons_CreateFailed" xml:space="preserve"><value>Failed to create season</value></data>
+  <data name="Admin_Seasons_UpdateFailed" xml:space="preserve"><value>Failed to update season</value></data>
+  <data name="Admin_Seasons_SeriesMovedInfo" xml:space="preserve"><value>ℹ️ Season moved successfully but was deactivated to prevent duplicate active seasons. You can manually activate it using the 'Set Active' button.</value></data>
+  <data name="Admin_Seasons_Delete_DepsMessage" xml:space="preserve"><value>Cannot delete '{0}' because it has {1}. Please delete those first.</value></data>
+  <data name="Admin_Seasons_Delete_Confirm" xml:space="preserve"><value>Are you sure you want to delete '{0}'? This action cannot be undone.</value></data>
+  <data name="Admin_Seasons_Delete_Error_Dependencies" xml:space="preserve"><value>Cannot delete season because it has dependencies. Please delete those first.</value></data>
+  <data name="Admin_Seasons_DeleteFailed" xml:space="preserve"><value>Failed to delete season</value></data>
+  <data name="Admin_Seasons_DeleteTitle" xml:space="preserve"><value>Delete Season</value></data>
+  <data name="Admin_Seasons_SetActive_Confirm" xml:space="preserve"><value>Set '{0}' as the active season for {1}? This will deactivate any other active seasons.</value></data>
+  <data name="Admin_Seasons_SetActiveFailed" xml:space="preserve"><value>Failed to set active season</value></data>
+  <data name="Admin_Seasons_SetActiveTitle" xml:space="preserve"><value>Set Active Season</value></data>
+  <data name="Admin_Results_Validation_FirstRequired" xml:space="preserve"><value>First place is required</value></data>
+  <data name="Admin_Results_Validation_SecondRequired" xml:space="preserve"><value>Second place is required</value></data>
+  <data name="Admin_Results_Validation_ThirdRequired" xml:space="preserve"><value>Third place is required</value></data>
+  <data name="Admin_Results_RecalcMessage" xml:space="preserve"><value>You are about to change the result for '{0}'.\n\nThis will RECALCULATE all user points for this event based on the new result. Any previously calculated points will be overwritten.\n\nDo you want to proceed?</value></data>
+  <data name="Admin_Results_Confirm_Delete" xml:space="preserve"><value>Are you sure you want to delete the result for '{0}'? This action cannot be undone.</value></data>
+  <data name="Admin_Results_DeleteSuccess" xml:space="preserve"><value>Result for '{0}' deleted successfully!</value></data>
+  <data name="Admin_Results_DeleteFailed" xml:space="preserve"><value>Failed to delete result for '{0}'</value></data>
+  <data name="Admin_Series_AddSeries" xml:space="preserve"><value>Add Series</value></data>
+  <data name="Admin_Series_Series" xml:space="preserve"><value>Series</value></data>
+  <data name="Admin_Series_Error_LoadDisciplines" xml:space="preserve"><value>Failed to load disciplines</value></data>
+  <data name="Admin_Series_Validation_SelectDiscipline" xml:space="preserve"><value>Please select a discipline</value></data>
+  <data name="Admin_Series_Validation_NameRequired" xml:space="preserve"><value>Name is required</value></data>
+  <data name="Admin_Series_CreateFailed" xml:space="preserve"><value>Failed to create series</value></data>
+  <data name="Admin_Series_UpdateFailed" xml:space="preserve"><value>Failed to update series</value></data>
+  <data name="Admin_Series_Delete_Confirm" xml:space="preserve"><value>Are you sure you want to delete '{0}'? This action cannot be undone if there are no seasons associated with it.</value></data>
+  <data name="Admin_Series_DeleteFailed" xml:space="preserve"><value>Failed to delete series</value></data>
+  <data name="Admin_Series_DeleteTitle" xml:space="preserve"><value>Delete Series</value></data>
+  <data name="Admin_Series_UnknownDiscipline" xml:space="preserve"><value>Unknown</value></data>
+  <data name="Admin_Users_Error_LoadUsers" xml:space="preserve"><value>Failed to load users</value></data>
+  <data name="Admin_Users_Error_DeactivateFailed" xml:space="preserve"><value>Failed to deactivate user</value></data>
+  <data name="Admin_Users_Error_DeleteFailed" xml:space="preserve"><value>Failed to delete user</value></data>
 </root>

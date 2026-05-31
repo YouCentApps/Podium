@@ -30,6 +30,16 @@
   <data name="Val_UsernameInvalid" xml:space="preserve"><value>Nome utente non valido. Deve essere 3-50 caratteri: solo lettere latine, numeri e spazi.</value></data>
   <data name="Val_PasswordInvalid" xml:space="preserve"><value>Password non valida. Deve essere 6-100 caratteri, senza spazi, solo lettere latine/numeri/caratteri speciali.</value></data>
   <data name="Val_EmailInvalid" xml:space="preserve"><value>Indirizzo email non valido. Inserisci un'email valida.</value></data>
+	<data name="Val_EmailRequired" xml:space="preserve"><value>L'email è obbligatoria.</value></data>
+  <data name="Val_UsernameRequired" xml:space="preserve"><value>Il nome utente è obbligatorio.</value></data>
+  <data name="Val_UsernameTooShort" xml:space="preserve"><value>Il nome utente deve essere di almeno 3 caratteri.</value></data>
+  <data name="Val_UsernameTooLong" xml:space="preserve"><value>Il nome utente non può superare i 50 caratteri.</value></data>
+  <data name="Val_UsernameChars" xml:space="preserve"><value>Il nome utente può contenere solo lettere latine, numeri e spazi.</value></data>
+  <data name="Val_PasswordRequired" xml:space="preserve"><value>La password è obbligatoria.</value></data>
+  <data name="Val_PasswordTooShort" xml:space="preserve"><value>La password deve essere di almeno 6 caratteri.</value></data>
+  <data name="Val_PasswordTooLong" xml:space="preserve"><value>La password non può superare i 100 caratteri.</value></data>
+  <data name="Val_PasswordNoSpaces" xml:space="preserve"><value>La password non può contenere spazi.</value></data>
+  <data name="Val_PasswordChars" xml:space="preserve"><value>La password può contenere solo lettere latine, numeri e caratteri speciali comuni.</value></data>
   <!-- Profile -->
   <data name="Profile_NotFound" xml:space="preserve"><value>Utente non trovato</value></data>
   <data name="Profile_UsernameUpdated" xml:space="preserve"><value>Nome utente aggiornato con successo</value></data>
@@ -85,6 +95,8 @@
   <data name="Email_Ignore" xml:space="preserve"><value>Se non hai richiesto questo codice, puoi ignorare questa email.</value></data>
   <data name="Email_Automated" xml:space="preserve"><value>Questo è un messaggio automatico, non rispondere.</value></data>
   <data name="Email_Copyright" xml:space="preserve"><value>Tutti i diritti riservati.</value></data>
+	<data name="Auth_Forbidden" xml:space="preserve"><value>Non hai il permesso di accedere a questa risorsa.</value></data>
+  <data name="General_GenericError" xml:space="preserve"><value>Si è verificato un errore. Riprova.</value></data>
   <data name="Admin_NoDuplicateActiveSeasons" xml:space="preserve"><value>Nessuna stagione attiva duplicata trovata.</value></data>
   <data name="Admin_FoundDuplicateActiveSeasons" xml:space="preserve"><value>Trovate {0} serie con più stagioni attive.</value></data>
 	<data name="Val_StartBeforeEnd" xml:space="preserve"><value>La data di inizio deve essere precedente alla data di fine</value></data>

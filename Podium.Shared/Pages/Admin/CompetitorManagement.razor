@@ -30,7 +30,7 @@
         {
             <div class="alert alert-success" style="display: flex; justify-content: space-between; align-items: center;">
                 <span>&#10004; @successMessage</span>
-                <button class="btn btn-sm btn-secondary" @onclick="ClearSuccess">Clear &times;</button>
+                <button class="btn btn-sm btn-secondary" @onclick="ClearSuccess">@L["Admin_Btn_Clear"]</button>
             </div>
         }
 
@@ -38,7 +38,7 @@
         {
             <div class="alert alert-error" style="display: flex; justify-content: space-between; align-items: center;">
                 <span>@errorMessage</span>
-                <button class="btn btn-sm btn-secondary" @onclick="ClearError">Clear &times;</button>
+                <button class="btn btn-sm btn-secondary" @onclick="ClearError">@L["Admin_Btn_Clear"]</button>
             </div>
         }
 
@@ -101,7 +101,7 @@
                                                 <strong>@season.Year</strong> - @GetSeriesName(season.SeriesId) (@GetDisciplineName(season.SeriesId))
                                                 @if (season.IsActive)
                                                 {
-                                                    <span class="badge badge-success" style="margin-left: 0.5rem;">Active</span>
+                                                    <span class="badge badge-success" style="margin-left: 0.5rem;">@L["Admin_Status_Active"].Value</span>
                                                 }
                                             </span>
                                             <button class="btn btn-sm btn-danger" @onclick="() => RemoveSeasonAssignment(seasonId)">
@@ -220,8 +220,8 @@
                             <td><strong>@competitor.Name</strong></td>
                             <td>@competitor.ShortName</td>
                             <td>
-                                <span class="badge @(competitor.Type == "Individual" ? "badge-info" : "badge-secondary")">
-                                    @competitor.Type
+                                    <span class="badge @(competitor.Type == "Individual" ? "badge-info" : "badge-secondary")">
+                                    @(competitor.Type == "Individual" ? L["Admin_Competitors_Type_Individual"].Value : L["Admin_Competitors_Type_Team"].Value)
                                 </span>
                             </td>
                             <td>
@@ -283,7 +283,7 @@
                     &laquo; @L["Admin_Pagination_Previous"]
                 </button>
                 <span style="margin: 0 1rem;">
-                    Page @currentPage of @totalPages (@filteredCompetitors.Count total)
+                    @L["Admin_Pagination_Info", currentPage, totalPages, filteredCompetitors.Count]
                 </span>
                 <button class="btn btn-secondary" @onclick="NextPage" disabled="@(currentPage == totalPages)">
                     @L["Admin_Pagination_Next"] &raquo;
@@ -662,19 +662,19 @@
     {
         if (string.IsNullOrWhiteSpace(formName))
         {
-            formError = "Name is required";
+            formError = L["Admin_Competitors_Validation_NameRequired"].Value;
             return;
         }
 
         if (string.IsNullOrWhiteSpace(formShortName))
         {
-            formError = "Short name is required";
+            formError = L["Admin_Competitors_Validation_ShortNameRequired"].Value;
             return;
         }
 
         if (formType != "Individual" && formType != "Team")
         {
-            formError = "Type must be Individual or Team";
+            formError = L["Admin_Competitors_Validation_TypeInvalid"].Value;
             return;
         }
 
@@ -695,18 +695,18 @@
             var response = await ApiClient.CreateCompetitorAsync(request);
             
             
-            if (response.Success)
-            {
-                successMessage = $"Competitor '{formName}' created successfully!";
-                showForm = false;
-                editingCompetitor = null;
-                await LoadData();
-                await ScrollToTop();
-            }
-            else
-            {
-                formError = response.Error ?? "Failed to create competitor";
-            }
+                if (response.Success)
+                {
+                    successMessage = L["Admin_Competitors_CreateSuccess", formName].Value;
+                    showForm = false;
+                    editingCompetitor = null;
+                    await LoadData();
+                    await ScrollToTop();
+                }
+                else
+                {
+                    formError = response.Error ?? L["Admin_Competitors_CreateFailed"].Value;
+                }
         }
         else
         {
@@ -723,8 +723,8 @@
             {
                 // Apply season assignment changes
                 await ApplySeasonChanges(editingCompetitor.Id);
-                
-                successMessage = $"Competitor '{formName}' updated successfully!";
+
+                successMessage = L["Admin_Competitors_UpdateSuccess", formName].Value;
                 showForm = false;
                 editingCompetitor = null;
                 await LoadData();
@@ -732,7 +732,7 @@
             }
             else
             {
-                formError = response.Error ?? "Failed to update competitor";
+                formError = response.Error ?? L["Admin_Competitors_UpdateFailed"].Value;
             }
         }
 
@@ -747,7 +747,7 @@
             var result = await ApiClient.AddCompetitorToSeasonAsync(seasonId, competitorId);
             if (!result.Success)
             {
-                errorMessage = $"Warning: Failed to add some season assignments. Error: {result.Error}";
+                errorMessage = L["Admin_Competitors_Warn_AddAssignmentFailed", result.Error ?? string.Empty].Value;
             }
         }
 
@@ -756,7 +756,7 @@
             var result = await ApiClient.RemoveCompetitorFromSeasonAsync(seasonId, competitorId);
             if (!result.Success)
             {
-                errorMessage = $"Warning: Failed to remove some season assignments. Error: {result.Error}";
+                errorMessage = L["Admin_Competitors_Warn_RemoveAssignmentFailed", result.Error ?? string.Empty].Value;
             }
         }
     }
@@ -778,14 +778,14 @@
         if (deps.HasDependencies)
         {
             var reasons = new List<string>();
-            if (deps.SeasonCount > 0) reasons.Add($"{deps.SeasonCount} season(s)");
-            if (deps.ResultCount > 0) reasons.Add($"{deps.ResultCount} event result(s)");
-            
-            deleteConfirmMessage = $"Cannot delete '{competitor.Name}' because it is assigned to {string.Join(" and ", reasons)}. Please remove those assignments first.";
+            if (deps.SeasonCount > 0) reasons.Add(L["Admin_Competitors_Confirm_Reason_Seasons", deps.SeasonCount].Value);
+            if (deps.ResultCount > 0) reasons.Add(L["Admin_Competitors_Confirm_Reason_Results", deps.ResultCount].Value);
+
+            deleteConfirmMessage = L["Admin_Competitors_Confirm_HasDependencies", competitor.Name, string.Join(" and ", reasons)].Value;
         }
         else
         {
-            deleteConfirmMessage = $"Are you sure you want to delete '{competitor.Name}'? This action cannot be undone.";
+            deleteConfirmMessage = L["Admin_Competitors_Confirm_Delete", competitor.Name].Value;
         }
         
         showDeleteConfirm = true;
@@ -808,7 +808,7 @@
         if (deps.HasDependencies)
         {
             showDeleteConfirm = false;
-            errorMessage = $"Cannot delete '{competitorToDelete.Name}' because it has dependencies.";
+            errorMessage = L["Admin_Competitors_Error_HasDependencies", competitorToDelete.Name].Value;
             competitorToDelete = null;
             return;
         }
@@ -820,13 +820,13 @@
         
         if (response.Success)
         {
-            successMessage = $"Competitor '{name}' deleted successfully!";
+            successMessage = L["Admin_Competitors_DeleteSuccess", name].Value;
             await LoadData();
             await ScrollToTop();
         }
         else
         {
-            errorMessage = response.Error ?? $"Failed to delete '{name}'";
+            errorMessage = response.Error ?? L["Admin_Competitors_DeleteFailed", name].Value;
             await ScrollToTop();
         }
         

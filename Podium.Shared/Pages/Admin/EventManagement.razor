@@ -28,7 +28,7 @@
         {
             <div class="alert alert-success" style="display: flex; justify-content: space-between; align-items: center;">
                 <span>&#10004; @successMessage</span>
-                <button class="btn btn-sm btn-secondary" @onclick="ClearSuccess">Clear &times;</button>
+                <button class="btn btn-sm btn-secondary" @onclick="ClearSuccess">@L["Admin_Btn_Clear"].Value</button>
             </div>
         }
 
@@ -36,7 +36,7 @@
         {
             <div class="alert alert-error" style="display: flex; justify-content: space-between; align-items: center;">
                 <span>@errorMessage</span>
-                <button class="btn btn-sm btn-secondary" @onclick="ClearError">Clear &times;</button>
+                <button class="btn btn-sm btn-secondary" @onclick="ClearError">@L["Admin_Btn_Clear"].Value</button>
             </div>
         }
 
@@ -272,7 +272,7 @@
                     &laquo; @L["Admin_Pagination_Previous"]
                 </button>
                 <span style="margin: 0 1rem;">
-                    Page @currentPage of @totalPages (@filteredEvents.Count total)
+                    @L["Admin_Pagination_Info", currentPage, totalPages, filteredEvents.Count].Value
                 </span>
                 <button class="btn btn-secondary" @onclick="NextPage" disabled="@(currentPage == totalPages)">
                     @L["Admin_Pagination_Next"] &raquo;
@@ -606,31 +606,31 @@
     {
         if (editingEvent == null && string.IsNullOrWhiteSpace(formSeasonId))
         {
-            formError = "Please select a season";
+            formError = L["Admin_Events_Validation_SelectSeason"].Value;
             return;
         }
 
         if (string.IsNullOrWhiteSpace(formName))
         {
-            formError = "Event name is required";
+            formError = L["Admin_Events_Validation_NameRequired"].Value;
             return;
         }
 
         if (string.IsNullOrWhiteSpace(formDisplayName))
         {
-            formError = "Display name is required";
+            formError = L["Admin_Events_Validation_DisplayNameRequired"].Value;
             return;
         }
 
         if (formEventNumber < 1)
         {
-            formError = "Event number must be at least 1";
+            formError = L["Admin_Events_Validation_EventNumberMin"].Value;
             return;
         }
 
         if (string.IsNullOrWhiteSpace(formLocation))
         {
-            formError = "Location is required";
+            formError = L["Admin_Events_Validation_LocationRequired"].Value;
             return;
         }
 
@@ -655,7 +655,7 @@
             
             if (response.Success)
             {
-                successMessage = $"Event '{formDisplayName}' created successfully!";
+                successMessage = L["Admin_Events_CreateSuccess", formDisplayName].Value;
                 showForm = false;
                 editingEvent = null;
                 await LoadData();
@@ -663,7 +663,7 @@
             }
             else
             {
-                formError = response.Error ?? "Failed to create event";
+                formError = response.Error ?? L["Admin_Events_CreateFailed"].Value;
             }
         }
         else
@@ -681,7 +681,7 @@
             
             if (response.Success)
             {
-                successMessage = $"Event '{formDisplayName}' updated successfully!";
+                successMessage = L["Admin_Events_UpdateSuccess", formDisplayName].Value;
                 showForm = false;
                 editingEvent = null;
                 await LoadData();
@@ -689,7 +689,7 @@
             }
             else
             {
-                formError = response.Error ?? "Failed to update event";
+                formError = response.Error ?? L["Admin_Events_UpdateFailed"].Value;
             }
         }
 
@@ -707,14 +707,14 @@
         if (deps.HasDependencies)
         {
             var reasons = new List<string>();
-            if (deps.PredictionCount > 0) reasons.Add($"{deps.PredictionCount} prediction(s)");
-            if (deps.HasResult) reasons.Add("event result");
-            
-            deleteConfirmMessage = $"Cannot delete '{evt.DisplayName}' because it has {string.Join(" and ", reasons)}. Please delete those first.";
+            if (deps.PredictionCount > 0) reasons.Add(L["Admin_Events_Confirm_Reason_Predictions", deps.PredictionCount].Value);
+            if (deps.HasResult) reasons.Add(L["Admin_Events_Confirm_Reason_Result"].Value);
+
+            deleteConfirmMessage = L["Admin_Events_Confirm_HasDependencies", evt.DisplayName, string.Join(" and ", reasons)].Value;
         }
         else
         {
-            deleteConfirmMessage = $"Are you sure you want to delete '{evt.DisplayName}'? This action cannot be undone.";
+            deleteConfirmMessage = L["Admin_Events_Confirm_Delete", evt.DisplayName].Value;
         }
         
         showDeleteConfirm = true;
@@ -737,7 +737,7 @@
         if (deps.HasDependencies)
         {
             showDeleteConfirm = false;
-            errorMessage = $"Cannot delete event because it has dependencies.";
+            errorMessage = L["Admin_Events_Error_HasDependencies", eventToDelete?.DisplayName ?? string.Empty].Value;
             eventToDelete = null;
             await ScrollToTop();
             return;
@@ -750,13 +750,13 @@
         
         if (response.Success)
         {
-            successMessage = $"Event '{name}' deleted successfully!";
+            successMessage = L["Admin_Events_DeleteSuccess", name].Value;
             await LoadData();
             await ScrollToTop();
         }
         else
         {
-            errorMessage = response.Error ?? $"Failed to delete '{name}'";
+            errorMessage = response.Error ?? L["Admin_Events_DeleteFailed", name].Value;
             await ScrollToTop();
         }
         

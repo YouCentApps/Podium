@@ -28,7 +28,7 @@
         {
             <div class="alert alert-error">
                 @errorMessage
-                <button class="btn btn-sm btn-secondary" @onclick="ClearError" style="margin-left: 10px;">Clear &times;</button>
+                <button class="btn btn-sm btn-secondary" @onclick="ClearError" style="margin-left: 10px;">@L["Admin_Btn_Clear"].Value &times;</button>
             </div>
         }
         @if (showForm)
@@ -167,9 +167,9 @@
 </div>
 
 <ConfirmDialog IsVisible="showDeleteConfirm"
-               Title="Delete Series"
+               Title="@L["Admin_Series_DeleteTitle"]"
                Message="@deleteConfirmMessage"
-               ConfirmText="Delete"
+               ConfirmText="@L["Admin_Btn_Delete"]"
                OnConfirm="DeleteSeries"
                OnCancel="CancelDelete" />
 
@@ -226,7 +226,7 @@
         }
         else
         {
-            errorMessage = "Failed to load disciplines";
+            errorMessage = L["Admin_Series_Error_LoadDisciplines"].Value;
             loading = false;
             return;
         }
@@ -261,7 +261,7 @@
     private string GetDisciplineName(string disciplineId)
     {
         var discipline = disciplines.FirstOrDefault(d => d.Id == disciplineId);
-        return discipline?.DisplayName ?? "Unknown";
+        return discipline?.DisplayName ?? L["Admin_Series_UnknownDiscipline"].Value;
     }
 
     private void ShowCreateForm()
@@ -312,13 +312,13 @@
     {
         if (string.IsNullOrWhiteSpace(formDisciplineId))
         {
-            formError = "Please select a discipline";
+            formError = L["Admin_Series_Validation_SelectDiscipline"].Value;
             return;
         }
 
         if (string.IsNullOrWhiteSpace(formName))
         {
-            formError = "Name is required";
+            formError = L["Admin_Series_Validation_NameRequired"].Value;
             return;
         }
 
@@ -346,7 +346,7 @@
             }
             else
             {
-                formError = response.Error ?? "Failed to create series";
+                formError = response.Error ?? L["Admin_Series_CreateFailed"].Value;
             }
         }
         else
@@ -370,7 +370,7 @@
             }
             else
             {
-                formError = response.Error ?? "Failed to update series";
+                formError = response.Error ?? L["Admin_Series_UpdateFailed"].Value;
             }
         }
 
@@ -380,7 +380,7 @@
     private void ConfirmDelete(Series series)
     {
         seriesToDelete = series;
-        deleteConfirmMessage = $"Are you sure you want to delete '{series.Name}'? This action cannot be undone if there are no seasons associated with it.";
+        deleteConfirmMessage = L["Admin_Series_Delete_Confirm", series.Name].Value;
         showDeleteConfirm = true;
     }
 
@@ -404,7 +404,7 @@
         }
         else
         {
-            errorMessage = response.Error ?? "Failed to delete series";
+            errorMessage = response.Error ?? L["Admin_Series_DeleteFailed"].Value;
         }
         
         seriesToDelete = null;

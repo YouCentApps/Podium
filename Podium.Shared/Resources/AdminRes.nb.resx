@@ -227,4 +227,101 @@
   <data name="Admin_UserDelete_Title" xml:space="preserve"><value>Slett bruker</value></data>
   <data name="Admin_UserDelete_Message" xml:space="preserve"><value>Er du sikker på at du vil slette brukeren '{0}' permanent? Denne handlingen kan ikke angres.</value></data>
   <data name="Admin_UserDelete_ConfirmSimple" xml:space="preserve"><value>Er du sikker på at du vil slette brukeren '{0}'?</value></data>
+  <data name="Admin_System" xml:space="preserve"><value>System</value></data>
+  <data name="Admin_Admins_RemoveTitle" xml:space="preserve"><value>Fjern administrator</value></data>
+  <data name="Admin_Admins_RemoveMessage" xml:space="preserve"><value>Er du sikker på at du vil fjerne administratorrettigheter for {0}?</value></data>
+  <data name="Admin_Admins_RemoveConfirm" xml:space="preserve"><value>Fjern</value></data>
+  <data name="Admin_Admins_SelectUser" xml:space="preserve"><value>Vennligst velg en bruker</value></data>
+  <data name="Admin_Admins_CreateFailed" xml:space="preserve"><value>Kunne ikke opprette administrator</value></data>
+  <data name="Admin_Admins_UpdateFailed" xml:space="preserve"><value>Kunne ikke oppdatere administrator</value></data>
+  <data name="Admin_Admins_RemoveFailed" xml:space="preserve"><value>Kunne ikke fjerne administrator</value></data>
+  <data name="Admin_Admins_LoadFailed" xml:space="preserve"><value>Kunne ikke laste administratorer</value></data>
+  <data name="Admin_Btn_Clear" xml:space="preserve"><value>Tøm ×</value></data>
+  <data name="Admin_Pagination_Info" xml:space="preserve"><value>Side {0} av {1} ({2} totalt)</value></data>
+
+  <data name="Admin_Competitors_Validation_NameRequired" xml:space="preserve"><value>Navn er påkrevd</value></data>
+  <data name="Admin_Competitors_Validation_ShortNameRequired" xml:space="preserve"><value>Kortnavn er påkrevd</value></data>
+  <data name="Admin_Competitors_Validation_TypeInvalid" xml:space="preserve"><value>Type må være Individual eller Team</value></data>
+
+  <data name="Admin_Competitors_CreateSuccess" xml:space="preserve"><value>Deltaker '{0}' opprettet!</value></data>
+  <data name="Admin_Competitors_CreateFailed" xml:space="preserve"><value>Kunne ikke opprette deltaker</value></data>
+  <data name="Admin_Competitors_UpdateSuccess" xml:space="preserve"><value>Deltaker '{0}' oppdatert!</value></data>
+  <data name="Admin_Competitors_UpdateFailed" xml:space="preserve"><value>Kunne ikke oppdatere deltaker</value></data>
+
+  <data name="Admin_Competitors_Warn_AddAssignmentFailed" xml:space="preserve"><value>Advarsel: Klarte ikke å legge til noen sesjonsoppgaver. Feil: {0}</value></data>
+  <data name="Admin_Competitors_Warn_RemoveAssignmentFailed" xml:space="preserve"><value>Advarsel: Klarte ikke å fjerne noen sesjonsoppgaver. Feil: {0}</value></data>
+
+  <data name="Admin_Competitors_Confirm_Reason_Seasons" xml:space="preserve"><value>{0} sesong(er)</value></data>
+  <data name="Admin_Competitors_Confirm_Reason_Results" xml:space="preserve"><value>{0} arrangementresultat(er)</value></data>
+  <data name="Admin_Competitors_Confirm_HasDependencies" xml:space="preserve"><value>Kan ikke slette '{0}' fordi den er tilordnet {1}. Vennligst fjern disse tilordningene først.</value></data>
+  <data name="Admin_Competitors_Confirm_Delete" xml:space="preserve"><value>Er du sikker på at du vil slette '{0}'? Denne handlingen kan ikke angres.</value></data>
+
+  <data name="Admin_Competitors_Error_HasDependencies" xml:space="preserve"><value>Kan ikke slette '{0}' fordi den har avhengigheter.</value></data>
+  <data name="Admin_Competitors_DeleteSuccess" xml:space="preserve"><value>Deltaker '{0}' slettet!</value></data>
+  <data name="Admin_Competitors_DeleteFailed" xml:space="preserve"><value>Kunne ikke slette '{0}'</value></data>
+  <data name="Admin_Disciplines_DeleteTitle" xml:space="preserve"><value>Slett disiplin</value></data>
+  <data name="Admin_Disciplines_DeleteMessage" xml:space="preserve"><value>Er du sikker på at du vil slette '{0}'? Denne handlingen kan ikke angres.</value></data>
+  <data name="Admin_Disciplines_DeleteConfirm" xml:space="preserve"><value>Slett</value></data>
+  <data name="Admin_Disciplines_CreateFailed" xml:space="preserve"><value>Kunne ikke opprette disiplin</value></data>
+  <data name="Admin_Disciplines_UpdateFailed" xml:space="preserve"><value>Kunne ikke oppdatere disiplin</value></data>
+  <data name="Admin_Disciplines_DeleteFailed" xml:space="preserve"><value>Kunne ikke slette disiplin</value></data>
+  <data name="Admin_Events_Validation_SelectSeason" xml:space="preserve"><value>Velg en sesong</value></data>
+  <data name="Admin_Events_Validation_NameRequired" xml:space="preserve"><value>Begivenhetsnavn er påkrevd</value></data>
+  <data name="Admin_Events_Validation_DisplayNameRequired" xml:space="preserve"><value>Visningsnavn er påkrevd</value></data>
+  <data name="Admin_Events_Validation_EventNumberMin" xml:space="preserve"><value>Begivenhetsnummeret må være minst 1</value></data>
+  <data name="Admin_Events_Validation_LocationRequired" xml:space="preserve"><value>Sted er påkrevd</value></data>
+
+  <data name="Admin_Events_CreateSuccess" xml:space="preserve"><value>Hendelse '{0}' opprettet!</value></data>
+  <data name="Admin_Events_CreateFailed" xml:space="preserve"><value>Kunne ikke opprette hendelse</value></data>
+  <data name="Admin_Events_UpdateSuccess" xml:space="preserve"><value>Hendelse '{0}' oppdatert!</value></data>
+  <data name="Admin_Events_UpdateFailed" xml:space="preserve"><value>Kunne ikke oppdatere hendelse</value></data>
+
+  <data name="Admin_Events_Confirm_Reason_Predictions" xml:space="preserve"><value>{0} prediksjon(er)</value></data>
+  <data name="Admin_Events_Confirm_Reason_Result" xml:space="preserve"><value>hendelsesresultat</value></data>
+  <data name="Admin_Events_Confirm_HasDependencies" xml:space="preserve"><value>Kan ikke slette '{0}' fordi den har {1}. Vennligst slett disse først.</value></data>
+  <data name="Admin_Events_Confirm_Delete" xml:space="preserve"><value>Er du sikker på at du vil slette '{0}'? Denne handlingen kan ikke angres.</value></data>
+
+  <data name="Admin_Events_Error_HasDependencies" xml:space="preserve"><value>Kan ikke slette '{0}' fordi den har avhengigheter.</value></data>
+  <data name="Admin_Events_DeleteSuccess" xml:space="preserve"><value>Hendelse '{0}' slettet!</value></data>
+  <data name="Admin_Events_DeleteFailed" xml:space="preserve"><value>Kunne ikke slette '{0}'</value></data>
+  <data name="Admin_Results_Validation_FirstRequired" xml:space="preserve"><value>Førsteplass er påkrevd</value></data>
+  <data name="Admin_Results_Validation_SecondRequired" xml:space="preserve"><value>Andreplass er påkrevd</value></data>
+  <data name="Admin_Results_Validation_ThirdRequired" xml:space="preserve"><value>Tredjeplass er påkrevd</value></data>
+  <data name="Admin_Results_RecalcMessage" xml:space="preserve"><value>Du er i ferd med å endre resultatet for '{0}'.\n\nDette vil BEREGNE PÅ NYTT alle brukerpunkter for dette arrangementet basert på det nye resultatet. Eventuelle tidligere beregnede poeng vil bli overskrevet.\n\nØnsker du å fortsette?</value></data>
+  <data name="Admin_Results_Confirm_Delete" xml:space="preserve"><value>Er du sikker på at du vil slette resultatet for '{0}'? Denne handlingen kan ikke angres.</value></data>
+  <data name="Admin_Results_DeleteSuccess" xml:space="preserve"><value>Resultat for '{0}' ble slettet!</value></data>
+  <data name="Admin_Results_DeleteFailed" xml:space="preserve"><value>Kunne ikke slette resultatet for '{0}'</value></data>
+  <data name="Admin_Seasons_Title" xml:space="preserve"><value>Sesonger</value></data>
+  <data name="Admin_Seasons_AddSeason" xml:space="preserve"><value>Legg til sesong</value></data>
+  <data name="Admin_Seasons_Error_LoadDisciplines" xml:space="preserve"><value>Kunne ikke laste inn disipliner</value></data>
+  <data name="Admin_Seasons_Validation_SelectSeries" xml:space="preserve"><value>Vennligst velg en serie</value></data>
+  <data name="Admin_Seasons_Validation_YearRange" xml:space="preserve"><value>Året må være mellom 2000 og 2100</value></data>
+  <data name="Admin_Seasons_Validation_NameRequired" xml:space="preserve"><value>Navn er påkrevd</value></data>
+  <data name="Admin_Seasons_Validation_StartBeforeEnd" xml:space="preserve"><value>Startdato må være før sluttdato</value></data>
+  <data name="Admin_Seasons_Validation_YearMatchStart" xml:space="preserve"><value>Året må samsvare med startdatoens år</value></data>
+  <data name="Admin_Seasons_CreateFailed" xml:space="preserve"><value>Kunne ikke opprette sesong</value></data>
+  <data name="Admin_Seasons_UpdateFailed" xml:space="preserve"><value>Kunne ikke oppdatere sesong</value></data>
+  <data name="Admin_Seasons_SeriesMovedInfo" xml:space="preserve"><value>ℹ️ Sesongen ble flyttet, men ble deaktivert for å forhindre dupliserte aktive sesonger. Du kan aktivere den manuelt ved hjelp av 'Sett aktiv'-knappen.</value></data>
+  <data name="Admin_Seasons_Delete_DepsMessage" xml:space="preserve"><value>Kan ikke slette '{0}' fordi den har {1}. Vennligst slett disse først.</value></data>
+  <data name="Admin_Seasons_Delete_Confirm" xml:space="preserve"><value>Er du sikker på at du vil slette '{0}'? Denne handlingen kan ikke angres.</value></data>
+  <data name="Admin_Seasons_Delete_Error_Dependencies" xml:space="preserve"><value>Kan ikke slette sesongen fordi den har avhengigheter. Vennligst slett disse først.</value></data>
+  <data name="Admin_Seasons_DeleteFailed" xml:space="preserve"><value>Kunne ikke slette sesongen</value></data>
+  <data name="Admin_Seasons_DeleteTitle" xml:space="preserve"><value>Slett sesong</value></data>
+  <data name="Admin_Seasons_SetActive_Confirm" xml:space="preserve"><value>Sett '{0}' som aktiv sesong for {1}? Dette vil deaktivere andre aktive sesonger.</value></data>
+  <data name="Admin_Seasons_SetActiveFailed" xml:space="preserve"><value>Kunne ikke sette aktiv sesong</value></data>
+  <data name="Admin_Seasons_SetActiveTitle" xml:space="preserve"><value>Sett aktiv sesong</value></data>
+  <data name="Admin_Series_AddSeries" xml:space="preserve"><value>Legg til serie</value></data>
+  <data name="Admin_Series_Series" xml:space="preserve"><value>Serie</value></data>
+  <data name="Admin_Series_Error_LoadDisciplines" xml:space="preserve"><value>Kunne ikke laste inn disipliner</value></data>
+  <data name="Admin_Series_Validation_SelectDiscipline" xml:space="preserve"><value>Vennligst velg en disiplin</value></data>
+  <data name="Admin_Series_Validation_NameRequired" xml:space="preserve"><value>Navn er påkrevd</value></data>
+  <data name="Admin_Series_CreateFailed" xml:space="preserve"><value>Kunne ikke opprette serie</value></data>
+  <data name="Admin_Series_UpdateFailed" xml:space="preserve"><value>Kunne ikke oppdatere serie</value></data>
+  <data name="Admin_Series_Delete_Confirm" xml:space="preserve"><value>Er du sikker på at du vil slette '{0}'? Denne handlingen kan ikke angres hvis det ikke er noen sesonger tilknyttet.</value></data>
+  <data name="Admin_Series_DeleteFailed" xml:space="preserve"><value>Kunne ikke slette serie</value></data>
+  <data name="Admin_Series_DeleteTitle" xml:space="preserve"><value>Slett serie</value></data>
+  <data name="Admin_Series_UnknownDiscipline" xml:space="preserve"><value>Ukjent</value></data>
+  <data name="Admin_Users_Error_LoadUsers" xml:space="preserve"><value>Kunne ikke laste inn brukere</value></data>
+  <data name="Admin_Users_Error_DeactivateFailed" xml:space="preserve"><value>Kunne ikke deaktivere bruker</value></data>
+  <data name="Admin_Users_Error_DeleteFailed" xml:space="preserve"><value>Kunne ikke slette bruker</value></data>
 </root>

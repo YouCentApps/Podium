@@ -205,7 +205,7 @@
         }
         else
         {
-            errorMessage = response.Error ?? "Failed to load users";
+            errorMessage = response.Error ?? L["Admin_Users_Error_LoadUsers"].Value;
         }
         
         loading = false;
@@ -353,7 +353,7 @@
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to deactivate user";
+                errorMessage = response.Error ?? L["Admin_Users_Error_DeactivateFailed"].Value;
             }
         }
         else
@@ -368,7 +368,7 @@
             }
             else
             {
-                errorMessage = response.Error ?? "Failed to delete user";
+                errorMessage = response.Error ?? L["Admin_Users_Error_DeleteFailed"].Value;
             }
         }
         

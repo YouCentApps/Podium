@@ -22,6 +22,8 @@ public class RegistrationService : IRegistrationService
     private readonly IStringLocalizer<ApiMessages> _localizer;
     private const string PendingRegistrationsTable = "PodiumPendingRegistrations";
     private const string OTPTable = "PodiumOTPCodes";
+    private const string PendingRegPartition = "PendingReg";
+    private const string OTPPartition = "OTP";
 
     public RegistrationService(IUserRepository userRepository, ITableClientFactory tableClientFactory, Action<string, string>? sendEmailCallback = null, IStringLocalizer<ApiMessages>? localizer = null)
     {
@@ -87,7 +89,7 @@ public class RegistrationService : IRegistrationService
                 ? AuthenticationService.HashPassword(password)
                 : (string.Empty, string.Empty);
 
-            var pendingEntity = new TableEntity("PendingReg", tempUserId)
+            var pendingEntity = new TableEntity(PendingRegPartition, tempUserId)
             {
                 ["Email"] = email.Trim().ToLowerInvariant(),
                 ["Username"] = username.Trim(),
@@ -112,7 +114,7 @@ public class RegistrationService : IRegistrationService
             // Generate and send OTP
             var otpCode = GenerateOTP();
             var otpClient = _tableClientFactory.GetTableClient(OTPTable);
-            var otpEntity = new TableEntity("OTP", Guid.NewGuid().ToString())
+            var otpEntity = new TableEntity(OTPPartition, Guid.NewGuid().ToString())
             {
                 ["Email"] = email.Trim().ToLowerInvariant(),
                 ["Code"] = otpCode,
@@ -169,7 +171,7 @@ public class RegistrationService : IRegistrationService
             var cutoffTime = DateTime.UtcNow.AddMinutes(-10);
             // Escape single quotes to prevent OData injection
             var safeTempUserId = tempUserId.Replace("'", "''");
-            var filter = $"PartitionKey eq 'OTP' and UserId eq '{safeTempUserId}' and IsUsed eq false and ExpiryTime gt datetime'{cutoffTime:yyyy-MM-ddTHH:mm:ss.fffffffZ}' and IsRegistration eq true";
+            var filter = $"PartitionKey eq '{OTPPartition}' and UserId eq '{safeTempUserId}' and IsUsed eq false and ExpiryTime gt datetime'{cutoffTime:yyyy-MM-ddTHH:mm:ss.fffffffZ}' and IsRegistration eq true";
             
             TableEntity? validOtp = null;
             await foreach (var entity in otpClient.QueryAsync<TableEntity>(filter: filter).ConfigureAwait(false))
@@ -191,7 +193,7 @@ public class RegistrationService : IRegistrationService
             await otpClient.UpdateEntityAsync(validOtp, Azure.ETag.All, TableUpdateMode.Merge).ConfigureAwait(false);
 
             // Get pending registration
-            var pendingResponse = await pendingRegClient.GetEntityAsync<TableEntity>("PendingReg", tempUserId).ConfigureAwait(false);
+            var pendingResponse = await pendingRegClient.GetEntityAsync<TableEntity>(PendingRegPartition, tempUserId).ConfigureAwait(false);
             var pending = pendingResponse.Value;
 
             // Check if not expired
@@ -224,7 +226,7 @@ public class RegistrationService : IRegistrationService
             }
 
             // Delete pending registration
-            await pendingRegClient.DeleteEntityAsync("PendingReg", tempUserId).ConfigureAwait(false);
+            await pendingRegClient.DeleteEntityAsync(PendingRegPartition, tempUserId).ConfigureAwait(false);
 
             return (true, userId, string.Empty);
         }
